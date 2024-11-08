@@ -12,6 +12,40 @@ namespace OHaraj.Infrastructure
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            base.OnModelCreating(builder);
+
+            var superAdminRoleId = "b70f0022-7ec7-4b94-a411-f918868b7588";
+            var adminRoleId = "8de5be14-5181-40c6-9b46-8d1619b2a91a";
+            var userRoleId = "672ed51d-a28d-457e-abe4-f39f4d4ee104";
+
+            //Seed roles (User, Admin, Super Admin)
+            var roles = new List<IdentityRole>
+            {
+                new IdentityRole
+                {
+                    Name = "SuperAdmin",
+                    NormalizedName = "SuperAdmin",
+                    Id = superAdminRoleId,
+                    ConcurrencyStamp = superAdminRoleId
+                },
+                new IdentityRole
+                {
+                    Name = "Admin",
+                    NormalizedName = "Admin",
+                    Id = adminRoleId,
+                    ConcurrencyStamp = adminRoleId
+                },
+                new IdentityRole
+                {
+                    Name = "User",
+                    NormalizedName = "User",
+                    Id = userRoleId,
+                    ConcurrencyStamp = userRoleId
+                }
+            };
+
+            builder.Entity<IdentityRole>().HasData(roles);
+
             
         }
 
