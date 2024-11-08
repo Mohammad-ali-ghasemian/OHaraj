@@ -59,7 +59,29 @@ namespace OHaraj.Infrastructure
 
             builder.Entity<IdentityUser>().HasData(superAdminUser);
 
-            
+            //Add all roles to Super Admin User
+            var superAdminRoles = new List<IdentityUserRole<string>>()
+            {
+                new IdentityUserRole<string>
+                {
+                    RoleId = superAdminRoleId,
+                    UserId = superAdminId
+                },
+                new IdentityUserRole<string>
+                {
+                    RoleId = adminRoleId,
+                    UserId = superAdminId
+                },
+                new IdentityUserRole<string>
+                {
+                    RoleId = userRoleId,
+                    UserId = superAdminId
+                }
+            };
+
+            builder.Entity<IdentityUserRole<string>>().HasData(superAdminRoles);
+
+
         }
 
     }
