@@ -46,6 +46,19 @@ namespace OHaraj.Infrastructure
 
             builder.Entity<IdentityRole>().HasData(roles);
 
+            //Seed Super Admin User
+            var superAdminId = "525e0169-6a01-493a-b4d7-1615bccd364d";
+            var superAdminUser = new IdentityUser()
+            {
+                Id = superAdminId,
+                UserName = "super_admin",
+                NormalizedUserName = "super_admin".ToUpper()
+            };
+
+            superAdminUser.PasswordHash = new PasswordHasher<IdentityUser>().HashPassword(superAdminUser, "123456789Aa.");
+
+            builder.Entity<IdentityUser>().HasData(superAdminUser);
+
             
         }
 
