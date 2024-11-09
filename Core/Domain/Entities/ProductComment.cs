@@ -8,5 +8,7 @@
         public bool IsApproved { get; set; }
 
         // Navigation Properties
+        ProductId
+        UserId
     }
 }
