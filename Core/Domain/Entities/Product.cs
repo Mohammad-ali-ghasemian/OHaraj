@@ -16,8 +16,8 @@
         public bool IsActive { get; set; } = false;
 
         // Navigation Properties
-        public int FileManagementId { get; set; }
-        public int CategoryId { get; set; }
-        public int ModelId { get; set; }
+        FileManagementId
+        CategoryId
+        ModelId
     }
 }
