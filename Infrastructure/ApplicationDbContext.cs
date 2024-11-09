@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using OHaraj.Core.Domain.Entities;
 
 namespace OHaraj.Infrastructure
 {
@@ -81,7 +82,23 @@ namespace OHaraj.Infrastructure
 
             builder.Entity<IdentityUserRole<string>>().HasData(superAdminRoles);
 
-
+            builder.Entity<Area>().HasData(
+                new Area
+                {
+                    Id = 1,
+                    Description = "Header"
+                },
+                new Area
+                {
+                    Id = 2,
+                    Description = "Body"
+                },
+                new Area
+                {
+                    Id = 3,
+                    Description = "Footer"
+                }
+            );
         }
 
     }
