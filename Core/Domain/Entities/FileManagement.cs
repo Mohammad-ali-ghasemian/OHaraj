@@ -10,6 +10,7 @@ namespace OHaraj.Core.Domain.Entities
         public string path { get; set; } = string.Empty;
 
         //Navigation Properties
-
+        ProductId
+        
     }
 }
