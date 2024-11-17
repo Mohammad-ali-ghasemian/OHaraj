@@ -1,4 +1,6 @@
-﻿namespace OHaraj.Core.Domain.Entities.Shop
+﻿using OHaraj.Core.Domain.Entities.Handling;
+
+namespace OHaraj.Core.Domain.Entities.Shop
 {
     public class Model
     {
@@ -7,8 +9,12 @@
         public string? Description { get; set; }
 
         // Navigation Properties
-        Product
-        Category
-        FileManagement
+        public List<Product> Products { get; set; }
+
+        public Category Category { get; set; }
+        public int CategoryId { get; set; }
+
+        public FileManagement FileManagement { get; set; }
+        public int FileManagementId { get; set; }
     }
 }
