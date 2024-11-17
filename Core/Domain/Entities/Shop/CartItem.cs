@@ -7,7 +7,10 @@
         public int FinalPrice { get; set; }
 
         // Navigation Properties
-        CartId
-        ProductId
+        public Cart Cart { get; set; }
+        public int CartId { get; set; }
+
+        public Product Product { get; set; }
+        public int ProductId { get; set; }
     }
 }
