@@ -1,4 +1,6 @@
-﻿namespace OHaraj.Core.Domain.Entities.Shop
+﻿using OHaraj.Core.Domain.Entities.Handling;
+
+namespace OHaraj.Core.Domain.Entities.Shop
 {
     public class ProductImages
     {
@@ -6,7 +8,10 @@
         public int Order { get; set; }
 
         // Navigation Properties
-        ProductId
-        FileManagementId
+        public Product Product { get; set; }
+        public int ProductId { get; set; }
+
+        public FileManagement FileManagement { get; set; }
+        public int FileManagementId { get; set; }
     }
 }
