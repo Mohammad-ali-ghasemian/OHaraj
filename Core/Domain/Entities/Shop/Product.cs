@@ -1,4 +1,6 @@
-﻿namespace OHaraj.Core.Domain.Entities.Shop
+﻿using OHaraj.Core.Domain.Entities.Handling;
+
+namespace OHaraj.Core.Domain.Entities.Shop
 {
     public class Product
     {
@@ -16,8 +18,21 @@
         public bool IsActive { get; set; } = false;
 
         // Navigation Properties
-        FileManagementId
-        CategoryId
-        ModelId
+        public FileManagement? FileManagement { get; set; }
+        public int FileManagementId { get; set; }
+
+        public Category? Category { get; set; }
+        public int CategoryId { get; set; }
+
+        public Model? Model { get; set; }
+        public int ModelId { get; set; }
+
+        public List<CartItem> CartItems { get; set; }
+
+        public List<ProductImages> ProductImages { get; set; }
+
+        public List<ProductLike> ProductLikes { get; set; }
+
+        public List<ProductComment> ProductComments { get; set; }
     }
 }
