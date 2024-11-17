@@ -1,4 +1,5 @@
-﻿using OHaraj.Core.Enums;
+﻿using Microsoft.AspNetCore.Identity;
+using OHaraj.Core.Enums;
 
 namespace OHaraj.Core.Domain.Entities.Shop
 {
@@ -11,6 +12,9 @@ namespace OHaraj.Core.Domain.Entities.Shop
         public CartStatus Status { get; set; }
 
         // Navigation Properties
-        UserId
+        public IdentityUser User { get; set; }
+        public string UserId { get; set; } = string.Empty;
+
+        public List<CartItem> Items { get; set; }
     }
 }
