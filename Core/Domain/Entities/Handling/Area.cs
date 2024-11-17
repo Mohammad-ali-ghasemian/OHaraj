@@ -1,8 +1,8 @@
-﻿namespace OHaraj.Core.Domain.Entities
+﻿namespace OHaraj.Core.Domain.Entities.Handling
 {
     public class Area
     {
-        public int Id { get; set; } 
+        public int Id { get; set; }
         public string Description { get; set; } = string.Empty;
     }
 }

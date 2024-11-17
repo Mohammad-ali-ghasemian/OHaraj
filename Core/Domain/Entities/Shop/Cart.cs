@@ -1,6 +1,6 @@
 ﻿using OHaraj.Core.Enums;
 
-namespace OHaraj.Core.Domain.Entities
+namespace OHaraj.Core.Domain.Entities.Shop
 {
     public class Cart
     {

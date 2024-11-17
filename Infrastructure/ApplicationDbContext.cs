@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using OHaraj.Core.Domain.Entities;
+using OHaraj.Core.Domain.Entities.Handling;
 
 namespace OHaraj.Infrastructure
 {

@@ -1,6 +1,6 @@
 ﻿using OHaraj.Core.Enums;
 
-namespace OHaraj.Core.Domain.Entities
+namespace OHaraj.Core.Domain.Entities.Handling
 {
     public class FileManagement
     {
@@ -11,6 +11,6 @@ namespace OHaraj.Core.Domain.Entities
 
         //Navigation Properties
         ProductId
-        
+
     }
 }

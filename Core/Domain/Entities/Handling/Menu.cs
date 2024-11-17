@@ -1,4 +1,4 @@
-﻿namespace OHaraj.Core.Domain.Entities
+﻿namespace OHaraj.Core.Domain.Entities.Handling
 {
     public class Menu
     {
