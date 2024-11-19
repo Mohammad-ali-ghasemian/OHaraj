@@ -1,4 +1,6 @@
-﻿namespace OHaraj.Core.Domain.Entities.Configs
+﻿using OHaraj.Core.Domain.Entities.Settings;
+
+namespace OHaraj.Core.Domain.Entities.Configs
 {
     public class ImageConfigs
     {
@@ -9,7 +11,7 @@
         public int? MaxHeight { get; set; }
 
         // Navigation Properties
-        ImageSettingsId
+        public List<ImageSettings> ImageSettings { get; set; }
 
     }
 }
