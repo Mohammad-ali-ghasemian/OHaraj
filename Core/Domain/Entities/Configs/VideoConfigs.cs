@@ -1,4 +1,6 @@
-﻿namespace OHaraj.Core.Domain.Entities.Configs
+﻿using OHaraj.Core.Domain.Entities.Settings;
+
+namespace OHaraj.Core.Domain.Entities.Configs
 {
     public class VideoConfigs
     {
@@ -10,6 +12,6 @@
         public int? MaxLength { get; set; }
 
         // Navigation Properties
-        VideoSettingsId
+        public List<VideoSettings> VideoSettings { get; set; }
     }
 }
