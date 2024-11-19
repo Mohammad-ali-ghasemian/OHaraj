@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using OHaraj.Core.Domain.Entities.Configs;
 using OHaraj.Core.Domain.Entities.Handling;
+using OHaraj.Core.Domain.Entities.Settings;
+using OHaraj.Core.Domain.Entities.Shop;
 
 namespace OHaraj.Infrastructure
 {
@@ -100,6 +103,29 @@ namespace OHaraj.Infrastructure
             //    }
             );
         }
+
+        public DbSet<Cart> Carts { get; set; }
+        public DbSet<CartItem> CartItems { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Model> Models { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<ProductLike> ProductLikes { get; set; }
+        public DbSet<ProductComment> ProductComments { get; set; }
+        public DbSet<ProductImages> ProductImages { get; set; }
+
+        public DbSet<FileManagement> FileManagement { get; set; }
+        public DbSet<Menu> Menus { get; set; }
+        public DbSet<RoleAccessBanned> RoleAccessBanned { get; set; }
+
+        public DbSet<AudioConfigs> AudioConfigs { get; set; }
+        public DbSet<DocumentConfigs> DocumentConfigs { get; set; }
+        public DbSet<ImageConfigs> ImageConfigs { get; set; }
+        public DbSet<VideoConfigs> VideoConfigs { get; set; }
+
+        public DbSet<AudioSettings> AudioSettings { get; set; }
+        public DbSet<DocumentSettings> DocumentSettings { get; set; }
+        public DbSet<ImageSettings> ImageSettings { get; set; }
+        public DbSet<VideoSettings> VideoSettings { get; set; }
 
     }
 }
