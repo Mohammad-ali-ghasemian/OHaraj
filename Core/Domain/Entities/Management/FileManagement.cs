@@ -1,4 +1,5 @@
-﻿using OHaraj.Core.Enums;
+﻿using OHaraj.Core.Domain.Entities.Shop;
+using OHaraj.Core.Enums;
 
 namespace OHaraj.Core.Domain.Entities.Handling
 {
@@ -10,7 +11,13 @@ namespace OHaraj.Core.Domain.Entities.Handling
         public string path { get; set; } = string.Empty;
 
         //Navigation Properties
-        ProductId
+        public Product? Product { get; set; }
+
+        public Category? Category { get; set; }
+
+        public Model? Model { get; set; }
+
+        public ProductImages? ProductImages { get; set; }
 
     }
 }
