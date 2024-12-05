@@ -14,8 +14,8 @@ namespace OHaraj.Core.Domain.Entities.Shop
 
         public List<Model> Models { get; set; }
 
-        public FileManagement FileManagement { get; set; }
-        public int FileManagementId { get; set; }
+        public FileManagement? FileManagement { get; set; }
+        public int? FileManagementId { get; set; }
 
 
 

@@ -19,13 +19,13 @@ namespace OHaraj.Core.Domain.Entities.Shop
 
         // Navigation Properties
         public FileManagement? FileManagement { get; set; }
-        public int FileManagementId { get; set; }
+        public int? FileManagementId { get; set; }
 
         public Category? Category { get; set; }
         public int CategoryId { get; set; }
 
         public Model? Model { get; set; }
-        public int ModelId { get; set; }
+        public int? ModelId { get; set; }
 
         public List<CartItem> CartItems { get; set; }
 
