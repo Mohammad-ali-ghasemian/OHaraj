@@ -101,7 +101,7 @@ namespace OHaraj.Infrastructure
             //        Id = 3,
             //        Description = "Footer"
             //    }
-            );
+            //);
         }
 
         public DbSet<Cart> Carts { get; set; }
