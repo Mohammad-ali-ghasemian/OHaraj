@@ -10,7 +10,7 @@ namespace OHaraj.Core.Domain.Entities.Handling
         public IdentityRole Role { get; set; }
         public string RoleId { get; set; }
 
-        public List<Menu> Menu {  get; set; } 
+        public Menu Menu {  get; set; } 
         public int MenuId { get; set; }
     }
 }
