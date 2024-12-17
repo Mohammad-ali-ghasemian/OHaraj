@@ -2,6 +2,19 @@
   "version": 3,
   "targets": {
     "net6.0": {
+      "DNTPersianUtils.Core/6.3.2": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/DNTPersianUtils.Core.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/DNTPersianUtils.Core.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Humanizer.Core/2.8.26": {
         "type": "package",
         "compile": {
@@ -968,6 +981,36 @@
     }
   },
   "libraries": {
+    "DNTPersianUtils.Core/6.3.2": {
+      "sha512": "2CtYEyPb8RSXsjtRkYbfIWarMphSI5bLXBdrDnZkbsTdCzo+Q6sXNEv7crENZ2gmn3Gqsny87ikoKgm9ZVEJRA==",
+      "type": "package",
+      "path": "dntpersianutils.core/6.3.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "dntpersianutils.core.6.3.2.nupkg.sha512",
+        "dntpersianutils.core.nuspec",
+        "lib/net46/DNTPersianUtils.Core.dll",
+        "lib/net46/DNTPersianUtils.Core.xml",
+        "lib/net5.0/DNTPersianUtils.Core.dll",
+        "lib/net5.0/DNTPersianUtils.Core.xml",
+        "lib/net6.0/DNTPersianUtils.Core.dll",
+        "lib/net6.0/DNTPersianUtils.Core.xml",
+        "lib/net7.0/DNTPersianUtils.Core.dll",
+        "lib/net7.0/DNTPersianUtils.Core.xml",
+        "lib/net8.0/DNTPersianUtils.Core.dll",
+        "lib/net8.0/DNTPersianUtils.Core.xml",
+        "lib/net9.0/DNTPersianUtils.Core.dll",
+        "lib/net9.0/DNTPersianUtils.Core.xml",
+        "lib/netstandard1.3/DNTPersianUtils.Core.dll",
+        "lib/netstandard1.3/DNTPersianUtils.Core.xml",
+        "lib/netstandard2.0/DNTPersianUtils.Core.dll",
+        "lib/netstandard2.0/DNTPersianUtils.Core.xml",
+        "lib/netstandard2.1/DNTPersianUtils.Core.dll",
+        "lib/netstandard2.1/DNTPersianUtils.Core.xml"
+      ]
+    },
     "Humanizer.Core/2.8.26": {
       "sha512": "OiKusGL20vby4uDEswj2IgkdchC1yQ6rwbIkZDVBPIR6al2b7n3pC91elBul9q33KaBgRKhbZH3+2Ur4fnWx2A==",
       "type": "package",
@@ -2644,6 +2687,7 @@
   },
   "projectFileDependencyGroups": {
     "net6.0": [
+      "DNTPersianUtils.Core >= 6.3.2",
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 6.0.6",
       "Microsoft.EntityFrameworkCore >= 6.0.6",
       "Microsoft.EntityFrameworkCore.SqlServer >= 6.0.6",
@@ -2697,6 +2741,10 @@
       "net6.0": {
         "targetAlias": "net6.0",
         "dependencies": {
+          "DNTPersianUtils.Core": {
+            "target": "Package",
+            "version": "[6.3.2, )"
+          },
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
             "target": "Package",
             "version": "[6.0.6, )"
