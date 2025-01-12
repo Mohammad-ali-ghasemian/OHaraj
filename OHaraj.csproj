@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="DNTPersianUtils.Core" Version="6.3.2" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.6" />
@@ -19,10 +20,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Controllers\" />
+    <Folder Include="Core\Domain\DTOs\" />
     <Folder Include="Core\Interfaces\Repositories\" />
     <Folder Include="Core\Interfaces\Services\" />
-    <Folder Include="Core\Domain\DTOs\" />
-    <Folder Include="Core\Domain\Models\" />
     <Folder Include="Infrastructure\Extensions\" />
     <Folder Include="Repositories\" />
     <Folder Include="Services\" />
