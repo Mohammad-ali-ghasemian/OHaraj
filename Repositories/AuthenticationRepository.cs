@@ -1,13 +1,18 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using OHaraj.Core.Domain.Models.Authentication;
+using System.Data;
 
 namespace OHaraj.Repositories
 {
     public class AuthenticationRepository : IAuthenticationRepository
     {
         private readonly UserManager<IdentityUser> _userManager;
-        public AuthenticationRepository(UserManager<IdentityUser> userManager)
+        private readonly SignInManager<IdentityUser> _signInManager;
+        public AuthenticationRepository(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
         {
             _userManager = userManager;
+            _signInManager = signInManager;
         }
 
         public async Task<IdentityResult> AddUserAsync(IdentityUser user, string password)
@@ -15,24 +20,24 @@ namespace OHaraj.Repositories
             return await _userManager.CreateAsync(user, password);
         }
 
-        public Task<IEnumerable<IdentityUser>> GetAllUsersAsync()
+        public async Task<SignInResult> SignInAsync(Login login)
         {
-            throw new NotImplementedException();
+            return await _signInManager.PasswordSignInAsync(login.Email, login.Password, login.rememberMe, false);
         }
 
-        public Task<IdentityUser> GetUserAsync(int userId)
+        public async Task<IEnumerable<IdentityUser>> GetAllUsersAsync()
         {
-            throw new NotImplementedException();
+            return await Task.FromResult(_userManager.Users.ToList());
         }
 
-        public Task<IEnumerable<IdentityUser>> GetUsersByRoleAsync(int roleId)
+        public async Task<IdentityUser> GetUserAsync(string userId)
         {
-            throw new NotImplementedException();
+            return await _userManager.FindByIdAsync(userId);
         }
 
-        public Task<IEnumerable<IdentityUser>> GetUsersByRoleAsync(string role)
+        public async Task<IEnumerable<IdentityUser>> GetUsersByRoleAsync(string roleName)
         {
-            throw new NotImplementedException();
+            return await _userManager.Users.Where(user => _userManager.IsInRoleAsync(user, roleName).Result).ToListAsync();
         }
     }
 }
