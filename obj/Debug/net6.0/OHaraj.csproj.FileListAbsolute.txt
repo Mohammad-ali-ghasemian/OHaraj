@@ -70,3 +70,5 @@ D:\E\git\OHaraj\OHaraj\OHaraj\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\S
 D:\E\git\OHaraj\OHaraj\OHaraj\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
 D:\E\git\OHaraj\OHaraj\OHaraj\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
 D:\E\git\OHaraj\OHaraj\OHaraj\obj\Debug\net6.0\OHaraj.sourcelink.json
+D:\E\git\OHaraj\OHaraj\OHaraj\bin\Debug\net6.0\DNTPersianUtils.Core.dll
+D:\E\git\OHaraj\OHaraj\OHaraj\bin\Debug\net6.0\Newtonsoft.Json.dll

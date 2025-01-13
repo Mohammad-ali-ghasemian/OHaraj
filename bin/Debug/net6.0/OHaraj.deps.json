@@ -8,14 +8,24 @@
     ".NETCoreApp,Version=v6.0": {
       "OHaraj/1.0.0": {
         "dependencies": {
+          "DNTPersianUtils.Core": "6.3.2",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "6.0.6",
           "Microsoft.EntityFrameworkCore": "6.0.6",
           "Microsoft.EntityFrameworkCore.SqlServer": "6.0.6",
           "Microsoft.EntityFrameworkCore.Tools": "6.0.6",
+          "Newtonsoft.Json": "6.0.6",
           "Swashbuckle.AspNetCore": "6.5.0"
         },
         "runtime": {
           "OHaraj.dll": {}
+        }
+      },
+      "DNTPersianUtils.Core/6.3.2": {
+        "runtime": {
+          "lib/net6.0/DNTPersianUtils.Core.dll": {
+            "assemblyVersion": "6.3.2.0",
+            "fileVersion": "6.3.2.0"
+          }
         }
       },
       "Humanizer.Core/2.8.26": {
@@ -361,6 +371,14 @@
           }
         }
       },
+      "Newtonsoft.Json/6.0.6": {
+        "runtime": {
+          "lib/net45/Newtonsoft.Json.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.6.17820"
+          }
+        }
+      },
       "Swashbuckle.AspNetCore/6.5.0": {
         "dependencies": {
           "Microsoft.Extensions.ApiDescription.Server": "6.0.5",
@@ -546,6 +564,13 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "DNTPersianUtils.Core/6.3.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-2CtYEyPb8RSXsjtRkYbfIWarMphSI5bLXBdrDnZkbsTdCzo+Q6sXNEv7crENZ2gmn3Gqsny87ikoKgm9ZVEJRA==",
+      "path": "dntpersianutils.core/6.3.2",
+      "hashPath": "dntpersianutils.core.6.3.2.nupkg.sha512"
     },
     "Humanizer.Core/2.8.26": {
       "type": "package",
@@ -798,6 +823,13 @@
       "sha512": "sha512-mtVirZr++rq+XCDITMUdnETD59XoeMxSpLRIII7JRI6Yj0LEDiO1pPn0ktlnIj12Ix8bfvQqQDMMIF9wC98oCA==",
       "path": "microsoft.win32.systemevents/4.7.0",
       "hashPath": "microsoft.win32.systemevents.4.7.0.nupkg.sha512"
+    },
+    "Newtonsoft.Json/6.0.6": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-w26uZNyCG5VeoKiEOJ4+9/o8koSofLKwHl7WLreIcp0U6r57L7WiRXmjp8MTKFw6dYNZ9AE0lw69WYbIhUsU9Q==",
+      "path": "newtonsoft.json/6.0.6",
+      "hashPath": "newtonsoft.json.6.0.6.nupkg.sha512"
     },
     "Swashbuckle.AspNetCore/6.5.0": {
       "type": "package",
