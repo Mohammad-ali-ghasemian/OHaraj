@@ -6,11 +6,14 @@ namespace OHaraj.Core.Domain.Models.Authentication
 {
     public class Login
     {
-        [ValidIranianMobileNumber(ErrorMessage = PublicHelper.NotValidValidationErrorMessage)]
+        [Display(Name = "ایمیل")]
+        [EmailAddress]
         [Required(ErrorMessage = PublicHelper.RequiredValidationErrorMessage)]
-        public string MobileNumber { get; set; }
+        public string Email { get; set; }
 
         [Required(ErrorMessage = PublicHelper.RequiredValidationErrorMessage)]
         public string Password { get; set; }
+
+        public bool rememberMe = false;
     }
 }
