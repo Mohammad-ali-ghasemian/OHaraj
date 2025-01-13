@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using OHaraj.Core.Domain.Entities.Management;
 using OHaraj.Core.Domain.Models.Authentication;
+using OHaraj.Core.Interfaces.Repositories;
+using OHaraj.Infrastructure;
 using System.Data;
 
 namespace OHaraj.Repositories
@@ -9,10 +12,16 @@ namespace OHaraj.Repositories
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
-        public AuthenticationRepository(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
+        private readonly ApplicationDbContext _dbContext;
+        public AuthenticationRepository(
+            UserManager<IdentityUser> userManager,
+            SignInManager<IdentityUser> signInManager,
+            ApplicationDbContext dbContext
+            )
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _dbContext = dbContext;
         }
 
         public async Task<IdentityResult> AddUserAsync(IdentityUser user, string password)
@@ -39,5 +48,18 @@ namespace OHaraj.Repositories
         {
             return await _userManager.Users.Where(user => _userManager.IsInRoleAsync(user, roleName).Result).ToListAsync();
         }
+
+        public async Task<Token> GetUserTokensAsync(string userId)
+        {
+            return await _dbContext.Tokens.FirstOrDefaultAsync(u => u.UserId == userId);
+        }
+
+        public async Task UpdateUserTokensAsync(Token token)
+        {
+            _dbContext.Update(token);
+            await _dbContext.SaveChangesAsync();
+        }
+
+
     }
 }
