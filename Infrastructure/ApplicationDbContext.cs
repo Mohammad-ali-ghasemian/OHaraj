@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using OHaraj.Core.Domain.Entities.Configs;
 using OHaraj.Core.Domain.Entities.Handling;
+using OHaraj.Core.Domain.Entities.Management;
 using OHaraj.Core.Domain.Entities.Settings;
 using OHaraj.Core.Domain.Entities.Shop;
 
@@ -116,6 +117,7 @@ namespace OHaraj.Infrastructure
         public DbSet<FileManagement> FileManagement { get; set; }
         public DbSet<Menu> Menus { get; set; }
         public DbSet<RoleAccessBanned> RoleAccessBanned { get; set; }
+        public DbSet<Token> Tokens { get; set; }
 
         public DbSet<AudioConfigs> AudioConfigs { get; set; }
         public DbSet<DocumentConfigs> DocumentConfigs { get; set; }
