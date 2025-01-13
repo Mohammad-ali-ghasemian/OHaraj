@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using OHaraj.Core.Domain.Entities.Management;
 using OHaraj.Core.Domain.Models.Authentication;
 
-namespace OHaraj.Repositories
+namespace OHaraj.Core.Interfaces.Repositories
 {
     public interface IAuthenticationRepository
     {
@@ -9,6 +10,7 @@ namespace OHaraj.Repositories
         Task<IdentityUser> GetUserAsync(string userId);
         Task<IEnumerable<IdentityUser>> GetAllUsersAsync();
         Task<IEnumerable<IdentityUser>> GetUsersByRoleAsync(string roleName);
+        Task<Token> GetUserTokensAsync(string userId);
         Task<SignInResult> SignInAsync(Login login);
     }
 }

@@ -1,7 +1,6 @@
-﻿namespace OHaraj.Services
+﻿namespace OHaraj.Core.Interfaces.Services
 {
     public interface IAuthenticationService
     {
-
     }
 }
