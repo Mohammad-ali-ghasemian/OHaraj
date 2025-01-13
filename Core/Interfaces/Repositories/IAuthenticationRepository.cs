@@ -10,7 +10,8 @@ namespace OHaraj.Core.Interfaces.Repositories
         Task<IdentityUser> GetUserAsync(string userId);
         Task<IEnumerable<IdentityUser>> GetAllUsersAsync();
         Task<IEnumerable<IdentityUser>> GetUsersByRoleAsync(string roleName);
-        Task<Token> GetUserTokensAsync(string userId);
         Task<SignInResult> SignInAsync(Login login);
+        Task<Token> GetUserTokensAsync(string userId);
+        Task UpdateUserTokensAsync(Token token);
     }
 }
