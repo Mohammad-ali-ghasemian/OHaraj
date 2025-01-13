@@ -9,7 +9,7 @@ namespace OHaraj.Core.Domain.Models.Authentication
         [Display(Name = "شماره تماس")]
         [ValidIranianMobileNumber(ErrorMessage = PublicHelper.NotValidValidationErrorMessage)]
         [Required(ErrorMessage = PublicHelper.RequiredValidationErrorMessage)]
-        public string MobileNumber { get; set; }
+        public string? MobileNumber { get; set; }
 
         [Display(Name = "ایمیل")]
         [EmailAddress]
