@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Authentication;
+﻿using OHaraj.Core.Interfaces.Services;
 
 namespace OHaraj.Services
 {
-    public class AuthenticationService
+    public class AuthenticationService : IAuthenticationService
     {
     }
 }
