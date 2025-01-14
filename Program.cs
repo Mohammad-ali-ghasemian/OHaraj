@@ -2,8 +2,10 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using OHaraj.Core.Interfaces.Repositories;
+using OHaraj.Core.Interfaces.Services;
 using OHaraj.Infrastructure;
 using OHaraj.Repositories;
+using OHaraj.Services;
 using Project.Application.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -40,6 +42,7 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 
 // Scopes
 builder.Services.AddScoped<IAuthenticationRepository, AuthenticationRepository>();
+builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
