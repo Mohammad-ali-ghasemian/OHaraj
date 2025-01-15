@@ -17,6 +17,9 @@ namespace OHaraj.Core.Domain.Models.Authentication
         public string Email { get; set; }
 
         [Required(ErrorMessage = PublicHelper.RequiredValidationErrorMessage)]
+        public string Username { get; set; }
+
+        [Required(ErrorMessage = PublicHelper.RequiredValidationErrorMessage)]
         public string Password { get; set; }
 
         [Required(ErrorMessage = PublicHelper.RequiredValidationErrorMessage)]
