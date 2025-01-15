@@ -31,7 +31,7 @@ namespace OHaraj.Repositories
 
         public async Task<SignInResult> SignInAsync(Login login)
         {
-            return await _signInManager.PasswordSignInAsync(login.Email, login.Password, login.rememberMe, false);
+            return await _signInManager.PasswordSignInAsync(login.Username, login.Password, login.rememberMe, false);
         }
 
         public async Task<IEnumerable<IdentityUser>> GetAllUsersAsync()
