@@ -39,9 +39,19 @@ namespace OHaraj.Repositories
             return await Task.FromResult(_userManager.Users.ToList());
         }
 
-        public async Task<IdentityUser> GetUserAsync(string userId)
+        public async Task<IdentityUser> GetUserByIdAsync(string userId)
         {
             return await _userManager.FindByIdAsync(userId);
+        }
+
+        public async Task<IdentityUser> GetUserByUsernameAsync(string username)
+        {
+            return await _userManager.FindByNameAsync(username);
+        }
+
+        public async Task<IdentityUser> GetUserByEmailAsync(string email)
+        {
+            return await _userManager.FindByEmailAsync(email);
         }
 
         public async Task<IEnumerable<IdentityUser>> GetUsersByRoleAsync(string roleName)
