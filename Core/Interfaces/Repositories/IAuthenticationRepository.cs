@@ -7,7 +7,9 @@ namespace OHaraj.Core.Interfaces.Repositories
     public interface IAuthenticationRepository
     {
         Task<IdentityResult> AddUserAsync(IdentityUser user, string password);
-        Task<IdentityUser> GetUserAsync(string userId);
+        Task<IdentityUser> GetUserByIdAsync(string userId);
+        Task<IdentityUser> GetUserByUsernameAsync(string username);
+        Task<IdentityUser> GetUserByEmailAsync(string email);
         Task<IEnumerable<IdentityUser>> GetAllUsersAsync();
         Task<IEnumerable<IdentityUser>> GetUsersByRoleAsync(string roleName);
         Task<SignInResult> SignInAsync(Login login);
