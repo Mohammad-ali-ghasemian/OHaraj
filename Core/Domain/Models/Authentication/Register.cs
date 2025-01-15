@@ -6,10 +6,10 @@ namespace OHaraj.Core.Domain.Models.Authentication
 {
     public class Register
     {
-        [Display(Name = "شماره تماس")]
+        /*[Display(Name = "شماره تماس")]
         [ValidIranianMobileNumber(ErrorMessage = PublicHelper.NotValidValidationErrorMessage)]
         [Required(ErrorMessage = PublicHelper.RequiredValidationErrorMessage)]
-        public string? MobileNumber { get; set; }
+        public string? MobileNumber { get; set; }*/
 
         [Display(Name = "ایمیل")]
         [EmailAddress]
