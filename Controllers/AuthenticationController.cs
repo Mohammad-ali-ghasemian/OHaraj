@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using OHaraj.Core.Domain.Models.Authentication;
+using OHaraj.Core.Interfaces.Services;
 using Project.Application.Responses;
 using System.Net;
 
@@ -11,6 +13,17 @@ namespace OHaraj.Controllers
     [ProducesResponseType(typeof(Response<string>), (int)HttpStatusCode.BadRequest)]
     public class AuthenticationController : Controller
     {
-        
+        private readonly IAuthenticationService _authenticationService;
+        public AuthenticationController(IAuthenticationService authenticationService)
+        {
+            _authenticationService = authenticationService;
+        }
+
+        [HttpPost("Register")]
+        [Produces(typeof(Response<ResponseStatus>))]
+        public async Task<IActionResult> Register(Register input)
+        {
+            return new Response<ResponseStatus>(await _authenticationService.Register(input)).ToJsonResult();
+        }
     }
 }
