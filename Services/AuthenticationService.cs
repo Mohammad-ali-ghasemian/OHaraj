@@ -31,5 +31,35 @@ namespace OHaraj.Services
             return Convert.ToHexString(RandomNumberGenerator.GetBytes(n));
         }
 
+        public async Task<ResponseStatus> Register(Register input)
+        {
+            if (_authenticationRepository.GetUserByUsernameAsync(input.Username) != null)
+            {
+                throw new BadRequestException("نام کاربری وجود دارد");
+            }
+            if (input.Email != null && _authenticationRepository.GetUserByEmailAsync(input.Email) != null)
+            {
+                throw new BadRequestException("ایمیل وجود دارد");
+            }
+            if (input.Password != input.ConfirmPassword)
+            {
+                throw new BadRequestException("تکرار رمز عبور صحیح نمی باشد");
+            }
+
+            IdentityResult result = await _authenticationRepository.AddUserAsync(new Microsoft.AspNetCore.Identity.IdentityUser
+            {
+                UserName = input.Username,
+                Email = input.Email
+            }, input.Password);
+
+            if (result.Succeeded)
+            {
+                return ResponseStatus.Succeed;
+            }
+            else
+            {
+                throw new BadRequestException("مشکلی در ایجاد اکانت به وجود آمد");
+            }
+        }
     }
 }
