@@ -26,5 +26,10 @@ namespace OHaraj.Services
             return (UserDTO)_httpContextAccessor.HttpContext.Items["User"];
         }
 
+        public static string CreateToken(int n)
+        {
+            return Convert.ToHexString(RandomNumberGenerator.GetBytes(n));
+        }
+
     }
 }
