@@ -21,5 +21,10 @@ namespace OHaraj.Services
             _authenticationRepository = authenticationRepository;
         }
 
+        public UserDTO Current()
+        {
+            return (UserDTO)_httpContextAccessor.HttpContext.Items["User"];
+        }
+
     }
 }
