@@ -58,7 +58,7 @@ namespace OHaraj.Services
             }
             else
             {
-                throw new BadRequestException("مشکلی در ایجاد اکانت به وجود آمد");
+                throw new BadRequestException("مشکلی در ایجاد حساب به وجود آمد");
             }
         }
     }
