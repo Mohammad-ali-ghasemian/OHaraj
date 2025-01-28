@@ -29,7 +29,12 @@ namespace OHaraj.Repositories
             return await _userManager.CreateAsync(user, password);
         }
 
-        public async Task<IdentityResult> DeleteUserAsync(IdentityUser user
+        public async Task<IdentityResult> AddUserRolesAsync(IdentityUser user, IEnumerable<string> roles)
+        {
+            return await _userManager.AddToRolesAsync(user, roles);
+        }
+
+        public async Task<IdentityResult> DeleteUserAsync(IdentityUser user)
         {
             return await _userManager.DeleteAsync(user);
         }
