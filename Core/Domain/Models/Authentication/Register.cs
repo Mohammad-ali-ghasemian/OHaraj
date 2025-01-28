@@ -13,7 +13,6 @@ namespace OHaraj.Core.Domain.Models.Authentication
 
         [Display(Name = "ایمیل")]
         [EmailAddress]
-        [Required(ErrorMessage = PublicHelper.RequiredValidationErrorMessage)]
         public string? Email { get; set; }
 
         [Required(ErrorMessage = PublicHelper.RequiredValidationErrorMessage)]
