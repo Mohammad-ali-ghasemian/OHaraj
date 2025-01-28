@@ -46,15 +46,26 @@ namespace OHaraj.Services
                 throw new BadRequestException("تکرار رمز عبور صحیح نمی باشد");
             }
 
-            IdentityResult result = await _authenticationRepository.AddUserAsync(new Microsoft.AspNetCore.Identity.IdentityUser
+            var user = new IdentityUser
             {
                 UserName = input.Username,
                 Email = input.Email
-            }, input.Password);
+            };
+
+            IdentityResult result = await _authenticationRepository.AddUserAsync(user, input.Password);
 
             if (result.Succeeded)
             {
-                return ResponseStatus.Succeed;
+                var addRoleResult = await _authenticationRepository.AddUserRolesAsync(user, new List<string> {"User"});
+
+                if (addRoleResult.Succeeded)
+                {
+                    // if add user and add role both worked correct
+                    return ResponseStatus.Succeed;
+                }
+
+                await _authenticationRepository.DeleteUserAsync(user);
+                throw new BadRequestException("مشکلی در ایجاد حساب به وجود آمد");
             }
             else
             {
