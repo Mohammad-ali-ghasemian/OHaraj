@@ -11,5 +11,6 @@ namespace OHaraj.Core.Interfaces.Services
         Task<string> VerifiyEmailToken(string email);// email verification in User table = true; verifiadAt in Token table;
         Task<ResponseStatus> SendResetPasswordEmail(string email);// create token and add it to token table; create expire date;
         Task<string> VerifiyResetPasswordToken(string email);
+        Task<ResponseStatus> Login(Login input);
     }
 }
