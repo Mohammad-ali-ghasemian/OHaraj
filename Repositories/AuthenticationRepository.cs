@@ -69,6 +69,12 @@ namespace OHaraj.Repositories
             return await _userManager.Users.Where(user => _userManager.IsInRoleAsync(user, roleName).Result).ToListAsync();
         }
 
+        public async Task AddUserTokensAsync(Token token)
+        {
+            await _dbContext.Tokens.AddAsync(token);
+            await _dbContext.SaveChangesAsync();
+        }
+
         public async Task<Token> GetUserTokensAsync(string userId)
         {
             return await _dbContext.Tokens.FirstOrDefaultAsync(u => u.UserId == userId);
