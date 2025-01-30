@@ -15,6 +15,7 @@ namespace OHaraj.Core.Interfaces.Repositories
         Task<IEnumerable<IdentityUser>> GetAllUsersAsync();
         Task<IEnumerable<IdentityUser>> GetUsersByRoleAsync(string roleName);
         Task<SignInResult> SignInAsync(Login login);
+        Task<Token> AddUserTokensAsync(Token token);
         Task<Token> GetUserTokensAsync(string userId);
         Task UpdateUserTokensAsync(Token token);
     }
