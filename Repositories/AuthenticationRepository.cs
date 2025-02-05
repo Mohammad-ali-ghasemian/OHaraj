@@ -88,5 +88,10 @@ namespace OHaraj.Repositories
             await _dbContext.SaveChangesAsync();
         }
 
+        public async Task<IdentityResult> RemoveUserPasswordAsync(IdentityUser user)
+        {
+            return await _userManager.RemovePasswordAsync(user);
+        }
+
     }
 }
