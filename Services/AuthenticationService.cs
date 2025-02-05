@@ -254,5 +254,9 @@ namespace OHaraj.Services
             throw new NotImplementedException();
         }
 
+        public Task<UserDTO> ChangePassword(ChangePassword input)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
