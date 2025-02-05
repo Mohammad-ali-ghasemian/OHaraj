@@ -41,6 +41,13 @@ namespace OHaraj.Controllers
             return new Response<string>(await _authenticationService.VerifiyEmailToken(token)).ToJsonResult();
         }
 
+        [HttpPost("Send-Reset-Password-Email")]
+        [Produces(typeof(Response<ResponseStatus>))]
+        public async Task<IActionResult> SendResetPasswordEmail(string email)
+        {
+            return new Response<ResponseStatus>(await _authenticationService.SendResetPasswordEmail(email)).ToJsonResult();
+        }
+
 
     }
 }
