@@ -33,6 +33,7 @@ namespace OHaraj.Core.Interfaces.Repositories
         // Reset Password without old password
         Task<IdentityResult> RemoveUserPasswordAsync(IdentityUser user);
         Task<IdentityResult> AddUserPasswordAsync(IdentityUser user, string newPassword);
-        
+        // Change Password with old password
+        Task<IdentityResult> ChangeUserPasswordAsync(IdentityUser user, ChangePassword input);
     }
 }
