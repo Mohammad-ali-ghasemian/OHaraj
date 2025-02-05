@@ -48,6 +48,13 @@ namespace OHaraj.Controllers
             return new Response<ResponseStatus>(await _authenticationService.SendResetPasswordEmail(email)).ToJsonResult();
         }
 
+        [HttpPost("Verify-Reset-Token")]
+        [Produces(typeof(Response<string>))]
+        public async Task<IActionResult> VerifyResetToken(ResetPassword input)
+        {
+            return new Response<string>(await _authenticationService.VerifiyResetPasswordToken(input)).ToJsonResult();
+        }
+
 
     }
 }
