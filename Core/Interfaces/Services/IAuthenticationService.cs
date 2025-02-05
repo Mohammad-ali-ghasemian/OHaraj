@@ -11,5 +11,6 @@ namespace OHaraj.Core.Interfaces.Services
         Task<ResponseStatus> Register(Register input);
         Task<ResponseStatus> SendVerificationEmail(string email);
         Task<string> VerifiyEmailToken(string token);
+        Task<ResponseStatus> SendResetPasswordEmail(string email);
     }
 }
