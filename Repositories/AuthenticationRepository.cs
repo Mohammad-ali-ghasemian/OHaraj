@@ -34,11 +34,6 @@ namespace OHaraj.Repositories
             return await _userManager.AddToRolesAsync(user, roles);
         }
 
-        public async Task<IdentityResult> DeleteUserAsync(IdentityUser user)
-        {
-            return await _userManager.DeleteAsync(user);
-        }
-
         public async Task<SignInResult> SignInAsync(Login login)
         {
             return await _signInManager.PasswordSignInAsync(login.Username, login.Password, login.rememberMe, false);
@@ -62,6 +57,12 @@ namespace OHaraj.Repositories
         public async Task<IdentityUser> GetUserByEmailAsync(string email)
         {
             return await _userManager.FindByEmailAsync(email);
+
+        }
+
+        public async Task<IdentityResult> UpdateUserAsync(IdentityUser user)
+        {
+            return await _userManager.UpdateAsync(user);
         }
 
         public async Task<IEnumerable<IdentityUser>> GetUsersByRoleAsync(string roleName)
@@ -75,17 +76,11 @@ namespace OHaraj.Repositories
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task<Token> GetUserTokensAsync(string userId)
-        {
-            return await _dbContext.Tokens.FirstOrDefaultAsync(u => u.UserId == userId);
-        }
-
         public async Task UpdateUserTokensAsync(Token token)
         {
             _dbContext.Update(token);
             await _dbContext.SaveChangesAsync();
         }
-
 
     }
 }
