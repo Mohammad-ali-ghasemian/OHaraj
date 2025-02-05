@@ -27,5 +27,7 @@ namespace OHaraj.Core.Interfaces.Repositories
         Task<Token> GetTokensByResetPasswordTokenAsync(string token);
         Task UpdateUserTokensAsync(Token token);
 
+        // Login
+        Task<SignInResult> SignInAsync(Login login);
     }
 }
