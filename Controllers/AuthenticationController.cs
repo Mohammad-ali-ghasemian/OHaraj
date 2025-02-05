@@ -62,7 +62,13 @@ namespace OHaraj.Controllers
         {
             return new Response<UserDTO>(await _authenticationService.ChangePassword(input)).ToJsonResult();
         }
-        
+        // IMCOMPLETE
+        [HttpPost("Login")]
+        [Produces(typeof(Response<UserDTO>))]
+        public async Task<IActionResult> Login(Login input)
+        {
+            return new Response<UserDTO>(await _authenticationService.Login(input)).ToJsonResult();
+        }
 
     }
 }
