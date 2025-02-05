@@ -201,5 +201,53 @@ namespace OHaraj.Services
             return ResponseStatus.Succeed;
         }
 
+        public async Task<string> VerifiyResetPasswordToken(ResetPassword input)
+        {
+            if (input.Password != input.ConfirmPassword)
+            {
+                throw new BadRequestException("تکرار رمز عبور صحیح نمی‌باشد");
+            }
+
+            var Token = await _authenticationRepository.GetTokensByResetPasswordTokenAsync(input.Token);
+            if (Token == null)
+            {
+                throw new NotFoundException("کد صحیح نمی باشد");
+            }
+
+            if (Token.ResetPasswordTokenExpires < DateTime.Now)
+            {
+                throw new BadRequestException("کد منسوخ شده است. لطفا دوباره درخواست بدهید");
+            }
+
+            var user = await _authenticationRepository.GetUserByIdAsync(Token.UserId);
+            if (user == null)
+            {
+                throw new NotFoundException("کاربر وجود ندارد");
+            }
+
+
+
+
+            var oldPasswordHash = user.PasswordHash;
+
+            var result = await _authenticationRepository.RemoveUserPasswordAsync(user);
+            if (!result.Succeeded)
+            {
+                throw new BadRequestException("مشکلی در فرایند بازنشانی رمز عبور پیش آمد");
+            }
+
+            result = await _authenticationRepository.AddUserPasswordAsync(user, input.Password);
+            if (!result.Succeeded)
+            {
+                user.PasswordHash = oldPasswordHash;
+                throw new BadRequestException("مشکلی در فرایند بازنشانی رمز عبور پیش آمد");
+            }
+            
+            Token.ResetPasswordTokenExpires = DateTime.Now;
+            await _authenticationRepository.UpdateUserTokensAsync(Token);
+            
+            return user.Email;
+        }
+
     }
 }
