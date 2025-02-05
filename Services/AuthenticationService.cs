@@ -7,18 +7,30 @@ using OHaraj.Core.Interfaces.Services;
 using Project.Application.Exceptions;
 using Project.Application.Responses;
 using System.Security.Cryptography;
+using MimeKit.Text;
+using MimeKit;
+using MailKit.Net.Smtp;
+using OHaraj.Core.Domain.Entities.Management;
+using Newtonsoft.Json.Linq;
 
 namespace OHaraj.Services
 {
     public class AuthenticationService : IAuthenticationService
     {
-        private readonly IMapper _mapper;
+        //private readonly IMapper _mapper;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IAuthenticationRepository _authenticationRepository;
-        public AuthenticationService(IMapper mapper, IHttpContextAccessor httpContextAccessor, IAuthenticationRepository authenticationRepository) {
-            _mapper = mapper;
+        private readonly UserManager<IdentityUser> _userManager;
+        public AuthenticationService(
+            IHttpContextAccessor httpContextAccessor,
+            IAuthenticationRepository authenticationRepository,
+            UserManager<IdentityUser> userManager
+            ) 
+        {
+            //_mapper = mapper;
             _httpContextAccessor = httpContextAccessor;
             _authenticationRepository = authenticationRepository;
+            _userManager = userManager;
         }
 
         public UserDTO Current()
@@ -49,7 +61,7 @@ namespace OHaraj.Services
             var user = new IdentityUser
             {
                 UserName = input.Username,
-                Email = input.Email
+                Email = input.Email.ToLower()
             };
 
             IdentityResult result = await _authenticationRepository.AddUserAsync(user, input.Password);
@@ -72,5 +84,6 @@ namespace OHaraj.Services
                 throw new BadRequestException("مشکلی در ایجاد حساب به وجود آمد");
             }
         }
+
     }
 }
