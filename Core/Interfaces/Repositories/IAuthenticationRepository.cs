@@ -29,5 +29,9 @@ namespace OHaraj.Core.Interfaces.Repositories
 
         // Login
         Task<SignInResult> SignInAsync(Login login);
+        
+        // Reset Password without old password
+        Task<IdentityResult> RemoveUserPasswordAsync(IdentityUser user);
+        
     }
 }
