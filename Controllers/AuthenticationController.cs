@@ -34,6 +34,13 @@ namespace OHaraj.Controllers
             return new Response<ResponseStatus>(await _authenticationService.SendVerificationEmail(email)).ToJsonResult();
         }
 
+        [HttpPost("Verify-Email-Token")]
+        [Produces(typeof(Response<string>))]
+        public async Task<IActionResult> VerifyEmailToken(string token)
+        {
+            return new Response<string>(await _authenticationService.VerifiyEmailToken(token)).ToJsonResult();
+        }
+
 
     }
 }
