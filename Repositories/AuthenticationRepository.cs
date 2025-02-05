@@ -65,6 +65,11 @@ namespace OHaraj.Repositories
             return await _userManager.UpdateAsync(user);
         }
 
+        public async Task<IdentityResult> DeleteUserAsync(IdentityUser user)
+        {
+            return await _userManager.DeleteAsync(user);
+        }
+
         public async Task<IEnumerable<IdentityUser>> GetUsersByRoleAsync(string roleName)
         {
             return await _userManager.Users.Where(user => _userManager.IsInRoleAsync(user, roleName).Result).ToListAsync();
@@ -76,6 +81,7 @@ namespace OHaraj.Repositories
             await _dbContext.SaveChangesAsync();
         }
 
+        
         public async Task UpdateUserTokensAsync(Token token)
         {
             _dbContext.Update(token);
