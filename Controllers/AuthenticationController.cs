@@ -55,6 +55,14 @@ namespace OHaraj.Controllers
             return new Response<string>(await _authenticationService.VerifiyResetPasswordToken(input)).ToJsonResult();
         }
 
+        // IMCOMPLETE
+        [HttpPost("Change-Password")]
+        [Produces(typeof(Response<UserDTO>))]
+        public async Task<IActionResult> ChangePassword(ChangePassword input)
+        {
+            return new Response<UserDTO>(await _authenticationService.ChangePassword(input)).ToJsonResult();
+        }
+        
 
     }
 }
