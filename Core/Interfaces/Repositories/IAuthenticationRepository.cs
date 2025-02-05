@@ -18,6 +18,7 @@ namespace OHaraj.Core.Interfaces.Repositories
         
         Task<IdentityResult> UpdateUserAsync(IdentityUser user);
         
+        Task<IdentityResult> DeleteUserAsync(IdentityUser user);
         
         // Token
         Task<Token> GetUserTokensAsync(string userId);
