@@ -135,5 +135,28 @@ namespace OHaraj.Services
             return ResponseStatus.Succeed;
         }
 
+
+        public async Task<string> VerifiyEmailToken(string token)
+        {
+            var Token = await _authenticationRepository.GetTokensByEmailVerificationTokenAsync(token);
+            if (Token == null)
+            {
+                throw new NotFoundException("کد صحیح نمی باشد");
+            }
+
+            var user = await _authenticationRepository.GetUserByIdAsync(Token.UserId);
+            if (user == null)
+            {
+                throw new NotFoundException("کاربر وجود ندارد");
+            }
+
+            Token.EmailVerifiedAt = DateTime.Now;
+            await _authenticationRepository.UpdateUserTokensAsync(Token);
+            user.EmailConfirmed = true;
+            await _authenticationRepository.UpdateUserAsync(user);
+
+            return user.Email;
+        }
+
     }
 }
