@@ -24,6 +24,7 @@ namespace OHaraj.Core.Interfaces.Repositories
         Task AddUserTokensAsync(Token token);
         Task<Token> GetUserTokensAsync(string userId);
         Task<Token> GetTokensByEmailVerificationTokenAsync(string token);
+        Task<Token> GetTokensByResetPasswordTokenAsync(string token);
         Task UpdateUserTokensAsync(Token token);
 
     }
