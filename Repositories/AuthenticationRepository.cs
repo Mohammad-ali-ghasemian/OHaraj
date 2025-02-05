@@ -93,5 +93,10 @@ namespace OHaraj.Repositories
             return await _userManager.RemovePasswordAsync(user);
         }
 
+        public async Task<IdentityResult> AddUserPasswordAsync(IdentityUser user, string newPassword)
+        {
+            return await _userManager.AddPasswordAsync(user, newPassword);
+        }
+        
     }
 }
