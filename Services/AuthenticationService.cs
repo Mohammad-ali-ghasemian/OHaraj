@@ -158,5 +158,48 @@ namespace OHaraj.Services
             return user.Email;
         }
 
+        // create and then send token
+        public async Task<ResponseStatus> SendResetPasswordEmail(string Email)
+        {
+            var user = await _authenticationRepository.GetUserByEmailAsync(Email);
+            if (user == null)
+            {
+                throw new NotFoundException("ایمیل یافت نشد");
+            }
+
+            var userTokens = await _authenticationRepository.GetUserTokensAsync(user.Id);
+            string token = CreateToken(4);
+
+            userTokens.ResetPasswordToken = token;
+            userTokens.ResetPasswordTokenExpires = DateTime.Now.AddHours(1);
+
+            await _authenticationRepository.UpdateUserTokensAsync(userTokens);
+
+            //starting assign mail server
+            var email = new MimeMessage();
+            email.From.Add(MailboxAddress.Parse("MoqasSupport@moqas-chat.ir"));
+            email.To.Add(MailboxAddress.Parse(Email));
+            email.Subject = "Do Not Reply";
+            email.Body = new TextPart(TextFormat.Html) { Text = $"کد بازیابی رمز شما<br/><b>{token}</b>" };
+
+            using var smtp = new SmtpClient();
+            {
+                try
+                {
+                    smtp.Connect("webmail.moqas-chat.ir", 587, false);
+                    smtp.Authenticate("MoqasSupport@moqas-chat.ir", "fF#90a54c");
+                    smtp.Send(email);
+                    smtp.Disconnect(true);
+                }
+                catch (Exception ex)
+                {
+                    throw new BadRequestException("مشکلی در ارسال ایمیل رخ داده است");
+                }
+            }
+            //end of assign
+
+            return ResponseStatus.Succeed;
+        }
+
     }
 }
