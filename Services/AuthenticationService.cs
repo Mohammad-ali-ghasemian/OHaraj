@@ -85,5 +85,55 @@ namespace OHaraj.Services
             }
         }
 
+        //create and then send token
+        public async Task<ResponseStatus> SendVerificationEmail(string Email)
+        {
+            var user = await _authenticationRepository.GetUserByEmailAsync(Email);
+            if (user == null)
+            {
+                throw new NotFoundException("ایمیل یافت نشد");
+            }
+
+            string token = CreateToken(4);
+            var userToken = await _authenticationRepository.GetUserTokensAsync(user.Id);
+            if (userToken.EmailVerificationToken != null)
+            {
+                userToken.EmailVerificationToken = token;
+                await _authenticationRepository.UpdateUserTokensAsync(userToken);
+            }
+            else
+            {
+                await _authenticationRepository.AddUserTokensAsync(new Core.Domain.Entities.Management.Token
+                {
+                    UserId = user.Id,
+                    EmailVerificationToken = token
+                });
+            }
+            
+            //starting assign mail server
+            var email = new MimeMessage();
+            email.From.Add(MailboxAddress.Parse("MoqasSupport@moqas-chat.ir"));
+            email.To.Add(MailboxAddress.Parse(Email));
+            email.Subject = "Do Not Reply";
+            email.Body = new TextPart(TextFormat.Html) { Text = $"کد فعال سازی شما<br/><b>{token}</b>" };
+
+            using var smtp = new SmtpClient();
+            {
+                try
+                {
+                    smtp.Connect("webmail.moqas-chat.ir", 587, false);
+                    smtp.Authenticate("MoqasSupport@moqas-chat.ir", "fF#90a54c");
+                    smtp.Send(email);
+                    smtp.Disconnect(true);
+                }
+                catch (Exception ex) {
+                    throw new BadRequestException("مشکلی در ارسال ایمیل رخ داده است");
+                }
+            }
+            //end of assign
+
+            return ResponseStatus.Succeed;
+        }
+
     }
 }
