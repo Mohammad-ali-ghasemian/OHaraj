@@ -249,5 +249,10 @@ namespace OHaraj.Services
             return user.Email;
         }
 
+        public Task<ResponseStatus> Login(Login input)
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }
