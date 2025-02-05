@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using OHaraj.Core.Domain.DTOs;
 using OHaraj.Core.Domain.Models.Authentication;
 using OHaraj.Core.Interfaces.Services;
 using Project.Application.Responses;
@@ -25,5 +26,14 @@ namespace OHaraj.Controllers
         {
             return new Response<ResponseStatus>(await _authenticationService.Register(input)).ToJsonResult();
         }
+
+        [HttpPost("Send-Verification-Email")]
+        [Produces(typeof(Response<ResponseStatus>))]
+        public async Task<IActionResult> SendVerificationEmail(string email)
+        {
+            return new Response<ResponseStatus>(await _authenticationService.SendVerificationEmail(email)).ToJsonResult();
+        }
+
+
     }
 }
