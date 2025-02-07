@@ -272,7 +272,9 @@ namespace OHaraj.Services
                 throw new BadRequestException("مشکلی در فرایند تغییر رمز عبور پیش آمد");
             }
 
-            return 
+            var userDto =  _mapper.Map<UserDTO>(user);
+            userDto.Roles = await _authenticationRepository.GetUserRolesAsync(user);
+            return userDto;
         }
 
         public Task<ResponseStatus> Login(Login input)
