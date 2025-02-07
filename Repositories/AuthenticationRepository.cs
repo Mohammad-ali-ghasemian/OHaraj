@@ -35,6 +35,10 @@ namespace OHaraj.Repositories
             return await _userManager.AddToRolesAsync(user, roles);
         }
 
+        public async Task<IEnumerable<string>> GetUserRolesAsync(IdentityUser user)
+        {
+            return await _userManager.GetRolesAsync(user);
+        }
 
         public async Task<IdentityUser> GetUserByIdAsync(string userId)
         {
