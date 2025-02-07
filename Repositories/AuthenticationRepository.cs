@@ -24,6 +24,7 @@ namespace OHaraj.Repositories
             _dbContext = dbContext;
         }
 
+        // User - Register
         public async Task<IdentityResult> AddUserAsync(IdentityUser user, string password)
         {
             return await _userManager.CreateAsync(user, password);
@@ -34,15 +35,6 @@ namespace OHaraj.Repositories
             return await _userManager.AddToRolesAsync(user, roles);
         }
 
-        public async Task<SignInResult> SignInAsync(Login login)
-        {
-            return await _signInManager.PasswordSignInAsync(login.Username, login.Password, login.rememberMe, false);
-        }
-
-        public async Task<IEnumerable<IdentityUser>> GetAllUsersAsync()
-        {
-            return await Task.FromResult(_userManager.Users.ToList());
-        }
 
         public async Task<IdentityUser> GetUserByIdAsync(string userId)
         {
@@ -57,8 +49,18 @@ namespace OHaraj.Repositories
         public async Task<IdentityUser> GetUserByEmailAsync(string email)
         {
             return await _userManager.FindByEmailAsync(email);
-
         }
+
+        public async Task<IEnumerable<IdentityUser>> GetAllUsersAsync()
+        {
+            return await Task.FromResult(_userManager.Users.ToList());
+        }
+
+        public async Task<IEnumerable<IdentityUser>> GetUsersByRoleAsync(string roleName)
+        {
+            return await _userManager.Users.Where(user => _userManager.IsInRoleAsync(user, roleName).Result).ToListAsync();
+        }
+
 
         public async Task<IdentityResult> UpdateUserAsync(IdentityUser user)
         {
@@ -70,24 +72,44 @@ namespace OHaraj.Repositories
             return await _userManager.DeleteAsync(user);
         }
 
-        public async Task<IEnumerable<IdentityUser>> GetUsersByRoleAsync(string roleName)
-        {
-            return await _userManager.Users.Where(user => _userManager.IsInRoleAsync(user, roleName).Result).ToListAsync();
-        }
 
+        // Token
         public async Task AddUserTokensAsync(Token token)
         {
             await _dbContext.Tokens.AddAsync(token);
             await _dbContext.SaveChangesAsync();
         }
 
-        
+        public async Task<Token> GetUserTokensAsync(string userId)
+        {
+            return await _dbContext.Tokens.FirstOrDefaultAsync(u => u.UserId == userId);
+        }
+
+        public async Task<Token> GetTokensByEmailVerificationTokenAsync(string token)
+        {
+            return await _dbContext.Tokens.FirstOrDefaultAsync(u => u.EmailVerificationToken == token);
+        }
+
+        public async Task<Token> GetTokensByResetPasswordTokenAsync(string token)
+        {
+            return await _dbContext.Tokens.FirstOrDefaultAsync(u => u.ResetPasswordToken == token);
+        }
+
         public async Task UpdateUserTokensAsync(Token token)
         {
             _dbContext.Update(token);
             await _dbContext.SaveChangesAsync();
         }
 
+
+        // Login
+        public async Task<SignInResult> SignInAsync(Login login)
+        {
+            return await _signInManager.PasswordSignInAsync(login.Username, login.Password, login.rememberMe, false);
+        }
+
+
+        // Reset Password without old password
         public async Task<IdentityResult> RemoveUserPasswordAsync(IdentityUser user)
         {
             return await _userManager.RemovePasswordAsync(user);
@@ -97,10 +119,11 @@ namespace OHaraj.Repositories
         {
             return await _userManager.AddPasswordAsync(user, newPassword);
         }
-        
+        // Change Password with old password
         public async Task<IdentityResult> ChangeUserPasswordAsync(IdentityUser user, ChangePassword input)
         {
             return await _userManager.ChangePasswordAsync(user, input.OldPassword, input.Password);
         }
+
     }
 }
