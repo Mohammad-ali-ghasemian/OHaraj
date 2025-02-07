@@ -201,6 +201,7 @@ namespace OHaraj.Services
             return ResponseStatus.Succeed;
         }
 
+        // 
         public async Task<string> VerifiyResetPasswordToken(ResetPassword input)
         {
             if (input.Password != input.ConfirmPassword)
@@ -240,6 +241,7 @@ namespace OHaraj.Services
             if (!result.Succeeded)
             {
                 user.PasswordHash = oldPasswordHash;
+                await _authenticationRepository.UpdateUserAsync(user);
                 throw new BadRequestException("مشکلی در فرایند بازنشانی رمز عبور پیش آمد");
             }
             
@@ -249,12 +251,12 @@ namespace OHaraj.Services
             return user.Email;
         }
 
-        public Task<ResponseStatus> Login(Login input)
+        public Task<UserDTO> ChangePassword(ChangePassword input)
         {
             throw new NotImplementedException();
         }
 
-        public Task<UserDTO> ChangePassword(ChangePassword input)
+        public Task<ResponseStatus> Login(Login input)
         {
             throw new NotImplementedException();
         }
