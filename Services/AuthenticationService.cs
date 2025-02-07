@@ -46,11 +46,11 @@ namespace OHaraj.Services
 
         public async Task<ResponseStatus> Register(Register input)
         {
-            if (_authenticationRepository.GetUserByUsernameAsync(input.Username) != null)
+            if (await _authenticationRepository.GetUserByUsernameAsync(input.Username) != null)
             {
                 throw new BadRequestException("نام کاربری وجود دارد");
             }
-            if (input.Email != null && _authenticationRepository.GetUserByEmailAsync(input.Email) != null)
+            if (input.Email != null && await _authenticationRepository.GetUserByEmailAsync(input.Email) != null)
             {
                 throw new BadRequestException("ایمیل وجود دارد");
             }
