@@ -277,9 +277,19 @@ namespace OHaraj.Services
             return userDto;
         }
 
-        public Task<ResponseStatus> Login(Login input)
+        public async Task<UserDTO> Login(Login input)
         {
-            throw new NotImplementedException();
+            var result = await _authenticationRepository.SignInAsync(input);
+
+            if (!result.Succeeded)
+            {
+                throw new NotFoundException("نام کاربری یا رمز عبور اشتباه است");
+            }
+
+            var user = await _authenticationRepository.GetUserByUsernameAsync(input.Username);
+            var userDto = _mapper.Map<UserDTO>(user);
+            userDto.Roles = await _authenticationRepository.GetUserRolesAsync(user);
+            return userDto;
         }
     }
 }
