@@ -201,7 +201,7 @@ namespace OHaraj.Services
             return ResponseStatus.Succeed;
         }
 
-        // 
+        // verify token & new password
         public async Task<string> VerifiyResetPasswordToken(ResetPassword input)
         {
             if (input.Password != input.ConfirmPassword)
