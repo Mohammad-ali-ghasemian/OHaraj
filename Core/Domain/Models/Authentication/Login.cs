@@ -6,8 +6,6 @@ namespace OHaraj.Core.Domain.Models.Authentication
 {
     public class Login
     {
-        [Display(Name = "ایمیل")]
-        [EmailAddress]
         [Required(ErrorMessage = PublicHelper.RequiredValidationErrorMessage)]
         public string Username { get; set; }
 
