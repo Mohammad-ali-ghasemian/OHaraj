@@ -251,9 +251,27 @@ namespace OHaraj.Services
             return user.Email;
         }
 
-        public Task<UserDTO> ChangePassword(ChangePassword input)
+        public async Task<UserDTO> ChangePassword(ChangePassword input)
         {
-            throw new NotImplementedException();
+            if (input.Password != input.ConfirmPassword)
+            {
+                throw new BadRequestException("تکرار رمز عبور صحیح نمی‌باشد");
+            }
+
+            var id = Current().Id;
+            var user = await _authenticationRepository.GetUserByIdAsync(id);
+            if (user == null)
+            {
+                throw new NotFoundException("کاربر یافت نشد");
+            }
+
+            var result = await _authenticationRepository.ChangeUserPasswordAsync(user, input);
+            if (!result.Succeeded)
+            {
+                throw new BadRequestException("مشکلی در فرایند تغییر رمز عبور پیش آمد");
+            }
+
+
         }
 
         public Task<ResponseStatus> Login(Login input)
