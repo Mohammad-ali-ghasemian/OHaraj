@@ -17,17 +17,18 @@ namespace OHaraj.Services
 {
     public class AuthenticationService : IAuthenticationService
     {
-        //private readonly IMapper _mapper;
+        private readonly IMapper _mapper;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IAuthenticationRepository _authenticationRepository;
         private readonly UserManager<IdentityUser> _userManager;
         public AuthenticationService(
+            IMapper mapper,
             IHttpContextAccessor httpContextAccessor,
             IAuthenticationRepository authenticationRepository,
             UserManager<IdentityUser> userManager
             ) 
         {
-            //_mapper = mapper;
+            _mapper = mapper;
             _httpContextAccessor = httpContextAccessor;
             _authenticationRepository = authenticationRepository;
             _userManager = userManager;
@@ -271,7 +272,7 @@ namespace OHaraj.Services
                 throw new BadRequestException("مشکلی در فرایند تغییر رمز عبور پیش آمد");
             }
 
-
+            return 
         }
 
         public Task<ResponseStatus> Login(Login input)
