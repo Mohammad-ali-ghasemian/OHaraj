@@ -77,5 +77,11 @@ namespace OHaraj.Controllers
             return new Response<ResponseStatus>(await _authenticationService.Logout()).ToJsonResult();
         }
 
+        [HttpGet("Get-User")]
+        [Produces(typeof(Response<UserDTO>))]
+        public async Task<IActionResult> GetUser(string id)
+        {
+            return new Response<UserDTO>(await _authenticationService.Login(input)).ToJsonResult();
+        }
     }
 }
