@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OHaraj.Core.Domain.DTOs;
 using OHaraj.Core.Domain.Models.Authentication;
@@ -67,6 +68,13 @@ namespace OHaraj.Controllers
         public async Task<IActionResult> Login(Login input)
         {
             return new Response<UserDTO>(await _authenticationService.Login(input)).ToJsonResult();
+        }
+
+        [HttpPost("Logout")]
+        [Produces(typeof(Response<ResponseStatus>))]
+        public async Task<IActionResult> Logout()
+        {
+            return new Response<ResponseStatus>(await _authenticationService.Logout()).ToJsonResult();
         }
 
     }
