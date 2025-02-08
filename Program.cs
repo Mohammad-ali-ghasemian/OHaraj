@@ -33,13 +33,27 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.Password.RequiredUniqueChars = 1;
 });
 
-// Cookie Setup
-builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-    .AddCookie(options =>
+// Configure Identity cookie settings for API behavior
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    // Set cookie expiration and sliding expiration if needed
+    options.ExpireTimeSpan = TimeSpan.FromDays(10);
+    options.SlidingExpiration = true;
+
+    // Instead of redirecting, return a 401 when not authenticated
+    options.Events.OnRedirectToLogin = context =>
     {
-        options.ExpireTimeSpan = TimeSpan.FromDays(10); // Cookie expires after 10 days
-        options.SlidingExpiration = true; // Resets expiration time if the user is active
-    });
+        context.Response.StatusCode = StatusCodes.Status401Unauthorized;
+        return Task.CompletedTask;
+    };
+
+    // Instead of redirecting, return a 403 when access is forbidden
+    options.Events.OnRedirectToAccessDenied = context =>
+    {
+        context.Response.StatusCode = StatusCodes.Status403Forbidden;
+        return Task.CompletedTask;
+    };
+});
 
 // Scopes
 builder.Services.AddScoped<IAuthenticationRepository, AuthenticationRepository>();
@@ -65,6 +79,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
