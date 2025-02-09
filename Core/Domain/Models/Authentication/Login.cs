@@ -12,6 +12,6 @@ namespace OHaraj.Core.Domain.Models.Authentication
         [Required(ErrorMessage = PublicHelper.RequiredValidationErrorMessage)]
         public string Password { get; set; }
 
-        public bool rememberMe = false;
+        public bool RememberMe { get; set; } = false;
     }
 }
