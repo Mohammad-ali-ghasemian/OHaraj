@@ -319,5 +319,13 @@ namespace OHaraj.Services
 
             return ResponseStatus.Succeed;
         }
+
+        public async Task<UserDTO> CurrentUser()
+        {
+            var user = await Current();
+            var userDto = _mapper.Map<UserDTO>(user);
+            userDto.Roles = await _authenticationRepository.GetUserRolesAsync(user);
+            return userDto;
+        }
     }
 }
