@@ -107,7 +107,7 @@ namespace OHaraj.Services
 
             string token = CreateToken(4);
             var userToken = await _authenticationRepository.GetUserTokensAsync(user.Id);
-            if (userToken.EmailVerificationToken != null)
+            if (userToken != null)
             {
                 userToken.EmailVerificationToken = token;
                 await _authenticationRepository.UpdateUserTokensAsync(userToken);
@@ -245,7 +245,7 @@ namespace OHaraj.Services
             var result = await _authenticationRepository.RemoveUserPasswordAsync(user);
             if (!result.Succeeded)
             {
-                throw new BadRequestException("مشکلی در فرایند بازنشانی رمز عبور پیش آمد");
+                throw new BadRequestException(string.Join("<br>", result.Errors.Select(e => e.Description).ToList()));
             }
 
             result = await _authenticationRepository.AddUserPasswordAsync(user, input.Password);
@@ -253,7 +253,7 @@ namespace OHaraj.Services
             {
                 user.PasswordHash = oldPasswordHash;
                 await _authenticationRepository.UpdateUserAsync(user);
-                throw new BadRequestException("مشکلی در فرایند بازنشانی رمز عبور پیش آمد");
+                throw new BadRequestException(string.Join("<br>", result.Errors.Select(e => e.Description).ToList()));
             }
             
             Token.ResetPasswordTokenExpires = DateTime.Now;
@@ -278,7 +278,7 @@ namespace OHaraj.Services
             var result = await _authenticationRepository.ChangeUserPasswordAsync(user, input);
             if (!result.Succeeded)
             {
-                throw new BadRequestException("مشکلی در فرایند تغییر رمز عبور پیش آمد");
+                throw new BadRequestException("رمز قبلی را صحیح وارد کنید");
             }
 
             var userDto =  _mapper.Map<UserDTO>(user);
