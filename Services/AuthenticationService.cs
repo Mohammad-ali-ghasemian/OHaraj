@@ -296,6 +296,12 @@ namespace OHaraj.Services
             }
 
             var user = await _authenticationRepository.GetUserByUsernameAsync(input.Username);
+            if (user.EmailConfirmed == false)
+            {
+                await _authenticationRepository.DeleteUserAsync(user);
+                throw new BadRequestException("ایمیل تایید نشده است. لطفا مجدد اقدام به ساخت حساب کنید");
+            }
+
             var userDto = _mapper.Map<UserDTO>(user);
             userDto.Roles = await _authenticationRepository.GetUserRolesAsync(user);
             return userDto;
