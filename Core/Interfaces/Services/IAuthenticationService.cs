@@ -15,5 +15,6 @@ namespace OHaraj.Core.Interfaces.Services
         Task<ResponseStatus> SendResetPasswordEmail(string email);
         Task<string> VerifiyResetPasswordToken(ResetPassword input);
         Task<UserDTO> ChangePassword(ChangePassword input);
+        Task<UserDTO> CurrentUser();
     }
 }
