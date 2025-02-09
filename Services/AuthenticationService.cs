@@ -21,22 +21,32 @@ namespace OHaraj.Services
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IAuthenticationRepository _authenticationRepository;
         private readonly UserManager<IdentityUser> _userManager;
+        private readonly SignInManager<IdentityUser> _signInManager;
         public AuthenticationService(
             IMapper mapper,
             IHttpContextAccessor httpContextAccessor,
             IAuthenticationRepository authenticationRepository,
-            UserManager<IdentityUser> userManager
+            UserManager<IdentityUser> userManager,
+            SignInManager<IdentityUser> signInManager
             ) 
         {
             _mapper = mapper;
             _httpContextAccessor = httpContextAccessor;
             _authenticationRepository = authenticationRepository;
             _userManager = userManager;
+            _signInManager = signInManager;
         }
 
-        public UserDTO Current()
+        public async Task<IdentityUser> Current()
         {
-            return (UserDTO)_httpContextAccessor.HttpContext.Items["User"];
+            var userPrincipal = _httpContextAccessor.HttpContext?.User;
+            if (userPrincipal == null)
+            {
+                return null;
+            }
+
+            var user = await _authenticationRepository.GetUserByPrincipalAsync(userPrincipal);
+            return user;
         }
 
         public static string CreateToken(int n)
@@ -259,8 +269,7 @@ namespace OHaraj.Services
                 throw new BadRequestException("تکرار رمز عبور صحیح نمی‌باشد");
             }
 
-            var id = Current().Id;
-            var user = await _authenticationRepository.GetUserByIdAsync(id);
+            var user = await Current();
             if (user == null)
             {
                 throw new NotFoundException("کاربر یافت نشد");
@@ -291,5 +300,6 @@ namespace OHaraj.Services
             userDto.Roles = await _authenticationRepository.GetUserRolesAsync(user);
             return userDto;
         }
+
     }
 }
