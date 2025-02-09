@@ -5,6 +5,7 @@ using OHaraj.Core.Domain.Models.Authentication;
 using OHaraj.Core.Interfaces.Repositories;
 using OHaraj.Infrastructure;
 using System.Data;
+using System.Security.Claims;
 
 namespace OHaraj.Repositories
 {
@@ -106,10 +107,15 @@ namespace OHaraj.Repositories
         }
 
 
-        // Login
+        // Login - Logout
         public async Task<SignInResult> SignInAsync(Login login)
         {
             return await _signInManager.PasswordSignInAsync(login.Username, login.Password, login.rememberMe, false);
+        }
+
+        public async Task SignOutAsync()
+        {
+            await _signInManager.SignOutAsync();
         }
 
 
