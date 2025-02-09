@@ -92,7 +92,7 @@ namespace OHaraj.Services
             }
             else
             {
-                throw new BadRequestException("مشکلی در ایجاد حساب به وجود آمد");
+                throw new BadRequestException(string.Join("<br>" ,result.Errors.Select(e => e.Description).ToList()));
             }
         }
 
