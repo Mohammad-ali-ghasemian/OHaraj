@@ -115,7 +115,7 @@ namespace OHaraj.Repositories
         // Login - Logout
         public async Task<SignInResult> SignInAsync(Login login)
         {
-            return await _signInManager.PasswordSignInAsync(login.Username, login.Password, login.rememberMe, false);
+            return await _signInManager.PasswordSignInAsync(login.Username, login.Password, login.RememberMe, false);
         }
 
         public async Task SignOutAsync()
