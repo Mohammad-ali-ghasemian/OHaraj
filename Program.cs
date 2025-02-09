@@ -11,6 +11,9 @@ using Project.Application.Profiles;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// for Current()
+builder.Services.AddHttpContextAccessor();
+
 // Add services to the container.
 // add database
 builder.Services.AddDbContext<ApplicationDbContext>
