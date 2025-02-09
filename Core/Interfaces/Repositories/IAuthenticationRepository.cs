@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using OHaraj.Core.Domain.Entities.Management;
 using OHaraj.Core.Domain.Models.Authentication;
+using System.Security.Claims;
 
 namespace OHaraj.Core.Interfaces.Repositories
 {
@@ -28,9 +29,10 @@ namespace OHaraj.Core.Interfaces.Repositories
         Task<Token> GetTokensByResetPasswordTokenAsync(string token);
         Task UpdateUserTokensAsync(Token token);
 
-        // Login
+        // Login - Logout
         Task<SignInResult> SignInAsync(Login login);
-        
+        Task SignOutAsync();
+
         // Reset Password without old password
         Task<IdentityResult> RemoveUserPasswordAsync(IdentityUser user);
         Task<IdentityResult> AddUserPasswordAsync(IdentityUser user, string newPassword);
