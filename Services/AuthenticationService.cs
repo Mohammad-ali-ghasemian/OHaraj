@@ -301,5 +301,17 @@ namespace OHaraj.Services
             return userDto;
         }
 
+        public async Task<ResponseStatus> Logout()
+        {
+            try
+            {
+                await _authenticationRepository.SignOutAsync();
+            } catch(Exception ex)
+            {
+                throw new BadRequestException("خروج انجام نشد");
+            }
+
+            return ResponseStatus.Succeed;
+        }
     }
 }
