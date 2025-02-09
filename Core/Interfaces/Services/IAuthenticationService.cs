@@ -8,6 +8,7 @@ namespace OHaraj.Core.Interfaces.Services
     public interface IAuthenticationService
     {
         Task<UserDTO> Login(Login input);
+        Task<ResponseStatus> Logout();
         Task<ResponseStatus> Register(Register input);
         Task<ResponseStatus> SendVerificationEmail(string email);
         Task<string> VerifiyEmailToken(string token);
