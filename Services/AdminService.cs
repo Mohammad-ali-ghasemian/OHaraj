@@ -26,5 +26,16 @@ namespace OHaraj.Services
             _signInManager = signInManager;
         }
 
+        public async Task<IdentityUser> Current()
+        {
+            var userPrincipal = _httpContextAccessor.HttpContext?.User;
+            if (userPrincipal == null)
+            {
+                return null;
+            }
+
+            var user = await _authenticationRepository.GetUserByPrincipalAsync(userPrincipal);
+            return user;
+        }
     }
 }
