@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using OHaraj.Core.Domain.DTOs;
+using OHaraj.Core.Domain.Models.Authentication;
 using OHaraj.Core.Interfaces.Services;
 using Project.Application.Responses;
 using System.Net;
@@ -20,5 +21,12 @@ namespace OHaraj.Controllers
             _adminService = adminService;
         }
 
+        [Authorize(Roles = ("SuperAdmin"))]
+        [HttpPost("Login")]
+        [Produces(typeof(Response<UserDTO>))]
+        public async Task<IActionResult> Login(Login input)
+        {
+            return new Response<UserDTO>(await _adminService.Login()).ToJsonResult();
+        }
     }
 }
