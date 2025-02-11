@@ -21,7 +21,13 @@ namespace OHaraj.Controllers
             _adminService = adminService;
         }
 
-        [Authorize(Roles = ("SuperAdmin"))]
+        [HttpPost("Add-Admin")]
+        [Produces(typeof(Response<UserDTO>))]
+        public async Task<IActionResult> AddAdmin(Register input)
+        {
+            return new Response<UserDTO>(await _adminService.AddAdmin()).ToJsonResult();
+        }
+
         [HttpPost("Login")]
         [Produces(typeof(Response<UserDTO>))]
         public async Task<IActionResult> Login(Login input)
