@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OHaraj.Infrastructure;
 
@@ -11,9 +12,10 @@ using OHaraj.Infrastructure;
 namespace OHaraj.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250211064928_reBuildSuperAdmin")]
+    partial class reBuildSuperAdmin
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -166,15 +168,13 @@ namespace OHaraj.Migrations
                         {
                             Id = "525e0169-6a01-493a-b4d7-1615bccd364d",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "4174662c-e93e-4a02-b277-097a738d996f",
-                            Email = "super_admin@email.com",
-                            EmailConfirmed = true,
+                            ConcurrencyStamp = "7cab5727-bec9-483b-a5dd-4697aa2a796a",
+                            EmailConfirmed = false,
                             LockoutEnabled = false,
-                            NormalizedEmail = "SUPER_ADMIN@EMAIL.COM",
                             NormalizedUserName = "SUPER_ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEBmTaQz5Qmzml2fhDCwy66TnG4Kpcpg24S76ANKDfrHMsx+7/dJ1MrSCPYNP9530Zw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGUs5C3grm85QMTfGbi0Asz7dnfH4V6is4P9SKX2I2W+VhbqRfh1kevvGQZjSBifIw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "200dee73-9914-41f5-90ad-b414ed65ce82",
+                            SecurityStamp = "0db5708b-1859-491f-824b-83d26cad76d5",
                             TwoFactorEnabled = false,
                             UserName = "super_admin"
                         });

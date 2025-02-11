@@ -57,7 +57,10 @@ namespace OHaraj.Infrastructure
             {
                 Id = superAdminId,
                 UserName = "super_admin",
-                NormalizedUserName = "super_admin".ToUpper()
+                NormalizedUserName = "super_admin".ToUpper(),
+                Email = "super_admin@email.com",
+                NormalizedEmail = "super_admin@email.com".ToUpper(),
+                EmailConfirmed = true
             };
 
             superAdminUser.PasswordHash = new PasswordHasher<IdentityUser>().HashPassword(superAdminUser, "123456789Aa.");
