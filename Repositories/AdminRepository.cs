@@ -3,6 +3,7 @@ using OHaraj.Core.Domain.Models.Admin;
 using OHaraj.Core.Domain.Models.Authentication;
 using OHaraj.Core.Interfaces.Repositories;
 using OHaraj.Infrastructure;
+using System.Security.Claims;
 
 namespace OHaraj.Repositories
 {
@@ -37,5 +38,54 @@ namespace OHaraj.Repositories
             return await _userManager.CreateAsync(user, password);
         }
 
+        public async Task<IdentityResult> AddUserRolesAsync(IdentityUser user, IEnumerable<string> roles)
+        {
+            return await _userManager.AddToRolesAsync(user, roles);
+        }
+
+        public Task<IEnumerable<string>> GetUserRolesAsync(IdentityUser user)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IdentityUser> GetUserByIdAsync(string userId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IdentityUser> GetUserByUsernameAsync(string username)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IdentityUser> GetUserByEmailAsync(string email)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IdentityUser> GetUserByPrincipalAsync(ClaimsPrincipal principal)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<IdentityUser>> GetAllUsersAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<IdentityUser>> GetUsersByRoleAsync(string roleName)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IdentityResult> UpdateUserAsync(IdentityUser user)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IdentityResult> DeleteUserAsync(IdentityUser user)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
