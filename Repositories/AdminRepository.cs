@@ -22,7 +22,7 @@ namespace OHaraj.Repositories
         }
         public async Task<SignInResult> SignInAsync(Login login)
         {
-            throw new NotImplementedException();
+            return await _signInManager.PasswordSignInAsync(login.Username, login.Password, login.RememberMe, false);
         }
 
         public async Task SignOutAsync()
