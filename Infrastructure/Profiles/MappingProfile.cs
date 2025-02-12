@@ -22,7 +22,9 @@ namespace Project.Application.Profiles
                 .ForMember(dest => dest.Roles, opt => opt.Ignore()) // Handle roles separately
                 .ReverseMap(); // Optional: Map back from UserDTO to IdentityUser
 
-
+            CreateMap<IdentityUser, AdminDTO>()
+                .ForMember(dest => dest.Roles, opt => opt.Ignore()) // Handle roles separately
+                .ReverseMap(); // Optional: Map back from UserDTO to IdentityUser
         }
     }
 }
