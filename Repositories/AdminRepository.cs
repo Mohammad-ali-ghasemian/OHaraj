@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using OHaraj.Core.Domain.Models.Admin;
 using OHaraj.Core.Domain.Models.Authentication;
 using OHaraj.Core.Interfaces.Repositories;
@@ -43,49 +44,50 @@ namespace OHaraj.Repositories
             return await _userManager.AddToRolesAsync(user, roles);
         }
 
-        public Task<IEnumerable<string>> GetUserRolesAsync(IdentityUser user)
+        public async Task<IEnumerable<string>> GetUserRolesAsync(IdentityUser user)
         {
-            throw new NotImplementedException();
+            return await _userManager.GetRolesAsync(user);
         }
 
-        public Task<IdentityUser> GetUserByIdAsync(string userId)
+        public async Task<IdentityUser> GetUserByIdAsync(string userId)
         {
-            throw new NotImplementedException();
+            return await _userManager.FindByIdAsync(userId);
         }
 
-        public Task<IdentityUser> GetUserByUsernameAsync(string username)
+        public async Task<IdentityUser> GetUserByUsernameAsync(string username)
         {
-            throw new NotImplementedException();
+            return await _userManager.FindByNameAsync(username);
         }
 
-        public Task<IdentityUser> GetUserByEmailAsync(string email)
+        public async Task<IdentityUser> GetUserByEmailAsync(string email)
         {
-            throw new NotImplementedException();
+            return await _userManager.FindByEmailAsync(email);
         }
 
-        public Task<IdentityUser> GetUserByPrincipalAsync(ClaimsPrincipal principal)
+        public async Task<IdentityUser> GetUserByPrincipalAsync(ClaimsPrincipal principal)
         {
-            throw new NotImplementedException();
+            return await _userManager.GetUserAsync(principal);
         }
 
-        public Task<IEnumerable<IdentityUser>> GetAllUsersAsync()
+        public async Task<IEnumerable<IdentityUser>> GetAllUsersAsync()
         {
-            throw new NotImplementedException();
+            return await Task.FromResult(_userManager.Users.ToList());
         }
 
-        public Task<IEnumerable<IdentityUser>> GetUsersByRoleAsync(string roleName)
+        public async Task<IEnumerable<IdentityUser>> GetUsersByRoleAsync(string roleName)
         {
-            throw new NotImplementedException();
+            return await _userManager.Users.Where(user => _userManager.IsInRoleAsync(user, roleName).Result).ToListAsync();
         }
 
-        public Task<IdentityResult> UpdateUserAsync(IdentityUser user)
+
+        public async Task<IdentityResult> UpdateUserAsync(IdentityUser user)
         {
-            throw new NotImplementedException();
+            return await _userManager.UpdateAsync(user);
         }
 
-        public Task<IdentityResult> DeleteUserAsync(IdentityUser user)
+        public async Task<IdentityResult> DeleteUserAsync(IdentityUser user)
         {
-            throw new NotImplementedException();
+            return await _userManager.DeleteAsync(user);
         }
     }
 }
