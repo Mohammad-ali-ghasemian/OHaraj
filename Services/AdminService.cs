@@ -1,19 +1,27 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Identity;
+using OHaraj.Core.Domain.DTOs;
+using OHaraj.Core.Domain.Models.Admin;
+using OHaraj.Core.Domain.Models.Authentication;
 using OHaraj.Core.Interfaces.Repositories;
+using OHaraj.Core.Interfaces.Services;
+using Project.Application.Exceptions;
+using Project.Application.Responses;
 
 namespace OHaraj.Services
 {
-    public class AdminService
+    public class AdminService : IAdminService
     {
         private readonly IMapper _mapper;
         private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IAdminRepository _adminRepository;
         private readonly IAuthenticationRepository _authenticationRepository;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
         public AdminService(
             IMapper mapper,
             IHttpContextAccessor httpContextAccessor,
+            IAdminRepository adminRepository,
             IAuthenticationRepository authenticationRepository,
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager
@@ -21,6 +29,7 @@ namespace OHaraj.Services
         {
             _mapper = mapper;
             _httpContextAccessor = httpContextAccessor;
+            _adminRepository = adminRepository;
             _authenticationRepository = authenticationRepository;
             _userManager = userManager;
             _signInManager = signInManager;
@@ -36,6 +45,62 @@ namespace OHaraj.Services
 
             var user = await _authenticationRepository.GetUserByPrincipalAsync(userPrincipal);
             return user;
+        }
+
+        public async Task<AdminDTO> AddAdmin(AdminRegister input)
+        {
+            if (await _authenticationRepository.GetUserByUsernameAsync(input.Username) != null)
+            {
+                throw new BadRequestException("نام کاربری وجود دارد");
+            }
+            if (input.Email != null && await _authenticationRepository.GetUserByEmailAsync(input.Email) != null)
+            {
+                throw new BadRequestException("ایمیل وجود دارد");
+            }
+            if (await _authenticationRepository.GetUserByPhoneNumberAsync(input.MobileNumber) != null)
+            {
+                throw new BadRequestException("شماره تلفن وجود دارد");
+            }
+            if (input.Password != input.ConfirmPassword)
+            {
+                throw new BadRequestException("تکرار رمز عبور صحیح نمی باشد");
+            }
+
+            var user = new IdentityUser
+            {
+                UserName = input.Username,
+                Email = input.Email.ToLower(),
+                EmailConfirmed = true,
+                PhoneNumber = input.MobileNumber,
+                PhoneNumberConfirmed = true
+            };
+
+            IdentityResult result = await _authenticationRepository.AddUserAsync(user, input.Password);
+
+            if (result.Succeeded)
+            {
+                var addRoleResult = await _authenticationRepository.AddUserRolesAsync(user, new List<string> { "User", "Admin" });
+
+                if (addRoleResult.Succeeded)
+                {
+                    // if add user and add role both worked correct
+                    var adminDto = _mapper.Map<AdminDTO>(user);
+                    adminDto.Roles = await _authenticationRepository.GetUserRolesAsync(user);
+                    return adminDto;
+                }
+
+                await _authenticationRepository.DeleteUserAsync(user);
+                throw new BadRequestException("مشکلی در ایجاد حساب به وجود آمد");
+            }
+            else
+            {
+                throw new BadRequestException(string.Join("<br>", result.Errors.Select(e => e.Description).ToList()));
+            }
+        }
+
+        public Task<UserDTO> UpdateAdmin()
+        {
+            throw new NotImplementedException();
         }
     }
 }
