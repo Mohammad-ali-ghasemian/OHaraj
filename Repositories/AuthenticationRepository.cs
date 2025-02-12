@@ -56,6 +56,11 @@ namespace OHaraj.Repositories
             return await _userManager.FindByEmailAsync(email);
         }
 
+        public async Task<IdentityUser> GetUserByPhoneNumberAsync(string phone)
+        {
+            return await _userManager.Users.FirstOrDefaultAsync(u => u.PhoneNumber == phone);
+        }
+
         public async Task<IdentityUser> GetUserByPrincipalAsync(ClaimsPrincipal principal)
         {
             return await _userManager.GetUserAsync(principal);
