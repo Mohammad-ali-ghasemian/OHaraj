@@ -16,6 +16,8 @@ namespace OHaraj.Core.Interfaces.Repositories
         Task<IdentityUser> GetUserByUsernameAsync(string username);
         Task<IdentityUser> GetUserByEmailAsync(string email);
         Task<IdentityUser> GetUserByPrincipalAsync(ClaimsPrincipal principal);
+        Task<IEnumerable<IdentityUser>> GetAllUsersAsync();
+        Task<IEnumerable<IdentityUser>> GetUsersByRoleAsync(string roleName);
         
         Task<IdentityResult> UpdateUserAsync(IdentityUser user);
         
