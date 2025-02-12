@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace OHaraj.Core.Domain.Models.Admin
 {
-    public class Register
+    public class AdminRegister
     {
         [Display(Name = "شماره تماس")]
         [ValidIranianMobileNumber(ErrorMessage = PublicHelper.NotValidValidationErrorMessage)]
