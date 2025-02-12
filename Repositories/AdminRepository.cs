@@ -27,7 +27,7 @@ namespace OHaraj.Repositories
 
         public async Task SignOutAsync()
         {
-            throw new NotImplementedException();
+            await _signInManager.SignOutAsync();
         }
     }
 }
