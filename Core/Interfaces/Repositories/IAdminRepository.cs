@@ -5,7 +5,7 @@ namespace OHaraj.Core.Interfaces.Repositories
 {
     public interface IAdminRepository
     {
-        Task<SignInResult> SignInAsync(Login login);
+        Task<SignInResult> SignInAsync(Login input);
         Task SignOutAsync();
     }
 }

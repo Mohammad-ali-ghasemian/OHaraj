@@ -20,9 +20,9 @@ namespace OHaraj.Repositories
             _signInManager = signInManager;
             _dbContext = dbContext;
         }
-        public async Task<SignInResult> SignInAsync(Login login)
+        public async Task<SignInResult> SignInAsync(Login input)
         {
-            return await _signInManager.PasswordSignInAsync(login.Username, login.Password, login.RememberMe, false);
+            return await _signInManager.PasswordSignInAsync(input.Username, input.Password, input.RememberMe, false);
         }
 
         public async Task SignOutAsync()
