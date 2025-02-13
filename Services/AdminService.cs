@@ -119,6 +119,18 @@ namespace OHaraj.Services
             }
         }
 
+        public async Task<IEnumerable<AdminDTO>> GetAdmins()
+        {
+            var admins = (await _authenticationRepository.GetUsersByRoleAsync("Admin")).ToList();
+            var adminsDto = _mapper.Map<List<AdminDTO>>(admins);
+            for(int i=0; i<admins.Count(); i++)
+            {
+                adminsDto[i].Roles = await _authenticationRepository.GetUserRolesAsync(admins[i]);
+            }
+
+            return adminsDto;
+        }
+
         public async Task<AdminDTO> ChangePassword(ChangePassword input)
         {
             if (input.Password != input.ConfirmPassword)
