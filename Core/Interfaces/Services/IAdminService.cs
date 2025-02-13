@@ -7,7 +7,7 @@ namespace OHaraj.Core.Interfaces.Services
     public interface IAdminService
     {
         Task<AdminDTO> AddAdmin(AdminRegister input);
-        Task<UserDTO> DemotionAdmin();
+        Task<UserDTO> DemotionAdmin(string id);
         Task<AdminDTO> ChangePassword();
         Task<AdminDTO> CurrentAdmin();
     }
