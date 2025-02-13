@@ -38,11 +38,22 @@ namespace OHaraj.Controllers
             return new Response<UserDTO>(await _adminService.DemotionAdmin(adminId)).ToJsonResult();
         }
 
+        getadmins
+
         [HttpPost("Change-Password")]
         [Produces(typeof(Response<AdminDTO>))]
         public async Task<IActionResult> ChangePassword(ChangePassword input)
         {
             return new Response<AdminDTO>(await _adminService.ChangePassword(input)).ToJsonResult();
+        }
+
+
+        
+        [HttpGet("Current-Admin")]
+        [Produces(typeof(Response<AdminDTO>))]
+        public async Task<IActionResult> CurrentAdmin()
+        {
+            return new Response<AdminDTO>(await _adminService.CurrentAdmin()).ToJsonResult();
         }
 
     }
