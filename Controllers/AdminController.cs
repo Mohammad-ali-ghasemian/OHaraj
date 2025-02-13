@@ -30,5 +30,13 @@ namespace OHaraj.Controllers
             return new Response<AdminDTO>(await _adminService.AddAdmin(input)).ToJsonResult();
         }
 
+        [Authorize(Roles = "SuperAdmin")]
+        [HttpPost("Demotion-Admin")]
+        [Produces(typeof(Response<UserDTO>))]
+        public async Task<IActionResult> DemotionAdmin(string adminId)
+        {
+            return new Response<UserDTO>(await _adminService.DemotionAdmin(adminId)).ToJsonResult();
+        }
+
     }
 }
