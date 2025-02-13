@@ -6,6 +6,7 @@ using OHaraj.Core.Domain.Models.Authentication;
 using OHaraj.Core.Interfaces.Services;
 using Project.Application.Responses;
 using System.Net;
+using System.Runtime.CompilerServices;
 
 namespace OHaraj.Controllers
 {
@@ -38,7 +39,13 @@ namespace OHaraj.Controllers
             return new Response<UserDTO>(await _adminService.DemotionAdmin(adminId)).ToJsonResult();
         }
 
-        getadmins
+        [Authorize(Roles = ("SuperAdmin"))]
+        [HttpGet("Get-Admins")]
+        [Produces(typeof(Response<IEnumerable<AdminDTO>>))]
+        public async Task<IActionResult> GetAdmins()
+        {
+            return new Response<IEnumerable<AdminDTO>>(await _adminService.GetAdmins()).ToJsonResult();
+        }
 
         [HttpPost("Change-Password")]
         [Produces(typeof(Response<AdminDTO>))]
