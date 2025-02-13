@@ -143,9 +143,12 @@ namespace OHaraj.Services
             return adminDto;
         }
 
-        public Task<AdminDTO> CurrentAdmin()
+        public async Task<AdminDTO> CurrentAdmin()
         {
-            throw new NotImplementedException();
+            var user = await Current();
+            var adminDto = _mapper.Map<AdminDTO>(user);
+            adminDto.Roles = await _authenticationRepository.GetUserRolesAsync(user);
+            return adminDto;
         }
     }
 }
