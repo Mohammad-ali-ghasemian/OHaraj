@@ -98,7 +98,33 @@ namespace OHaraj.Services
             }
         }
 
-        public Task<UserDTO> UpdateAdmin()
+        public async Task<UserDTO> DemotionAdmin(string id)
+        {
+            var user = await _authenticationRepository.GetUserByIdAsync(id);
+            if (user == null)
+            {
+                throw new NotFoundException("کاربر یافت نشد");
+            }
+
+            var result = await _adminRepository.RemoveAdminRoleAsync(user, "Admin");
+            if (result.Succeeded)
+            {
+                var userDto = _mapper.Map<UserDTO>(user);
+                userDto.Roles = await _authenticationRepository.GetUserRolesAsync(user);
+                return userDto;
+            }
+            else
+            {
+                throw new BadRequestException("مشکلی در تنزل ادمین پیش آمد");
+            }
+        }
+
+        public Task<AdminDTO> ChangePassword()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<AdminDTO> CurrentAdmin()
         {
             throw new NotImplementedException();
         }
