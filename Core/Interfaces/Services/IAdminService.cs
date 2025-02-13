@@ -8,6 +8,7 @@ namespace OHaraj.Core.Interfaces.Services
     {
         Task<AdminDTO> AddAdmin(AdminRegister input);
         Task<UserDTO> DemotionAdmin(string id);
+        Task<IEnumerable<AdminDTO>> GetAdmins();
         Task<AdminDTO> ChangePassword(ChangePassword input);
         Task<AdminDTO> CurrentAdmin();
     }
