@@ -34,5 +34,9 @@ namespace OHaraj.Repositories
             return await _userManager.AddToRolesAsync(user, roles);
         }
 
+        public async Task<IdentityResult> DemotionAdmin(IdentityUser user, string role)
+        {
+            return await _userManager.RemoveFromRoleAsync(user, role);
+        }
     }
 }
