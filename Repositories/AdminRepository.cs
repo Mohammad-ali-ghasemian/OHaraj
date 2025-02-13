@@ -24,7 +24,7 @@ namespace OHaraj.Repositories
             _dbContext = dbContext;
         }
 
-        public async Task<IdentityResult> AddAdmin(IdentityUser user, string password)
+        public async Task<IdentityResult> AddAdminAsync(IdentityUser user, string password)
         {
             return await _userManager.CreateAsync(user, password);
         }
@@ -34,7 +34,7 @@ namespace OHaraj.Repositories
             return await _userManager.AddToRolesAsync(user, roles);
         }
 
-        public async Task<IdentityResult> DemotionAdmin(IdentityUser user, string role)
+        public async Task<IdentityResult> RemoveAdminRoleAsync(IdentityUser user, string role)
         {
             return await _userManager.RemoveFromRoleAsync(user, role);
         }
