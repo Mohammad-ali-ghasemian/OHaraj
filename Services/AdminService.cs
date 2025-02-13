@@ -119,9 +119,28 @@ namespace OHaraj.Services
             }
         }
 
-        public Task<AdminDTO> ChangePassword()
+        public async Task<AdminDTO> ChangePassword(ChangePassword input)
         {
-            throw new NotImplementedException();
+            if (input.Password != input.ConfirmPassword)
+            {
+                throw new BadRequestException("تکرار رمز عبور صحیح نمی‌باشد");
+            }
+
+            var user = await Current();
+            if (user == null)
+            {
+                throw new NotFoundException("کاربر یافت نشد");
+            }
+
+            var result = await _authenticationRepository.ChangeUserPasswordAsync(user, input);
+            if (!result.Succeeded)
+            {
+                throw new BadRequestException("رمز قبلی را صحیح وارد کنید");
+            }
+
+            var adminDto = _mapper.Map<AdminDTO>(user);
+            adminDto.Roles = await _authenticationRepository.GetUserRolesAsync(user);
+            return adminDto;
         }
 
         public Task<AdminDTO> CurrentAdmin()
