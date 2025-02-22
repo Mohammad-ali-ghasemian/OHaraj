@@ -20,8 +20,6 @@ namespace OHaraj.Services
         private readonly IMapper _mapper;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IAuthenticationRepository _authenticationRepository;
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
         public AuthenticationService(
             IMapper mapper,
             IHttpContextAccessor httpContextAccessor,
@@ -33,8 +31,6 @@ namespace OHaraj.Services
             _mapper = mapper;
             _httpContextAccessor = httpContextAccessor;
             _authenticationRepository = authenticationRepository;
-            _userManager = userManager;
-            _signInManager = signInManager;
         }
 
         public async Task<IdentityUser> Current()
