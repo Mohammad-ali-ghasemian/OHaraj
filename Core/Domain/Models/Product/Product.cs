@@ -1,6 +1,6 @@
 ﻿namespace OHaraj.Core.Domain.Models.Product
 {
-    public class AddProduct
+    public class Product
     {
     }
 }
