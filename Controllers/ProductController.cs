@@ -29,6 +29,15 @@ namespace OHaraj.Controllers
             return new Response<ProductDTO>(await _productService.AddProduct(input)).ToJsonResult();
         }
 
+        [Authorize("SuperAdmin,Admin")]
+        [HttpPost("Update-Product")]
+        [Produces(typeof(Response<ProductDTO>))]
+        public async Task<IActionResult> UpdateProduct(Product input)
+        {
+            return new Response<ProductDTO>(await _productService.UpdateProduct(input)).ToJsonResult();
+        }
+
+
 
     }
 }
