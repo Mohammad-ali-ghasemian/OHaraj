@@ -51,6 +51,13 @@ namespace OHaraj.Controllers
             return new Response<IEnumerable<ProductDTO>>(await _productService.GetAllProducts()).ToJsonResult();
         }
 
+        [HttpGet("Get-Products-By-Category")]
+        [Produces(typeof(Response<IEnumerable<ProductDTO>>))]
+        public async Task<IActionResult> GetProductsByCategory(int categoryId)
+        {
+            return new Response<IEnumerable<ProductDTO>>(await _productService.GetProductsByCategory(CategoryId)).ToJsonResult();
+        }
+
 
 
     }
