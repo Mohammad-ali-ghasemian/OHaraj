@@ -58,6 +58,13 @@ namespace OHaraj.Controllers
             return new Response<IEnumerable<ProductDTO>>(await _productService.GetProductsByCategory(CategoryId)).ToJsonResult();
         }
 
+        [Authorize("SuperAdmin,Admin")]
+        [HttpPost("Delete-Product")]
+        [Produces(typeof(Response<int>))]
+        public async Task<IActionResult> DeleteProduct(int productId)
+        {
+            return new Response<int>(await _productService.DeleteProduct(productId)).ToJsonResult();
+        }
 
 
     }
