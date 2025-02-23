@@ -37,6 +37,13 @@ namespace OHaraj.Controllers
             return new Response<ProductDTO>(await _productService.UpdateProduct(input)).ToJsonResult();
         }
 
+        [HttpGet("Get-Product")]
+        [Produces(typeof(Response<ProductDTO>))]
+        public async Task<IActionResult> GetProduct(int productId)
+        {
+            return new Response<ProductDTO>(await _productService.GetProduct(productId)).ToJsonResult();
+        }
+
 
 
     }
