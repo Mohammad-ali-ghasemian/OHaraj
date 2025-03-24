@@ -55,7 +55,7 @@ namespace OHaraj.Controllers
         [Produces(typeof(Response<IEnumerable<ProductDTO>>))]
         public async Task<IActionResult> GetProductsByCategory(int categoryId)
         {
-            return new Response<IEnumerable<ProductDTO>>(await _productService.GetProductsByCategory(CategoryId)).ToJsonResult();
+            return new Response<IEnumerable<ProductDTO>>(await _productService.GetProductsByCategory(categoryId)).ToJsonResult();
         }
 
         [Authorize("SuperAdmin,Admin")]
