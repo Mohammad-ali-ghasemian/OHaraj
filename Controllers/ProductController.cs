@@ -24,7 +24,7 @@ namespace OHaraj.Controllers
         [Authorize("SuperAdmin,Admin")]
         [HttpPost("Add-Product")]
         [Produces(typeof(Response<ProductDTO>))]
-        public async Task<IActionResult> AddProduct(Product input)
+        public async Task<IActionResult> AddProduct(UpsertProduct input)
         {
             return new Response<ProductDTO>(await _productService.AddProduct(input)).ToJsonResult();
         }
@@ -32,7 +32,7 @@ namespace OHaraj.Controllers
         [Authorize("SuperAdmin,Admin")]
         [HttpPost("Update-Product")]
         [Produces(typeof(Response<ProductDTO>))]
-        public async Task<IActionResult> UpdateProduct(Product input)
+        public async Task<IActionResult> UpdateProduct(UpsertProduct input)
         {
             return new Response<ProductDTO>(await _productService.UpdateProduct(input)).ToJsonResult();
         }
