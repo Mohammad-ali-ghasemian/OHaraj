@@ -5,7 +5,7 @@ namespace OHaraj.Core.Interfaces.Repositories
 {
     public interface IProductRepository
     {
-        Task<ProductDTO> AddProduct(Product input);
-
+        Task<ProductDTO> AddProductAsync(Product input);
+        
     }
 }
