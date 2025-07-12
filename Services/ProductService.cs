@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Identity;
 using OHaraj.Core.Domain.DTOs;
 using OHaraj.Core.Domain.Models.Product;
 using OHaraj.Core.Interfaces.Repositories;
@@ -23,6 +24,18 @@ namespace OHaraj.Services
             _authenticationRepository = authenticationRepository;
             _mapper = mapper;
             _httpContextAccessor = httpContextAccessor;
+        }
+
+        public async Task<IdentityUser> Current()
+        {
+            var userPrincipal = _httpContextAccessor.HttpContext?.User;
+            if (userPrincipal == null)
+            {
+                return null;
+            }
+
+            var user = await _authenticationRepository.GetUserByPrincipalAsync(userPrincipal);
+            return user;
         }
 
         public Task<ProductDTO> AddProduct(UpsertProduct input)
