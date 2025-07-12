@@ -16,6 +16,12 @@ namespace OHaraj.Repositories
         public async Task AddProductAsync(Product input)
         {
             await _dbContext.AddAsync(input);
+            await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task UpdateProductAsync(Product input)
+        {
+            _dbContext.Update(input);
 
         }
 
@@ -40,11 +46,6 @@ namespace OHaraj.Repositories
         }
 
         public Task<IEnumerable<ProductDTO>> GetProductsByModelAsync(int modelId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task UpdateProductAsync(Product input)
         {
             throw new NotImplementedException();
         }
