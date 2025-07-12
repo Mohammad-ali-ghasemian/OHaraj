@@ -1,4 +1,5 @@
-﻿using OHaraj.Core.Domain.DTOs;
+﻿using Microsoft.EntityFrameworkCore;
+using OHaraj.Core.Domain.DTOs;
 using OHaraj.Core.Domain.Entities.Shop;
 using OHaraj.Core.Interfaces.Repositories;
 using OHaraj.Infrastructure;
@@ -31,22 +32,21 @@ namespace OHaraj.Repositories
             await _dbContext.SaveChangesAsync();
         }
 
-        public Task<ProductDTO> GetProductAsync(int id)
+        public async Task<Product> GetProductAsync(int id)
+        
+        }
+
+        public Task<IEnumerable<Product>> GetProductsAsync()
         {
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<ProductDTO>> GetProductsAsync()
+        public Task<IEnumerable<Product>> GetProductsByCategotyAsync(int categoryId)
         {
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<ProductDTO>> GetProductsByCategotyAsync(int categoryId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<IEnumerable<ProductDTO>> GetProductsByModelAsync(int modelId)
+        public Task<IEnumerable<Product>> GetProductsByModelAsync(int modelId)
         {
             throw new NotImplementedException();
         }
