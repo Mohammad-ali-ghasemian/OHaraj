@@ -22,7 +22,7 @@ namespace OHaraj.Repositories
         public async Task UpdateProductAsync(Product input)
         {
             _dbContext.Update(input);
-
+            await _dbContext.SaveChangesAsync();
         }
 
         public Task DeleteProductAsync(int id)
