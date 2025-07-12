@@ -25,9 +25,10 @@ namespace OHaraj.Repositories
             await _dbContext.SaveChangesAsync();
         }
 
-        public Task DeleteProductAsync(Product input)
+        public async Task DeleteProductAsync(Product input)
         {
-            _dbContext.Remove
+            _dbContext.Remove(input);
+            await _dbContext.SaveChangesAsync();
         }
 
         public Task<ProductDTO> GetProductAsync(int id)
