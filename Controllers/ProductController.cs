@@ -66,6 +66,14 @@ namespace OHaraj.Controllers
             return new Response<int>(await _productService.DeleteProduct(productId)).ToJsonResult();
         }
 
+        [Authorize("SuperAdmin,Admin")]
+        [HttpPost("Toggle-Product-Activation")]
+        [Produces(typeof(Response<ProductDTO>))]
+        public async Task<IActionResult> ToggleProductActivation(int productId)
+        {
+            return new Response<ProductDTO>(await _productService.ToggleProductActivation(productId)).ToJsonResult();
+        }
+
 
     }
 }
