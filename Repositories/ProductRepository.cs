@@ -42,7 +42,6 @@ namespace OHaraj.Repositories
         {
             return await _dbContext.Products.AsNoTracking()
                 .Include(nameof(Product.ProductLikes))
-                .Include(nameof(Product.ProductComments))
                 .Include(nameof(Product.ProductImages))
                 .FirstOrDefaultAsync(x => x.Id == id);
         }
@@ -59,9 +58,11 @@ namespace OHaraj.Repositories
                 .ToListAsync();
         }
 
-        public Task<IEnumerable<Product>> GetProductsByModelAsync(int modelId)
+        public async Task<IEnumerable<Product>> GetProductsByModelAsync(int modelId)
         {
-            throw new NotImplementedException();
+            return await _dbContext.Products.AsNoTracking()
+                .Where(x => x.ModelId == modelId)
+                .ToListAsync();
         }
     }
 }
