@@ -13,12 +13,13 @@ namespace OHaraj.Repositories
             _dbContext = dbContext;
         }
 
-        public Task<ProductDTO> AddProductAsync(Product input)
+        public async Task AddProductAsync(Product input)
         {
-            throw new NotImplementedException();
+            await _dbContext.AddAsync(input);
+
         }
 
-        public Task<int> DeleteProductAsync(int id)
+        public Task DeleteProductAsync(int id)
         {
             throw new NotImplementedException();
         }
@@ -43,7 +44,7 @@ namespace OHaraj.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<ProductDTO> UpdateProductAsync(Product input)
+        public Task UpdateProductAsync(Product input)
         {
             throw new NotImplementedException();
         }
