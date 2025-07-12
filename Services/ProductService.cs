@@ -63,11 +63,6 @@ namespace OHaraj.Services
             throw new NotImplementedException();
         }
 
-        public Task<ProductDTO> ToggleProductActivation(int productId)
-        {
-            throw new NotImplementedException();
-        }
-
         public Task<ProductDTO> UpdateProduct(UpsertProduct input)
         {
             throw new NotImplementedException();

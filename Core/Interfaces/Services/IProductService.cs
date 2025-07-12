@@ -12,6 +12,5 @@ namespace OHaraj.Core.Interfaces.Services
         Task<IEnumerable<ProductDTO>> GetProductsByCategory(int categoryId);
         Task<IEnumerable<ProductDTO>> GetProductsByModel(int ModelId);
         Task<int> DeleteProduct(int productId);
-        Task<ProductDTO> ToggleProductActivation(int productId);
     }
 }
