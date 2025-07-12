@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using OHaraj.Core.Domain.DTOs;
+using OHaraj.Core.Domain.Models.Product;
 using OHaraj.Core.Interfaces.Repositories;
 using OHaraj.Core.Interfaces.Services;
 
@@ -21,6 +23,41 @@ namespace OHaraj.Services
             _authenticationRepository = authenticationRepository;
             _mapper = mapper;
             _httpContextAccessor = httpContextAccessor;
+        }
+
+        public Task<ProductDTO> AddProduct(UpsertProduct input)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<int> DeleteProduct(int productId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<ProductDTO>> GetAllProducts()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<ProductDTO> GetProduct(int productId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<ProductDTO>> GetProductsByCategory(int categoryId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<ProductDTO> ToggleProductActivation(int productId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<ProductDTO> UpdateProduct(UpsertProduct input)
+        {
+            throw new NotImplementedException();
         }
     }
 }
