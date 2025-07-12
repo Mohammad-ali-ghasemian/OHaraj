@@ -33,7 +33,13 @@ namespace OHaraj.Repositories
         }
 
         public async Task<Product> GetProductAsync(int id)
-        
+        {
+            return await _dbContext.Products.AsNoTracking()
+                .FirstOrDefaultAsync(x => x.Id == id);
+        }
+
+        public async Task<Product> GetProductDetailsAsync(int id)
+        {
         }
 
         public Task<IEnumerable<Product>> GetProductsAsync()
