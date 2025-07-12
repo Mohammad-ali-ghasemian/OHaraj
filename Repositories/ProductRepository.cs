@@ -40,6 +40,11 @@ namespace OHaraj.Repositories
 
         public async Task<Product> GetProductDetailsAsync(int id)
         {
+            return await _dbContext.Products.AsNoTracking()
+                .Include(nameof(Product.ProductLikes))
+                .Include(nameof(Product.ProductComments))
+                .Include(nameof(Product.ProductImages))
+                .FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public Task<IEnumerable<Product>> GetProductsAsync()
