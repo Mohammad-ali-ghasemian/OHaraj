@@ -52,9 +52,11 @@ namespace OHaraj.Repositories
             return await _dbContext.Products.AsNoTracking().ToListAsync();
         }
 
-        public Task<IEnumerable<Product>> GetProductsByCategotyAsync(int categoryId)
+        public async Task<IEnumerable<Product>> GetProductsByCategotyAsync(int categoryId)
         {
-            throw new NotImplementedException();
+            return await _dbContext.Products.AsNoTracking()
+                .Where(x => x.CategoryId == categoryId)
+                .ToListAsync();
         }
 
         public Task<IEnumerable<Product>> GetProductsByModelAsync(int modelId)
