@@ -7,7 +7,7 @@ namespace OHaraj.Core.Interfaces.Repositories
     {
         Task AddProductAsync(Product input);
         Task UpdateProductAsync(Product input);
-        Task DeleteProductAsync(int id);
+        Task DeleteProductAsync(Product input);
         Task<ProductDTO> GetProductAsync(int id);
         Task<IEnumerable<ProductDTO>> GetProductsAsync();
         Task<IEnumerable<ProductDTO>> GetProductsByCategotyAsync(int categoryId);
