@@ -110,9 +110,10 @@ namespace OHaraj.Repositories
             await _dbContext.SaveChangesAsync();
         }
 
-        public Task DeleteAllProductCommentsAsync(IEnumerable<ProductComment> comments)
+        public async Task DeleteAllProductCommentsAsync(int productId)
         {
-            throw new NotImplementedException();
+            _dbContext.ProductComments.RemoveRange(await GetProductAllCommentsAsync(productId));
+            await _dbContext.SaveChangesAsync();
         }
 
 
