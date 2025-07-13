@@ -64,5 +64,80 @@ namespace OHaraj.Repositories
                 .Where(x => x.ModelId == modelId)
                 .ToListAsync();
         }
+
+        public Task<IEnumerable<Product>> GetUnverifiedProductsAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<Product>> GetUnverifiedProductsAsync(int userId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<ProductLike> IsLiked(ProductLike input)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<ProductComment> GetProductCommentAsync(int commentId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<ProductComment>> GetProductFiveCommentsAsync(int courseId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<ProductComment>> GetProductTenCommentsAsync(int courseId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<ProductComment>> GetProductAllVerifiedCommentsAsync(int courseId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<ProductComment>> GetProductAllCommentsAsync(int courseId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<ProductComment>> GetUserAllCommentsAsync(int userId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<ProductComment>> GetAllUnverifiedCommentsAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<ProductComment>> GetProductUnverifiedCommentsAsync(int courseId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<ProductComment>> GetUserUnverifiedCommentsAsync(int userId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task UpdateProductCommentAsync(ProductComment comment)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task DeleteProductCommentAsync(ProductComment comment)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task DeleteAllProductCommentsAsync(IEnumerable<ProductComment> comments)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
