@@ -35,12 +35,6 @@ namespace OHaraj.Repositories
         public async Task<Product> GetProductAsync(int id)
         {
             return await _dbContext.Products.AsNoTracking()
-                .FirstOrDefaultAsync(x => x.Id == id);
-        }
-
-        public async Task<Product> GetProductDetailsAsync(int id)
-        {
-            return await _dbContext.Products.AsNoTracking()
                 .Include(nameof(Product.ProductLikes))
                 .Include(nameof(Product.ProductImages))
                 .FirstOrDefaultAsync(x => x.Id == id);
@@ -48,7 +42,10 @@ namespace OHaraj.Repositories
 
         public async Task<IEnumerable<Product>> GetProductsAsync()
         {
-            return await _dbContext.Products.AsNoTracking().ToListAsync();
+            return await _dbContext.Products.AsNoTracking()
+                .Include(nameof(Product.ProductLikes))
+                .Include(nameof(Product.ProductImages))
+                .ToListAsync();
         }
 
         public async Task<IEnumerable<Product>> GetProductsByCategotyAsync(int categoryId)
@@ -65,19 +62,27 @@ namespace OHaraj.Repositories
                 .ToListAsync();
         }
 
-        public Task<IEnumerable<Product>> GetUnverifiedProductsAsync()
+        public async Task<IEnumerable<Product>> GetDeactiveProductsAsync()
         {
-            throw new NotImplementedException();
+            return await _dbContext.Products.AsNoTracking()
+                .Where(x => x.IsActive == false)
+                .Include(nameof(Product.ProductLikes))
+                .Include(nameof(Product.ProductImages))
+                .ToListAsync();
         }
 
-        public Task<IEnumerable<Product>> GetUnverifiedProductsAsync(int userId)
+        public async Task<IEnumerable<Product>> GetActiveProductsAsync()
         {
-            throw new NotImplementedException();
+            return await _dbContext.Products.AsNoTracking()
+                .Where(x => x.IsActive == true)
+                .Include (nameof(Product.ProductLikes))
+                .Include (nameof(Product.ProductImages))
+                .ToListAsync ();
         }
 
-        public Task<ProductLike> IsLiked(ProductLike input)
+        public async Task<ProductLike> IsLikedByUser(ProductLike input)
         {
-            throw new NotImplementedException();
+            return await _dbContext.ProductLikes.FirstOrDefaultAsync(x => x.UserId == input.UserId && x.ProductId == input.ProductId);
         }
 
         public Task<ProductComment> GetProductCommentAsync(int commentId)
