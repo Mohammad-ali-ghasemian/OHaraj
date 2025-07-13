@@ -20,7 +20,7 @@ namespace OHaraj.Core.Interfaces.Repositories
         Task<IEnumerable<Product>> GetDeactiveProductsAsync();
         Task<IEnumerable<Product>> GetActiveProductsAsync();
         Task<ProductLike> IsLikedByUser(ProductLike input);
-        Task<ProductComment> GetProductCommentAsync(int commentId);
+        Task<ProductComment> GetCommentAsync(int commentId);
         Task<IEnumerable<ProductComment>> GetProductFiveCommentsAsync(int courseId);
         Task<IEnumerable<ProductComment>> GetProductTenCommentsAsync(int courseId);
         Task<IEnumerable<ProductComment>> GetProductAllVerifiedCommentsAsync(int courseId);
