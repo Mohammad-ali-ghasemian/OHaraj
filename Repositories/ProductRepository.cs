@@ -162,9 +162,12 @@ namespace OHaraj.Repositories
 
 
 
-        public Task<IEnumerable<ProductComment>> GetAllUnverifiedCommentsAsync()
+        public async Task<IEnumerable<ProductComment>> GetAllUnverifiedCommentsAsync()
         {
-            throw new NotImplementedException();
+            return await _dbContext.ProductComments.AsNoTracking()
+                .Where(x => x.IsApproved == false)
+                .OrderBy (x => x.DateAdded)
+                .ToListAsync();
         }
 
 
