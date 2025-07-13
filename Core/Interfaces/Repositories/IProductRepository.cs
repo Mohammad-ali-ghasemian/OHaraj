@@ -9,7 +9,6 @@ namespace OHaraj.Core.Interfaces.Repositories
         Task UpdateProductAsync(Product input);
         Task DeleteProductAsync(Product input);
         Task<Product> GetProductAsync(int id);
-        Task<Product> GetProductDetailsAsync(int id);
         Task<IEnumerable<Product>> GetProductsAsync();
         Task<IEnumerable<Product>> GetProductsByCategotyAsync(int categoryId);
         Task<IEnumerable<Product>> GetProductsByModelAsync(int modelId);
@@ -18,9 +17,9 @@ namespace OHaraj.Core.Interfaces.Repositories
 
 
 
-        Task<IEnumerable<Product>> GetUnverifiedProductsAsync();
-        Task<IEnumerable<Product>> GetUnverifiedProductsAsync(int userId);
-        Task<ProductLike> IsLiked(ProductLike input);
+        Task<IEnumerable<Product>> GetDeactiveProductsAsync();
+        Task<IEnumerable<Product>> GetActiveProductsAsync();
+        Task<ProductLike> IsLikedByUser(ProductLike input);
         Task<ProductComment> GetProductCommentAsync(int commentId);
         Task<IEnumerable<ProductComment>> GetProductFiveCommentsAsync(int courseId);
         Task<IEnumerable<ProductComment>> GetProductTenCommentsAsync(int courseId);
