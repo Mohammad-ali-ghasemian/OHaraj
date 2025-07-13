@@ -36,8 +36,8 @@ namespace OHaraj.Core.Interfaces.Repositories
 
         Task<IEnumerable<ProductComment>> GetAllUnverifiedCommentsAsync();
 
-        Task<IEnumerable<ProductComment>> GetUserAllCommentsAsync(int userId);
-        Task<IEnumerable<ProductComment>> GetUserUnverifiedCommentsAsync(int userId);
+        Task<IEnumerable<ProductComment>> GetUserAllCommentsAsync(string userId);
+        Task<IEnumerable<ProductComment>> GetUserUnverifiedCommentsAsync(string userId);
         
 
     }
