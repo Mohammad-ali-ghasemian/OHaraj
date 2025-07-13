@@ -108,9 +108,12 @@ namespace OHaraj.Repositories
                 .ToListAsync();
         }
 
-        public Task<IEnumerable<ProductComment>> GetProductAllVerifiedCommentsAsync(int productId)
+        public async Task<IEnumerable<ProductComment>> GetProductAllVerifiedCommentsAsync(int productId)
         {
-            throw new NotImplementedException();
+            return await _dbContext.ProductComments.AsNoTracking()
+                .Where(x => x.ProductId == productId && x.IsApproved == true)
+                .OrderByDescending(x => x.DateAdded)
+                .ToListAsync();
         }
 
         public Task<IEnumerable<ProductComment>> GetProductAllCommentsAsync(int productId)
