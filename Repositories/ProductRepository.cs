@@ -85,9 +85,9 @@ namespace OHaraj.Repositories
             return await _dbContext.ProductLikes.FirstOrDefaultAsync(x => x.UserId == input.UserId && x.ProductId == input.ProductId);
         }
 
-        public Task<ProductComment> GetProductCommentAsync(int commentId)
+        public async Task<ProductComment> GetCommentAsync(int commentId)
         {
-            throw new NotImplementedException();
+            return await _dbContext.ProductComments.FirstOrDefaultAsync(x => x.Id == commentId);
         }
 
         public Task<IEnumerable<ProductComment>> GetProductFiveCommentsAsync(int courseId)
