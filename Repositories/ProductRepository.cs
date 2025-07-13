@@ -171,14 +171,20 @@ namespace OHaraj.Repositories
         }
 
 
-        public Task<IEnumerable<ProductComment>> GetUserAllCommentsAsync(int userId)
+        public async Task<IEnumerable<ProductComment>> GetUserAllCommentsAsync(string userId)
         {
-            throw new NotImplementedException();
+            return await _dbContext.ProductComments.AsNoTracking()
+                .Where(x => x.UserId == userId)
+                .OrderByDescending(x => x.DateAdded)
+                .ToListAsync();
         }
 
-        public Task<IEnumerable<ProductComment>> GetUserUnverifiedCommentsAsync(int userId)
+        public async Task<IEnumerable<ProductComment>> GetUserUnverifiedCommentsAsync(string userId)
         {
-            throw new NotImplementedException();
+            return await _dbContext.ProductComments.AsNoTracking()
+                .Where (x => x.UserId == userId && x.IsApproved == false)
+                .OrderBy(x => x.DateAdded)
+                .ToListAsync();
         }
 
 
