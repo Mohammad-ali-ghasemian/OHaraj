@@ -92,6 +92,29 @@ namespace OHaraj.Repositories
             return await _dbContext.ProductComments.FirstOrDefaultAsync(x => x.Id == commentId);
         }
 
+        public async Task AddProductCommentAsync(ProductComment comment)
+        {
+            await _dbContext.AddAsync(comment);
+            await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task UpdateProductCommentAsync(ProductComment comment)
+        {
+            _dbContext.Update(comment);
+            await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task DeleteProductCommentAsync(ProductComment comment)
+        {
+            _dbContext.Remove(comment);
+            await _dbContext.SaveChangesAsync();
+        }
+
+        public Task DeleteAllProductCommentsAsync(IEnumerable<ProductComment> comments)
+        {
+            throw new NotImplementedException();
+        }
+
 
 
         public async Task<IEnumerable<ProductComment>> GetProductFiveNewestCommentsAsync(int productId)
@@ -137,38 +160,23 @@ namespace OHaraj.Repositories
         }
 
 
+
         public Task<IEnumerable<ProductComment>> GetAllUnverifiedCommentsAsync()
         {
             throw new NotImplementedException();
         }
 
-        
 
         public Task<IEnumerable<ProductComment>> GetUserAllCommentsAsync(int userId)
         {
             throw new NotImplementedException();
         }
 
-
-
         public Task<IEnumerable<ProductComment>> GetUserUnverifiedCommentsAsync(int userId)
         {
             throw new NotImplementedException();
         }
 
-        public Task UpdateProductCommentAsync(ProductComment comment)
-        {
-            throw new NotImplementedException();
-        }
 
-        public Task DeleteProductCommentAsync(ProductComment comment)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task DeleteAllProductCommentsAsync(IEnumerable<ProductComment> comments)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
