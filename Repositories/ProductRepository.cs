@@ -80,6 +80,8 @@ namespace OHaraj.Repositories
                 .ToListAsync ();
         }
 
+
+
         public async Task<ProductLike> IsLikedByUser(ProductLike input)
         {
             return await _dbContext.ProductLikes.FirstOrDefaultAsync(x => x.UserId == input.UserId && x.ProductId == input.ProductId);
@@ -89,6 +91,8 @@ namespace OHaraj.Repositories
         {
             return await _dbContext.ProductComments.FirstOrDefaultAsync(x => x.Id == commentId);
         }
+
+
 
         public async Task<IEnumerable<ProductComment>> GetProductFiveNewestCommentsAsync(int productId)
         {
@@ -116,25 +120,33 @@ namespace OHaraj.Repositories
                 .ToListAsync();
         }
 
+        public async Task<IEnumerable<ProductComment>> GetProductUnverifiedCommentsAsync(int productId)
+        {
+            return await _dbContext.ProductComments.AsNoTracking()
+                .Where(x => x.ProductId == productId &&  x.IsApproved == false)
+                .OrderBy(x => x.DateAdded)
+                .ToListAsync() ;
+        }
+
         public Task<IEnumerable<ProductComment>> GetProductAllCommentsAsync(int productId)
         {
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<ProductComment>> GetUserAllCommentsAsync(int userId)
-        {
-            throw new NotImplementedException();
-        }
 
         public Task<IEnumerable<ProductComment>> GetAllUnverifiedCommentsAsync()
         {
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<ProductComment>> GetProductUnverifiedCommentsAsync(int productId)
+        
+
+        public Task<IEnumerable<ProductComment>> GetUserAllCommentsAsync(int userId)
         {
             throw new NotImplementedException();
         }
+
+
 
         public Task<IEnumerable<ProductComment>> GetUserUnverifiedCommentsAsync(int userId)
         {
