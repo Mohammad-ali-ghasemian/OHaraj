@@ -67,5 +67,10 @@ namespace OHaraj.Services
         {
             throw new NotImplementedException();
         }
+
+        public Task<IEnumerable<ProductDTO>> GetProductsByModel(int ModelId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

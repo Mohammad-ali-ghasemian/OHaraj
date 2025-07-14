@@ -24,7 +24,7 @@ namespace OHaraj.Core.Interfaces.Repositories
         Task AddProductCommentAsync(ProductComment comment);
         Task UpdateProductCommentAsync(ProductComment comment);
         Task DeleteProductCommentAsync(ProductComment comment);
-        Task DeleteAllProductCommentsAsync(IEnumerable<ProductComment> comments);
+        Task DeleteAllProductCommentsAsync(int productId);
 
         
         Task<IEnumerable<ProductComment>> GetProductFiveNewestCommentsAsync(int courseId);

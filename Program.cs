@@ -9,6 +9,7 @@ using OHaraj.Services;
 using Project.Application.Contracts.Infrastructure;
 using Project.Application.Middlewares;
 using Project.Application.Profiles;
+using Project.Infrastructure.FileStorage;
 
 var builder = WebApplication.CreateBuilder(args);
 
