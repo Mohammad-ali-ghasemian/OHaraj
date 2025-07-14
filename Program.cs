@@ -6,6 +6,7 @@ using OHaraj.Core.Interfaces.Services;
 using OHaraj.Infrastructure;
 using OHaraj.Repositories;
 using OHaraj.Services;
+using Project.Application.Contracts.Infrastructure;
 using Project.Application.Middlewares;
 using Project.Application.Profiles;
 
@@ -59,6 +60,8 @@ builder.Services.ConfigureApplicationCookie(options =>
 });
 
 // Scopes
+builder.Services.AddScoped<IFileStorageService, InAppStorageService>();
+
 builder.Services.AddScoped<IAuthenticationRepository, AuthenticationRepository>();
 builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
 
@@ -93,6 +96,9 @@ app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+// in the absent of cloud storage
+app.UseStaticFiles();
 
 app.MapControllers();
 
