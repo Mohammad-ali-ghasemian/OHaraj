@@ -4,6 +4,7 @@ using OHaraj.Core.Domain.DTOs;
 using OHaraj.Core.Domain.Models.Product;
 using OHaraj.Core.Interfaces.Repositories;
 using OHaraj.Core.Interfaces.Services;
+using Project.Application.Contracts.Infrastructure;
 
 namespace OHaraj.Services
 {
@@ -13,17 +14,22 @@ namespace OHaraj.Services
         private readonly IAuthenticationRepository _authenticationRepository;
         private readonly IMapper _mapper;
         private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly string Usercontainer;
+        private readonly IFileStorageService _uploaderService;
         public ProductService(
             IProductRepository productRepository,
             IAuthenticationRepository authenticationRepository,
             IMapper mapper,
-            IHttpContextAccessor httpContextAccessor
+            IHttpContextAccessor httpContextAccessor,
+            IFileStorageService uploaderService
             )
         {
             _productRepository = productRepository;
             _authenticationRepository = authenticationRepository;
             _mapper = mapper;
             _httpContextAccessor = httpContextAccessor;
+            Usercontainer = "UserProfile";
+            _uploaderService = uploaderService;
         }
 
         public async Task<IdentityUser> Current()
