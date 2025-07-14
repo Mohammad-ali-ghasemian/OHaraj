@@ -41,12 +41,16 @@ namespace OHaraj.Core.Domain.Models.Product
         [Required(ErrorMessage = PublicHelper.RequiredValidationErrorMessage)]
         public bool IsActive { get; set; } = false;
 
+        [Required(ErrorMessage = PublicHelper.RequiredValidationErrorMessage)]
         public IFormFile? MainImage { get; set; }
 
+        [Required(ErrorMessage = PublicHelper.RequiredValidationErrorMessage)]
         public List<IFormFile>? OtherImages { get; set; }
 
+        [Required(ErrorMessage = PublicHelper.RequiredValidationErrorMessage)]
         public int CategoryId { get; set; }
 
+        [Required(ErrorMessage = PublicHelper.RequiredValidationErrorMessage)]
         public int? ModelId { get; set; }
 
     }
