@@ -1,4 +1,5 @@
 ﻿using OHaraj.Core.Domain.DTOs;
+using OHaraj.Core.Domain.Entities.Handling;
 using OHaraj.Core.Domain.Entities.Shop;
 
 namespace OHaraj.Core.Interfaces.Repositories
@@ -15,6 +16,8 @@ namespace OHaraj.Core.Interfaces.Repositories
         Task<IEnumerable<Product>> GetProductsByModelAsync(int modelId);
         Task<IEnumerable<Product>> GetDeactiveProductsAsync();
         Task<IEnumerable<Product>> GetActiveProductsAsync();
+
+        Task<int> AddFileToTableAsync(FileManagement input);
 
 
 
