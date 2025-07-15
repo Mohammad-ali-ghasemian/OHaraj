@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using OHaraj.Core.Domain.DTOs;
+using OHaraj.Core.Domain.Entities.Handling;
 using OHaraj.Core.Domain.Entities.Shop;
 using OHaraj.Core.Interfaces.Repositories;
 using OHaraj.Infrastructure;
@@ -80,6 +81,12 @@ namespace OHaraj.Repositories
                 .ToListAsync ();
         }
 
+        public async Task<int> AddFileToTableAsync(FileManagement input)
+        {
+            await _dbContext.AddAsync(input);
+            await _dbContext.SaveChangesAsync();
+            return input.Id;
+        }
 
 
         public async Task<ProductLike> IsLikedByUser(ProductLike input)
