@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using OHaraj.Core.Domain.DTOs;
+using OHaraj.Core.Domain.Entities.Handling;
+using OHaraj.Core.Domain.Entities.Shop;
 using OHaraj.Core.Domain.Models.Product;
 using OHaraj.Core.Interfaces.Repositories;
 using OHaraj.Core.Interfaces.Services;
@@ -28,7 +30,7 @@ namespace OHaraj.Services
             _authenticationRepository = authenticationRepository;
             _mapper = mapper;
             _httpContextAccessor = httpContextAccessor;
-            Usercontainer = "UserProfile";
+            Usercontainer = "Product";
             _uploaderService = uploaderService;
         }
 
@@ -44,9 +46,64 @@ namespace OHaraj.Services
             return user;
         }
 
-        public Task<ProductDTO> AddProduct(UpsertProduct input)
+        public async Task<ProductDTO> AddProduct(UpsertProduct input)
         {
-            throw new NotImplementedException();
+            int? fileId = null;
+            if (input.MainImage != null)
+            {
+                fileId = await _productRepository.AddFileToTableAsync(new FileManagement
+                {
+                    Type = Core.Enums.FileType.Image,
+                    path = await _uploaderService.SaveFile(Usercontainer, input.MainImage, wattermark: true);
+                });
+            }
+
+            List<ProductImages>? otherImages = null;
+            if (input.OtherImages != null)
+            {
+                int imgId;
+                int pivot = 1;
+                foreach (var image in input.OtherImages)
+                {
+                    imgId = await _productRepository.AddFileToTableAsync(new FileManagement
+                    {
+                        Type = Core.Enums.FileType.Image,
+                        path = await _uploaderService.SaveFile(Usercontainer, image, wattermark: true)
+                    });
+
+                    otherImages.Add(new ProductImages
+                    {
+                        Order = pivot,
+                        FileManagementId = imgId
+                    });
+                    ++pivot;
+                }
+            }
+
+
+            Product product = new Product
+            {
+                Name = input.Name,
+                Weight = input.Weight,
+                Width = input.Width,
+                Height = input.Height,
+                Length = input.Length,
+                Quantity = input.Quantity,
+                ShortContent = input.ShortContent,
+                Content = input.Content,
+                Price = input.Price,
+                DiscountPercent = input.DiscountPercent,
+                IsActive = input.IsActive,
+                CategoryId = input.CategoryId,
+                ModelId = input.ModelId,
+                FileManagementId = fileId,
+                ProductImages = otherImages
+            };
+
+            await _productRepository.AddProductAsync(product);
+            
+            return _mapper.Map<ProductDTO>(product);
+
         }
 
         public Task<int> DeleteProduct(int productId)
