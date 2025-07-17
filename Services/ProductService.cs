@@ -7,6 +7,7 @@ using OHaraj.Core.Domain.Models.Product;
 using OHaraj.Core.Interfaces.Repositories;
 using OHaraj.Core.Interfaces.Services;
 using Project.Application.Contracts.Infrastructure;
+using Project.Application.Exceptions;
 
 namespace OHaraj.Services
 {
@@ -106,9 +107,16 @@ namespace OHaraj.Services
 
         }
 
-        public Task<int> DeleteProduct(int productId)
+        public async Task<int> DeleteProduct(int productId)
         {
-            throw new NotImplementedException();
+            var product = await _productRepository.GetProductAsync(productId);
+            if (product == null)
+            {
+                throw new NotFoundException("محصول یافت نشد");
+            }
+
+            await _productRepository.DeleteProductAsync(product);
+            return product.Id;
         }
 
         public Task<IEnumerable<ProductDTO>> GetAllProducts()
