@@ -18,6 +18,8 @@ namespace OHaraj.Core.Interfaces.Repositories
         Task<IEnumerable<Product>> GetActiveProductsAsync();
 
         Task<int> AddFileToTableAsync(FileManagement input);
+        Task<int> UpdateFileToTableAsync(FileManagement input);
+        Task<int> DeleteFileToTableAsync(FileManagement input);
 
 
 
