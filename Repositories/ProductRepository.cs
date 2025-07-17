@@ -88,6 +88,20 @@ namespace OHaraj.Repositories
             return input.Id;
         }
 
+        public async Task<int> UpdateFileToTableAsync(FileManagement input)
+        {
+            _dbContext.Update(input);
+            await _dbContext.SaveChangesAsync();
+            return input.Id;
+        }
+
+        public async Task<int> DeleteFileToTableAsync(FileManagement input)
+        {
+            _dbContext.Remove(input);
+            await _dbContext.SaveChangesAsync();
+            return input.Id;
+        }
+
 
         public async Task<ProductLike> IsLikedByUser(ProductLike input)
         {
