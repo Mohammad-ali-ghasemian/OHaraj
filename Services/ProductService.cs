@@ -194,14 +194,22 @@ namespace OHaraj.Services
             return product.Id;
         }
 
-        public Task<IEnumerable<ProductDTO>> GetAllProducts()
+        public async Task<ProductDTO> GetProduct(int productId)
         {
-            throw new NotImplementedException();
+            var product = await _productRepository.GetProductAsync(productId);
+            if (product == null)
+            {
+                throw new NotFoundException("محصول یافت نشد!");
+            }
+
+            return _mapper.Map<ProductDTO>(product, opt => opt.Items["LikesNumberValue"] = product.ProductLikes.Count);
+            
         }
 
-        public Task<ProductDTO> GetProduct(int productId)
+        public async Task<IEnumerable<ProductDTO>> GetAllProducts()
         {
-            throw new NotImplementedException();
+            var products = await _productRepository.GetProductsAsync();
+            return _mapper.Map<IEnumerable<ProductDTO>>(products);
         }
 
         public Task<IEnumerable<ProductDTO>> GetProductsByCategory(int categoryId)
