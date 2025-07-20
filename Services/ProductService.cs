@@ -209,7 +209,9 @@ namespace OHaraj.Services
         public async Task<IEnumerable<ProductDTO>> GetAllProducts()
         {
             var products = await _productRepository.GetProductsAsync();
-            return _mapper.Map<IEnumerable<ProductDTO>>(products);
+            return products.Select(product =>
+                _mapper.Map<ProductDTO>(product, opt => opt.Items["LikesNumberValue"] = product.ProductLikes.Count)
+            );
         }
 
         public Task<IEnumerable<ProductDTO>> GetProductsByCategory(int categoryId)
