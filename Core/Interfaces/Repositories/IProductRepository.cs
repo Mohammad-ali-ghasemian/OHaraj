@@ -12,10 +12,10 @@ namespace OHaraj.Core.Interfaces.Repositories
 
         Task<Product> GetProductAsync(int id);
         Task<IEnumerable<Product>> GetProductsAsync();
-        Task<IEnumerable<Product>> GetProductsByCategotyAsync(int categoryId);
-        Task<IEnumerable<Product>> GetProductsByModelAsync(int modelId);
         Task<IEnumerable<Product>> GetDeactiveProductsAsync();
         Task<IEnumerable<Product>> GetActiveProductsAsync();
+        Task<IEnumerable<Product>> GetProductsByCategotyAsync(int categoryId);
+        Task<IEnumerable<Product>> GetProductsByModelAsync(int modelId);
 
         Task<int> AddFileToTableAsync(FileManagement input);
         Task<int> UpdateFileToTableAsync(FileManagement input);
