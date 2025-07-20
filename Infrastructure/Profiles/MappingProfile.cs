@@ -28,7 +28,14 @@ namespace Project.Application.Profiles
                 .ReverseMap(); // Optional: Map back from UserDTO to IdentityUser
 
             CreateMap<Product, ProductDTO>()
-                .ReverseMap(); // Optional: Map back from ProductDTO to Product
+                .AfterMap((src, dest, context) =>
+                {
+                    // Use context.Items to pass in the value
+                    if (context.Items.ContainsKey("LikesNumberValue"))
+                    {
+                        dest.LikesNumber = int.Parse(context.Items["LikesNumberValue"].ToString());
+                    }
+                }).ReverseMap();
         }
     }
 }
