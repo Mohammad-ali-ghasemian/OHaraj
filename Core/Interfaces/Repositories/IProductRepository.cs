@@ -19,6 +19,7 @@ namespace OHaraj.Core.Interfaces.Repositories
 
         Task<int> AddFileToTableAsync(FileManagement input);
         Task<int> UpdateFileToTableAsync(FileManagement input);
+        Task<FileManagement> GetFileToTableAsync(int? fileId);
         Task<int> DeleteFileToTableAsync(FileManagement input);
 
 
