@@ -15,5 +15,15 @@ namespace OHaraj.Core.Interfaces.Services
 
         Task<bool> IsLikedByUser(int productId);
 
+        Task<>
+        // add/get/delete/update comment
+        //approve comment
+        //delete all product comments
+        // get product verified comments (number)
+        // get product unverified comments
+        // get product all comments
+        // get all unverified comments
+        // GetUserAllCommentsAsync
+        // GetUserUnverifiedCommentsAsync
     }
 }
