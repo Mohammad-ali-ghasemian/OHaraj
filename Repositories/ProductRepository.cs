@@ -144,7 +144,7 @@ namespace OHaraj.Repositories
 
 
 
-        public async Task<IEnumerable<ProductComment>> GetProductFiveNewestCommentsAsync(int productId)
+        public async Task<IEnumerable<ProductComment>> GetProductFiveNewestVerifiedCommentsAsync(int productId)
         {
             return await _dbContext.ProductComments.AsNoTracking()
                 .Where(x => x.ProductId == productId && x.IsApproved == true)
@@ -153,7 +153,7 @@ namespace OHaraj.Repositories
                 .ToListAsync();
         }
 
-        public async Task<IEnumerable<ProductComment>> GetProductTenNewestCommentsAsync(int productId)
+        public async Task<IEnumerable<ProductComment>> GetProductTenNewestVerifiedCommentsAsync(int productId)
         {
             return await _dbContext.ProductComments.AsNoTracking()
                 .Where(x => x.ProductId == productId && x.IsApproved == true)

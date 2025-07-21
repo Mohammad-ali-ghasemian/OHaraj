@@ -33,8 +33,8 @@ namespace OHaraj.Core.Interfaces.Repositories
         Task DeleteAllProductCommentsAsync(int productId);
 
         
-        Task<IEnumerable<ProductComment>> GetProductFiveNewestCommentsAsync(int courseId);
-        Task<IEnumerable<ProductComment>> GetProductTenNewestCommentsAsync(int courseId);
+        Task<IEnumerable<ProductComment>> GetProductFiveNewestVerifiedCommentsAsync(int courseId);
+        Task<IEnumerable<ProductComment>> GetProductTenNewestVerifiedCommentsAsync(int courseId);
         Task<IEnumerable<ProductComment>> GetProductAllVerifiedCommentsAsync(int courseId);
         Task<IEnumerable<ProductComment>> GetProductUnverifiedCommentsAsync(int courseId);
         Task<IEnumerable<ProductComment>> GetProductAllCommentsAsync(int courseId);
