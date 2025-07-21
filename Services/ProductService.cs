@@ -241,5 +241,11 @@ namespace OHaraj.Services
                 _mapper.Map<ProductDTO>(product, opt => opt.Items["LikesNumberValue"] = product.ProductLikes.Count)
             );
         }
+
+        public async Task<bool> IsLikedByUser(int productId)
+        {
+            var user = await Current();
+            return await _productRepository.IsLikedByUser(new ProductLike { ProductId = productId, UserId = user.Id}) != null ? true : false;
+        } 
     }
 }
