@@ -7,10 +7,13 @@ namespace OHaraj.Core.Interfaces.Services
     {
         Task<ProductDTO> AddProduct(UpsertProduct input);
         Task<ProductDTO> UpdateProduct(UpdateProduct input);
+        Task<int> DeleteProduct(int productId);
         Task<ProductDTO> GetProduct(int productId);
         Task<IEnumerable<ProductDTO>> GetAllProducts(string filter = null);
         Task<IEnumerable<ProductDTO>> GetProductsByCategory(int categoryId);
         Task<IEnumerable<ProductDTO>> GetProductsByModel(int modelId);
-        Task<int> DeleteProduct(int productId);
+
+        Task<bool> IsLikedByUser(int productId);
+
     }
 }
