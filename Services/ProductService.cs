@@ -226,14 +226,16 @@ namespace OHaraj.Services
             );
         }
 
-        public Task<IEnumerable<ProductDTO>> GetProductsByCategory(int categoryId)
+        public async Task<IEnumerable<ProductDTO>> GetProductsByCategory(int categoryId)
         {
-            throw new NotImplementedException();
+            var products = await _productRepository.GetProductsByCategotyAsync(categoryId);
+            return products.Select(product =>
+                _mapper.Map<ProductDTO>(product, opt => opt.Items["LikesNumberValue"] = product.ProductLikes.Count)
+            );
         }
 
-        public Task<IEnumerable<ProductDTO>> GetProductsByModel(int ModelId)
+        public async Task<IEnumerable<ProductDTO>> GetProductsByModel(int modelId)
         {
-            throw new NotImplementedException();
         }
     }
 }
