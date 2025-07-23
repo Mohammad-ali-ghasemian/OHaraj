@@ -27,7 +27,7 @@ namespace OHaraj.Core.Interfaces.Services
         Task<CommentDTO> GetComment(int commentId);
 
         Task<IEnumerable<CommentDTO>> GetProductAllComments(int productId);
-        Task<IEnumerable<CommentDTO>> GetProductVerifiedComments(int productId, int number);
+        Task<IEnumerable<CommentDTO>> GetProductVerifiedComments(int productId, int? number);
         Task<IEnumerable<CommentDTO>> GetProductUnverifiedComments(int productId);
         Task<IEnumerable<CommentDTO>> GetAllUnverifiedComments();
         Task<IEnumerable<CommentDTO>> GetUserAllComments();
