@@ -31,6 +31,6 @@ namespace OHaraj.Core.Interfaces.Services
         Task<IEnumerable<CommentDTO>> GetProductUnverifiedComments(int productId);
         Task<IEnumerable<CommentDTO>> GetAllUnverifiedComments();
         Task<IEnumerable<CommentDTO>> GetUserAllComments(string userId);
-        Task<IEnumerable<CommentDTO>> GetUserUnverifiedComments();
+        Task<IEnumerable<CommentDTO>> GetUserUnverifiedComments(string userId);
     }
 }
