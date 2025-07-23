@@ -318,9 +318,15 @@ namespace OHaraj.Services
             return productId;
         }
 
-        public Task<CommentDTO> GetComment(int commentId)
+        public async Task<CommentDTO> GetComment(int commentId)
         {
-            throw new NotImplementedException();
+            var comment = await _productRepository.GetCommentAsync(commentId);
+            if (comment == null)
+            {
+                throw new NotFoundException("کامنت یافت نشد");
+            }
+
+            return _mapper.Map<CommentDTO>(comment);
         }
 
         public Task<IEnumerable<CommentDTO>> GetProductAllComments(int productId)
