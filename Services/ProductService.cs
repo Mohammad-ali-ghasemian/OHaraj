@@ -250,6 +250,18 @@ namespace OHaraj.Services
 
         public async Task<CommentDTO> AddComment(UpsertComment input)
         {
+            var user = await Current();
+            ProductComment comment = new ProductComment
+            {
+                Text = input.Text,
+                DateAdded = DateTime.Now,
+                UserId = user.Id,
+                ProductId = input.ProductId,
+                IsApproved = false
+            };
+
+            await _productRepository.AddProductCommentAsync(comment);
+            return _mapper.Map<CommentDTO>(comment);
         }
 
         public Task<CommentDTO> UpdateComment(UpsertComment input)
