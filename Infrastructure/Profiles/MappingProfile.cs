@@ -36,6 +36,9 @@ namespace Project.Application.Profiles
                         dest.LikesNumber = int.Parse(context.Items["LikesNumberValue"].ToString());
                     }
                 }).ReverseMap();
+
+            CreateMap<ProductComment, UserDTO>()
+                .ReverseMap();
         }
     }
 }
