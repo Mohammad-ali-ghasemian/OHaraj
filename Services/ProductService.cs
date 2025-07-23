@@ -294,9 +294,16 @@ namespace OHaraj.Services
             return _mapper.Map<CommentDTO>(comment);
         }
 
-        public Task<int> DeleteComment(int commentId)
+        public async Task<int> DeleteComment(int commentId)
         {
-            throw new NotImplementedException();
+            var comment = await _productRepository.GetCommentAsync(commentId);
+            if (comment == null)
+            {
+                throw new NotFoundException("کامنت یافت نشد");
+            }
+
+            await _productRepository.DeleteProductCommentAsync(comment);
+            return commentId;
         }
 
         public Task<int> DeleteAllProductComments(int productId)
