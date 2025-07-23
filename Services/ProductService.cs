@@ -246,6 +246,65 @@ namespace OHaraj.Services
         {
             var user = await Current();
             return await _productRepository.IsLikedByUser(new ProductLike { ProductId = productId, UserId = user.Id}) != null ? true : false;
-        } 
+        }
+
+        public async Task<CommentDTO> AddComment(UpsertComment input)
+        {
+        }
+
+        public Task<CommentDTO> UpdateComment(UpsertComment input)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<CommentDTO> ApproveComment(int commentId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<int> DeleteComment(int commentId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<int> DeleteAllProductComments(int productId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<CommentDTO> GetComment(int commentId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<CommentDTO>> GetProductAllComments(int productId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<CommentDTO>> GetProductVerifiedComments(int productId, int number)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<CommentDTO>> GetProductUnverifiedComments(int productId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<CommentDTO>> GetAllUnverifiedComments()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<CommentDTO>> GetUserAllComments()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<CommentDTO>> GetUserUnverifiedComments()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
