@@ -306,9 +306,16 @@ namespace OHaraj.Services
             return commentId;
         }
 
-        public Task<int> DeleteAllProductComments(int productId)
+        public async Task<int> DeleteAllProductComments(int productId)
         {
-            throw new NotImplementedException();
+            var product = await _productRepository.GetProductAsync(productId);
+            if (product == null)
+            {
+                throw new NotFoundException("محصول یافت نشد");
+            }
+
+            await _productRepository.DeleteAllProductCommentsAsync(productId);
+            return productId;
         }
 
         public Task<CommentDTO> GetComment(int commentId)
