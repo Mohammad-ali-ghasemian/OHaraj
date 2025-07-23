@@ -19,7 +19,7 @@ namespace OHaraj.Core.Interfaces.Services
         Task<CommentDTO> AddComment(UpsertComment input);
         Task<CommentDTO> UpdateComment(UpsertComment input);
         
-        Task<CommentDTO> ApproveComment(int commentId);
+        Task<CommentDTO> ToggleApprovalComment(int commentId, bool isApprove);
         
         Task<int> DeleteComment(int commentId);
         Task<int> DeleteAllProductComments(int productId);
