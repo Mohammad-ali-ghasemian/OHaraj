@@ -264,9 +264,21 @@ namespace OHaraj.Services
             return _mapper.Map<CommentDTO>(comment);
         }
 
-        public Task<CommentDTO> UpdateComment(UpsertComment input)
+        public async Task<CommentDTO> UpdateComment(UpsertComment input)
         {
-            throw new NotImplementedException();
+            var comment = await _productRepository.GetCommentAsync(input.Id);
+            if (comment == null)
+            {
+                throw new NotFoundException("کامنت یافت نشد");
+            }
+
+            comment.Text = input.Text;
+            comment.ProductId = input.ProductId;
+            comment.IsApproved = false;
+            comment.ProductId = input.ProductId;
+
+            await _productRepository.UpdateProductCommentAsync(comment);
+            return _mapper.Map<CommentDTO>(comment);
         }
 
         public Task<CommentDTO> ApproveComment(int commentId)
