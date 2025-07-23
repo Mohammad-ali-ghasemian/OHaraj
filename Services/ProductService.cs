@@ -306,6 +306,7 @@ namespace OHaraj.Services
             return commentId;
         }
 
+        // Delete all product's comments
         public async Task<int> DeleteAllProductComments(int productId)
         {
             var product = await _productRepository.GetProductAsync(productId);
@@ -329,6 +330,7 @@ namespace OHaraj.Services
             return _mapper.Map<CommentDTO>(comment);
         }
 
+        // Get all product's comments
         public async Task<IEnumerable<CommentDTO>> GetProductAllComments(int productId)
         {
             var product = await _productRepository.GetProductAsync(productId);
@@ -343,6 +345,7 @@ namespace OHaraj.Services
                 _mapper.Map<CommentDTO>(comment));
         }
 
+        // Get product's (only) verified comments
         public async Task<IEnumerable<CommentDTO>> GetProductVerifiedComments(int productId, int? number)
         {
             var product = await _productRepository.GetProductAsync(productId);
@@ -371,6 +374,7 @@ namespace OHaraj.Services
                 _mapper.Map<CommentDTO>(comment));
         }
 
+        // Get product's (only) unverified comments
         public async Task<IEnumerable<CommentDTO>> GetProductUnverifiedComments(int productId)
         {
             var product = await _productRepository.GetProductAsync(productId);
@@ -384,6 +388,7 @@ namespace OHaraj.Services
                 _mapper.Map<CommentDTO>(comment));
         }
 
+        // Get all unverified comments (everywhere)
         public async Task<IEnumerable<CommentDTO>> GetAllUnverifiedComments()
         {
             var comments = await _productRepository.GetAllUnverifiedCommentsAsync();
@@ -391,6 +396,7 @@ namespace OHaraj.Services
                 _mapper.Map<CommentDTO>(comment));
         }
 
+        // Get user's all comments
         public async Task<IEnumerable<CommentDTO>> GetUserAllComments(string userId)
         {
             var user = await _authenticationRepository.GetUserByIdAsync(userId);
@@ -404,6 +410,7 @@ namespace OHaraj.Services
                 _mapper.Map<CommentDTO>(comment));
         }
 
+        // Get user's (only) unverified comments
         public async Task<IEnumerable<CommentDTO>> GetUserUnverifiedComments(string userId)
         {
             var user = await _authenticationRepository.GetUserByIdAsync(userId);
