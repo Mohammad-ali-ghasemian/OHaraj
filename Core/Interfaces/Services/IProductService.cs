@@ -14,16 +14,23 @@ namespace OHaraj.Core.Interfaces.Services
         Task<IEnumerable<ProductDTO>> GetProductsByModel(int modelId);
 
         Task<bool> IsLikedByUser(int productId);
+        
+        // Comment Section
+        Task<CommentDTO> AddComment(UpsertComment input);
+        Task<CommentDTO> UpdateComment(UpsertComment input);
+        
+        Task<CommentDTO> ApproveComment(int commentId);
+        
+        Task<int> DeleteComment(int commentId);
+        Task<int> DeleteAllProductComments(int productId);
 
-        Task<>
-        // add/get/delete/update comment
-        //approve comment
-        //delete all product comments
-        // get product verified comments (number)
-        // get product unverified comments
-        // get product all comments
-        // get all unverified comments
-        // GetUserAllCommentsAsync
-        // GetUserUnverifiedCommentsAsync
+        Task<CommentDTO> GetComment(int commentId);
+
+        Task<IEnumerable<CommentDTO>> GetProductAllComments(int productId);
+        Task<IEnumerable<CommentDTO>> GetProductVerifiedComments(int productId, int number);
+        Task<IEnumerable<CommentDTO>> GetProductUnverifiedComments(int productId);
+        Task<IEnumerable<CommentDTO>> GetAllUnverifiedComments();
+        Task<IEnumerable<CommentDTO>> GetUserAllComments();
+        Task<IEnumerable<CommentDTO>> GetUserUnverifiedComments();
     }
 }
