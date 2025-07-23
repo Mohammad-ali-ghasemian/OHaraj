@@ -371,9 +371,17 @@ namespace OHaraj.Services
                 _mapper.Map<CommentDTO>(comment));
         }
 
-        public Task<IEnumerable<CommentDTO>> GetProductUnverifiedComments(int productId)
+        public async Task<IEnumerable<CommentDTO>> GetProductUnverifiedComments(int productId)
         {
-            throw new NotImplementedException();
+            var product = await _productRepository.GetProductAsync(productId);
+            if (product == null)
+            {
+                throw new NotFoundException("محصول یافت نشد");
+            }
+
+            var comments = await _productRepository.GetProductUnverifiedCommentsAsync(productId);
+            return comments.Select(comment =>
+                _mapper.Map<CommentDTO>(comment));
         }
 
         public Task<IEnumerable<CommentDTO>> GetAllUnverifiedComments()
