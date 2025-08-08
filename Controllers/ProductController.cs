@@ -93,5 +93,13 @@ namespace OHaraj.Controllers
         {
             return new Response<CommentDTO>(await _productService.UpdateComment(input)).ToJsonResult();
         }
+
+        [Authorize("SuperAdmin,Admin")]
+        [HttpPost("Toggle-Approval-Comment")]
+        [Produces(typeof(Response<CommentDTO>))]
+        public async Task<IActionResult> ToggleApprovalComment(int commentId, bool status)
+        {
+            return new Response<CommentDTO>(await _productService.ToggleApprovalComment(commentId, status)).ToJsonResult();
+        }
     }
 }
