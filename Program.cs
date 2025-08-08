@@ -104,3 +104,9 @@ app.UseStaticFiles();
 app.MapControllers();
 
 app.Run();
+
+
+/* TO DO 
+ * Model like product
+ * Category like product
+ * */
