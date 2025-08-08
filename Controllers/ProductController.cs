@@ -73,6 +73,12 @@ namespace OHaraj.Controllers
             return new Response<int>(await _productService.DeleteProduct(productId)).ToJsonResult();
         }
 
+        [HttpGet("Is-Liked")]
+        [Produces(typeof(Response<bool>))]
+        public async Task<IActionResult> IsLiked(int productId)
+        {
+            return new Response<bool>(await _productService.IsLikedByUser(productId)).ToJsonResult();
+        }
 
     }
 }
