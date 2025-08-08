@@ -86,5 +86,12 @@ namespace OHaraj.Controllers
         {
             return new Response<CommentDTO>(await _productService.AddComment(input)).ToJsonResult();
         }
+
+        [HttpPost("Update-Comment")]
+        [Produces(typeof(Response<CommentDTO>))]
+        public async Task<IActionResult> UpdateComment(UpsertComment input)
+        {
+            return new Response<CommentDTO>(await _productService.UpdateComment(input)).ToJsonResult();
+        }
     }
 }
