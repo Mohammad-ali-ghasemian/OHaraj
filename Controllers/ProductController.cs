@@ -101,5 +101,12 @@ namespace OHaraj.Controllers
         {
             return new Response<CommentDTO>(await _productService.ToggleApprovalComment(commentId, status)).ToJsonResult();
         }
+
+        [HttpPost("Delete-Comment")]
+        [Produces(typeof(Response<int>))]
+        public async Task<IActionResult> DeleteComment(int commentId)
+        {
+            return new Response<int>(await _productService.DeleteComment(commentId)).ToJsonResult();
+        }
     }
 }
