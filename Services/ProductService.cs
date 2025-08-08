@@ -301,6 +301,15 @@ namespace OHaraj.Services
             {
                 throw new NotFoundException("کامنت یافت نشد");
             }
+            var user = await Current();
+            var roles = await _authenticationRepository.GetUserRolesAsync(user);
+            if (!roles.Any(r => r == "Admin" || r == "SuperAdmin"))
+            {
+                if (user.Id != comment.UserId)
+                {
+                    throw new BadRequestException("دسترسی غیرمجاز");
+                }
+            }
 
             await _productRepository.DeleteProductCommentAsync(comment);
             return commentId;
