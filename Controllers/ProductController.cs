@@ -32,7 +32,7 @@ namespace OHaraj.Controllers
         [Authorize("SuperAdmin,Admin")]
         [HttpPost("Update-Product")]
         [Produces(typeof(Response<ProductDTO>))]
-        public async Task<IActionResult> UpdateProduct(UpsertProduct input)
+        public async Task<IActionResult> UpdateProduct(UpdateProduct input)
         {
             return new Response<ProductDTO>(await _productService.UpdateProduct(input)).ToJsonResult();
         }
@@ -79,6 +79,8 @@ namespace OHaraj.Controllers
         {
             return new Response<bool>(await _productService.IsLikedByUser(productId)).ToJsonResult();
         }
+
+        [HttpPost("Add-Comment")]
 
     }
 }
