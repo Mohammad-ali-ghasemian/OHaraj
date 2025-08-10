@@ -184,5 +184,17 @@ namespace OHaraj.Controllers
         {
             return new Response<IEnumerable<CommentDTO>>(await _productService.GetProductAllComments(productId)).ToJsonResult();
         }
+
+        /// <summary>
+        /// Get all unverified comments in whole system
+        /// </summary>
+        /// <returns></returns>
+        [Authorize("SuperAdmin,Admin")]
+        [HttpGet("Get-Unverified-Comments")]
+        [Produces(typeof(Response<IEnumerable<CommentDTO>>))]
+        public async Task<IActionResult> GetUnverifiedComments()
+        {
+            return new Response<IEnumerable<CommentDTO>>(await _productService.GetAllUnverifiedComments()).ToJsonResult();
+        }
     }
 }
