@@ -414,6 +414,12 @@ namespace OHaraj.Services
                 throw new NotFoundException("کاربر یافت نشد");
             }
 
+            var current = await Current();
+            if (current.Id != userId)
+            {
+                throw new BadRequestException("دسترسی غیرمجاز");
+            }
+
             var comments = await _productRepository.GetUserAllCommentsAsync(userId);
             return comments.Select(comment =>
                 _mapper.Map<CommentDTO>(comment));
