@@ -108,5 +108,17 @@ namespace OHaraj.Controllers
         {
             return new Response<int>(await _productService.DeleteComment(commentId)).ToJsonResult();
         }
+
+        /// <summary>
+        /// Delete Product's all comments
+        /// </summary>
+        /// <returns></returns>
+        [Authorize("SuperAdmin,Admin")]
+        [HttpPost("Delete-Product-Comments")]
+        [Produces(typeof(Response<int>))]
+        public async Task<IActionResult> DeleteProductComments(int productId)
+        {
+            return new Response<int>(await _productService.DeleteAllProductComments(productId)).ToJsonResult();
+        }
     }
 }
