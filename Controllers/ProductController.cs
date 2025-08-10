@@ -139,5 +139,28 @@ namespace OHaraj.Controllers
         {
             return new Response<IEnumerable<CommentDTO>>(await _productService.GetProductAllComments(productId)).ToJsonResult();
         }
+
+        /// <summary>
+        /// Get Product's verified comments
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("Get-Product-Verified-Comments")]
+        [Produces(typeof(Response<IEnumerable<CommentDTO>>))]
+        public async Task<IActionResult> GetProductVerifiedComments(int productId)
+        {
+            return new Response<IEnumerable<CommentDTO>>(await _productService.GetProductVerifiedComments(productId, null)).ToJsonResult();
+        }
+
+        /// <summary>
+        /// Get Product's unverified comments
+        /// </summary>
+        /// <returns></returns>
+        [Authorize("SuperAdmin,Admin")]
+        [HttpGet("Get-Product-Unverified-Comments")]
+        [Produces(typeof(Response<IEnumerable<CommentDTO>>))]
+        public async Task<IActionResult> GetProductUnverifiedComments(int productId)
+        {
+            return new Response<IEnumerable<CommentDTO>>(await _productService.GetProductAllComments(productId)).ToJsonResult();
+        }
     }
 }
