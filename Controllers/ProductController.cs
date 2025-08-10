@@ -182,7 +182,7 @@ namespace OHaraj.Controllers
         [Produces(typeof(Response<IEnumerable<CommentDTO>>))]
         public async Task<IActionResult> GetProductUnverifiedComments(int productId)
         {
-            return new Response<IEnumerable<CommentDTO>>(await _productService.GetProductAllComments(productId)).ToJsonResult();
+            return new Response<IEnumerable<CommentDTO>>(await _productService.GetProductUnverifiedComments(productId)).ToJsonResult();
         }
 
         /// <summary>
