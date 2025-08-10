@@ -127,5 +127,17 @@ namespace OHaraj.Controllers
         {
             return new Response<CommentDTO>(await _productService.GetComment(commentId)).ToJsonResult();
         }
+
+        /// <summary>
+        /// Get Product's all comments
+        /// </summary>
+        /// <returns></returns>
+        [Authorize("SuperAdmin,Admin")]
+        [HttpGet("Get-Product-Comments")]
+        [Produces(typeof(Response<IEnumerable<CommentDTO>>))]
+        public async Task<IActionResult> GetProductComments(int productId)
+        {
+            return new Response<IEnumerable<CommentDTO>>(await _productService.GetProductAllComments(productId)).ToJsonResult();
+        }
     }
 }
