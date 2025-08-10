@@ -120,5 +120,12 @@ namespace OHaraj.Controllers
         {
             return new Response<int>(await _productService.DeleteAllProductComments(productId)).ToJsonResult();
         }
+
+        [HttpGet("Get-Comment")]
+        [Produces(typeof(Response<CommentDTO>))]
+        public async Task<IActionResult> GetComment(int commentId)
+        {
+            return new Response<CommentDTO>(await _productService.GetComment(commentId)).ToJsonResult();
+        }
     }
 }
