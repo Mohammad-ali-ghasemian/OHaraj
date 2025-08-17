@@ -155,7 +155,7 @@ namespace OHaraj.Controllers
         /// Get Product's 10 newest verified comments
         /// </summary>
         /// <returns></returns>
-        [HttpGet("Get-Product-5Verified-Comments")]
+        [HttpGet("Get-Product-10Verified-Comments")]
         [Produces(typeof(Response<IEnumerable<CommentDTO>>))]
         public async Task<IActionResult> GetProduct10VerifiedComments(int productId)
         {
