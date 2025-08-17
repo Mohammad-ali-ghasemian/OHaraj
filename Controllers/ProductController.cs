@@ -212,7 +212,7 @@ namespace OHaraj.Controllers
         /// Get User's unverified comments
         /// </summary>
         /// <returns></returns>
-        [HttpGet("Get-User-Comments")]
+        [HttpGet("Get-User-Unverified-Comments")]
         [Produces(typeof(Response<IEnumerable<CommentDTO>>))]
         public async Task<IActionResult> GetUserUnverifiedComments(string userId)
         {
