@@ -23,6 +23,10 @@ namespace OHaraj.Controllers
             _adminService = adminService;
         }
 
+        /// <summary>
+        /// Can be used just by super admin.
+        /// </summary>
+        /// <returns></returns>
         [Authorize(Roles = "SuperAdmin")]
         [HttpPost("Add-Admin")]
         [Produces(typeof(Response<AdminDTO>))]
@@ -31,6 +35,10 @@ namespace OHaraj.Controllers
             return new Response<AdminDTO>(await _adminService.AddAdmin(input)).ToJsonResult();
         }
 
+        /// <summary>
+        /// Can be used just by super admin. remove user's admin role.
+        /// </summary>
+        /// <returns></returns>
         [Authorize(Roles = "SuperAdmin")]
         [HttpPost("Demotion-Admin")]
         [Produces(typeof(Response<UserDTO>))]
@@ -39,6 +47,10 @@ namespace OHaraj.Controllers
             return new Response<UserDTO>(await _adminService.DemotionAdmin(adminId)).ToJsonResult();
         }
 
+        /// <summary>
+        /// Can be used just by super admin.
+        /// </summary>
+        /// <returns></returns>
         [Authorize(Roles = ("SuperAdmin"))]
         [HttpGet("Get-Admins")]
         [Produces(typeof(Response<IEnumerable<AdminDTO>>))]
