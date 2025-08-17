@@ -10,6 +10,7 @@ using Project.Application.Contracts.Infrastructure;
 using Project.Application.Middlewares;
 using Project.Application.Profiles;
 using Project.Infrastructure.FileStorage;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -75,7 +76,14 @@ builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    // for commenting endpoints
+    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+    c.IncludeXmlComments(xmlPath);
+});
+
 
 // AutoMapper
 builder.Services.AddAutoMapper(typeof(MappingProfile).Assembly);
