@@ -122,11 +122,15 @@ namespace OHaraj.Services
             int? fileId = null;
             if (input.MainImage != null)
             {
+                if (mainFile == null)
+                    mainFile = new FileManagement();
                 mainFile.path = await _uploaderService.EditFile(FileContainer, input.MainImage, mainFile.path);
                 fileId = await _productRepository.UpdateFileToTableAsync(mainFile);
             }
-            else
+            else if (mainFile != null) 
             {
+                product.FileManagementId = null;
+                await _productRepository.UpdateProductAsync(product); // جدا کردن وابستگی
                 await _uploaderService.DeleteFile(FileContainer, mainFile.path);
                 await _productRepository.DeleteFileToTableAsync(mainFile);
             }
@@ -142,6 +146,7 @@ namespace OHaraj.Services
             List<ProductImages>? otherImages = null;
             if (input.OtherImages != null)
             {
+                otherImages = new List<ProductImages>();
                 int imgId;
                 int pivot = 1;
                 foreach (var image in input.OtherImages)
