@@ -1,11 +1,19 @@
 {
   "Version": 1,
-  "Hash": "S5G11Q/o2X9VqhzGs17FFzTV2BhpeLOCoiTUSah9880=",
+  "Hash": "e0/9kmNdaOxpsoXsgVMXvegoTpRpyc3Bm3dWd+AG1bQ=",
   "Source": "OHaraj",
   "BasePath": "_content/OHaraj",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "OHaraj\\wwwroot",
+      "Source": "OHaraj",
+      "ContentRoot": "D:\\E\\git\\OHaraj\\OHaraj\\OHaraj\\wwwroot\\",
+      "BasePath": "_content/OHaraj",
+      "Pattern": "**"
+    }
+  ],
   "Assets": []
 }

@@ -85,3 +85,4 @@ D:\E\git\OHaraj\OHaraj\OHaraj\obj\Debug\net6.0\OHaraj.xml
 D:\E\git\OHaraj\OHaraj\OHaraj\obj\Debug\net6.0\OHaraj.pdb
 D:\E\git\OHaraj\OHaraj\OHaraj\obj\Debug\net6.0\OHaraj.genruntimeconfig.cache
 D:\E\git\OHaraj\OHaraj\OHaraj\obj\Debug\net6.0\ref\OHaraj.dll
+D:\E\git\OHaraj\OHaraj\OHaraj\bin\Debug\net6.0\OHaraj.staticwebassets.runtime.json

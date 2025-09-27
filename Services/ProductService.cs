@@ -62,6 +62,7 @@ namespace OHaraj.Services
             List<ProductImages>? otherImages = null;
             if (input.OtherImages != null)
             {
+                otherImages = new List<ProductImages>();
                 int imgId;
                 int pivot = 1;
                 foreach (var image in input.OtherImages)

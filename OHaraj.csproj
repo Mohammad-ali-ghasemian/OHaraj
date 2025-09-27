@@ -30,6 +30,7 @@
 
   <ItemGroup>
     <Folder Include="Infrastructure\Extensions\" />
+    <Folder Include="wwwroot\" />
   </ItemGroup>
 
 </Project>
