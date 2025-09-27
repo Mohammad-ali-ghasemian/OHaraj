@@ -203,8 +203,24 @@ namespace OHaraj.Services
                 throw new NotFoundException("محصول یافت نشد!");
             }
 
-            return _mapper.Map<ProductDTO>(product, opt => opt.Items["LikesNumberValue"] = product.ProductLikes.Count);
-            
+            // extracting main image path
+            var file = await _productRepository.GetFileToTableAsync(product.FileManagementId);
+
+            // extracting othes images paths
+            List<string> otherFiles = new List<string>();
+            FileManagement otherFile;
+            foreach (var f in product.ProductImages)
+            {
+                otherFile = await _productRepository.GetFileToTableAsync(f.FileManagementId);
+                otherFiles.Add(otherFile.path);
+            }
+
+            var map = _mapper.Map<ProductDTO>(product, opt => opt.Items["LikesNumberValue"] = product.ProductLikes.Count);
+            if (file != null)
+                map.MainImagePath = file.path;
+            map.OtherImagesPath = otherFiles;
+
+            return map;
         }
 
         public async Task<IEnumerable<ProductDTO>> GetAllProducts(string filter = null)
