@@ -21,18 +21,18 @@ namespace OHaraj.Controllers
             _productService = productService;
         }
 
-        [Authorize("SuperAdmin,Admin")]
+        [Authorize(Roles = "SuperAdmin,Admin")]
         [HttpPost("Add-Product")]
         [Produces(typeof(Response<ProductDTO>))]
-        public async Task<IActionResult> AddProduct(UpsertProduct input)
+        public async Task<IActionResult> AddProduct([FromForm] UpsertProduct input)
         {
             return new Response<ProductDTO>(await _productService.AddProduct(input)).ToJsonResult();
         }
 
-        [Authorize("SuperAdmin,Admin")]
+        [Authorize(Roles = "SuperAdmin,Admin")]
         [HttpPost("Update-Product")]
         [Produces(typeof(Response<ProductDTO>))]
-        public async Task<IActionResult> UpdateProduct(UpdateProduct input)
+        public async Task<IActionResult> UpdateProduct([FromForm] UpdateProduct input)
         {
             return new Response<ProductDTO>(await _productService.UpdateProduct(input)).ToJsonResult();
         }
@@ -65,7 +65,7 @@ namespace OHaraj.Controllers
             return new Response<IEnumerable<ProductDTO>>(await _productService.GetProductsByModel(modelId)).ToJsonResult();
         }
 
-        [Authorize("SuperAdmin,Admin")]
+        [Authorize(Roles = "SuperAdmin,Admin")]
         [HttpPost("Delete-Product")]
         [Produces(typeof(Response<int>))]
         public async Task<IActionResult> DeleteProduct(int productId)
@@ -94,7 +94,7 @@ namespace OHaraj.Controllers
             return new Response<CommentDTO>(await _productService.UpdateComment(input)).ToJsonResult();
         }
 
-        [Authorize("SuperAdmin,Admin")]
+        [Authorize(Roles = "SuperAdmin,Admin")]
         [HttpPost("Toggle-Approval-Comment")]
         [Produces(typeof(Response<CommentDTO>))]
         public async Task<IActionResult> ToggleApprovalComment(int commentId, bool status)
@@ -113,7 +113,7 @@ namespace OHaraj.Controllers
         /// Delete Product's all comments
         /// </summary>
         /// <returns></returns>
-        [Authorize("SuperAdmin,Admin")]
+        [Authorize(Roles = "SuperAdmin,Admin")]
         [HttpPost("Delete-Product-Comments")]
         [Produces(typeof(Response<int>))]
         public async Task<IActionResult> DeleteProductComments(int productId)
@@ -132,7 +132,7 @@ namespace OHaraj.Controllers
         /// Get Product's all comments
         /// </summary>
         /// <returns></returns>
-        [Authorize("SuperAdmin,Admin")]
+        [Authorize(Roles = "SuperAdmin,Admin")]
         [HttpGet("Get-Product-Comments")]
         [Produces(typeof(Response<IEnumerable<CommentDTO>>))]
         public async Task<IActionResult> GetProductComments(int productId)
@@ -177,7 +177,7 @@ namespace OHaraj.Controllers
         /// Get Product's unverified comments
         /// </summary>
         /// <returns></returns>
-        [Authorize("SuperAdmin,Admin")]
+        [Authorize(Roles = "SuperAdmin,Admin")]
         [HttpGet("Get-Product-Unverified-Comments")]
         [Produces(typeof(Response<IEnumerable<CommentDTO>>))]
         public async Task<IActionResult> GetProductUnverifiedComments(int productId)
@@ -189,7 +189,7 @@ namespace OHaraj.Controllers
         /// Get all unverified comments in whole system
         /// </summary>
         /// <returns></returns>
-        [Authorize("SuperAdmin,Admin")]
+        [Authorize(Roles = "SuperAdmin,Admin")]
         [HttpGet("Get-Unverified-Comments")]
         [Produces(typeof(Response<IEnumerable<CommentDTO>>))]
         public async Task<IActionResult> GetUnverifiedComments()
