@@ -26,6 +26,9 @@ namespace OHaraj.Core.Interfaces.Repositories
 
 
         Task<ProductLike> IsLikedByUser(ProductLike input);
+        Task<int> Like(ProductLike input);
+        Task<int> Unlike(ProductLike input);
+
         Task<ProductComment> GetCommentAsync(int commentId);
         Task AddProductCommentAsync(ProductComment comment);
         Task UpdateProductCommentAsync(ProductComment comment);
