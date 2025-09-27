@@ -200,12 +200,14 @@ namespace OHaraj.Services
 
             var mainFile = await _productRepository.GetFileToTableAsync(product.FileManagementId);
             await _productRepository.DeleteFileToTableAsync(mainFile);
+            await _uploaderService.DeleteFile(FileContainer, mainFile.path);
 
             FileManagement otherFile;
             foreach (var f in product.ProductImages)
             {
                 otherFile = await _productRepository.GetFileToTableAsync(f.FileManagementId);
                 await _productRepository.DeleteFileToTableAsync(otherFile);
+                await _uploaderService.DeleteFile(FileContainer, otherFile.path);
             }
 
             return product.Id;
