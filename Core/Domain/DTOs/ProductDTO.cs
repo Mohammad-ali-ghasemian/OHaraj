@@ -16,5 +16,8 @@
         public int CategoryId { get; set; }
         public int ModelId { get; set; }
         public int LikesNumber { get; set; }
+
+        public string? MainImagePath { get; set; }
+        public List<string>? OtherImagesPath { get; set; }
     }
 }
