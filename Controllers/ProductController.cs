@@ -44,11 +44,27 @@ namespace OHaraj.Controllers
             return new Response<ProductDTO>(await _productService.GetProduct(productId)).ToJsonResult();
         }
 
+        [Authorize(Roles = "SuperAdmin,Admin")]
         [HttpGet("Get-All-Products")]
         [Produces(typeof(Response<IEnumerable<ProductDTO>>))]
         public async Task<IActionResult> GetAllProducts()
         {
             return new Response<IEnumerable<ProductDTO>>(await _productService.GetAllProducts()).ToJsonResult();
+        }
+
+        [Authorize(Roles = "SuperAdmin,Admin")]
+        [HttpGet("Get-Deactive-Products")]
+        [Produces(typeof(Response<IEnumerable<ProductDTO>>))]
+        public async Task<IActionResult> GetDeactiveProducts()
+        {
+            return new Response<IEnumerable<ProductDTO>>(await _productService.GetAllProducts("Deactive")).ToJsonResult();
+        }
+
+        [HttpGet("Get-Active-Products")]
+        [Produces(typeof(Response<IEnumerable<ProductDTO>>))]
+        public async Task<IActionResult> GetActiveProducts()
+        {
+            return new Response<IEnumerable<ProductDTO>>(await _productService.GetAllProducts("Active")).ToJsonResult();
         }
 
         [HttpGet("Get-Products-By-Category")]
