@@ -115,6 +115,21 @@ namespace OHaraj.Repositories
             return await _dbContext.ProductLikes.FirstOrDefaultAsync(x => x.UserId == input.UserId && x.ProductId == input.ProductId);
         }
 
+        public async Task<int> Like(ProductLike input)
+        {
+            await _dbContext.AddAsync(input);
+            await _dbContext.SaveChangesAsync();
+            return input.Id;
+        }
+
+        public async Task<int> Unlike(ProductLike input)
+        {
+            _dbContext.Remove(input);
+            await _dbContext.SaveChangesAsync();
+            return input.Id;
+        }
+
+
         public async Task<ProductComment> GetCommentAsync(int commentId)
         {
             return await _dbContext.ProductComments.FirstOrDefaultAsync(x => x.Id == commentId);
