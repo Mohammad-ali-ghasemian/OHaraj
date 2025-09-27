@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "iHW+0ZYoY+wQwFVxDnvHepVuL7KjRfkHopG1oXqL49I=",
+  "Hash": "WA6ggmDhNcq1FCR+5LebQ/qsjdWhFkdiqEGN8CIR9+Y=",
   "Source": "OHaraj",
   "BasePath": "_content/OHaraj",
   "Mode": "Default",
@@ -16,6 +16,25 @@
     }
   ],
   "Assets": [
+    {
+      "Identity": "D:\\E\\git\\OHaraj\\OHaraj\\OHaraj\\wwwroot\\Product\\142dc763-8e7e-4c87-9dba-b7257e65fa9d.jpg",
+      "SourceId": "OHaraj",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\E\\git\\OHaraj\\OHaraj\\OHaraj\\wwwroot\\",
+      "BasePath": "_content/OHaraj",
+      "RelativePath": "Product/142dc763-8e7e-4c87-9dba-b7257e65fa9d.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Product\\142dc763-8e7e-4c87-9dba-b7257e65fa9d.jpg"
+    },
     {
       "Identity": "D:\\E\\git\\OHaraj\\OHaraj\\OHaraj\\wwwroot\\Product\\3f46ebec-2e10-4165-b937-6da17aaf6c8c.jpg",
       "SourceId": "OHaraj",
@@ -110,6 +129,44 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Product\\8b8c2839-8eec-4821-8b5b-9291cc167d50.jpg"
+    },
+    {
+      "Identity": "D:\\E\\git\\OHaraj\\OHaraj\\OHaraj\\wwwroot\\Product\\9eda63ac-f7cd-4df0-9b97-436a74750ee6.jpg",
+      "SourceId": "OHaraj",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\E\\git\\OHaraj\\OHaraj\\OHaraj\\wwwroot\\",
+      "BasePath": "_content/OHaraj",
+      "RelativePath": "Product/9eda63ac-f7cd-4df0-9b97-436a74750ee6.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Product\\9eda63ac-f7cd-4df0-9b97-436a74750ee6.jpg"
+    },
+    {
+      "Identity": "D:\\E\\git\\OHaraj\\OHaraj\\OHaraj\\wwwroot\\Product\\e2ada499-dc98-42e5-9547-2313f98eddbb.jpg",
+      "SourceId": "OHaraj",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\E\\git\\OHaraj\\OHaraj\\OHaraj\\wwwroot\\",
+      "BasePath": "_content/OHaraj",
+      "RelativePath": "Product/e2ada499-dc98-42e5-9547-2313f98eddbb.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Product\\e2ada499-dc98-42e5-9547-2313f98eddbb.jpg"
     },
     {
       "Identity": "D:\\E\\git\\OHaraj\\OHaraj\\OHaraj\\wwwroot\\Product\\e3597ee9-bfb2-4c6d-b0af-d37cf6423e38.jpg",
