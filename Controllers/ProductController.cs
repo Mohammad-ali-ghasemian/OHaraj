@@ -89,6 +89,17 @@ namespace OHaraj.Controllers
             return new Response<int>(await _productService.DeleteProduct(productId)).ToJsonResult();
         }
 
+        [HttpPost("ToggleLike")]
+        [Produces(typeof(Response<int>))]
+        public async Task<IActionResult> ToggleLike(int productId)
+        {
+            return new Response<int>()
+        }
+
+        /// <summary>
+        /// Did user liked the product? (true/false)
+        /// </summary>
+        /// <returns></returns>
         [HttpGet("Is-Liked")]
         [Produces(typeof(Response<bool>))]
         public async Task<IActionResult> IsLiked(int productId)
