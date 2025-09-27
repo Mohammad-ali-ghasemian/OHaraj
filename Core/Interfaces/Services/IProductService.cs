@@ -13,6 +13,7 @@ namespace OHaraj.Core.Interfaces.Services
         Task<IEnumerable<ProductDTO>> GetProductsByCategory(int categoryId);
         Task<IEnumerable<ProductDTO>> GetProductsByModel(int modelId);
 
+        Task<int> ToggleLike(int productId);
         Task<bool> IsLikedByUser(int productId);
         
         // Comment Section
