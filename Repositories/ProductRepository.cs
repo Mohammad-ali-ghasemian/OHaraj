@@ -52,6 +52,7 @@ namespace OHaraj.Repositories
         public async Task<IEnumerable<Product>> GetProductsByCategotyAsync(int categoryId)
         {
             return await _dbContext.Products.AsNoTracking()
+                .Include(nameof(Product.ProductLikes))
                 .Where(x => x.CategoryId == categoryId)
                 .ToListAsync();
         }
@@ -59,6 +60,7 @@ namespace OHaraj.Repositories
         public async Task<IEnumerable<Product>> GetProductsByModelAsync(int modelId)
         {
             return await _dbContext.Products.AsNoTracking()
+                .Include(nameof(Product.ProductLikes))
                 .Where(x => x.ModelId == modelId)
                 .ToListAsync();
         }
