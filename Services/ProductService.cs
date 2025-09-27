@@ -280,7 +280,31 @@ namespace OHaraj.Services
         public async Task<bool> IsLikedByUser(int productId)
         {
             var user = await Current();
+            if (user == null)
+            {
+                return false;
+            }
             return await _productRepository.IsLikedByUser(new ProductLike { ProductId = productId, UserId = user.Id}) != null ? true : false;
+        }
+        
+        public async Task<int> ToggleLike(int productId)
+        {
+            var user = await Current();
+            if (user == null)
+            {
+                throw new BadRequestException("لطفا ابتدا وارد شوید");
+            }
+
+            ProductLike productLike = new ProductLike { ProductId = productId, UserId = user.Id };
+
+            var like = await _productRepository.IsLikedByUser(productLike);
+
+            if (like == null)
+            {
+                return await _productRepository.Like(productLike);
+            }
+
+            return await _productRepository.Unlike(productLike);
         }
 
         public async Task<CommentDTO> AddComment(UpsertComment input)
