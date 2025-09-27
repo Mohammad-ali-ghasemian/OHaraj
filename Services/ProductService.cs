@@ -197,6 +197,17 @@ namespace OHaraj.Services
             }
 
             await _productRepository.DeleteProductAsync(product);
+
+            var mainFile = await _productRepository.GetFileToTableAsync(product.FileManagementId);
+            await _productRepository.DeleteFileToTableAsync(mainFile);
+
+            FileManagement otherFile;
+            foreach (var f in product.ProductImages)
+            {
+                otherFile = await _productRepository.GetFileToTableAsync(f.FileManagementId);
+                await _productRepository.DeleteFileToTableAsync(otherFile);
+            }
+
             return product.Id;
         }
 
