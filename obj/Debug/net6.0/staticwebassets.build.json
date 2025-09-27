@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "WA6ggmDhNcq1FCR+5LebQ/qsjdWhFkdiqEGN8CIR9+Y=",
+  "Hash": "iRasXsJPTDNUvnQ8zOJXaS3/Jo0S5uVlHoZ7u44pKuw=",
   "Source": "OHaraj",
   "BasePath": "_content/OHaraj",
   "Mode": "Default",
@@ -36,25 +36,6 @@
       "OriginalItemSpec": "wwwroot\\Product\\142dc763-8e7e-4c87-9dba-b7257e65fa9d.jpg"
     },
     {
-      "Identity": "D:\\E\\git\\OHaraj\\OHaraj\\OHaraj\\wwwroot\\Product\\3f46ebec-2e10-4165-b937-6da17aaf6c8c.jpg",
-      "SourceId": "OHaraj",
-      "SourceType": "Discovered",
-      "ContentRoot": "D:\\E\\git\\OHaraj\\OHaraj\\OHaraj\\wwwroot\\",
-      "BasePath": "_content/OHaraj",
-      "RelativePath": "Product/3f46ebec-2e10-4165-b937-6da17aaf6c8c.jpg",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "PreferTarget",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\Product\\3f46ebec-2e10-4165-b937-6da17aaf6c8c.jpg"
-    },
-    {
       "Identity": "D:\\E\\git\\OHaraj\\OHaraj\\OHaraj\\wwwroot\\Product\\44fe3209-b5e8-44cd-8bed-b97d83802da1.jpg",
       "SourceId": "OHaraj",
       "SourceType": "Discovered",
@@ -74,12 +55,12 @@
       "OriginalItemSpec": "wwwroot\\Product\\44fe3209-b5e8-44cd-8bed-b97d83802da1.jpg"
     },
     {
-      "Identity": "D:\\E\\git\\OHaraj\\OHaraj\\OHaraj\\wwwroot\\Product\\51290702-473f-4990-a3dd-144459e3b1ad.jpg",
+      "Identity": "D:\\E\\git\\OHaraj\\OHaraj\\OHaraj\\wwwroot\\Product\\4a885117-b337-4d73-901f-8224ef4a7919.jpg",
       "SourceId": "OHaraj",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\E\\git\\OHaraj\\OHaraj\\OHaraj\\wwwroot\\",
       "BasePath": "_content/OHaraj",
-      "RelativePath": "Product/51290702-473f-4990-a3dd-144459e3b1ad.jpg",
+      "RelativePath": "Product/4a885117-b337-4d73-901f-8224ef4a7919.jpg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -90,7 +71,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\Product\\51290702-473f-4990-a3dd-144459e3b1ad.jpg"
+      "OriginalItemSpec": "wwwroot\\Product\\4a885117-b337-4d73-901f-8224ef4a7919.jpg"
     },
     {
       "Identity": "D:\\E\\git\\OHaraj\\OHaraj\\OHaraj\\wwwroot\\Product\\558daf5c-c9c6-42fb-8cae-0281ce51f8eb.jpg",
