@@ -37,6 +37,27 @@ namespace Project.Application.Profiles
                     }
                 }).ReverseMap();
 
+            //CreateMap<Product, ProductDTO>()
+            //    .ForMember(dest => dest.MainImagePath,
+            //        opt => opt.MapFrom(src => src.FileManagement != null ? src.FileManagement.path : null))
+            //    .ForMember(dest => dest.OtherImagesPath,
+            //        opt => opt.MapFrom(src => src.ProductImages != null
+            //            ? src.ProductImages.Select(pi => pi.FileManagement.path).ToList()
+            //            : new List<string>()))
+            //    .AfterMap((src, dest, context) =>
+            //    {
+            //        if (context.Items.ContainsKey("LikesNumberValue"))
+            //        {
+            //            dest.LikesNumber = Convert.ToInt32(context.Items["LikesNumberValue"]);
+            //        }
+            //        else
+            //        {
+            //            dest.LikesNumber = src.ProductLikes?.Count ?? 0;
+            //        }
+            //    })
+            //    .ReverseMap();
+
+
             CreateMap<ProductComment, UserDTO>()
                 .ReverseMap();
         }
