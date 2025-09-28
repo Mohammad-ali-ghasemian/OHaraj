@@ -289,6 +289,11 @@ namespace OHaraj.Services
         
         public async Task<int> ToggleLike(int productId)
         {
+            if (await _productRepository.GetProductAsync(productId) == null)
+            {
+                throw new NotFoundException("محصول یافت نشد");
+            }
+
             var user = await Current();
             if (user == null)
             {
@@ -304,12 +309,22 @@ namespace OHaraj.Services
                 return await _productRepository.Like(productLike);
             }
 
-            return await _productRepository.Unlike(productLike);
+            return await _productRepository.Unlike(like);
         }
 
         public async Task<CommentDTO> AddComment(UpsertComment input)
         {
             var user = await Current();
+            if (user == null)
+            {
+                throw new BadRequestException("ابتدا وارد شوید");
+            }
+
+            if (await _productRepository.GetProductAsync(input.ProductId) == null)
+            {
+                throw new NotFoundException("محصول یافت نشد");
+            }
+
             ProductComment comment = new ProductComment
             {
                 Text = input.Text,
@@ -325,10 +340,26 @@ namespace OHaraj.Services
 
         public async Task<CommentDTO> UpdateComment(UpsertComment input)
         {
+            var user = await Current();
+            if (user == null)
+            {
+                throw new BadRequestException("ابتدا وارد شوید");
+            }
+
+            if (await _productRepository.GetProductAsync(input.ProductId) == null)
+            {
+                throw new NotFoundException("محصول یافت نشد");
+            }
+
             var comment = await _productRepository.GetCommentAsync(input.Id);
             if (comment == null)
             {
                 throw new NotFoundException("کامنت یافت نشد");
+            }
+
+            if (user.Id !=  comment.UserId)
+            {
+                throw new BadRequestException("قادر به ویرایش کامنت فرد دیگر نیستید");
             }
 
             comment.Text = input.Text;
@@ -474,9 +505,13 @@ namespace OHaraj.Services
             }
 
             var current = await Current();
-            if (current.Id != userId)
+            var roles = await _authenticationRepository.GetUserRolesAsync(current);
+            if (!roles.Any(r => r == "Admin" || r == "SuperAdmin"))
             {
-                throw new BadRequestException("دسترسی غیرمجاز");
+                if (current.Id != userId)
+                {
+                    throw new BadRequestException("دسترسی غیرمجاز");
+                }
             }
 
             var comments = await _productRepository.GetUserAllCommentsAsync(userId);
@@ -494,9 +529,13 @@ namespace OHaraj.Services
             }
 
             var current = await Current();
-            if (current.Id != userId)
+            var roles = await _authenticationRepository.GetUserRolesAsync(current);
+            if (!roles.Any(r => r == "Admin" || r == "SuperAdmin"))
             {
-                throw new BadRequestException("دسترسی غیرمجاز");
+                if (current.Id != userId)
+                {
+                    throw new BadRequestException("دسترسی غیرمجاز");
+                }
             }
 
             var comments = await _productRepository.GetUserUnverifiedCommentsAsync(userId);
