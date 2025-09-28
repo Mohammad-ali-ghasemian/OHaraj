@@ -93,7 +93,7 @@ namespace OHaraj.Controllers
         [Produces(typeof(Response<int>))]
         public async Task<IActionResult> ToggleLike(int productId)
         {
-            return new Response<int>()
+            return new Response<int>(await _productService.ToggleLike(productId)).ToJsonResult();
         }
 
         /// <summary>
