@@ -147,9 +147,11 @@ namespace OHaraj.Services
             return map;
         }
 
-        public Task<IEnumerable<CategoryDTO>> GetAllCategories(string filter = null)
+        public async Task<IEnumerable<CategoryDTO>> GetAllCategories()
         {
-            
+            IEnumerable<Category> categories = await _categoryRepository.GetCategoriesAsync();
+
+            return _mapper.Map<IEnumerable<CategoryDTO>>(categories);
         }
     }
 }
