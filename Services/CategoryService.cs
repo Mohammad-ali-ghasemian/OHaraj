@@ -117,7 +117,7 @@ namespace OHaraj.Services
             var category = await _categoryRepository.GetCategoryAsync(categoryId);
             if (category == null)
             {
-                throw new NotFoundException("محصول یافت نشد");
+                throw new NotFoundException("کتگوری یافت نشد");
             }
 
             await _categoryRepository.DeleteCategoryAsync(category);
@@ -129,9 +129,22 @@ namespace OHaraj.Services
             return category.Id;
         }
 
-        public Task<CategoryDTO> GetCategory(int CategoryId)
+        public async Task<CategoryDTO> GetCategory(int categoryId)
         {
-            
+            var category = await _categoryRepository.GetCategoryAsync(categoryId);
+            if (category == null)
+            {
+                throw new NotFoundException("کتگوری یافت نشد!");
+            }
+
+            // extracting main image path
+            var file = await _categoryRepository.GetFileToTableAsync(category.FileManagementId);
+
+            var map = _mapper.Map<CategoryDTO>(category);
+            if (file != null)
+                map.ImagePath = file.path;
+
+            return map;
         }
 
         public Task<IEnumerable<CategoryDTO>> GetAllCategories(string filter = null)
