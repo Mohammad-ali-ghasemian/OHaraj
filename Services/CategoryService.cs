@@ -112,9 +112,21 @@ namespace OHaraj.Services
             return _mapper.Map<CategoryDTO>(category);
         }
 
-        public Task<int> DeleteCategory(int CategoryId)
+        public async Task<int> DeleteCategory(int categoryId)
         {
-            
+            var category = await _categoryRepository.GetCategoryAsync(categoryId);
+            if (category == null)
+            {
+                throw new NotFoundException("محصول یافت نشد");
+            }
+
+            await _categoryRepository.DeleteCategoryAsync(category);
+
+            var mainFile = await _categoryRepository.GetFileToTableAsync(category.FileManagementId);
+            await _categoryRepository.DeleteFileToTableAsync(mainFile);
+            await _uploaderService.DeleteFile(FileContainer, mainFile.path);
+
+            return category.Id;
         }
 
         public Task<CategoryDTO> GetCategory(int CategoryId)
