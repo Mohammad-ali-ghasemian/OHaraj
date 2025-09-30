@@ -15,13 +15,14 @@ namespace OHaraj.Services
     public class ModelService : IModelService
     {
         private readonly IModelRepository _modelRepository;
-        private readonly IAuthenticationRepository _authenticationRepository;
+        private readonly ICategoryRepository _categoryRepository;
         private readonly IMapper _mapper;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly string FileContainer;
         private readonly IFileStorageService _uploaderService;
         public ModelService(
             IModelRepository modelRepository,
+            ICategoryRepository categoryRepository,
             IAuthenticationRepository authenticationRepository,
             IMapper mapper,
             IHttpContextAccessor httpContextAccessor,
@@ -29,27 +30,19 @@ namespace OHaraj.Services
             )
         {
             _modelRepository = modelRepository;
-            _authenticationRepository = authenticationRepository;
+            _categoryRepository = categoryRepository;
             _mapper = mapper;
             _httpContextAccessor = httpContextAccessor;
             FileContainer = "Model";
             _uploaderService = uploaderService;
         }
 
-        public async Task<IdentityUser> Current()
-        {
-            var userPrincipal = _httpContextAccessor.HttpContext?.User;
-            if (userPrincipal == null)
-            {
-                return null;
-            }
-
-            var user = await _authenticationRepository.GetUserByPrincipalAsync(userPrincipal);
-            return user;
-        }
-
         public async Task<ModelDTO> AddModel(UpsertModel input)
         {
+            if (await _categoryRepository.GetCategoryAsync(input.CategoryId) == null)
+            {
+                throw new NotFoundException("کتگوری یافت نشد");
+            }
             int? fileId = null;
             if (input.Image != null)
             {
@@ -59,7 +52,6 @@ namespace OHaraj.Services
                     path = await _uploaderService.SaveFile(FileContainer, input.Image, wattermark: true)
                 });
             }
-
 
             Model model = new Model
             {
@@ -80,6 +72,11 @@ namespace OHaraj.Services
             if (model == null)
             {
                 throw new NotFoundException("مدل یافت نشد");
+            }
+
+            if (_categoryRepository.GetCategoryAsync(input.CategoryId) == null)
+            {
+                throw new NotFoundException("کتگوری یافت نشد");
             }
 
             // update model main image from "FileManagement" table and static folder
@@ -133,7 +130,7 @@ namespace OHaraj.Services
             var model = await _modelRepository.GetModelAsync(modelId);
             if (model == null)
             {
-                throw new NotFoundException("کتگوری یافت نشد!");
+                throw new NotFoundException("مدل یافت نشد!");
             }
 
             // extracting main image path
