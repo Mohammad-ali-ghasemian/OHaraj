@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "9SDBBxu/6bDM83TzOzFayxGSh6Ssi5z2P5lHwsZy7CQ=",
+  "Hash": "lO999pPOww3nS9CTn5d/azPoJWa2kwz/B3caFPMMrx8=",
   "Source": "OHaraj",
   "BasePath": "_content/OHaraj",
   "Mode": "Default",
@@ -16,6 +16,25 @@
     }
   ],
   "Assets": [
+    {
+      "Identity": "D:\\E\\git\\OHaraj\\OHaraj\\OHaraj\\wwwroot\\Category\\73bca271-1145-4f71-a6fe-eea86ad6443f.jpg",
+      "SourceId": "OHaraj",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\E\\git\\OHaraj\\OHaraj\\OHaraj\\wwwroot\\",
+      "BasePath": "_content/OHaraj",
+      "RelativePath": "Category/73bca271-1145-4f71-a6fe-eea86ad6443f.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Category\\73bca271-1145-4f71-a6fe-eea86ad6443f.jpg"
+    },
     {
       "Identity": "D:\\E\\git\\OHaraj\\OHaraj\\OHaraj\\wwwroot\\Model\\22aa697a-1630-4ced-bfdd-dab458c3ad41.jpg",
       "SourceId": "OHaraj",
@@ -91,25 +110,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Model\\9ce6b6c7-bfba-490c-bb32-c57f988e9962.jpg"
-    },
-    {
-      "Identity": "D:\\E\\git\\OHaraj\\OHaraj\\OHaraj\\wwwroot\\Model\\e9cdb9ea-08fb-4195-896b-13074c648905.jpg",
-      "SourceId": "OHaraj",
-      "SourceType": "Discovered",
-      "ContentRoot": "D:\\E\\git\\OHaraj\\OHaraj\\OHaraj\\wwwroot\\",
-      "BasePath": "_content/OHaraj",
-      "RelativePath": "Model/e9cdb9ea-08fb-4195-896b-13074c648905.jpg",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "PreferTarget",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\Model\\e9cdb9ea-08fb-4195-896b-13074c648905.jpg"
     },
     {
       "Identity": "D:\\E\\git\\OHaraj\\OHaraj\\OHaraj\\wwwroot\\Product\\142dc763-8e7e-4c87-9dba-b7257e65fa9d.jpg",
