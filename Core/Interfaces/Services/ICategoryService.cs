@@ -9,6 +9,6 @@ namespace OHaraj.Core.Interfaces.Services
         Task<CategoryDTO> UpdateCategory(UpsertCategory input);
         Task<int> DeleteCategory(int categoryId);
         Task<CategoryDTO> GetCategory(int categoryId);
-        Task<IEnumerable<CategoryDTO>> GetAllCategories(string filter = null);
+        Task<IEnumerable<CategoryDTO>> GetAllCategories();
     }
 }
