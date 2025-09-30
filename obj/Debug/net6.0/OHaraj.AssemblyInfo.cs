@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("OHaraj")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5a97a68c6202bff6cae9f38cf466c7b52c54b3c3")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+cd3711f267f47a8047531bccc91f292642c00466")]
 [assembly: System.Reflection.AssemblyProductAttribute("OHaraj")]
 [assembly: System.Reflection.AssemblyTitleAttribute("OHaraj")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
