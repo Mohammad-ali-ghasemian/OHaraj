@@ -37,6 +37,14 @@ namespace OHaraj.Services
 
         public async Task<CategoryDTO> AddCategory(UpsertCategory input)
         {
+            if (input.ParentCategoryId != null)
+            {
+                if (await _categoryRepository.GetCategoryAsync((int) input.ParentCategoryId) == null)
+                    {
+                        throw new NotFoundException("کتگوری والد یافت نشد");
+                    }
+            }
+            
             int? fileId = null;
             if (input.Image != null)
             {
@@ -67,6 +75,13 @@ namespace OHaraj.Services
             if (category == null)
             {
                 throw new NotFoundException("کتگوری یافت نشد");
+            }
+            if (input.ParentCategoryId != null)
+            {
+                if (await _categoryRepository.GetCategoryAsync((int) input.ParentCategoryId) == null)
+                {
+                    throw new NotFoundException("کتگوری والد یافت نشد");
+                }
             }
 
             // update category main image from "FileManagement" table and static folder
