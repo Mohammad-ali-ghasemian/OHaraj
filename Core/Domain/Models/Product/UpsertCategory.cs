@@ -9,7 +9,7 @@ namespace OHaraj.Core.Domain.Models.Product
         [Required(ErrorMessage = PublicHelper.RequiredValidationErrorMessage)]
         public string Name { get; set; } = string.Empty;
         public string? Description { get; set; }
-        public int ParentCategoryId { get; set; }
+        public int? ParentCategoryId { get; set; }
         public IFormFile? Image { get; set; }
     }
 }
