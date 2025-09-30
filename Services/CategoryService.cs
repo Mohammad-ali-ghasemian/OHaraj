@@ -16,7 +16,6 @@ namespace OHaraj.Services
     public class CategoryService : ICategoryService
     {
         private readonly ICategoryRepository _categoryRepository;
-        private readonly IAuthenticationRepository _authenticationRepository;
         private readonly IMapper _mapper;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly string FileContainer;
@@ -30,23 +29,10 @@ namespace OHaraj.Services
             )
         {
             _categoryRepository = categoryRepository;
-            _authenticationRepository = authenticationRepository;
             _mapper = mapper;
             _httpContextAccessor = httpContextAccessor;
             FileContainer = "Category";
             _uploaderService = uploaderService;
-        }
-
-        public async Task<IdentityUser> Current()
-        {
-            var userPrincipal = _httpContextAccessor.HttpContext?.User;
-            if (userPrincipal == null)
-            {
-                return null;
-            }
-
-            var user = await _authenticationRepository.GetUserByPrincipalAsync(userPrincipal);
-            return user;
         }
 
         public async Task<CategoryDTO> AddCategory(UpsertCategory input)
