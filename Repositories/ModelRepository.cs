@@ -58,7 +58,7 @@ namespace OHaraj.Repositories
 
         public async Task<FileManagement> GetFileToTableAsync(int? fileId)
         {
-            return await _dbContext.FileManagement.FirstOrDefaultAsync(x => x.Id == fileId);
+            return await _dbContext.FileManagement.AsNoTracking().FirstOrDefaultAsync(x => x.Id == fileId);
         }
 
         public async Task<int> DeleteFileToTableAsync(FileManagement input)

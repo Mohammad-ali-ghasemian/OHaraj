@@ -74,7 +74,7 @@ namespace OHaraj.Services
                 throw new NotFoundException("مدل یافت نشد");
             }
 
-            if (_categoryRepository.GetCategoryAsync(input.CategoryId) == null)
+            if (await _categoryRepository.GetCategoryAsync(input.CategoryId) == null)
             {
                 throw new NotFoundException("کتگوری یافت نشد");
             }
