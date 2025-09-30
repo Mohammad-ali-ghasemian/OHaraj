@@ -1,10 +1,15 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using OHaraj.Core.Domain.DTOs;
+using OHaraj.Core.Domain.Entities.Handling;
+using OHaraj.Core.Domain.Entities.Shop;
 using OHaraj.Core.Domain.Models.Product;
 using OHaraj.Core.Interfaces.Repositories;
 using OHaraj.Core.Interfaces.Services;
+using OHaraj.Repositories;
 using Project.Application.Contracts.Infrastructure;
+using Project.Application.Exceptions;
+using System.Xml.Linq;
 
 namespace OHaraj.Services
 {
@@ -28,7 +33,7 @@ namespace OHaraj.Services
             _authenticationRepository = authenticationRepository;
             _mapper = mapper;
             _httpContextAccessor = httpContextAccessor;
-            FileContainer = "Product";
+            FileContainer = "Category";
             _uploaderService = uploaderService;
         }
 
@@ -43,29 +48,83 @@ namespace OHaraj.Services
             var user = await _authenticationRepository.GetUserByPrincipalAsync(userPrincipal);
             return user;
         }
-        public Task<CategoryDTO> AddCategory(UpsertCategory input)
+
+        public async Task<CategoryDTO> AddCategory(UpsertCategory input)
         {
-            throw new NotImplementedException();
+            int? fileId = null;
+            if (input.Image != null)
+            {
+                fileId = await _categoryRepository.AddFileToTableAsync(new FileManagement
+                {
+                    Type = Core.Enums.FileType.Image,
+                    path = await _uploaderService.SaveFile(FileContainer, input.Image, wattermark: true)
+                });
+            }
+
+
+            Category category = new Category
+            {
+                Name = input.Name,
+                Description = input.Description,
+                ParentId = input.ParentCategoryId,
+                FileManagementId = fileId
+            };
+
+            await _categoryRepository.AddCategoryAsync(category);
+
+            return _mapper.Map<CategoryDTO>(category);
+        }
+
+        public async Task<CategoryDTO> UpdateCategory(UpsertCategory input)
+        {
+            var category = await _categoryRepository.GetCategoryAsync(input.Id);
+            if (category == null)
+            {
+                throw new NotFoundException("کتگوری یافت نشد");
+            }
+
+            // update category main image from "FileManagement" table and static folder
+            var mainFile = await _categoryRepository.GetFileToTableAsync(category.FileManagementId);
+
+            int? fileId = null;
+            if (input.Image != null)
+            {
+                if (mainFile == null)
+                    mainFile = new FileManagement();
+                mainFile.path = await _uploaderService.EditFile(FileContainer, input.Image, mainFile.path);
+                fileId = await _categoryRepository.UpdateFileToTableAsync(mainFile);
+            }
+            else if (mainFile != null)
+            {
+                category.FileManagementId = null;
+                await _categoryRepository.UpdateCategoryAsync(category); // جدا کردن وابستگی
+                await _uploaderService.DeleteFile(FileContainer, mainFile.path);
+                await _categoryRepository.DeleteFileToTableAsync(mainFile);
+            }
+
+            category.Name = input.Name;
+            category.Description = input.Description;
+            category.ParentId = input.ParentCategoryId;
+            category.FileManagementId = fileId;
+
+            await _categoryRepository.UpdateCategoryAsync(category);
+
+            return _mapper.Map<CategoryDTO>(category);
         }
 
         public Task<int> DeleteCategory(int CategoryId)
         {
-            throw new NotImplementedException();
-        }
-
-        public Task<IEnumerable<CategoryDTO>> GetAllCategories(string filter = null)
-        {
-            throw new NotImplementedException();
+            
         }
 
         public Task<CategoryDTO> GetCategory(int CategoryId)
         {
-            throw new NotImplementedException();
+            
         }
 
-        public Task<CategoryDTO> UpdateCategory(UpsertCategory input)
+        public Task<IEnumerable<CategoryDTO>> GetAllCategories(string filter = null)
         {
-            throw new NotImplementedException();
+            
         }
     }
 }
