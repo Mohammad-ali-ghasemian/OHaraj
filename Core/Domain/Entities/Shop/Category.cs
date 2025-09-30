@@ -5,7 +5,6 @@ namespace OHaraj.Core.Domain.Entities.Shop
     public class Category
     {
         public int Id { get; set; }
-        public int? ParentId { get; set; }
         public string Name { get; set; } = string.Empty;
         public string? Description { get; set; }
 
@@ -18,8 +17,9 @@ namespace OHaraj.Core.Domain.Entities.Shop
         public int? FileManagementId { get; set; }
 
 
-
         public Category? ParentCategory { get; set; }
+        public int? ParentId { get; set; }
+
         public List<Category>? SubCategories { get; set; }
     }
 }
