@@ -43,6 +43,9 @@ namespace Project.Application.Profiles
 
             CreateMap<Category, CategoryDTO>()
                 .ReverseMap();
+
+            CreateMap<Model, ModelDTO>()
+                .ReverseMap();
         }
     }
 }
