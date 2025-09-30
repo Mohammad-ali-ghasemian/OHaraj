@@ -40,6 +40,9 @@ namespace Project.Application.Profiles
 
             CreateMap<ProductComment, CommentDTO>()
                 .ReverseMap();
+
+            CreateMap<Category, CategoryDTO>()
+                .ReverseMap();
         }
     }
 }
