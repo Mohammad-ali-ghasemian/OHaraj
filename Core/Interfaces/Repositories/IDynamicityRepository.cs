@@ -1,5 +1,7 @@
 ﻿using OHaraj.Core.Domain.Entities.Configs;
 using OHaraj.Core.Domain.Entities.Handling;
+using OHaraj.Core.Domain.Entities.Settings;
+using OHaraj.Core.Enums;
 
 namespace OHaraj.Core.Interfaces.Repositories
 {
@@ -59,5 +61,52 @@ namespace OHaraj.Core.Interfaces.Repositories
 
         Task<DocumentConfigs> GetDocumentConfigAsync(int id);
         Task<IEnumerable<DocumentConfigs>> GetDocumentConfigsAsync();
+
+
+
+        //Settings
+        Task<int> AddImageSettingAsync(ImageSettings input);
+        Task<int> UpdateImageSettingAsync(ImageSettings input);
+        Task<int> DeleteImageSettingAsync(ImageSettings input);
+
+        Task<ImageSettings> GetImageSettingAsync(int id);
+        Task<IEnumerable<ImageSettings>> GetImageSettingsAsync();
+        Task<IEnumerable<ImageSettings>> GetImageSettingsByMenuIdAsync(int menuId);
+        Task<IEnumerable<ImageSettings>> GetImageSettingsByAreaAsync(Area area);
+        Task<IEnumerable<ImageSettings>> GetImageSettingsByConfigIdAsync(int configId);
+
+
+        Task<int> AddVideoSettingAsync(VideoSettings input);
+        Task<int> UpdateVideoSettingAsync(VideoSettings input);
+        Task<int> DeleteVideoSettingAsync(VideoSettings input);
+
+        Task<VideoSettings> GetVideoSettingAsync(int id);
+        Task<IEnumerable<VideoSettings>> GetVideoSettingsAsync();
+        Task<IEnumerable<VideoSettings>> GetVideoSettingsByMenuIdAsync(int menuId);
+        Task<IEnumerable<VideoSettings>> GetVideoSettingsByAreaAsync(Area area);
+        Task<IEnumerable<VideoSettings>> GetVideoSettingsByConfigIdAsync(int configId);
+
+
+        Task<int> AddAudioSettingAsync(AudioSettings input);
+        Task<int> UpdateAudioSettingAsync(AudioSettings input);
+        Task<int> DeleteAudioSettingAsync(AudioSettings input);
+
+        Task<AudioSettings> GetAudioSettingAsync(int id);
+        Task<IEnumerable<AudioSettings>> GetAudioSettingsAsync();
+        Task<IEnumerable<AudioSettings>> GetAudioSettingsByMenuIdAsync(int menuId);
+        Task<IEnumerable<AudioSettings>> GetAudioSettingsByAreaAsync(Area area);
+        Task<IEnumerable<AudioSettings>> GetAudioSettingsByConfigIdAsync(int configId);
+
+
+        Task<int> AddDocumentSettingAsync(DocumentSettings input);
+        Task<int> UpdateDocumentSettingAsync(DocumentSettings input);
+        Task<int> DeleteDocumentSettingAsync(DocumentSettings input);
+
+        Task<DocumentSettings> GetDocumentSettingAsync(int id);
+        Task<IEnumerable<DocumentSettings>> GetDocumentSettingsAsync();
+        Task<IEnumerable<DocumentSettings>> GetDocumentSettingsByMenuIdAsync(int menuId);
+        Task<IEnumerable<DocumentSettings>> GetDocumentSettingsByAreaAsync(Area area);
+        Task<IEnumerable<DocumentSettings>> GetDocumentSettingsByConfigIdAsync(int configId);
+
     }
 }
