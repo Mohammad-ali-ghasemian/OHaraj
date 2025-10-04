@@ -79,6 +79,9 @@ builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IModelRepository, ModelRepository>();
 builder.Services.AddScoped<IModelService, ModelService>();
 
+builder.Services.AddScoped<IDynamicityRepository, DynamicityRepository>();
+builder.Services.AddScoped<IDynamicityService, DynamicityService>();
+
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
