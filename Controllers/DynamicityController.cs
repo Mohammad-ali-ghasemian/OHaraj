@@ -23,7 +23,7 @@ namespace OHaraj.Controllers
 
         [HttpPost("Add-Menu")]
         [Produces(typeof(Response<Menu>))]
-        public async Task<IActionResult> AddMenu(Menu input)
+        public async Task<IActionResult> AddMenu(Menu input) 
         {
 
         }
