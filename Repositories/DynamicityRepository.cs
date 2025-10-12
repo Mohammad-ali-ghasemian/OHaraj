@@ -284,14 +284,20 @@ namespace OHaraj.Repositories
                 .ToListAsync();
         }
 
-        public Task<ImageConfigs> GetImageConfigAsync(int id)
+        public async Task<IEnumerable<ImageSettings>> GetImageSettingsByAreaAsync(Area area)
         {
-            throw new NotImplementedException();
+            return await _dbcontext.ImageSettings
+                .AsNoTracking()
+                .Where(x => x.Area == area)
+                .ToListAsync();
         }
 
         public Task<IEnumerable<ImageConfigs>> GetImageConfigsAsync()
         {
-            throw new NotImplementedException();
+            return await _dbcontext.ImageSettings
+                .AsNoTracking()
+                .Where(x => x.MenuId == menuId)
+                .ToListAsync();
         }
 
         public Task<ImageSettings> GetImageSettingAsync(int id)
