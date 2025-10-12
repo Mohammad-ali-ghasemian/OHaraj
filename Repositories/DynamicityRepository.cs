@@ -27,9 +27,11 @@ namespace OHaraj.Repositories
             return input.Id;
         }
 
-        public Task<int> AddBanAccessAsync(RoleAccessBanned input)
+        public async Task<int> DeleteMenuAsync(Menu input)
         {
-            throw new NotImplementedException();
+            _dbcontext.Remove(input);
+            await _dbcontext.SaveChangesAsync();
+            return input.Id;
         }
 
         public Task<int> AddDocumentConfigAsync(DocumentConfigs input)
