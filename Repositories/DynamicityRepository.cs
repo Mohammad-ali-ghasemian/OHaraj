@@ -117,9 +117,11 @@ namespace OHaraj.Repositories
             return input.Id;
         }
 
-        public Task<int> DeleteImageConfigAsync(ImageConfigs input)
+        public async Task<int> DeleteImageConfigAsync(ImageConfigs input)
         {
-            throw new NotImplementedException();
+            _dbcontext.Remove(input);
+            await _dbcontext.SaveChangesAsync();
+            return input.Id;
         }
 
         public Task<int> DeleteImageConfigAsync(ImageConfigs input)
