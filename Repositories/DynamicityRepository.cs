@@ -271,9 +271,9 @@ namespace OHaraj.Repositories
                 .FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public Task<IEnumerable<DocumentSettings>> GetDocumentSettingsByConfigIdAsync(int configId)
+        public async Task<IEnumerable<ImageSettings>> GetImageSettingsAsync()
         {
-            throw new NotImplementedException();
+            return await _dbcontext.ImageSettings.AsNoTracking().ToListAsync();
         }
 
         public Task<IEnumerable<DocumentSettings>> GetDocumentSettingsByMenuIdAsync(int menuId)
