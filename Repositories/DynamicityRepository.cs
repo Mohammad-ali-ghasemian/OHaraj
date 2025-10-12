@@ -264,9 +264,11 @@ namespace OHaraj.Repositories
             return input.Id;
         }
 
-        public Task<IEnumerable<DocumentSettings>> GetDocumentSettingsByAreaAsync(Area area)
+        public async Task<ImageSettings> GetImageSettingAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _dbcontext.ImageSettings
+                .AsNoTracking()
+                .FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public Task<IEnumerable<DocumentSettings>> GetDocumentSettingsByConfigIdAsync(int configId)
