@@ -182,7 +182,9 @@ namespace OHaraj.Repositories
 
         public async Task<int> UpdateAudioConfigAsync(AudioConfigs input)
         {
-            throw new NotImplementedException();
+            _dbcontext.Update(input);
+            await _dbcontext.SaveChangesAsync();
+            return input.Id;
         }
 
         public async Task<int> DeleteAudioConfigAsync(AudioConfigs input)
