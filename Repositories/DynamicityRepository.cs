@@ -138,17 +138,19 @@ namespace OHaraj.Repositories
                 .ToListAsync();
         }
 
-        public Task<int> DeleteMenuAsync(Menu input)
+        public async Task<int> AddVideoConfigAsync(VideoConfigs input)
+        {
+            await _dbcontext.AddAsync(input);
+            await _dbcontext.SaveChangesAsync();
+            return input.Id;
+        }
+
+        public Task<int> UpdateVideoConfigAsync(VideoConfigs input)
         {
             throw new NotImplementedException();
         }
 
         public Task<int> DeleteVideoConfigAsync(VideoConfigs input)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<int> DeleteVideoSettingAsync(VideoSettings input)
         {
             throw new NotImplementedException();
         }
