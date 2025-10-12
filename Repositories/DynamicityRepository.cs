@@ -42,9 +42,9 @@ namespace OHaraj.Repositories
                 .FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public Task<int> AddDocumentSettingAsync(DocumentSettings input)
+        public async Task<IEnumerable<Menu>> GetMenusAsync()
         {
-            throw new NotImplementedException();
+            return await _dbcontext.Menus.AsNoTracking().Include(nameof(Menu)).ToListAsync();
         }
 
         public Task<int> AddImageConfigAsync(ImageConfigs input)
