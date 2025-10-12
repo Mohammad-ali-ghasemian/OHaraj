@@ -47,9 +47,17 @@ namespace OHaraj.Repositories
             return await _dbcontext.Menus.AsNoTracking().Include(nameof(Menu)).ToListAsync();
         }
 
-        public Task<int> AddImageConfigAsync(ImageConfigs input)
+        public async Task<IEnumerable<Menu>> GetAccessDeniedMenusAsync(IEnumerable<string> roleIds)
         {
-            throw new NotImplementedException();
+            var accessBanned = await _dbcontext.RoleAccessBanned.AsNoTracking()
+                .Where(x => roleIds.Contains(x.RoleId))
+                .Select(x => x.MenuId)
+                .ToListAsync();
+
+            return await _dbcontext.Menus.AsNoTracking()
+                .Include(nameof(Menu))
+                .Where(x => accessBanned.Contains(x.Id))
+                .ToListAsync();
         }
 
         public Task<int> AddImageSettingAsync(ImageSettings input)
