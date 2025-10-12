@@ -131,9 +131,11 @@ namespace OHaraj.Repositories
                 .FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public Task<int> DeleteImageSettingAsync(ImageSettings input)
+        public async Task<IEnumerable<ImageConfigs>> GetImageConfigsAsync()
         {
-            throw new NotImplementedException();
+            return await _dbcontext.ImageConfigs
+                .AsNoTracking()
+                .ToListAsync();
         }
 
         public Task<int> DeleteMenuAsync(Menu input)
