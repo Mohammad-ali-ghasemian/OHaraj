@@ -229,12 +229,14 @@ namespace OHaraj.Repositories
             return input.Id;
         }
 
-        public Task<IEnumerable<RoleAccessBanned>> GetBanAccessesAsync()
+        public async Task<DocumentConfigs> GetDocumentConfigAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _dbcontext.DocumentConfigs
+                .AsNoTracking()
+                .FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public Task<DocumentConfigs> GetDocumentConfigAsync(int id)
+        public Task<IEnumerable<DocumentConfigs>> GetDocumentConfigsAsync()
         {
             throw new NotImplementedException();
         }
