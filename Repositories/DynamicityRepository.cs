@@ -292,11 +292,11 @@ namespace OHaraj.Repositories
                 .ToListAsync();
         }
 
-        public Task<IEnumerable<ImageConfigs>> GetImageConfigsAsync()
+        public async Task<IEnumerable<ImageSettings>> GetImageSettingsByConfigIdAsync(int configId)
         {
             return await _dbcontext.ImageSettings
                 .AsNoTracking()
-                .Where(x => x.MenuId == menuId)
+                .Where(x => x.ImageConfigsId == configId)
                 .ToListAsync();
         }
 
