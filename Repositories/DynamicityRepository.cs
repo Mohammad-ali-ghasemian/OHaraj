@@ -236,9 +236,11 @@ namespace OHaraj.Repositories
                 .FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public Task<IEnumerable<DocumentConfigs>> GetDocumentConfigsAsync()
+        public async Task<IEnumerable<DocumentConfigs>> GetDocumentConfigsAsync()
         {
-            throw new NotImplementedException();
+            return await _dbcontext.DocumentConfigs
+                .AsNoTracking()
+                .ToListAsync();
         }
 
         public Task<IEnumerable<DocumentConfigs>> GetDocumentConfigsAsync()
