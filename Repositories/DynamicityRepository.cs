@@ -81,9 +81,9 @@ namespace OHaraj.Repositories
             return input.Id;
         }
 
-        public Task<int> AddVideoSettingAsync(VideoSettings input)
+        public async Task<RoleAccessBanned> GetBanAccessAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _dbcontext.RoleAccessBanned.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public Task<int> DeleteAudioConfigAsync(AudioConfigs input)
