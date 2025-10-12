@@ -189,7 +189,9 @@ namespace OHaraj.Repositories
 
         public async Task<int> DeleteAudioConfigAsync(AudioConfigs input)
         {
-            throw new NotImplementedException();
+            _dbcontext.Remove(input);
+            await _dbcontext.SaveChangesAsync();
+            return input.Id;
         }
 
         public Task<IEnumerable<AudioSettings>> GetAudioSettingsByAreaAsync(Area area)
