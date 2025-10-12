@@ -159,12 +159,14 @@ namespace OHaraj.Repositories
             return input.Id;
         }
 
-        public Task<IEnumerable<Menu>> GetAccessDeniedMenusAsync(IEnumerable<string> roleIds)
+        public async Task<VideoConfigs> GetVideoConfigAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _dbcontext.VideoConfigs
+                .AsNoTracking()
+                .FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public Task<AudioConfigs> GetAudioConfigAsync(int id)
+        public Task<IEnumerable<VideoConfigs>> GetVideoConfigsAsync()
         {
             throw new NotImplementedException();
         }
