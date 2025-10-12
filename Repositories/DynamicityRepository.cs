@@ -60,9 +60,11 @@ namespace OHaraj.Repositories
                 .ToListAsync();
         }
 
-        public Task<int> AddImageSettingAsync(ImageSettings input)
+        public async Task<int> AddBanAccessAsync(RoleAccessBanned input)
         {
-            throw new NotImplementedException();
+            await _dbcontext.AddAsync(input);
+            await _dbcontext.SaveChangesAsync();
+            return input.Id;
         }
 
         public Task<int> AddMenuAsync(Menu input)
