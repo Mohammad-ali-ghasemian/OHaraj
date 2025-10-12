@@ -145,9 +145,11 @@ namespace OHaraj.Repositories
             return input.Id;
         }
 
-        public Task<int> UpdateVideoConfigAsync(VideoConfigs input)
+        public async Task<int> UpdateVideoConfigAsync(VideoConfigs input)
         {
-            throw new NotImplementedException();
+            _dbcontext.Update(input);
+            await _dbcontext.SaveChangesAsync();
+            return input.Id;
         }
 
         public Task<int> DeleteVideoConfigAsync(VideoConfigs input)
