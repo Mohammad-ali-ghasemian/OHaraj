@@ -26,7 +26,7 @@ namespace OHaraj.Core.Interfaces.Repositories
 
         Task<RoleAccessBanned> GetBanAccessAsync(int id);
         Task<IEnumerable<RoleAccessBanned>> GetBanAccessesAsync();
-        Task<IEnumerable<RoleAccessBanned>> GetBanAccessByRoleAsync(int roleId);
+        Task<IEnumerable<RoleAccessBanned>> GetBanAccessByRoleAsync(string roleId);
 
 
 
