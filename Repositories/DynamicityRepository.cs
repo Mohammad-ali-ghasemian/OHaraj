@@ -208,19 +208,25 @@ namespace OHaraj.Repositories
                 .ToListAsync();
         }
 
-        public Task<IEnumerable<AudioSettings>> GetAudioSettingsByMenuIdAsync(int menuId)
+        public async Task<int> AddDocumentConfigAsync(DocumentConfigs input)
         {
-            throw new NotImplementedException();
+            await _dbcontext.AddAsync(input);
+            await _dbcontext.SaveChangesAsync();
+            return input.Id;
         }
 
-        public Task<RoleAccessBanned> GetBanAccessAsync(int id)
+        public async Task<int> UpdateDocumentConfigAsync(DocumentConfigs input)
         {
-            throw new NotImplementedException();
+            _dbcontext.Update(input);
+            await _dbcontext.SaveChangesAsync();
+            return input.Id;
         }
 
-        public Task<IEnumerable<RoleAccessBanned>> GetBanAccessByRoleAsync(int roleId)
+        public async Task<int> RemoveDocumentConfigAsync(DocumentConfigs input)
         {
-            throw new NotImplementedException();
+            _dbcontext.Remove(input);
+            await _dbcontext.SaveChangesAsync();
+            return input.Id;
         }
 
         public Task<IEnumerable<RoleAccessBanned>> GetBanAccessesAsync()
