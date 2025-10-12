@@ -203,7 +203,9 @@ namespace OHaraj.Repositories
 
         public async Task<IEnumerable<AudioConfigs>> GetAudioConfigsAsync()
         {
-            throw new NotImplementedException();
+            return await _dbcontext.AudioConfigs
+                .AsNoTracking()
+                .ToListAsync();
         }
 
         public Task<IEnumerable<AudioSettings>> GetAudioSettingsByMenuIdAsync(int menuId)
