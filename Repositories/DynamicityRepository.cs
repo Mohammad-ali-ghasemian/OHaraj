@@ -276,9 +276,12 @@ namespace OHaraj.Repositories
             return await _dbcontext.ImageSettings.AsNoTracking().ToListAsync();
         }
 
-        public Task<IEnumerable<DocumentSettings>> GetDocumentSettingsByMenuIdAsync(int menuId)
+        public async Task<IEnumerable<ImageSettings>> GetImageSettingsByMenuIdAsync(int menuId)
         {
-            throw new NotImplementedException();
+            return await _dbcontext.ImageSettings
+                .AsNoTracking()
+                .Where(x => x.MenuId == menuId)
+                .ToListAsync();
         }
 
         public Task<ImageConfigs> GetImageConfigAsync(int id)
