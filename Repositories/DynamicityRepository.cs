@@ -103,9 +103,11 @@ namespace OHaraj.Repositories
                 .ToListAsync();
         }
 
-        public Task<int> DeleteBanAccessAsync(RoleAccessBanned input)
+        public async Task<int> AddImageConfigAsync(ImageConfigs input)
         {
-            throw new NotImplementedException();
+            await _dbcontext.AddAsync(input);
+            await _dbcontext.SaveChangesAsync();
+            return input.Id;
         }
 
         public Task<int> DeleteDocumentConfigAsync(DocumentConfigs input)
