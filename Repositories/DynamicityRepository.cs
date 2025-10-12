@@ -166,9 +166,11 @@ namespace OHaraj.Repositories
                 .FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public Task<IEnumerable<VideoConfigs>> GetVideoConfigsAsync()
+        public async Task<IEnumerable<VideoConfigs>> GetVideoConfigsAsync()
         {
-            throw new NotImplementedException();
+            return await _dbcontext.VideoConfigs
+                .AsNoTracking()
+                .ToListAsync();
         }
 
         public Task<IEnumerable<AudioConfigs>> GetAudioConfigsAsync()
