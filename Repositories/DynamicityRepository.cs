@@ -194,12 +194,14 @@ namespace OHaraj.Repositories
             return input.Id;
         }
 
-        public Task<IEnumerable<AudioSettings>> GetAudioSettingsByAreaAsync(Area area)
+        public async Task<AudioConfigs> GetAudioConfigAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _dbcontext.AudioConfigs
+                .AsNoTracking()
+                .FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public Task<IEnumerable<AudioSettings>> GetAudioSettingsByConfigIdAsync(int configId)
+        public async Task<IEnumerable<AudioConfigs>> GetAudioConfigsAsync()
         {
             throw new NotImplementedException();
         }
