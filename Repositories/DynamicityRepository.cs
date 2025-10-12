@@ -243,19 +243,25 @@ namespace OHaraj.Repositories
                 .ToListAsync();
         }
 
-        public Task<IEnumerable<DocumentConfigs>> GetDocumentConfigsAsync()
+        public async Task<int> AddImageSettingAsync(ImageSettings input)
         {
-            throw new NotImplementedException();
+            await _dbcontext.AddAsync(input);
+            await _dbcontext.SaveChangesAsync();
+            return input.Id;
         }
 
-        public Task<DocumentSettings> GetDocumentSettingAsync(int id)
+        public async Task<int> UpdateImageSettingAsync(ImageSettings input)
         {
-            throw new NotImplementedException();
+            _dbcontext.Update(input);
+            await _dbcontext.SaveChangesAsync();
+            return input.Id;
         }
 
-        public Task<IEnumerable<DocumentSettings>> GetDocumentSettingsAsync()
+        public async Task<int> RemoveImageSettingAsync(ImageSettings input)
         {
-            throw new NotImplementedException();
+            _dbcontext.Remove(input);
+            await _dbcontext.SaveChangesAsync();
+            return input.Id;
         }
 
         public Task<IEnumerable<DocumentSettings>> GetDocumentSettingsByAreaAsync(Area area)
