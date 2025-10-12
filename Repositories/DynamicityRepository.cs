@@ -152,9 +152,11 @@ namespace OHaraj.Repositories
             return input.Id;
         }
 
-        public Task<int> DeleteVideoConfigAsync(VideoConfigs input)
+        public async Task<int> DeleteVideoConfigAsync(VideoConfigs input)
         {
-            throw new NotImplementedException();
+            _dbcontext.Remove(input);
+            await _dbcontext.SaveChangesAsync();
+            return input.Id;
         }
 
         public Task<IEnumerable<Menu>> GetAccessDeniedMenusAsync(IEnumerable<string> roleIds)
