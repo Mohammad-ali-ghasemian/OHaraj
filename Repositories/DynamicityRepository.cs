@@ -67,9 +67,11 @@ namespace OHaraj.Repositories
             return input.Id;
         }
 
-        public Task<int> AddMenuAsync(Menu input)
+        public async Task<int> UpdateBanAccessAsync(RoleAccessBanned input)
         {
-            throw new NotImplementedException();
+            _dbcontext.Update(input);
+            await _dbcontext.SaveChangesAsync();
+            return input.Id;
         }
 
         public Task<int> AddVideoConfigAsync(VideoConfigs input)
