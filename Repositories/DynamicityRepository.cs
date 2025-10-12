@@ -173,17 +173,19 @@ namespace OHaraj.Repositories
                 .ToListAsync();
         }
 
-        public Task<IEnumerable<AudioConfigs>> GetAudioConfigsAsync()
+        public async Task<int> AddAudioConfigAsync(AudioConfigs input)
+        {
+            await _dbcontext.AddAsync(input);
+            await _dbcontext.SaveChangesAsync();
+            return input.Id;
+        }
+
+        public async Task<int> UpdateAudioConfigAsync(AudioConfigs input)
         {
             throw new NotImplementedException();
         }
 
-        public Task<AudioSettings> GetAudioSettingAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<IEnumerable<AudioSettings>> GetAudioSettingsAsync()
+        public async Task<int> DeleteAudioConfigAsync(AudioConfigs input)
         {
             throw new NotImplementedException();
         }
