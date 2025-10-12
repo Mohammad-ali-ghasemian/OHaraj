@@ -1,4 +1,5 @@
-﻿using OHaraj.Core.Domain.Entities.Configs;
+﻿using Microsoft.EntityFrameworkCore;
+using OHaraj.Core.Domain.Entities.Configs;
 using OHaraj.Core.Domain.Entities.Handling;
 using OHaraj.Core.Domain.Entities.Settings;
 using OHaraj.Core.Enums;
@@ -34,9 +35,11 @@ namespace OHaraj.Repositories
             return input.Id;
         }
 
-        public Task<int> AddDocumentConfigAsync(DocumentConfigs input)
+        public async Task<Menu> GetMenuAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _dbcontext.Menus.AsNoTracking()
+                .Include(nameof(Menu))
+                .FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public Task<int> AddDocumentSettingAsync(DocumentSettings input)
