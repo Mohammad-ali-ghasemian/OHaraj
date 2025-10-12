@@ -83,12 +83,16 @@ namespace OHaraj.Repositories
 
         public async Task<RoleAccessBanned> GetBanAccessAsync(int id)
         {
-            return await _dbcontext.RoleAccessBanned.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
+            return await _dbcontext.RoleAccessBanned
+                .AsNoTracking()
+                .FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public Task<int> DeleteAudioConfigAsync(AudioConfigs input)
+        public async Task<IEnumerable<RoleAccessBanned>> GetBanAccessesAsync()
         {
-            throw new NotImplementedException();
+            return await _dbcontext.RoleAccessBanned
+                .AsNoTracking()
+                .ToListAsync();
         }
 
         public Task<int> DeleteAudioSettingAsync(AudioSettings input)
