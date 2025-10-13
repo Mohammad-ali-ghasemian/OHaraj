@@ -410,9 +410,12 @@ namespace OHaraj.Repositories
                 .ToListAsync();
         }
 
-        public Task<IEnumerable<AudioSettings>> GetAudioSettingsByConfigIdAsync(int configId)
+        public async Task<IEnumerable<AudioSettings>> GetAudioSettingsByConfigIdAsync(int configId)
         {
-            
+            return await _dbcontext.AudioSettings
+                .AsNoTracking()
+                .Where(x => x.AudioConfigsId == configId)
+                .ToListAsync();
         }
 
         public Task<int> UpdateBanAccessAsync(RoleAccessBanned input)
