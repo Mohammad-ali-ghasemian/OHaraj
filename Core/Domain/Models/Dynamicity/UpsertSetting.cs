@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace OHaraj.Core.Domain.Models.Dynamicity
 {
-    public class UpsertSettings
+    public class UpsertSetting
     {
         public int Id { get; set; }
         [Required(ErrorMessage = PublicHelper.RequiredValidationErrorMessage)]
