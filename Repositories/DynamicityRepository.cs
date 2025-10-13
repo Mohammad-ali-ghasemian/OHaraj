@@ -14,6 +14,7 @@ namespace OHaraj.Repositories
         public DynamicityRepository(ApplicationDbContext dbcontext) {
             _dbcontext = dbcontext;
         }
+        //Menu
         public async Task<int> AddMenuAsync(Menu input)
         {
             await _dbcontext.AddAsync(input);
@@ -34,6 +35,7 @@ namespace OHaraj.Repositories
             await _dbcontext.SaveChangesAsync();
             return input.Id;
         }
+
 
         public async Task<Menu> GetMenuAsync(int id)
         {
@@ -60,6 +62,9 @@ namespace OHaraj.Repositories
                 .ToListAsync();
         }
 
+
+
+        //Role Access Banned
         public async Task<int> AddBanAccessAsync(RoleAccessBanned input)
         {
             await _dbcontext.AddAsync(input);
@@ -80,6 +85,7 @@ namespace OHaraj.Repositories
             await _dbcontext.SaveChangesAsync();
             return input.Id;
         }
+
 
         public async Task<RoleAccessBanned> GetBanAccessAsync(int id)
         {
@@ -103,6 +109,10 @@ namespace OHaraj.Repositories
                 .ToListAsync();
         }
 
+
+
+
+        //Configs
         public async Task<int> AddImageConfigAsync(ImageConfigs input)
         {
             await _dbcontext.AddAsync(input);
@@ -124,6 +134,7 @@ namespace OHaraj.Repositories
             return input.Id;
         }
 
+
         public async Task<ImageConfigs> GetImageConfigAsync(int id)
         {
             return await _dbcontext.ImageConfigs
@@ -137,6 +148,8 @@ namespace OHaraj.Repositories
                 .AsNoTracking()
                 .ToListAsync();
         }
+
+
 
         public async Task<int> AddVideoConfigAsync(VideoConfigs input)
         {
@@ -159,6 +172,7 @@ namespace OHaraj.Repositories
             return input.Id;
         }
 
+
         public async Task<VideoConfigs> GetVideoConfigAsync(int id)
         {
             return await _dbcontext.VideoConfigs
@@ -172,6 +186,8 @@ namespace OHaraj.Repositories
                 .AsNoTracking()
                 .ToListAsync();
         }
+
+
 
         public async Task<int> AddAudioConfigAsync(AudioConfigs input)
         {
@@ -194,6 +210,7 @@ namespace OHaraj.Repositories
             return input.Id;
         }
 
+
         public async Task<AudioConfigs> GetAudioConfigAsync(int id)
         {
             return await _dbcontext.AudioConfigs
@@ -207,6 +224,8 @@ namespace OHaraj.Repositories
                 .AsNoTracking()
                 .ToListAsync();
         }
+
+
 
         public async Task<int> AddDocumentConfigAsync(DocumentConfigs input)
         {
@@ -229,6 +248,7 @@ namespace OHaraj.Repositories
             return input.Id;
         }
 
+
         public async Task<DocumentConfigs> GetDocumentConfigAsync(int id)
         {
             return await _dbcontext.DocumentConfigs
@@ -243,6 +263,10 @@ namespace OHaraj.Repositories
                 .ToListAsync();
         }
 
+
+
+
+        //Settings
         public async Task<int> AddImageSettingAsync(ImageSettings input)
         {
             await _dbcontext.AddAsync(input);
@@ -263,6 +287,7 @@ namespace OHaraj.Repositories
             await _dbcontext.SaveChangesAsync();
             return input.Id;
         }
+
 
         public async Task<ImageSettings> GetImageSettingAsync(int id)
         {
@@ -300,6 +325,8 @@ namespace OHaraj.Repositories
                 .ToListAsync();
         }
 
+
+
         public async Task<int> AddVideoSettingAsync(VideoSettings input)
         {
             await _dbcontext.AddAsync(input);
@@ -320,6 +347,7 @@ namespace OHaraj.Repositories
             await _dbcontext.SaveChangesAsync();
             return input.Id;
         }
+
 
         public async Task<VideoSettings> GetVideoSettingAsync(int id)
         {
@@ -359,6 +387,8 @@ namespace OHaraj.Repositories
                 .ToListAsync();
         }
 
+
+
         public async Task<int> AddAudioSettingAsync(AudioSettings input)
         {
             await _dbcontext.AddAsync(input);
@@ -379,6 +409,7 @@ namespace OHaraj.Repositories
             await _dbcontext.SaveChangesAsync();
             return input.Id;
         }
+
 
         public async Task<AudioSettings> GetAudioSettingAsync(int id)
         {
@@ -418,6 +449,8 @@ namespace OHaraj.Repositories
                 .ToListAsync();
         }
 
+
+
         public async Task<int> AddDocumentSettingAsync(DocumentSettings input)
         {
             await _dbcontext.AddAsync(input);
@@ -438,6 +471,7 @@ namespace OHaraj.Repositories
             await _dbcontext.SaveChangesAsync();
             return input.Id;
         }
+
 
         public async Task<DocumentSettings> GetDocumentSettingAsync(int id)
         {
@@ -476,5 +510,7 @@ namespace OHaraj.Repositories
                 .Where(x => x.DocumentConfigsId == configId)
                 .ToListAsync();
         }
+
+
     }
 }
