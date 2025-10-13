@@ -394,9 +394,12 @@ namespace OHaraj.Repositories
                 .ToListAsync();
         }
 
-        public Task<IEnumerable<AudioSettings>> GetAudioSettingsByMenuIdAsync(int menuId)
+        public async Task<IEnumerable<AudioSettings>> GetAudioSettingsByMenuIdAsync(int menuId)
         {
-            
+            return await _dbcontext.AudioSettings
+                .AsNoTracking()
+                .Where(x => x.MenuId == menuId)
+                .ToListAsync();
         }
 
         public Task<IEnumerable<AudioSettings>> GetAudioSettingsByAreaAsync(Area area)
