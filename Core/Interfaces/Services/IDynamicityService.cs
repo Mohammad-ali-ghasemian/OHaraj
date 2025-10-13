@@ -1,4 +1,5 @@
-﻿using OHaraj.Core.Domain.Entities.Management;
+﻿using OHaraj.Core.Domain.Entities.Configs;
+using OHaraj.Core.Domain.Entities.Management;
 using OHaraj.Core.Domain.Models.Dynamicity;
 
 namespace OHaraj.Core.Interfaces.Services
@@ -18,6 +19,8 @@ namespace OHaraj.Core.Interfaces.Services
         Task<IEnumerable<RoleAccessBanned>> GetAccessBan(string userId);
         Task<IEnumerable<RoleAccessBanned>> GetAllAccessBans();
 
-
+        Task<IEnumerable<ImageConfigs>> UpsertImageConfig(UpsertImageConfig input);
+        Task<int> DeleteImageConfig(int imageConfigId);
+        Task<Menu> GetImageConfig(int imageConfigId);
     }
 }
