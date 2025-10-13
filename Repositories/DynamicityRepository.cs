@@ -387,9 +387,11 @@ namespace OHaraj.Repositories
                 .FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public Task<IEnumerable<AudioSettings>> GetAudioSettingsAsync()
+        public async Task<IEnumerable<AudioSettings>> GetAudioSettingsAsync()
         {
-            
+            return await _dbcontext.AudioSettings
+                .AsNoTracking()
+                .ToListAsync();
         }
 
         public Task<IEnumerable<AudioSettings>> GetAudioSettingsByMenuIdAsync(int menuId)
