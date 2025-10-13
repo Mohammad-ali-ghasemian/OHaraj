@@ -434,7 +434,9 @@ namespace OHaraj.Repositories
 
         public async Task<int> DeleteDocumentSettingAsync(DocumentSettings input)
         {
-            
+            _dbcontext.Remove(input);
+            await _dbcontext.SaveChangesAsync();
+            return input.Id;
         }
 
         public Task<DocumentSettings> GetDocumentSettingAsync(int id)
