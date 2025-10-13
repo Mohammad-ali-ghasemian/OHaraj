@@ -222,7 +222,7 @@ namespace OHaraj.Repositories
             return input.Id;
         }
 
-        public async Task<int> RemoveDocumentConfigAsync(DocumentConfigs input)
+        public async Task<int> DeleteDocumentConfigAsync(DocumentConfigs input)
         {
             _dbcontext.Remove(input);
             await _dbcontext.SaveChangesAsync();
@@ -257,7 +257,7 @@ namespace OHaraj.Repositories
             return input.Id;
         }
 
-        public async Task<int> RemoveImageSettingAsync(ImageSettings input)
+        public async Task<int> DeleteImageSettingAsync(ImageSettings input)
         {
             _dbcontext.Remove(input);
             await _dbcontext.SaveChangesAsync();
