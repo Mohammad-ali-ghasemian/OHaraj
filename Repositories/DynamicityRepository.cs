@@ -321,29 +321,30 @@ namespace OHaraj.Repositories
             return input.Id;
         }
 
-        public Task<IEnumerable<ImageSettings>> GetImageSettingsByConfigIdAsync(int configId)
+        public async Task<VideoSettings> GetVideoSettingAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _dbcontext.VideoSettings
+                .AsNoTracking()
+                .FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public Task<IEnumerable<ImageSettings>> GetImageSettingsByMenuIdAsync(int menuId)
+        public async Task<IEnumerable<VideoSettings>> GetVideoSettingsAsync()
         {
-            throw new NotImplementedException();
         }
 
-        public Task<Menu> GetMenuAsync(int id)
+        public Task<IEnumerable<VideoSettings>> GetVideoSettingsByMenuIdAsync(int menuId)
         {
-            throw new NotImplementedException();
+
         }
 
-        public Task<IEnumerable<Menu>> GetMenusAsync()
+        public Task<IEnumerable<VideoSettings>> GetVideoSettingsByAreaAsync(Area area)
         {
-            throw new NotImplementedException();
+
         }
 
-        public Task<VideoConfigs> GetVideoConfigAsync(int id)
+        public Task<IEnumerable<VideoSettings>> GetVideoSettingsByConfigIdAsync(int configId)
         {
-            throw new NotImplementedException();
+
         }
 
         public Task<IEnumerable<VideoConfigs>> GetVideoConfigsAsync()
