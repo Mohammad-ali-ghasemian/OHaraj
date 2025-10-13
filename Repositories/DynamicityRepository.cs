@@ -300,19 +300,25 @@ namespace OHaraj.Repositories
                 .ToListAsync();
         }
 
-        public Task<ImageSettings> GetImageSettingAsync(int id)
+        public async Task<int> AddVideoSettingAsync(VideoSettings input)
         {
-            throw new NotImplementedException();
+            await _dbcontext.AddAsync(input);
+            await _dbcontext.SaveChangesAsync();
+            return input.Id;
         }
 
-        public Task<IEnumerable<ImageSettings>> GetImageSettingsAsync()
+        public async Task<int> UpdateVideoSettingAsync(VideoSettings input)
         {
-            throw new NotImplementedException();
+            _dbcontext.Update(input);
+            await _dbcontext.SaveChangesAsync();
+            return input.Id;
         }
 
-        public Task<IEnumerable<ImageSettings>> GetImageSettingsByAreaAsync(Area area)
+        public async Task<int> DeleteVideoSettingAsync(VideoSettings input)
         {
-            throw new NotImplementedException();
+            _dbcontext.Remove(input);
+            await _dbcontext.SaveChangesAsync();
+            return input.Id;
         }
 
         public Task<IEnumerable<ImageSettings>> GetImageSettingsByConfigIdAsync(int configId)
