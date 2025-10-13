@@ -343,9 +343,12 @@ namespace OHaraj.Repositories
                 .ToListAsync();
         }
 
-        public Task<IEnumerable<VideoSettings>> GetVideoSettingsByAreaAsync(Area area)
+        public async Task<IEnumerable<VideoSettings>> GetVideoSettingsByAreaAsync(Area area)
         {
-
+            return await _dbcontext.VideoSettings
+                .AsNoTracking()
+                .Where(x => x.Area == area)
+                .ToListAsync();
         }
 
         public Task<IEnumerable<VideoSettings>> GetVideoSettingsByConfigIdAsync(int configId)
