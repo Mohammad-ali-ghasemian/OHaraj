@@ -21,6 +21,7 @@ namespace OHaraj.Core.Interfaces.Services
 
         Task<IEnumerable<ImageConfigs>> UpsertImageConfig(UpsertImageConfig input);
         Task<int> DeleteImageConfig(int imageConfigId);
-        Task<Menu> GetImageConfig(int imageConfigId);
+        Task<ImageConfigs> GetImageConfig(int imageConfigId);
+        Task<IEnumerable<ImageConfigs>> GetImageConfigs();
     }
 }
