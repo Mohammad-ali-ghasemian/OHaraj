@@ -380,29 +380,31 @@ namespace OHaraj.Repositories
             return input.Id;
         }
 
-        public Task<IEnumerable<VideoSettings>> GetVideoSettingsByAreaAsync(Area area)
+        public async Task<AudioSettings> GetAudioSettingAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _dbcontext.AudioSettings
+                .AsNoTracking()
+                .FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public Task<IEnumerable<VideoSettings>> GetVideoSettingsByConfigIdAsync(int configId)
+        public Task<IEnumerable<AudioSettings>> GetAudioSettingsAsync()
         {
-            throw new NotImplementedException();
+            
         }
 
-        public Task<IEnumerable<VideoSettings>> GetVideoSettingsByMenuIdAsync(int menuId)
+        public Task<IEnumerable<AudioSettings>> GetAudioSettingsByMenuIdAsync(int menuId)
         {
-            throw new NotImplementedException();
+            
         }
 
-        public Task<int> UpdateAudioConfigAsync(AudioConfigs input)
+        public Task<IEnumerable<AudioSettings>> GetAudioSettingsByAreaAsync(Area area)
         {
-            throw new NotImplementedException();
+            
         }
 
-        public Task<int> UpdateAudioSettingAsync(AudioSettings input)
+        public Task<IEnumerable<AudioSettings>> GetAudioSettingsByConfigIdAsync(int configId)
         {
-            throw new NotImplementedException();
+            
         }
 
         public Task<int> UpdateBanAccessAsync(RoleAccessBanned input)
