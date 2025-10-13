@@ -439,9 +439,11 @@ namespace OHaraj.Repositories
             return input.Id;
         }
 
-        public Task<DocumentSettings> GetDocumentSettingAsync(int id)
+        public async Task<DocumentSettings> GetDocumentSettingAsync(int id)
         {
-            
+            return await _dbcontext.DocumentSettings
+                .AsNoTracking()
+                .FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public Task<IEnumerable<DocumentSettings>> GetDocumentSettingsAsync()
