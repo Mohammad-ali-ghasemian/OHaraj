@@ -351,9 +351,12 @@ namespace OHaraj.Repositories
                 .ToListAsync();
         }
 
-        public Task<IEnumerable<VideoSettings>> GetVideoSettingsByConfigIdAsync(int configId)
+        public async Task<IEnumerable<VideoSettings>> GetVideoSettingsByConfigIdAsync(int configId)
         {
-
+            return await _dbcontext.VideoSettings
+                .AsNoTracking()
+                .Where(x => x.VideoConfigsId == configId)
+                .ToListAsync();
         }
 
         public Task<IEnumerable<VideoConfigs>> GetVideoConfigsAsync()
