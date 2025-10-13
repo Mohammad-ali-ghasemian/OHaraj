@@ -330,6 +330,9 @@ namespace OHaraj.Repositories
 
         public async Task<IEnumerable<VideoSettings>> GetVideoSettingsAsync()
         {
+            return await _dbcontext.VideoSettings
+                .AsNoTracking()
+                .ToListAsync();
         }
 
         public Task<IEnumerable<VideoSettings>> GetVideoSettingsByMenuIdAsync(int menuId)
