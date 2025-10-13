@@ -418,44 +418,46 @@ namespace OHaraj.Repositories
                 .ToListAsync();
         }
 
-        public Task<int> UpdateBanAccessAsync(RoleAccessBanned input)
+        public async Task<int> AddDocumentSettingAsync(DocumentSettings input)
         {
-            throw new NotImplementedException();
+            await _dbcontext.AddAsync(input);
+            await _dbcontext.SaveChangesAsync();
+            return input.Id;
         }
 
-        public Task<int> UpdateDocumentConfigAsync(DocumentConfigs input)
+        public async Task<int> UpdateDocumentSettingAsync(DocumentSettings input)
         {
-            throw new NotImplementedException();
+            
         }
 
-        public Task<int> UpdateDocumentSettingAsync(DocumentSettings input)
+        public async Task<int> DeleteDocumentSettingAsync(DocumentSettings input)
         {
-            throw new NotImplementedException();
+            
         }
 
-        public Task<int> UpdateImageConfigAsync(ImageConfigs input)
+        public Task<DocumentSettings> GetDocumentSettingAsync(int id)
         {
-            throw new NotImplementedException();
+            
         }
 
-        public Task<int> UpdateImageSettingAsync(ImageSettings input)
+        public Task<IEnumerable<DocumentSettings>> GetDocumentSettingsAsync()
         {
-            throw new NotImplementedException();
+            
         }
 
-        public Task<int> UpdateMenuAsync(Menu input)
+        public Task<IEnumerable<DocumentSettings>> GetDocumentSettingsByMenuIdAsync(int menuId)
         {
-            throw new NotImplementedException();
+            
         }
 
-        public Task<int> UpdateVideoConfigAsync(VideoConfigs input)
+        public Task<IEnumerable<DocumentSettings>> GetDocumentSettingsByAreaAsync(Area area)
         {
-            throw new NotImplementedException();
+            
         }
 
-        public Task<int> UpdateVideoSettingAsync(VideoSettings input)
+        public Task<IEnumerable<DocumentSettings>> GetDocumentSettingsByConfigIdAsync(int configId)
         {
-            throw new NotImplementedException();
+            
         }
     }
 }
