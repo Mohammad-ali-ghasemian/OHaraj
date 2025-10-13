@@ -1,9 +1,9 @@
 ﻿using Project.Application.Helpers;
 using System.ComponentModel.DataAnnotations;
 
-namespace OHaraj.Core.Domain.Models.Dynamicity
+namespace OHaraj.Core.Domain.Models.Dynamicity.Configs
 {
-    public class UpsertImageConfig
+    public class UpsertVideoConfig
     {
         public int Id { get; set; }
         public string? Name { get; set; }
@@ -11,5 +11,6 @@ namespace OHaraj.Core.Domain.Models.Dynamicity
         public int? MaxSize { get; set; }
         public int? MaxWidth { get; set; }
         public int? MaxHeight { get; set; }
+        public int? MaxLength { get; set; }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using Project.Application.Helpers;
 using System.ComponentModel.DataAnnotations;
 
-namespace OHaraj.Core.Domain.Models.Dynamicity
+namespace OHaraj.Core.Domain.Models.Dynamicity.Configs
 {
     public class UpsertAudioConfig
     {
