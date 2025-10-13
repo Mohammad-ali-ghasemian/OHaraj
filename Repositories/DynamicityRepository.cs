@@ -359,19 +359,25 @@ namespace OHaraj.Repositories
                 .ToListAsync();
         }
 
-        public Task<IEnumerable<VideoConfigs>> GetVideoConfigsAsync()
+        public async Task<int> AddAudioSettingAsync(AudioSettings input)
         {
-            throw new NotImplementedException();
+            await _dbcontext.AddAsync(input);
+            await _dbcontext.SaveChangesAsync();
+            return input.Id;
         }
 
-        public Task<VideoSettings> GetVideoSettingAsync(int id)
+        public async Task<int> UpdateAudioSettingAsync(AudioSettings input)
         {
-            throw new NotImplementedException();
+            _dbcontext.Update(input);
+            await _dbcontext.SaveChangesAsync();
+            return input.Id;
         }
 
-        public Task<IEnumerable<VideoSettings>> GetVideoSettingsAsync()
+        public async Task<int> DeleteAudioSettingAsync(AudioSettings input)
         {
-            throw new NotImplementedException();
+            _dbcontext.Remove(input);
+            await _dbcontext.SaveChangesAsync();
+            return input.Id;
         }
 
         public Task<IEnumerable<VideoSettings>> GetVideoSettingsByAreaAsync(Area area)
