@@ -1,5 +1,5 @@
 ﻿using OHaraj.Core.Domain.Entities.Configs;
-using OHaraj.Core.Domain.Entities.Handling;
+using OHaraj.Core.Domain.Entities.Management;
 using OHaraj.Core.Domain.Entities.Settings;
 using OHaraj.Core.Enums;
 

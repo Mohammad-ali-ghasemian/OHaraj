@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace OHaraj.Core.Domain.Entities.Handling
+namespace OHaraj.Core.Domain.Entities.Management
 {
     public class RoleAccessBanned
     {

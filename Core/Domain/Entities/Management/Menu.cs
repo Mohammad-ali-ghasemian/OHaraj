@@ -1,6 +1,6 @@
 ﻿using OHaraj.Core.Domain.Entities.Settings;
 
-namespace OHaraj.Core.Domain.Entities.Handling
+namespace OHaraj.Core.Domain.Entities.Management
 {
     public class Menu
     {

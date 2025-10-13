@@ -1,4 +1,4 @@
-﻿using OHaraj.Core.Domain.Entities.Handling;
+﻿using OHaraj.Core.Domain.Entities.Management;
 using OHaraj.Core.Domain.Entities.Shop;
 using Project.Application.Helpers;
 using System.ComponentModel.DataAnnotations;

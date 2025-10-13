@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using OHaraj.Core.Domain.DTOs;
-using OHaraj.Core.Domain.Entities.Handling;
+using OHaraj.Core.Domain.Entities.Management;
 using OHaraj.Core.Domain.Entities.Shop;
 using OHaraj.Core.Domain.Models.Product;
 using OHaraj.Core.Interfaces.Repositories;

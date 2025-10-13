@@ -1,7 +1,7 @@
 ﻿using OHaraj.Core.Domain.Entities.Shop;
 using OHaraj.Core.Enums;
 
-namespace OHaraj.Core.Domain.Entities.Handling
+namespace OHaraj.Core.Domain.Entities.Management
 {
     public class FileManagement
     {
