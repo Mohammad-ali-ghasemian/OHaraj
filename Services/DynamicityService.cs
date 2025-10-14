@@ -100,9 +100,18 @@ namespace OHaraj.Services
             return await _dynamicityRepository.GetMenusAsync();
         }
 
-        public Task<int> DeleteDocumentSetting(int documentSettingId)
+        public async Task<IEnumerable<Menu>> GetLoginUserAccessMenus()
         {
-            throw new NotImplementedException();
+            var user = await Current();
+            if (user == null)
+            {
+                throw new NotFoundException("کاربر وارد نشده است.");
+            }
+
+            var accessBanned = await _dynamicityRepository.GetAccessDeniedMenusAsync(await _authenticationRepository.GetUserRolesAsync(user));
+            var menus = await _dynamicityRepository.GetMenusAsync();
+
+            return menus.Except(accessBanned);
         }
 
         public Task<int> DeleteImageConfig(int imageConfigId)
