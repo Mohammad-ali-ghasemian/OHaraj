@@ -21,11 +21,11 @@ namespace OHaraj.Controllers
             _dynamicityService = dynamicityService;
         }
 
-        //[HttpPost("Add-Menu")]
-        //[Produces(typeof(Response<Menu>))]
-        //public async Task<IActionResult> AddMenu(Menu input) 
-        //{
+        [HttpPost("Add-Menu")]
+        [Produces(typeof(Response<Menu>))]
+        public async Task<IActionResult> AddMenu(Menu input) 
+        {
 
-        //}
+        }
     }
 }
