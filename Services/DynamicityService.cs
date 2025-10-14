@@ -9,6 +9,7 @@ using OHaraj.Core.Enums;
 using OHaraj.Core.Interfaces.Repositories;
 using OHaraj.Core.Interfaces.Services;
 using Project.Application.Contracts.Infrastructure;
+using Project.Application.Exceptions;
 
 namespace OHaraj.Services
 {
@@ -48,9 +49,28 @@ namespace OHaraj.Services
             return user;
         }
 
-        public Task<int> DeleteAccessBan(int accessBanId)
+        public async Task<int> UpsertMenu(UpsertMenu input)
         {
-            throw new NotImplementedException();
+            if (input.ParentId != null && await _dynamicityRepository.GetMenuAsync((int) input.ParentId) == null)
+            {
+                throw new NotFoundException("منو والد یافت نشد");
+            }
+
+            var menu = await _dynamicityRepository.GetMenuAsync(input.Id);
+            if (menu == null)
+            {
+                return await _dynamicityRepository.AddMenuAsync(new Menu
+                {
+                    Title = input.Title,
+                    ParentId = input.ParentId,
+                });
+            }
+            else
+            {
+                menu.Title = input.Title;
+                menu.ParentId = input.ParentId;
+                return await _dynamicityRepository.UpdateMenuAsync(menu);
+            }
         }
 
         public Task<int> DeleteAudioConfig(int audioConfigId)
