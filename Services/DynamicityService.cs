@@ -95,9 +95,9 @@ namespace OHaraj.Services
             return menu;
         }
 
-        public Task<int> DeleteDocumentConfig(int documentConfigId)
+        public async Task<IEnumerable<Menu>> GetMenus()
         {
-            throw new NotImplementedException();
+            return await _dynamicityRepository.GetMenusAsync();
         }
 
         public Task<int> DeleteDocumentSetting(int documentSettingId)
