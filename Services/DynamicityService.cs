@@ -75,7 +75,7 @@ namespace OHaraj.Services
 
         public async Task<int> DeleteMenu(int menuId)
         {
-            var menu = _dynamicityRepository.GetMenuAsync(menuId);
+            var menu = await _dynamicityRepository.GetMenuAsync(menuId);
             if (menu == null)
             {
                 throw new NotFoundException("منو یافت نشد!");
@@ -84,9 +84,15 @@ namespace OHaraj.Services
             return await _dynamicityRepository.DeleteMenuAsync(menu);
         }
 
-        public Task<int> DeleteAudioSetting(int audioSettingId)
+        public async Task<Menu> GetMenu(int menuId)
         {
-            throw new NotImplementedException();
+            var menu = await _dynamicityRepository.GetMenuAsync(menuId);
+            if (menu == null)
+            {
+                throw new NotFoundException("منو یافت نشد!");
+            }
+
+            return menu;
         }
 
         public Task<int> DeleteDocumentConfig(int documentConfigId)
