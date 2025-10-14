@@ -73,9 +73,15 @@ namespace OHaraj.Services
             }
         }
 
-        public Task<int> DeleteAudioConfig(int audioConfigId)
+        public async Task<int> DeleteMenu(int menuId)
         {
-            throw new NotImplementedException();
+            var menu = _dynamicityRepository.GetMenuAsync(menuId);
+            if (menu == null)
+            {
+                throw new NotFoundException("منو یافت نشد!");
+            }
+
+            return await _dynamicityRepository.DeleteMenuAsync(menu);
         }
 
         public Task<int> DeleteAudioSetting(int audioSettingId)
