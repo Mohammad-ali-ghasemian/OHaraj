@@ -105,7 +105,7 @@ namespace OHaraj.Services
             var user = await Current();
             if (user == null)
             {
-                throw new NotFoundException("کاربر وارد نشده است.");
+                throw new NotFoundException("کاربر یافت است.");
             }
 
             var accessBanned = await _dynamicityRepository.GetAccessDeniedMenusAsync(await _authenticationRepository.GetUserRolesAsync(user));
@@ -114,9 +114,18 @@ namespace OHaraj.Services
             return menus.Except(accessBanned);
         }
 
-        public Task<int> DeleteImageConfig(int imageConfigId)
+        public async Task<IEnumerable<Menu>> GetOtherUserAccessMenus(string userId)
         {
-            throw new NotImplementedException();
+            var user = await _authenticationRepository.GetUserByIdAsync(userId);
+            if (user == null)
+            {
+                throw new NotFoundException("کاربر یافت نشد.");
+            }
+
+            var accessBanned = await _dynamicityRepository.GetAccessDeniedMenusAsync(await _authenticationRepository.GetUserRolesAsync(user));
+            var menus = await _dynamicityRepository.GetMenusAsync();
+
+            return menus.Except(accessBanned);
         }
 
         public Task<int> DeleteImageSetting(int imageSettingId)
