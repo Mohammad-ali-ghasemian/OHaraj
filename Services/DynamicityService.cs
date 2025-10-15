@@ -441,9 +441,15 @@ namespace OHaraj.Services
             return await _dynamicityRepository.DeleteImageSettingAsync(imageSetting);
         }
 
-        public Task<ImageSettings> GetImageSetting(int imageSettingId)
+        public async Task<ImageSettings> GetImageSetting(int imageSettingId)
         {
-            
+            var imageSetting = await _dynamicityRepository.GetImageSettingAsync(imageSettingId);
+            if (imageSetting == null)
+            {
+                throw new NotFoundException("تنظیمات یافت نشد");
+            }
+
+            return imageSetting;
         }
 
         public Task<IEnumerable<ImageSettings>> GetImageSettings()
