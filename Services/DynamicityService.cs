@@ -481,40 +481,86 @@ namespace OHaraj.Services
             return await _dynamicityRepository.GetImageSettingsByConfigIdAsync(imageConfigId);
         }
 
-        public Task<Menu> GetMenu(int menuId)
+
+
+        public async Task<int> UpsertVideoSetting(UpsertSetting input)
         {
-            throw new NotImplementedException();
+            if (input.Id == null)
+            {
+                return await _dynamicityRepository.AddVideoSettingAsync(new VideoSettings
+                {
+                    Area = input.Area,
+                    VideoConfigsId = input.ConfigId,
+                    MenuId = input.MenuId,
+                });
+            }
+            else
+            {
+                var videoSetting = await _dynamicityRepository.GetVideoSettingAsync((int)input.Id);
+                if (videoSetting == null)
+                {
+                    throw new NotFoundException("تنظیمات یافت نشد");
+                }
+                videoSetting.Area = input.Area;
+                videoSetting.VideoConfigsId = input.ConfigId;
+                videoSetting.MenuId = input.MenuId;
+
+                return await _dynamicityRepository.UpdateVideoSettingAsync(videoSetting);
+            }
         }
 
-        public Task<IEnumerable<Menu>> GetMenus()
+        public async Task<int> DeleteVideoSetting(int videoSettingId)
         {
-            throw new NotImplementedException();
+            var videoSetting = await _dynamicityRepository.GetVideoSettingAsync(videoSettingId);
+            if (videoSetting == null)
+            {
+                throw new NotFoundException("تنظیمات یافت نشد");
+            }
+
+            return await _dynamicityRepository.DeleteVideoSettingAsync(videoSetting);
         }
 
-        public Task<IEnumerable<Menu>> GetMyAccessMenus()
+        public async Task<VideoSettings> GetVideoSetting(int videoSettingId)
         {
-            throw new NotImplementedException();
+            var videoSetting = await _dynamicityRepository.GetVideoSettingAsync(videoSettingId);
+            if (videoSetting == null)
+            {
+                throw new NotFoundException("تنظیمات یافت نشد");
+            }
+
+            return videoSetting;
         }
 
-        public Task<IEnumerable<Menu>> GetOtherAccessMenus(string userId)
+        public async Task<IEnumerable<VideoSettings>> GetVideoSettings()
         {
-            throw new NotImplementedException();
+            return await _dynamicityRepository.GetVideoSettingsAsync();
         }
 
-        public Task<VideoConfigs> GetVideoConfig(int audioConfigId)
+        public async Task<IEnumerable<VideoSettings>> GetVideoSettingsByMenuId(int menuId)
         {
-            throw new NotImplementedException();
+            if (await _dynamicityRepository.GetMenuAsync(menuId) == null)
+            {
+                throw new NotFoundException("منو یافت نشد");
+            }
+            return await _dynamicityRepository.GetVideoSettingsByMenuIdAsync(menuId);
         }
 
-        public Task<IEnumerable<VideoConfigs>> GetVideoConfigs()
+        public async Task<IEnumerable<VideoSettings>> GetVideoSettingsByArea(Area area)
         {
-            throw new NotImplementedException();
+            return await _dynamicityRepository.GetVideoSettingsByAreaAsync(area);
         }
 
-        public Task<VideoSettings> GetVideoSetting(int videoSettingId)
+        public async Task<IEnumerable<VideoSettings>> GetVideoSettingsByConfigId(int videoConfigId)
         {
-            throw new NotImplementedException();
+            if (await _dynamicityRepository.GetVideoConfigAsync(videoConfigId) == null)
+            {
+                throw new NotFoundException("کانفیگ یافت نشد");
+            }
+
+            return await _dynamicityRepository.GetVideoSettingsByConfigIdAsync(videoConfigId);
         }
+
+
 
         public Task<IEnumerable<VideoSettings>> GetVideoSettings()
         {
@@ -561,7 +607,7 @@ namespace OHaraj.Services
             throw new NotImplementedException();
         }
 
-        public Task<int> UpsertImageConfig(UpsertImageConfig input)
+        public Task<int> UpsertVideoConfig(UpsertImageConfig input)
         {
             throw new NotImplementedException();
         }
