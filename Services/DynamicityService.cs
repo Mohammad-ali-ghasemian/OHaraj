@@ -404,34 +404,55 @@ namespace OHaraj.Services
 
 
         //Settings
-        public Task<ImageConfigs> GetImageConfig(int imageConfigId)
+        public async Task<int> UpsertImageSetting(UpsertSetting input)
         {
-            throw new NotImplementedException();
+            if (input.Id == null)
+            {
+                return await _dynamicityRepository.AddImageSettingAsync(new ImageSettings
+                {
+                    Area = input.Area,
+                    ImageConfigsId = input.ConfigId,
+                    MenuId = input.MenuId,
+                });
+            }
+            else
+            {
+                var imageSetting = await _dynamicityRepository.GetImageSettingAsync((int) input.Id);
+                if (imageSetting == null)
+                {
+                    throw new NotFoundException("تنظیمات یافت نشد");
+                }
+                imageSetting.Area = input.Area;
+                imageSetting.ImageConfigsId = input.ConfigId;
+                imageSetting.MenuId = input.MenuId;
+
+                return await _dynamicityRepository.UpdateImageSettingAsync(imageSetting);
+            }
         }
 
         public Task<IEnumerable<ImageConfigs>> GetImageConfigs()
         {
-            throw new NotImplementedException();
+            
         }
 
         public Task<ImageSettings> GetImageSetting(int imageSettingId)
         {
-            throw new NotImplementedException();
+            
         }
 
         public Task<IEnumerable<ImageSettings>> GetImageSettings()
         {
-            throw new NotImplementedException();
+            
         }
 
         public Task<IEnumerable<ImageSettings>> GetImageSettingsByArea(Area area)
         {
-            throw new NotImplementedException();
+            
         }
 
         public Task<IEnumerable<ImageSettings>> GetImageSettingsByConfigId(int imageConfigId)
         {
-            throw new NotImplementedException();
+            
         }
 
         public Task<IEnumerable<ImageSettings>> GetImageSettingsByMenuId(int menuId)
