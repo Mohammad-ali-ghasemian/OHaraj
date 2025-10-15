@@ -50,6 +50,7 @@ namespace OHaraj.Services
             return user;
         }
 
+        //Menu
         public async Task<int> UpsertMenu(UpsertMenu input)
         {
             if (input.ParentId != null && await _dynamicityRepository.GetMenuAsync((int) input.ParentId) == null)
@@ -129,6 +130,9 @@ namespace OHaraj.Services
             return menus.Except(accessBanned);
         }
 
+
+
+        //Role Access Banned
         public async Task<int> UpsertAccessBan(UpsertRoleAccessBanned input)
         {
             if (input.Id == null)
@@ -184,6 +188,9 @@ namespace OHaraj.Services
             return await _dynamicityRepository.GetBanAccessesAsync();
         }
 
+
+
+        //Configs
         public async Task<int> UpsertImageConfig(UpsertImageConfig input)
         {
             if (input.Id == null)
@@ -236,6 +243,8 @@ namespace OHaraj.Services
         {
             return await _dynamicityRepository.GetImageConfigsAsync();
         }
+
+
 
         public async Task<int> UpsertVideoConfig(UpsertVideoConfig input)
         {
@@ -292,6 +301,8 @@ namespace OHaraj.Services
             return await _dynamicityRepository.GetVideoConfigsAsync();
         }
 
+
+
         public async Task<int> UpsertAudioConfig(UpsertAudioConfig input)
         {
             if (input.Id == null)
@@ -341,6 +352,8 @@ namespace OHaraj.Services
             return await _dynamicityRepository.GetAudioConfigsAsync();
         }
 
+
+
         public async Task<int> UpsertDocumentConfig(UpsertDocumentConfig input)
         {
             if (input.Id == null)
@@ -388,6 +401,9 @@ namespace OHaraj.Services
             return await _dynamicityRepository.GetDocumentConfigsAsync();
         }
 
+
+
+        //Settings
         public Task<ImageConfigs> GetImageConfig(int imageConfigId)
         {
             throw new NotImplementedException();
