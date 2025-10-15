@@ -641,39 +641,82 @@ namespace OHaraj.Services
 
 
 
-        public Task<int> UpsertDocumentConfig(UpsertDocumentConfig input)
+        public async Task<int> UpsertDocumentSetting(UpsertSetting input)
         {
-            throw new NotImplementedException();
+            if (input.Id == null)
+            {
+                return await _dynamicityRepository.AddDocumentSettingAsync(new DocumentSettings
+                {
+                    Area = input.Area,
+                    DocumentConfigsId = input.ConfigId,
+                    MenuId = input.MenuId,
+                });
+            }
+            else
+            {
+                var documentSetting = await _dynamicityRepository.GetDocumentSettingAsync((int)input.Id);
+                if (documentSetting == null)
+                {
+                    throw new NotFoundException("تنظیمات یافت نشد");
+                }
+                documentSetting.Area = input.Area;
+                documentSetting.DocumentConfigsId = input.ConfigId;
+                documentSetting.MenuId = input.MenuId;
+
+                return await _dynamicityRepository.UpdateDocumentSettingAsync(documentSetting);
+            }
         }
 
-        public Task<int> UpsertDocumentSetting(UpsertSetting input)
+        public async Task<int> DeleteDocumentSetting(int documentSettingId)
         {
-            throw new NotImplementedException();
+            var documentSetting = await _dynamicityRepository.GetDocumentSettingAsync(documentSettingId);
+            if (documentSetting == null)
+            {
+                throw new NotFoundException("تنظیمات یافت نشد");
+            }
+
+            return await _dynamicityRepository.DeleteDocumentSettingAsync(documentSetting);
         }
 
-        public Task<int> UpsertVideoConfig(UpsertImageConfig input)
+        public async Task<DocumentSettings> GetDocumentSetting(int documentSettingId)
         {
-            throw new NotImplementedException();
+            var documentSetting = await _dynamicityRepository.GetDocumentSettingAsync(documentSettingId);
+            if (documentSetting == null)
+            {
+                throw new NotFoundException("تنظیمات یافت نشد");
+            }
+
+            return documentSetting;
         }
 
-        public Task<int> UpsertImageSetting(UpsertSetting input)
+        public async Task<IEnumerable<DocumentSettings>> GetDocumentSettings()
         {
-            throw new NotImplementedException();
+            return await _dynamicityRepository.GetDocumentSettingsAsync();
         }
 
-        public Task<int> UpsertMenu(UpsertMenu input)
+        public async Task<IEnumerable<DocumentSettings>> GetDocumentSettingsByMenuId(int menuId)
         {
-            throw new NotImplementedException();
+            if (await _dynamicityRepository.GetMenuAsync(menuId) == null)
+            {
+                throw new NotFoundException("منو یافت نشد");
+            }
+            return await _dynamicityRepository.GetDocumentSettingsByMenuIdAsync(menuId);
         }
 
-        public Task<int> UpsertVideoConfig(UpsertVideoConfig input)
+        public async Task<IEnumerable<DocumentSettings>> GetDocumentSettingsByArea(Area area)
         {
-            throw new NotImplementedException();
+            return await _dynamicityRepository.GetDocumentSettingsByAreaAsync(area);
         }
 
-        public Task<int> UpsertVideoSetting(UpsertSetting input)
+        public async Task<IEnumerable<DocumentSettings>> GetDocumentSettingsByConfigId(int documentConfigId)
         {
-            throw new NotImplementedException();
+            if (await _dynamicityRepository.GetDocumentConfigAsync(documentConfigId) == null)
+            {
+                throw new NotFoundException("کانفیگ یافت نشد");
+            }
+
+            return await _dynamicityRepository.GetDocumentSettingsByConfigIdAsync(documentConfigId);
         }
+
     }
 }
