@@ -5,7 +5,7 @@ namespace OHaraj.Core.Domain.Models.Dynamicity.Configs
 {
     public class UpsertAudioConfig
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
         [Required(ErrorMessage = PublicHelper.RequiredValidationErrorMessage)]
         public int MaxSize { get; set; }
         public int MaxLength { get; set; }
