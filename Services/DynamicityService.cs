@@ -452,9 +452,9 @@ namespace OHaraj.Services
             return imageSetting;
         }
 
-        public Task<IEnumerable<ImageSettings>> GetImageSettings()
+        public async Task<IEnumerable<ImageSettings>> GetImageSettings()
         {
-            
+            return await _dynamicityRepository.GetImageSettingsAsync();
         }
 
         public Task<IEnumerable<ImageSettings>> GetImageSettingsByArea(Area area)
