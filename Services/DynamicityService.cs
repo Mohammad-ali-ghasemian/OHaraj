@@ -292,24 +292,53 @@ namespace OHaraj.Services
             return await _dynamicityRepository.GetVideoConfigsAsync();
         }
 
-        public Task<IEnumerable<AudioSettings>> GetAudioSettingsByMenuId(int menuId)
+        public async Task<int> UpsertAudioConfig(UpsertAudioConfig input)
         {
-            throw new NotImplementedException();
+            if (input.Id == null)
+            {
+                return await _dynamicityRepository.AddAudioConfigAsync(new AudioConfigs
+                {
+                    MaxSize = input.MaxSize,
+                    MaxLength = input.MaxLength,
+                });
+            }
+            else
+            {
+                var audioConfig = await _dynamicityRepository.GetAudioConfigAsync((int)input.Id);
+                if (audioConfig == null)
+                {
+                    throw new NotFoundException("کانفیگ یافت نشد");
+                }
+                audioConfig.MaxSize= input.MaxSize;
+                audioConfig.MaxLength = input.MaxLength;
+
+                return await _dynamicityRepository.UpdateAudioConfigAsync(audioConfig);
+            }
         }
 
-        public Task<DocumentConfigs> GetDocumentConfig(int documentConfigId)
+        public async Task<int> DeleteAudioConfig(int audioConfigId)
         {
-            throw new NotImplementedException();
+            var audioConfig = await _dynamicityRepository.GetAudioConfigAsync(audioConfigId);
+            if (audioConfig == null)
+            {
+                throw new NotFoundException("کانفیگ یافت نشد");
+            }
+            return await _dynamicityRepository.DeleteAudioConfigAsync(audioConfig);
         }
 
-        public Task<IEnumerable<DocumentConfigs>> GetDocumentConfigs()
+        public async Task<AudioConfigs> GetAudioConfig(int audioConfigId)
         {
-            throw new NotImplementedException();
+            var audioConfig = await _dynamicityRepository.GetAudioConfigAsync(audioConfigId);
+            if (audioConfig == null)
+            {
+                throw new NotFoundException("کانفیگ یافت نشد");
+            }
+            return audioConfig;
         }
 
-        public Task<DocumentSettings> GetDocumentSetting(int documentSettingId)
+        public async Task<IEnumerable<AudioConfigs>> GetAudioConfigs()
         {
-            throw new NotImplementedException();
+            return await _dynamicityRepository.GetAudioConfigsAsync();
         }
 
         public Task<IEnumerable<DocumentSettings>> GetDocumentSettings()
@@ -387,7 +416,7 @@ namespace OHaraj.Services
             throw new NotImplementedException();
         }
 
-        public Task<VideoConfigs> GetVideoConfig(int videoConfigId)
+        public Task<VideoConfigs> GetVideoConfig(int audioConfigId)
         {
             throw new NotImplementedException();
         }
