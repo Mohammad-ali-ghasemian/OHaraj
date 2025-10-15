@@ -341,24 +341,51 @@ namespace OHaraj.Services
             return await _dynamicityRepository.GetAudioConfigsAsync();
         }
 
-        public Task<IEnumerable<DocumentSettings>> GetDocumentSettings()
+        public async Task<int> UpsertDocumentConfig(UpsertDocumentConfig input)
         {
-            throw new NotImplementedException();
+            if (input.Id == null)
+            {
+                return await _dynamicityRepository.AddDocumentConfigAsync(new DocumentConfigs
+                {
+                    MaxSize = input.MaxSize,
+                });
+            }
+            else
+            {
+                var documentConfig = await _dynamicityRepository.GetDocumentConfigAsync((int)input.Id);
+                if (documentConfig == null)
+                {
+                    throw new NotFoundException("کانفیگ یافت نشد");
+                }
+                documentConfig.MaxSize = input.MaxSize;
+
+                return await _dynamicityRepository.UpdateDocumentConfigAsync(documentConfig);
+            }
         }
 
-        public Task<IEnumerable<DocumentSettings>> GetDocumentSettingsByArea(Area area)
+        public async Task<int> DeleteDocumentConfig(int documentConfigId)
         {
-            throw new NotImplementedException();
+            var documentConfig = await _dynamicityRepository.GetDocumentConfigAsync(documentConfigId);
+            if (documentConfig == null)
+            {
+                throw new NotFoundException("کانفیگ یافت نشد");
+            }
+            return await _dynamicityRepository.DeleteDocumentConfigAsync(documentConfig);
         }
 
-        public Task<IEnumerable<DocumentSettings>> GetDocumentSettingsByConfigId(int documentConfigId)
+        public async Task<DocumentConfigs> GetDocumentConfig(int documentConfigId)
         {
-            throw new NotImplementedException();
+            var documentConfig = await _dynamicityRepository.GetDocumentConfigAsync(documentConfigId);
+            if (documentConfig == null)
+            {
+                throw new NotFoundException("کانفیگ یافت نشد");
+            }
+            return documentConfig;
         }
 
-        public Task<IEnumerable<DocumentSettings>> GetDocumentSettingsByMenuId(int menuId)
+        public async Task<IEnumerable<DocumentConfigs>> GetDocumentConfigs()
         {
-            throw new NotImplementedException();
+            return await _dynamicityRepository.GetDocumentConfigsAsync();
         }
 
         public Task<ImageConfigs> GetImageConfig(int imageConfigId)
