@@ -151,24 +151,36 @@ namespace OHaraj.Services
             }
         }
 
-        public Task<int> DeleteMenu(int menuId)
+        public async Task<int> DeleteAccessBan(int accessBanId)
         {
-            throw new NotImplementedException();
+            var accessBanned = await _dynamicityRepository.GetBanAccessAsync(accessBanId);
+            if (accessBanned == null)
+            {
+                throw new NotFoundException("مورد یافت نشد");
+            }
+
+            return await _dynamicityRepository.DeleteBanAccessAsync(accessBanned);
         }
 
-        public Task<int> DeleteVideoConfig(int videoConfigId)
+        public async Task<RoleAccessBanned> GetAccessBan(int accessBanId)
         {
-            throw new NotImplementedException();
+            var accessBanned = await _dynamicityRepository.GetBanAccessAsync(accessBanId);
+            if (accessBanned == null)
+            {
+                throw new NotFoundException("مورد یافت نشد");
+            }
+
+            return accessBanned;
         }
 
         public Task<int> DeleteVideoSetting(int videoSettingId)
         {
-            throw new NotImplementedException();
+            
         }
 
         public Task<RoleAccessBanned> GetAccessBan(int id)
         {
-            throw new NotImplementedException();
+            
         }
 
         public Task<IEnumerable<RoleAccessBanned>> GetAccessBan(string userId)
