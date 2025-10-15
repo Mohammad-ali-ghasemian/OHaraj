@@ -173,14 +173,14 @@ namespace OHaraj.Services
             return accessBanned;
         }
 
-        public Task<int> DeleteVideoSetting(int videoSettingId)
+        public async Task<IEnumerable<RoleAccessBanned>> GetAccessBan(string roleId)
         {
-            
+            return await _dynamicityRepository.GetBanAccessByRoleAsync(roleId);
         }
 
-        public Task<RoleAccessBanned> GetAccessBan(int id)
+        public async Task<IEnumerable<RoleAccessBanned>> GetAllAccessBans()
         {
-            
+            return await _dynamicityRepository.GetBanAccessesAsync();
         }
 
         public Task<IEnumerable<RoleAccessBanned>> GetAccessBan(string userId)
