@@ -222,9 +222,14 @@ namespace OHaraj.Services
             return await _dynamicityRepository.DeleteImageConfigAsync(imageConfig);
         }
 
-        public Task<AudioConfigs> GetAudioConfig(int audioConfigId)
+        public async Task<ImageConfigs> GetImageConfig(int imageConfigId)
         {
-            
+            var imageConfig = await _dynamicityRepository.GetImageConfigAsync(imageConfigId);
+            if (imageConfig == null)
+            {
+                throw new NotFoundException("کانفیگ یافت نشد");
+            }
+            return imageConfig;
         }
 
         public Task<IEnumerable<AudioConfigs>> GetAudioConfigs()
