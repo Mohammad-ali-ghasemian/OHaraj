@@ -128,9 +128,27 @@ namespace OHaraj.Services
             return menus.Except(accessBanned);
         }
 
-        public Task<int> DeleteImageSetting(int imageSettingId)
+        public async Task<int> UpsertAccessBan(UpsertRoleAccessBanned input)
         {
-            throw new NotImplementedException();
+            if (input.Id == null)
+            {
+                return await _dynamicityRepository.AddBanAccessAsync(new RoleAccessBanned
+                {
+                    RoleId = input.RoleId,
+                    MenuId = input.MenuId,
+                });
+            }
+            else
+            {
+                var accessBanned = await _dynamicityRepository.GetBanAccessAsync((int) input.Id);
+                if (accessBanned == null)
+                {
+                    throw new NotFoundException("مورد یافت نشد");
+                }
+                accessBanned.RoleId = input.RoleId;
+                accessBanned.MenuId = input.MenuId;
+                return await _dynamicityRepository.UpdateBanAccessAsync(accessBanned);
+            }
         }
 
         public Task<int> DeleteMenu(int menuId)
