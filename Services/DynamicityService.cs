@@ -10,6 +10,7 @@ using OHaraj.Core.Interfaces.Repositories;
 using OHaraj.Core.Interfaces.Services;
 using Project.Application.Contracts.Infrastructure;
 using Project.Application.Exceptions;
+using System.Xml.Linq;
 
 namespace OHaraj.Services
 {
@@ -183,34 +184,62 @@ namespace OHaraj.Services
             return await _dynamicityRepository.GetBanAccessesAsync();
         }
 
-        public Task<IEnumerable<RoleAccessBanned>> GetAccessBan(string userId)
+        public async Task<int> UpsertImageConfig(UpsertImageConfig input)
         {
-            throw new NotImplementedException();
+            if (input.Id == null)
+            {
+                return await _dynamicityRepository.AddImageConfigAsync(new ImageConfigs
+                {
+                    Name = input.Name,
+                    MaxSize = input.MaxSize,
+                    MaxWidth = input.MaxWidth,
+                    MaxHeight = input.MaxHeight,
+                });
+            }
+            else
+            {
+                var imageConfig = await _dynamicityRepository.GetImageConfigAsync((int)input.Id);
+                if (imageConfig == null)
+                {
+                    throw new NotFoundException("کانفیگ یافت نشد");
+                }
+                imageConfig.Name = input.Name;
+                imageConfig.MaxSize = input.MaxSize;
+                imageConfig.MaxWidth = input.MaxWidth;
+                imageConfig.MaxHeight = input.MaxHeight;
+
+                return await _dynamicityRepository.UpdateImageConfigAsync(imageConfig);
+            }
         }
 
-        public Task<IEnumerable<RoleAccessBanned>> GetAllAccessBans()
+        public async Task<int> DeleteImageConfig(int imageConfigId)
         {
-            throw new NotImplementedException();
+            var imageConfig = await _dynamicityRepository.GetImageConfigAsync(imageConfigId);
+            if (imageConfig == null)
+            {
+                throw new NotFoundException("کانفیگ یافت نشد");
+            }
+            return await _dynamicityRepository.DeleteImageConfigAsync(imageConfig);
         }
 
         public Task<AudioConfigs> GetAudioConfig(int audioConfigId)
         {
-            throw new NotImplementedException();
+            
         }
 
         public Task<IEnumerable<AudioConfigs>> GetAudioConfigs()
         {
-            throw new NotImplementedException();
+            
         }
 
         public Task<AudioSettings> GetAudioSetting(int audioSettingId)
         {
-            throw new NotImplementedException();
+            
         }
 
         public Task<IEnumerable<AudioSettings>> GetAudioSettings()
         {
-            throw new NotImplementedException();
+            
         }
 
         public Task<IEnumerable<AudioSettings>> GetAudioSettingsByArea(Area area)
