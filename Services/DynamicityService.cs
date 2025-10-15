@@ -457,19 +457,28 @@ namespace OHaraj.Services
             return await _dynamicityRepository.GetImageSettingsAsync();
         }
 
-        public Task<IEnumerable<ImageSettings>> GetImageSettingsByArea(Area area)
+        public async Task<IEnumerable<ImageSettings>> GetImageSettingsByMenuId(int menuId)
         {
-            
+            if (await _dynamicityRepository.GetMenuAsync(menuId) == null)
+            {
+                throw new NotFoundException("منو یافت نشد");
+            }
+            return await _dynamicityRepository.GetImageSettingsByMenuIdAsync(menuId);
         }
 
-        public Task<IEnumerable<ImageSettings>> GetImageSettingsByConfigId(int imageConfigId)
+        public async Task<IEnumerable<ImageSettings>> GetImageSettingsByArea(Area area)
         {
-            
+            return await _dynamicityRepository.GetImageSettingsByAreaAsync(area);
         }
 
-        public Task<IEnumerable<ImageSettings>> GetImageSettingsByMenuId(int menuId)
+        public async Task<IEnumerable<ImageSettings>> GetImageSettingsByConfigId(int imageConfigId)
         {
-            throw new NotImplementedException();
+            if (await _dynamicityRepository.GetImageConfigAsync(imageConfigId) == null)
+            {
+                throw new NotFoundException("کانفیگ یافت نشد");
+            }
+
+            return await _dynamicityRepository.GetImageSettingsByConfigIdAsync(imageConfigId);
         }
 
         public Task<Menu> GetMenu(int menuId)
