@@ -232,9 +232,9 @@ namespace OHaraj.Services
             return imageConfig;
         }
 
-        public Task<IEnumerable<AudioConfigs>> GetAudioConfigs()
+        public async Task<IEnumerable<ImageConfigs>> GetImageConfigs()
         {
-            
+            return await _dynamicityRepository.GetImageConfigsAsync();
         }
 
         public Task<AudioSettings> GetAudioSetting(int audioSettingId)
