@@ -562,40 +562,84 @@ namespace OHaraj.Services
 
 
 
-        public Task<IEnumerable<VideoSettings>> GetVideoSettings()
+        public async Task<int> UpsertAudioSetting(UpsertSetting input)
         {
-            throw new NotImplementedException();
+            if (input.Id == null)
+            {
+                return await _dynamicityRepository.AddAudioSettingAsync(new AudioSettings
+                {
+                    Area = input.Area,
+                    AudioConfigsId = input.ConfigId,
+                    MenuId = input.MenuId,
+                });
+            }
+            else
+            {
+                var audioSetting = await _dynamicityRepository.GetAudioSettingAsync((int)input.Id);
+                if (audioSetting == null)
+                {
+                    throw new NotFoundException("تنظیمات یافت نشد");
+                }
+                audioSetting.Area = input.Area;
+                audioSetting.AudioConfigsId = input.ConfigId;
+                audioSetting.MenuId = input.MenuId;
+
+                return await _dynamicityRepository.UpdateAudioSettingAsync(audioSetting);
+            }
         }
 
-        public Task<IEnumerable<VideoSettings>> GetVideoSettingsByArea(Area area)
+        public async Task<int> DeleteAudioSetting(int audioSettingId)
         {
-            throw new NotImplementedException();
+            var audioSetting = await _dynamicityRepository.GetAudioSettingAsync(audioSettingId);
+            if (audioSetting == null)
+            {
+                throw new NotFoundException("تنظیمات یافت نشد");
+            }
+
+            return await _dynamicityRepository.DeleteAudioSettingAsync(audioSetting);
         }
 
-        public Task<IEnumerable<VideoSettings>> GetVideoSettingsByConfigId(int videoConfigId)
+        public async Task<AudioSettings> GetAudioSetting(int audioSettingId)
         {
-            throw new NotImplementedException();
+            var audioSetting = await _dynamicityRepository.GetAudioSettingAsync(audioSettingId);
+            if (audioSetting == null)
+            {
+                throw new NotFoundException("تنظیمات یافت نشد");
+            }
+
+            return audioSetting;
         }
 
-        public Task<IEnumerable<VideoSettings>> GetVideoSettingsByMenuId(int menuId)
+        public async Task<IEnumerable<AudioSettings>> GetAudioSettings()
         {
-            throw new NotImplementedException();
+            return await _dynamicityRepository.GetAudioSettingsAsync();
         }
 
-        public Task<int> UpsertAccessBan(UpsertRoleAccessBanned input)
+        public async Task<IEnumerable<AudioSettings>> GetAudioSettingsByMenuId(int menuId)
         {
-            throw new NotImplementedException();
+            if (await _dynamicityRepository.GetMenuAsync(menuId) == null)
+            {
+                throw new NotFoundException("منو یافت نشد");
+            }
+            return await _dynamicityRepository.GetAudioSettingsByMenuIdAsync(menuId);
         }
 
-        public Task<int> UpsertAudioConfig(UpsertAudioConfig input)
+        public async Task<IEnumerable<AudioSettings>> GetAudioSettingsByArea(Area area)
         {
-            throw new NotImplementedException();
+            return await _dynamicityRepository.GetAudioSettingsByAreaAsync(area);
         }
 
-        public Task<int> UpsertAudioSetting(UpsertSetting input)
+        public async Task<IEnumerable<AudioSettings>> GetAudioSettingsByConfigId(int audioConfigId)
         {
-            throw new NotImplementedException();
+            if (await _dynamicityRepository.GetAudioConfigAsync(audioConfigId) == null)
+            {
+                throw new NotFoundException("کانفیگ یافت نشد");
+            }
+
+            return await _dynamicityRepository.GetAudioSettingsByConfigIdAsync(audioConfigId);
         }
+
+
 
         public Task<int> UpsertDocumentConfig(UpsertDocumentConfig input)
         {
