@@ -100,7 +100,7 @@ namespace OHaraj.Services
             return await _dynamicityRepository.GetMenusAsync();
         }
 
-        public async Task<IEnumerable<Menu>> GetLoginUserAccessMenus()
+        public async Task<IEnumerable<Menu>> GetLoginedUserAccessMenus()
         {
             var user = await Current();
             if (user == null)
