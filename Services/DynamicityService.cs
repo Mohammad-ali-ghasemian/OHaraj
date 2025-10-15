@@ -237,24 +237,59 @@ namespace OHaraj.Services
             return await _dynamicityRepository.GetImageConfigsAsync();
         }
 
-        public Task<AudioSettings> GetAudioSetting(int audioSettingId)
+        public async Task<int> UpsertVideoConfig(UpsertVideoConfig input)
         {
-            
+            if (input.Id == null)
+            {
+                return await _dynamicityRepository.AddVideoConfigAsync(new VideoConfigs
+                {
+                    Name = input.Name,
+                    MaxSize = input.MaxSize,
+                    MaxWidth = input.MaxWidth,
+                    MaxHeight = input.MaxHeight,
+                    MaxLength = input.MaxLength,
+                });
+            }
+            else
+            {
+                var videoConfig = await _dynamicityRepository.GetVideoConfigAsync((int)input.Id);
+                if (videoConfig == null)
+                {
+                    throw new NotFoundException("کانفیگ یافت نشد");
+                }
+                videoConfig.Name = input.Name;
+                videoConfig.MaxSize = input.MaxSize;
+                videoConfig.MaxWidth = input.MaxWidth;
+                videoConfig.MaxHeight = input.MaxHeight;
+                videoConfig.MaxLength = input.MaxLength;
+
+                return await _dynamicityRepository.UpdateVideoConfigAsync(videoConfig);
+            }
         }
 
-        public Task<IEnumerable<AudioSettings>> GetAudioSettings()
+        public async Task<int> DeleteVideoConfig(int videoConfigId)
         {
-            
+            var videoConfig = await _dynamicityRepository.GetVideoConfigAsync(videoConfigId);
+            if (videoConfig == null)
+            {
+                throw new NotFoundException("کانفیگ یافت نشد");
+            }
+            return await _dynamicityRepository.DeleteVideoConfigAsync(videoConfig);
         }
 
-        public Task<IEnumerable<AudioSettings>> GetAudioSettingsByArea(Area area)
+        public async Task<VideoConfigs> GetVideoConfig(int videoConfigId)
         {
-            throw new NotImplementedException();
+            var videoConfig = await _dynamicityRepository.GetVideoConfigAsync(videoConfigId);
+            if (videoConfig == null)
+            {
+                throw new NotFoundException("کانفیگ یافت نشد");
+            }
+            return videoConfig;
         }
 
-        public Task<IEnumerable<AudioSettings>> GetAudioSettingsByConfigId(int audioConfigId)
+        public async Task<IEnumerable<VideoConfigs>> GetVideoConfigs()
         {
-            throw new NotImplementedException();
+            return await _dynamicityRepository.GetVideoConfigsAsync();
         }
 
         public Task<IEnumerable<AudioSettings>> GetAudioSettingsByMenuId(int menuId)
