@@ -20,13 +20,13 @@ namespace OHaraj.Core.Interfaces.Repositories
 
 
         //Role Access Banned
-        Task<int> AddBanAccessAsync(RoleAccessBanned input);
-        Task<int> UpdateBanAccessAsync(RoleAccessBanned input);
-        Task<int> DeleteBanAccessAsync(RoleAccessBanned input);
+        Task<int> AddAccessAsync(RoleAccess input);
+        Task<int> UpdateAccessAsync(RoleAccess input);
+        Task<int> DeleteAccessAsync(RoleAccess input);
 
-        Task<RoleAccessBanned> GetBanAccessAsync(int id);
-        Task<IEnumerable<RoleAccessBanned>> GetBanAccessesAsync();
-        Task<IEnumerable<RoleAccessBanned>> GetBanAccessByRoleAsync(string roleId);
+        Task<RoleAccess> GetAccessAsync(int id);
+        Task<IEnumerable<RoleAccess>> GetAccessesAsync();
+        Task<IEnumerable<RoleAccess>> GetAccessByRoleAsync(string roleId);
 
 
 
@@ -112,18 +112,18 @@ namespace OHaraj.Core.Interfaces.Repositories
 
 
         //Roles
-        Task<String> AddRoleAsync(ir);
-        Task<String> UpdateRoleAsync(ir);
-        Task<String> DeleteRoleAsync(ir);
-        Task<identity Role> GetRoleAsync(String roleId);
+        Task<string> AddRoleAsync(ir);
+        Task<string> UpdateRoleAsync(ir);
+        Task<string> DeleteRoleAsync(ir);
+        Task<identity Role> GetRoleAsync(string roleId);
         Task<IEnumerable<identity role>> GetRolesAsync();
 
         // Default : everyone has "User" role
         // Default : cannot give "User" and "Admin" or "SuperAdmin" role to another user (SuperAdmin can give "admin")
         // Default : cannot take "User" and "Admin" or "SuperAdmin" role from another user
-        // Give role to the user, gives back some identity roles for later : fetch the name of the roles (String) then return
-        Task<IEnumerable<ir>> GiveRoleAsync(String userId, String roleId);
-        Task<IEnumerable<ir>> GetRoleAsync(String userId, String roleId);
+        // Give role to the user, gives back some identity roles for later : fetch the name of the roles (string) then return
+        Task<IEnumerable<ir>> RolesAsync(string userId, string roleId);
+        Task<IEnumerable<ir>> GetRoleAsync(string userId, string roleId);
 
     }
 }

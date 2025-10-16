@@ -2,7 +2,7 @@
 
 namespace OHaraj.Core.Domain.Entities.Management
 {
-    public class RoleAccessBanned
+    public class RoleAccess
     {
         public int Id { get; set; }
 

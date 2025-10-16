@@ -4,6 +4,8 @@ using OHaraj.Core.Domain.Entities.Settings;
 using OHaraj.Core.Domain.Models.Dynamicity;
 using OHaraj.Core.Domain.Models.Dynamicity.Configs;
 using OHaraj.Core.Enums;
+using System.Data;
+using System.Security.Principal;
 
 namespace OHaraj.Core.Interfaces.Services
 {
@@ -83,5 +85,20 @@ namespace OHaraj.Core.Interfaces.Services
         Task<IEnumerable<DocumentSettings>> GetDocumentSettingsByMenuId(int menuId);
         Task<IEnumerable<DocumentSettings>> GetDocumentSettingsByArea(Area area);
         Task<IEnumerable<DocumentSettings>> GetDocumentSettingsByConfigId(int documentConfigId);
+
+
+
+        //Roles
+        Task<string> UpsertRole(ir);
+        Task<string> DeleteRole(ir);
+        Task<identity Role> GetRole(string roleId);
+        Task<IEnumerable<identity role>> GetRoles();
+
+        // Default : everyone has "User" role
+        // Default : cannot give "User" and "Admin" or "SuperAdmin" role to another user (SuperAdmin can give "admin")
+        // Default : cannot take "User" and "Admin" or "SuperAdmin" role from another user
+        // Give role to the user, gives back some identity roles for later : fetch the name of the roles (string) then return
+        Task<IEnumerable<ir>> GiveRole(string userId, string roleId);
+        Task<IEnumerable<ir>> GetRole(string userId, string roleId);
     }
 }

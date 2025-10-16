@@ -10,7 +10,7 @@ namespace OHaraj.Core.Domain.Entities.Management
 
         // Navigation Properties
 
-        public RoleAccessBanned? RoleAccessBanned { get; set;}
+        public RoleAccess? RoleAccess { get; set;}
 
         public List<AudioSettings> AudioSettings { get; set;}
 

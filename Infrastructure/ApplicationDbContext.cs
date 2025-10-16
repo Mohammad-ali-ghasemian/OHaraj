@@ -118,7 +118,7 @@ namespace OHaraj.Infrastructure
 
         public DbSet<FileManagement> FileManagement { get; set; }
         public DbSet<Menu> Menus { get; set; }
-        public DbSet<RoleAccessBanned> RoleAccessBanned { get; set; }
+        public DbSet<RoleAccess> RoleAccess { get; set; }
         public DbSet<Token> Tokens { get; set; }
 
         public DbSet<AudioConfigs> AudioConfigs { get; set; }
