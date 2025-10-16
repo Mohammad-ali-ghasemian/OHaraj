@@ -108,5 +108,22 @@ namespace OHaraj.Core.Interfaces.Repositories
         Task<IEnumerable<DocumentSettings>> GetDocumentSettingsByAreaAsync(Area area);
         Task<IEnumerable<DocumentSettings>> GetDocumentSettingsByConfigIdAsync(int configId);
 
+
+
+
+        //Roles
+        Task<String> AddRoleAsync(ir);
+        Task<String> UpdateRoleAsync(ir);
+        Task<String> DeleteRoleAsync(ir);
+        Task<identity Role> GetRoleAsync(String roleId);
+        Task<IEnumerable<identity role>> GetRolesAsync();
+
+        // Default : everyone has "User" role
+        // Default : cannot give "User" and "Admin" or "SuperAdmin" role to another user (SuperAdmin can give "admin")
+        // Default : cannot take "User" and "Admin" or "SuperAdmin" role from another user
+        // Give role to the user, gives back some identity roles for later : fetch the name of the roles (String) then return
+        Task<IEnumerable<ir>> GiveRoleAsync(String userId, String roleId);
+        Task<IEnumerable<ir>> GetRoleAsync(String userId, String roleId);
+
     }
 }
