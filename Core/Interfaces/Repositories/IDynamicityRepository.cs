@@ -117,15 +117,15 @@ namespace OHaraj.Core.Interfaces.Repositories
         Task<IdentityResult> UpdateRoleAsync(IdentityRole role);
         Task<IdentityResult> DeleteRoleAsync(IdentityRole role);
         Task<IdentityRole> GetRoleAsync(string roleId);
-        Task<IEnumerable<IdentityRole>> GetRolesAsync(string userId);
+        Task<IEnumerable<string>> GetRolesAsync(IdentityUser user);
         Task<IEnumerable<IdentityRole>> GetRolesAsync();
 
         // Default : every login has at least "User" role
         // Default : cannot give "User" and "Admin" or "SuperAdmin" role to another user (SuperAdmin can give "admin")
         // Default : cannot take "User" and "Admin" or "SuperAdmin" role from another user (SuperAdmin can demotion "admin")
         // Give role to the user, gives back some identity roles for later : fetch the name of the roles (string) then return
-        Task<IEnumerable<IdentityRole>> GiveRolesAsync(string userId, IEnumerable<IdentityRole> roles);
-        Task<IEnumerable<IdentityRole>> TakeRolesAsync(string userId, IEnumerable<IdentityRole> roles);
+        Task<IEnumerable<string>> GiveRolesAsync(IdentityUser user, IEnumerable<string> roles);
+        Task<IEnumerable<string>> TakeRolesAsync(IdentityUser user, IEnumerable<string> roles);
 
     }
 }
