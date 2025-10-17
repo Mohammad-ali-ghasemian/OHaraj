@@ -49,37 +49,37 @@ namespace OHaraj.Repositories
             return await _dbcontext.Menus.AsNoTracking().Include(nameof(Menu)).ToListAsync();
         }
 
-        public async Task<IEnumerable<Menu>> GetAccessDeniedMenusAsync(IEnumerable<string> roleIds)
-        {
-            var accessBanned = await _dbcontext.RoleAccessBanned.AsNoTracking()
-                .Where(x => roleIds.Contains(x.RoleId))
-                .Select(x => x.MenuId)
-                .ToListAsync();
+        //public async Task<IEnumerable<Menu>> GetAccessDeniedMenusAsync(IEnumerable<string> roleIds)
+        //{
+        //    var accessBanned = await _dbcontext.RoleAccessBanned.AsNoTracking()
+        //        .Where(x => roleIds.Contains(x.RoleId))
+        //        .Select(x => x.MenuId)
+        //        .ToListAsync();
 
-            return await _dbcontext.Menus.AsNoTracking()
-                .Include(nameof(Menu))
-                .Where(x => accessBanned.Contains(x.Id))
-                .ToListAsync();
-        }
+        //    return await _dbcontext.Menus.AsNoTracking()
+        //        .Include(nameof(Menu))
+        //        .Where(x => accessBanned.Contains(x.Id))
+        //        .ToListAsync();
+        //}
 
 
 
         //Role Access Banned
-        public async Task<int> AddBanAccessAsync(RoleAccessBanned input)
+        public async Task<int> AddAccessAsync(RoleAccess input)
         {
             await _dbcontext.AddAsync(input);
             await _dbcontext.SaveChangesAsync();
             return input.Id;
         }
 
-        public async Task<int> UpdateBanAccessAsync(RoleAccessBanned input)
+        public async Task<int> UpdateAccessAsync(RoleAccess input)
         {
             _dbcontext.Update(input);
             await _dbcontext.SaveChangesAsync();
             return input.Id;
         }
 
-        public async Task<int> DeleteBanAccessAsync(RoleAccessBanned input)
+        public async Task<int> DeleteAccessAsync(RoleAccess input)
         {
             _dbcontext.Remove(input);
             await _dbcontext.SaveChangesAsync();
@@ -87,23 +87,23 @@ namespace OHaraj.Repositories
         }
 
 
-        public async Task<RoleAccessBanned> GetBanAccessAsync(int id)
+        public async Task<RoleAccess> GetAccessAsync(int id)
         {
-            return await _dbcontext.RoleAccessBanned
+            return await _dbcontext.RoleAccess
                 .AsNoTracking()
                 .FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public async Task<IEnumerable<RoleAccessBanned>> GetBanAccessesAsync()
+        public async Task<IEnumerable<RoleAccess>> GetAccessesAsync()
         {
-            return await _dbcontext.RoleAccessBanned
+            return await _dbcontext.RoleAccess
                 .AsNoTracking()
                 .ToListAsync();
         }
 
-        public async Task<IEnumerable<RoleAccessBanned>> GetBanAccessByRoleAsync(string roleId)
+        public async Task<IEnumerable<RoleAccess>> GetAccessByRoleAsync(string roleId)
         {
-            return await _dbcontext.RoleAccessBanned
+            return await _dbcontext.RoleAccess
                 .AsNoTracking()
                 .Where(x => x.RoleId == roleId)
                 .ToListAsync();
