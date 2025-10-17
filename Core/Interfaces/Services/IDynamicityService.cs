@@ -21,12 +21,12 @@ namespace OHaraj.Core.Interfaces.Services
 
 
 
-        //Role Access Banned
-        Task<int> UpsertAccessBan(UpsertRoleAccessBanned input);
-        Task<int> DeleteAccessBan(int accessBanId);
-        Task<RoleAccessBanned> GetAccessBan(int accessBanId);
-        Task<IEnumerable<RoleAccessBanned>> GetAccessBan(string roleId);
-        Task<IEnumerable<RoleAccessBanned>> GetAllAccessBans();
+        //Role Access 
+        Task<int> UpsertAccess(UpsertRoleAccess input);
+        Task<int> DeleteAccess(int accessId);
+        Task<RoleAccess> GetAccess(int accessId);
+        Task<IEnumerable<RoleAccess>> GetAccess(string roleId);
+        Task<IEnumerable<RoleAccess>> GetAllAccesss();
 
 
 

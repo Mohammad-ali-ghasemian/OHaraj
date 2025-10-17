@@ -19,7 +19,7 @@ namespace OHaraj.Core.Interfaces.Repositories
 
 
 
-        //Role Access Banned
+        //Role Access
         Task<int> AddAccessAsync(RoleAccess input);
         Task<int> UpdateAccessAsync(RoleAccess input);
         Task<int> DeleteAccessAsync(RoleAccess input);

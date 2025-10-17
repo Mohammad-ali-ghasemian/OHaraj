@@ -64,7 +64,7 @@ namespace OHaraj.Repositories
 
 
 
-        //Role Access Banned
+        //Role Access
         public async Task<int> AddAccessAsync(RoleAccess input)
         {
             await _dbcontext.AddAsync(input);
