@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using OHaraj.Core.Domain.Entities.Configs;
 using OHaraj.Core.Domain.Entities.Management;
 using OHaraj.Core.Domain.Entities.Settings;
@@ -511,6 +512,44 @@ namespace OHaraj.Repositories
                 .ToListAsync();
         }
 
+        public Task<string> AddRoleAsync(IdentityRole role)
+        {
+            throw new NotImplementedException();
+        }
 
+        public Task<string> UpdateRoleAsync(IdentityRole role)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<string> DeleteRoleAsync(IdentityRole role)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IdentityRole> GetRoleAsync(string roleId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<IdentityRole>> GetRolesAsync(string userId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<IdentityRole>> GetRolesAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<IdentityRole>> GiveRolesAsync(string userId, IEnumerable<IdentityRole> roles)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<IdentityRole>> TakeRolesAsync(string userId, IEnumerable<IdentityRole> roles)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
