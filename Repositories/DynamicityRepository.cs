@@ -14,9 +14,12 @@ namespace OHaraj.Repositories
     {
         private readonly ApplicationDbContext _dbcontext;
         private readonly RoleManager<IdentityRole> _roleManager;
-        public DynamicityRepository(ApplicationDbContext dbcontext, RoleManager<IdentityRole> roleManager) {
+        private readonly UserManager<IdentityUser> _userManager;
+        public DynamicityRepository(ApplicationDbContext dbcontext, RoleManager<IdentityRole> roleManager, UserManager<IdentityUser> userManager)
+        {
             _dbcontext = dbcontext;
             _roleManager = roleManager;
+            _userManager = userManager;
         }
         //Menu
         public async Task<int> AddMenuAsync(Menu input)
@@ -515,6 +518,9 @@ namespace OHaraj.Repositories
                 .ToListAsync();
         }
 
+
+
+        //Roles
         public async Task<IdentityResult> AddRoleAsync(string roleName)
         {
             var roleExists = await _roleManager.RoleExistsAsync(roleName);
@@ -547,14 +553,14 @@ namespace OHaraj.Repositories
            return await _roleManager.FindByIdAsync(roleId);
         }
 
-        public Task<IEnumerable<IdentityRole>> GetRolesAsync(string userId)
+        public async Task<IEnumerable<string>> GetRolesAsync(IdentityUser user)
         {
-            
+            return await _userManager.GetRolesAsync(user);
         }
 
-        public Task<IEnumerable<IdentityRole>> GetRolesAsync()
+        public async Task<IEnumerable<IdentityRole>> GetRolesAsync()
         {
-            
+            return await _roleManager.Roles.ToListAsync();
         }
 
         public Task<IEnumerable<IdentityRole>> GiveRolesAsync(string userId, IEnumerable<IdentityRole> roles)
