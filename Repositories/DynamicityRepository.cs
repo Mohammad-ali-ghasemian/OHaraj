@@ -577,9 +577,17 @@ namespace OHaraj.Repositories
             return await _userManager.GetRolesAsync(user);
         }
 
-        public Task<IEnumerable<string>> TakeRolesAsync(IdentityUser user, IEnumerable<string> roles)
+        public async Task<IEnumerable<string>> TakeRolesAsync(IdentityUser user, IEnumerable<string> roles)
         {
-            
+            var existingRoles = await _userManager.GetRolesAsync(user);
+            var removableRoles = roles.Intersect(existingRoles, StringComparer.OrdinalIgnoreCase).Distinct().ToList();
+
+            if (removableRoles.Any())
+            {
+                await _userManager.RemoveFromRolesAsync(user, removableRoles);
+            }
+
+            return await _userManager.GetRolesAsync(user);
         }
     }
 }
