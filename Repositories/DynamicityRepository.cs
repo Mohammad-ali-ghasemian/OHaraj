@@ -516,10 +516,10 @@ namespace OHaraj.Repositories
 
         public async Task<IdentityResult> AddRoleAsync(string roleName)
         {
-            var roleExists = await _roleManager.RoleExistsAsync(role.);
+            var roleExists = await _roleManager.RoleExistsAsync(roleName);
             if (!roleExists)
             {
-                return await _roleManager.CreateAsync(new IdentityRole("Admin"));
+                return await _roleManager.CreateAsync(new IdentityRole(roleName));
             }
             else
             {
@@ -529,7 +529,6 @@ namespace OHaraj.Repositories
                     Description = "A role with the name 'Admin' already exists."
                 });
             }
-
         }
 
         public Task<IdentityResult> UpdateRoleAsync(string roleName)
