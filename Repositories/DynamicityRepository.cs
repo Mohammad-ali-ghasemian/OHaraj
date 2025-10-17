@@ -531,12 +531,12 @@ namespace OHaraj.Repositories
             }
         }
 
-        public Task<IdentityResult> UpdateRoleAsync(string roleName)
+        public async Task<IdentityResult> UpdateRoleAsync(IdentityRole role)
         {
-            
+            return await _roleManager.UpdateAsync(role);
         }
 
-        public Task<IdentityResult> DeleteRoleAsync(string roleName)
+        public Task<IdentityResult> DeleteRoleAsync(IdentityRole role)
         {
             
         }
