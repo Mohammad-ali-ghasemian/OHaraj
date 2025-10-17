@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace OHaraj.Core.Domain.Models.Dynamicity
 {
-    public class UpsertRoleAccessBanned
+    public class UpsertRoleAccess
     {
         public int? Id { get; set; }
         [Required(ErrorMessage = PublicHelper.RequiredValidationErrorMessage)]
