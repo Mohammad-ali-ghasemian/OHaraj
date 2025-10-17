@@ -12,8 +12,10 @@ namespace OHaraj.Repositories
     public class DynamicityRepository : IDynamicityRepository
     {
         private readonly ApplicationDbContext _dbcontext;
-        public DynamicityRepository(ApplicationDbContext dbcontext) {
+        private readonly RoleManager<IdentityRole> _roleManager;
+        public DynamicityRepository(ApplicationDbContext dbcontext, RoleManager<IdentityRole> roleManager) {
             _dbcontext = dbcontext;
+            _roleManager = roleManager;
         }
         //Menu
         public async Task<int> AddMenuAsync(Menu input)
@@ -512,44 +514,57 @@ namespace OHaraj.Repositories
                 .ToListAsync();
         }
 
-        public Task<string> AddRoleAsync(IdentityRole role)
+        public async Task<IdentityResult> AddRoleAsync(string roleName)
         {
-            throw new NotImplementedException();
+            var roleExists = await _roleManager.RoleExistsAsync(role.);
+            if (!roleExists)
+            {
+                return await _roleManager.CreateAsync(new IdentityRole("Admin"));
+            }
+            else
+            {
+                return IdentityResult.Failed(new IdentityError
+                {
+                    Code = "DuplicateRole",
+                    Description = "A role with the name 'Admin' already exists."
+                });
+            }
+
         }
 
-        public Task<string> UpdateRoleAsync(IdentityRole role)
+        public Task<IdentityResult> UpdateRoleAsync(string roleName)
         {
-            throw new NotImplementedException();
+            
         }
 
-        public Task<string> DeleteRoleAsync(IdentityRole role)
+        public Task<IdentityResult> DeleteRoleAsync(string roleName)
         {
-            throw new NotImplementedException();
+            
         }
 
         public Task<IdentityRole> GetRoleAsync(string roleId)
         {
-            throw new NotImplementedException();
+            
         }
 
         public Task<IEnumerable<IdentityRole>> GetRolesAsync(string userId)
         {
-            throw new NotImplementedException();
+            
         }
 
         public Task<IEnumerable<IdentityRole>> GetRolesAsync()
         {
-            throw new NotImplementedException();
+            
         }
 
         public Task<IEnumerable<IdentityRole>> GiveRolesAsync(string userId, IEnumerable<IdentityRole> roles)
         {
-            throw new NotImplementedException();
+            
         }
 
         public Task<IEnumerable<IdentityRole>> TakeRolesAsync(string userId, IEnumerable<IdentityRole> roles)
         {
-            throw new NotImplementedException();
+            
         }
     }
 }
