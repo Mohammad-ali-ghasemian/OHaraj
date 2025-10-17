@@ -132,61 +132,61 @@ namespace OHaraj.Services
 
 
 
-        //Role Access Banned
-        //public async Task<int> UpsertAccessBan(UpsertRoleAccessBanned input)
-        //{
-        //    if (input.Id == null)
-        //    {
-        //        return await _dynamicityRepository.AddBanAccessAsync(new RoleAccessBanned
-        //        {
-        //            RoleId = input.RoleId,
-        //            MenuId = input.MenuId,
-        //        });
-        //    }
-        //    else
-        //    {
-        //        var accessBanned = await _dynamicityRepository.GetBanAccessAsync((int) input.Id);
-        //        if (accessBanned == null)
-        //        {
-        //            throw new NotFoundException("مورد یافت نشد");
-        //        }
-        //        accessBanned.RoleId = input.RoleId;
-        //        accessBanned.MenuId = input.MenuId;
-        //        return await _dynamicityRepository.UpdateBanAccessAsync(accessBanned);
-        //    }
-        //}
+        //Role Access 
+        public async Task<int> UpsertAccess(UpsertRoleAccess input)
+        {
+            if (input.Id == null)
+            {
+                return await _dynamicityRepository.AddAccessAsync(new RoleAccess
+                {
+                    RoleId = input.RoleId,
+                    MenuId = input.MenuId,
+                });
+            }
+            else
+            {
+                var access = await _dynamicityRepository.GetAccessAsync((int) input.Id);
+                if (access == null)
+                {
+                    throw new NotFoundException("مورد یافت نشد");
+                }
+                access.RoleId = input.RoleId;
+                access.MenuId = input.MenuId;
+                return await _dynamicityRepository.UpdateAccessAsync(access);
+            }
+        }
 
-        //public async Task<int> DeleteAccessBan(int accessBanId)
-        //{
-        //    var accessBanned = await _dynamicityRepository.GetBanAccessAsync(accessBanId);
-        //    if (accessBanned == null)
-        //    {
-        //        throw new NotFoundException("مورد یافت نشد");
-        //    }
+        public async Task<int> DeleteAccess(int accessId)
+        {
+            var access = await _dynamicityRepository.GetAccessAsync(accessId);
+            if (access == null)
+            {
+                throw new NotFoundException("مورد یافت نشد");
+            }
 
-        //    return await _dynamicityRepository.DeleteBanAccessAsync(accessBanned);
-        //}
+            return await _dynamicityRepository.DeleteAccessAsync(access);
+        }
 
-        //public async Task<RoleAccessBanned> GetAccessBan(int accessBanId)
-        //{
-        //    var accessBanned = await _dynamicityRepository.GetBanAccessAsync(accessBanId);
-        //    if (accessBanned == null)
-        //    {
-        //        throw new NotFoundException("مورد یافت نشد");
-        //    }
+        public async Task<RoleAccess> GetAccess(int accessId)
+        {
+            var access = await _dynamicityRepository.GetAccessAsync(accessId);
+            if (access == null)
+            {
+                throw new NotFoundException("مورد یافت نشد");
+            }
 
-        //    return accessBanned;
-        //}
+            return access;
+        }
 
-        //public async Task<IEnumerable<RoleAccessBanned>> GetAccessBan(string roleId)
-        //{
-        //    return await _dynamicityRepository.GetBanAccessByRoleAsync(roleId);
-        //}
+        public async Task<IEnumerable<RoleAccess>> GetAccess(string roleId)
+        {
+            return await _dynamicityRepository.GetAccessByRoleAsync(roleId);
+        }
 
-        //public async Task<IEnumerable<RoleAccessBanned>> GetAllAccessBans()
-        //{
-        //    return await _dynamicityRepository.GetBanAccessesAsync();
-        //}
+        public async Task<IEnumerable<RoleAccess>> GetAllAccesss()
+        {
+            return await _dynamicityRepository.GetAccessesAsync();
+        }
 
 
 
@@ -718,14 +718,5 @@ namespace OHaraj.Services
             return await _dynamicityRepository.GetDocumentSettingsByConfigIdAsync(documentConfigId);
         }
 
-        public Task<int> UpsertAccessBan(UpsertRoleAccessBanned input)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<int> DeleteAccessBan(int accessBanId)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
