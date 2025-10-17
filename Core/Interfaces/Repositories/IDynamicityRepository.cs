@@ -1,4 +1,5 @@
-﻿using OHaraj.Core.Domain.Entities.Configs;
+﻿using Microsoft.AspNetCore.Identity;
+using OHaraj.Core.Domain.Entities.Configs;
 using OHaraj.Core.Domain.Entities.Management;
 using OHaraj.Core.Domain.Entities.Settings;
 using OHaraj.Core.Enums;
@@ -112,18 +113,19 @@ namespace OHaraj.Core.Interfaces.Repositories
 
 
         //Roles
-        Task<string> AddRoleAsync(ir);
-        Task<string> UpdateRoleAsync(ir);
-        Task<string> DeleteRoleAsync(ir);
-        Task<identity Role> GetRoleAsync(string roleId);
-        Task<IEnumerable<identity role>> GetRolesAsync();
+        Task<string> AddRoleAsync(IdentityRole role);
+        Task<string> UpdateRoleAsync(IdentityRole role);
+        Task<string> DeleteRoleAsync(IdentityRole role);
+        Task<IdentityRole> GetRoleAsync(string roleId);
+        Task<IEnumerable<IdentityRole>> GetRolesAsync(string userId);
+        Task<IEnumerable<IdentityRole>> GetRolesAsync();
 
-        // Default : everyone has "User" role
+        // Default : every login has at least "User" role
         // Default : cannot give "User" and "Admin" or "SuperAdmin" role to another user (SuperAdmin can give "admin")
-        // Default : cannot take "User" and "Admin" or "SuperAdmin" role from another user
+        // Default : cannot take "User" and "Admin" or "SuperAdmin" role from another user (SuperAdmin can demotion "admin")
         // Give role to the user, gives back some identity roles for later : fetch the name of the roles (string) then return
-        Task<IEnumerable<ir>> RolesAsync(string userId, string roleId);
-        Task<IEnumerable<ir>> GetRoleAsync(string userId, string roleId);
+        Task<IEnumerable<IdentityRole>> GiveRolesAsync(string userId, IEnumerable<IdentityRole> roles);
+        Task<IEnumerable<IdentityRole>> TakeRolesAsync(string userId, IEnumerable<IdentityRole> roles);
 
     }
 }
