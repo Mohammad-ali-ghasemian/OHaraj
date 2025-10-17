@@ -114,8 +114,8 @@ namespace OHaraj.Core.Interfaces.Repositories
 
         //Roles
         Task<IdentityResult> AddRoleAsync(string roleName);
-        Task<IdentityResult> UpdateRoleAsync(string roleName);
-        Task<IdentityResult> DeleteRoleAsync(string roleName);
+        Task<IdentityResult> UpdateRoleAsync(IdentityRole role);
+        Task<IdentityResult> DeleteRoleAsync(IdentityRole role);
         Task<IdentityRole> GetRoleAsync(string roleId);
         Task<IEnumerable<IdentityRole>> GetRolesAsync(string userId);
         Task<IEnumerable<IdentityRole>> GetRolesAsync();
