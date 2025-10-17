@@ -6,6 +6,7 @@ using OHaraj.Core.Domain.Entities.Settings;
 using OHaraj.Core.Enums;
 using OHaraj.Core.Interfaces.Repositories;
 using OHaraj.Infrastructure;
+using System.Data;
 
 namespace OHaraj.Repositories
 {
@@ -536,14 +537,14 @@ namespace OHaraj.Repositories
             return await _roleManager.UpdateAsync(role);
         }
 
-        public Task<IdentityResult> DeleteRoleAsync(IdentityRole role)
+        public async Task<IdentityResult> DeleteRoleAsync(IdentityRole role)
         {
-            
+            return await _roleManager.DeleteAsync(role);
         }
 
-        public Task<IdentityRole> GetRoleAsync(string roleId)
+        public async Task<IdentityRole> GetRoleAsync(string roleId)
         {
-            
+           return await _roleManager.FindByIdAsync(roleId);
         }
 
         public Task<IEnumerable<IdentityRole>> GetRolesAsync(string userId)
