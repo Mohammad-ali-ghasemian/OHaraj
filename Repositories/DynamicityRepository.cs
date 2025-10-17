@@ -563,12 +563,21 @@ namespace OHaraj.Repositories
             return await _roleManager.Roles.ToListAsync();
         }
 
-        public Task<IEnumerable<IdentityRole>> GiveRolesAsync(string userId, IEnumerable<IdentityRole> roles)
+
+        public async Task<IEnumerable<string>> GiveRolesAsync(IdentityUser user, IEnumerable<string> roles)
         {
-            
+            var existingRoles = await _userManager.GetRolesAsync(user);
+            var newRoles = roles.Except(existingRoles, StringComparer.OrdinalIgnoreCase).Distinct().ToList();
+
+            if (newRoles.Any())
+            {
+                await _userManager.AddToRolesAsync(user, newRoles);
+            }
+
+            return await _userManager.GetRolesAsync(user);
         }
 
-        public Task<IEnumerable<IdentityRole>> TakeRolesAsync(string userId, IEnumerable<IdentityRole> roles)
+        public Task<IEnumerable<string>> TakeRolesAsync(IdentityUser user, IEnumerable<string> roles)
         {
             
         }
