@@ -107,13 +107,14 @@ namespace OHaraj.Services
             var user = await Current();
             if (user == null)
             {
-                throw new NotFoundException("کاربر یافت است.");
+                throw new NotFoundException("کاربر یافت نشد.");
             }
 
-            var accessBanned = await _dynamicityRepository.GetAccessDeniedMenusAsync(await _authenticationRepository.GetUserRolesAsync(user));
-            var menus = await _dynamicityRepository.GetMenusAsync();
+            var access = await _dynamicityRepository.GetAccessMenusAsync(await _authenticationRepository.GetUserRolesAsync(user));
+            //var menus = await _dynamicityRepository.GetMenusAsync();
 
-            return menus.Except(accessBanned);
+            //return menus.Except(accessBanned);
+            return access;
         }
 
         public async Task<IEnumerable<Menu>> GetOtherUserAccessMenus(string userId)
@@ -124,10 +125,11 @@ namespace OHaraj.Services
                 throw new NotFoundException("کاربر یافت نشد.");
             }
 
-            var accessBanned = await _dynamicityRepository.GetAccessDeniedMenusAsync(await _authenticationRepository.GetUserRolesAsync(user));
-            var menus = await _dynamicityRepository.GetMenusAsync();
+            var access = await _dynamicityRepository.GetAccessMenusAsync(await _authenticationRepository.GetUserRolesAsync(user));
+            //var menus = await _dynamicityRepository.GetMenusAsync();
 
-            return menus.Except(accessBanned);
+            //return menus.Except(accessBanned);
+            return access;
         }
 
 

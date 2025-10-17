@@ -49,18 +49,18 @@ namespace OHaraj.Repositories
             return await _dbcontext.Menus.AsNoTracking().Include(nameof(Menu)).ToListAsync();
         }
 
-        //public async Task<IEnumerable<Menu>> GetAccessDeniedMenusAsync(IEnumerable<string> roleIds)
-        //{
-        //    var accessBanned = await _dbcontext.RoleAccessBanned.AsNoTracking()
-        //        .Where(x => roleIds.Contains(x.RoleId))
-        //        .Select(x => x.MenuId)
-        //        .ToListAsync();
+        public async Task<IEnumerable<Menu>> GetAccessMenusAsync(IEnumerable<string> roleIds)
+        {
+            var access = await _dbcontext.RoleAccess.AsNoTracking()
+                .Where(x => roleIds.Contains(x.RoleId))
+                .Select(x => x.MenuId)
+                .ToListAsync();
 
-        //    return await _dbcontext.Menus.AsNoTracking()
-        //        .Include(nameof(Menu))
-        //        .Where(x => accessBanned.Contains(x.Id))
-        //        .ToListAsync();
-        //}
+            return await _dbcontext.Menus.AsNoTracking()
+                .Include(nameof(Menu))
+                .Where(x => access.Contains(x.Id))
+                .ToListAsync();
+        }
 
 
 
