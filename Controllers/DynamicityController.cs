@@ -136,11 +136,22 @@ namespace OHaraj.Controllers
             return new Response<int>(await _dynamicityService.DeleteAccess(accessId)).ToJsonResult();
         }
 
-        [HttpPost("Get-Access-By-Id")]
+        [HttpGet("Get-Access-By-Id")]
         [Produces(typeof(Response<RoleAccess>))]
         public async Task<IActionResult> GetAccessById(int id)
         {
             return new Response<RoleAccess>(await _dynamicityService.GetAccess(id)).ToJsonResult();
+        }
+
+        /// <summary>
+        /// What menus can the role access (beside anonymous menus)
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("Get-Role-Accesses")]
+        [Produces(typeof(Response<IEnumerable<RoleAccess>>))]
+        public async Task<IActionResult> GetRoleAccesses(string roleId)
+        {
+            return new Response<IEnumerable<RoleAccess>>(await _dynamicityService.GetAccess(roleId)).ToJsonResult();
         }
 
     }
