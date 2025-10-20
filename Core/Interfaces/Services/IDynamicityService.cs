@@ -90,7 +90,7 @@ namespace OHaraj.Core.Interfaces.Services
 
 
         //Roles
-        Task<string> UpsertRole(string roleName);
+        Task<string> UpsertRole(UpsertRole input);
         Task<string> DeleteRole(string roleName);
         Task<IdentityRole> GetRole(string roleId);
         Task<IEnumerable<IdentityRole>> GetRoles();
