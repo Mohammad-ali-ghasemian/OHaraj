@@ -85,7 +85,17 @@ namespace OHaraj.Controllers
             return new Response<IEnumerable<Menu>>(await _dynamicityService.GetAnonymousUserAccessMenus()).ToJsonResult();
         }
 
-
+        /// <summary>
+        /// Must login first to use this
+        /// </summary>
+        /// <returns></returns>
+        [Authorize]
+        [HttpGet("Get-Logined-User-Access-Menus")]
+        [Produces(typeof(Response<IEnumerable<Menu>>))]
+        public async Task<IActionResult> GetLoginedUserAccessMenus()
+        {
+            return new Response<IEnumerable<Menu>>(await _dynamicityService.GetLoginedUserAccessMenus()).ToJsonResult();
+        }
 
     }
 }
