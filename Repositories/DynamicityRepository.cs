@@ -548,9 +548,14 @@ namespace OHaraj.Repositories
             return await _roleManager.DeleteAsync(role);
         }
 
-        public async Task<IdentityRole> GetRoleAsync(string roleId)
+        public async Task<IdentityRole> GetRoleByIdAsync(string roleId)
         {
            return await _roleManager.FindByIdAsync(roleId);
+        }
+
+        public async Task<IdentityRole> GetRoleByNameAsync(string roleName)
+        {
+            return await _roleManager.FindByNameAsync(roleName);
         }
 
         public async Task<IEnumerable<string>> GetRolesAsync(IdentityUser user)
