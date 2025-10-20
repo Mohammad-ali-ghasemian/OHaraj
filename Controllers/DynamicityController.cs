@@ -183,7 +183,7 @@ namespace OHaraj.Controllers
         }
 
         /// <summary>
-        /// Delet a config will delete all settings that was matching to it
+        /// Delet a config will delete all settings that were matching to it
         /// </summary>
         /// <returns></returns>
         [HttpPost("Delete-Image-Config")]
@@ -223,6 +223,10 @@ namespace OHaraj.Controllers
             return new Response<int>(await _dynamicityService.UpsertVideoConfig(input)).ToJsonResult();
         }
 
+        /// <summary>
+        /// Delet a config will delete all settings that were matching to it
+        /// </summary>
+        /// <returns></returns>
         [HttpPost("Delete-Video-Config")]
         [Produces(typeof(Response<int>))]
         public async Task<IActionResult> DeleteVideoConfig(int videoConfigId)
@@ -260,6 +264,10 @@ namespace OHaraj.Controllers
             return new Response<int>(await _dynamicityService.UpsertAudioConfig(input)).ToJsonResult();
         }
 
+        /// <summary>
+        /// Delet a config will delete all settings that were matching to it
+        /// </summary>
+        /// <returns></returns>
         [HttpPost("Delete-Audio-Config")]
         [Produces(typeof(Response<int>))]
         public async Task<IActionResult> DeleteAudioConfig(int audioConfigId)
@@ -297,6 +305,10 @@ namespace OHaraj.Controllers
             return new Response<int>(await _dynamicityService.UpsertDocumentConfig(input)).ToJsonResult();
         }
 
+        /// <summary>
+        /// Delet a config will delete all settings that were matching to it
+        /// </summary>
+        /// <returns></returns>
         [HttpPost("Delete-Document-Config")]
         [Produces(typeof(Response<int>))]
         public async Task<IActionResult> DeleteDocumentConfig(int documentConfigId)
