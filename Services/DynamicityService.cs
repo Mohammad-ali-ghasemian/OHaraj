@@ -773,9 +773,14 @@ namespace OHaraj.Services
             return new RoleDTO { Id = role.Id , Name = role.Name};
         }
 
-        public Task<IEnumerable<RoleDTO>> GetRoles()
+        public async Task<IEnumerable<RoleDTO>> GetRoles()
         {
-            throw new NotImplementedException();
+            var roles = await _dynamicityRepository.GetRolesAsync();
+            return roles.Select(r => new RoleDTO
+            {
+                Id = r.Id,
+                Name = r.Name
+            });
         }
 
         public Task<IEnumerable<IdentityRole>> GiveRoles(string userId, IEnumerable<string> roleIds)
