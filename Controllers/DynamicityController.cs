@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OHaraj.Core.Domain.Entities.Configs;
 using OHaraj.Core.Domain.Entities.Management;
+using OHaraj.Core.Domain.Entities.Settings;
 using OHaraj.Core.Domain.Models.Dynamicity;
 using OHaraj.Core.Domain.Models.Dynamicity.Configs;
 using OHaraj.Core.Interfaces.Services;
@@ -352,6 +353,13 @@ namespace OHaraj.Controllers
         public async Task<IActionResult> DeleteImageSetting(int imageSettingId)
         {
             return new Response<int>(await _dynamicityService.DeleteImageSetting(imageSettingId)).ToJsonResult();
+        }
+
+        [HttpGet("Get-Image-Setting")]
+        [Produces(typeof(Response<ImageSettings>))]
+        public async Task<IActionResult> GetImageSetting(int imageSettingId)
+        {
+            return new Response<ImageSettings>(await _dynamicityService.GetImageSetting(imageSettingId)).ToJsonResult();
         }
 
 
