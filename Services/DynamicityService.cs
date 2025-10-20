@@ -730,7 +730,7 @@ namespace OHaraj.Services
                 {
                     return input.Name;
                 }
-                throw new BadRequestException("مشکلی در ایجاد رول به وجود آمده است");
+                return result.Errors.ToString();
             }
             else
             {
@@ -744,9 +744,18 @@ namespace OHaraj.Services
             }
         }
 
-        public Task<string> DeleteRole(string roleName)
+        public async Task<string> DeleteRole(string roleId)
         {
-            throw new NotImplementedException();
+            var role = await _dynamicityRepository.GetRoleByIdAsync(roleId);
+            if (role == null)
+            {
+                throw new NotFoundException("رول یافت نشد");
+            }
+            var result = await _dynamicityRepository.DeleteRoleAsync(role);
+            if (result.Succeeded)
+            {
+                return role.Name;
+            }
         }
 
         public Task<IdentityRole> GetRole(string roleId)
