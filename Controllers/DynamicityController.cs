@@ -154,5 +154,13 @@ namespace OHaraj.Controllers
             return new Response<IEnumerable<RoleAccess>>(await _dynamicityService.GetAccess(roleId)).ToJsonResult();
         }
 
+
+        [HttpGet("Get-All-Accesses")]
+        [Produces(typeof(Response<IEnumerable<RoleAccess>>))]
+        public async Task<IActionResult> GetAllAccesses()
+        {
+            return new Response<IEnumerable<RoleAccess>>(await _dynamicityService.GetAllAccesss()).ToJsonResult();
+        }
+
     }
 }
