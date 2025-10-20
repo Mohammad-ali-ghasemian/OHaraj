@@ -107,7 +107,20 @@ namespace OHaraj.Controllers
         {
             return new Response<IEnumerable<Menu>>(await _dynamicityService.GetOtherUserAccessMenus(userId)).ToJsonResult();
         }
-        
+
+
+
+
+        /// <summary>
+        /// Which role can access which menu
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost("Add-Access")]
+        [Produces(typeof(Response<int>))]
+        public async Task<IActionResult]> AddAccess(UpsertRoleAccess input)
+        {
+            return new Response<int>(await _dynamicityService.UpsertAccess(input)).ToJsonResult();
+        }
 
     }
 }
