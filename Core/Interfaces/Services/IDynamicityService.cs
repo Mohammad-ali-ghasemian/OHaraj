@@ -1,4 +1,5 @@
-﻿using OHaraj.Core.Domain.Entities.Configs;
+﻿using Microsoft.AspNetCore.Identity;
+using OHaraj.Core.Domain.Entities.Configs;
 using OHaraj.Core.Domain.Entities.Management;
 using OHaraj.Core.Domain.Entities.Settings;
 using OHaraj.Core.Domain.Models.Dynamicity;
@@ -89,16 +90,16 @@ namespace OHaraj.Core.Interfaces.Services
 
 
         //Roles
-        Task<string> UpsertRole(ir);
-        Task<string> DeleteRole(ir);
-        Task<identity Role> GetRole(string roleId);
-        Task<IEnumerable<identity role>> GetRoles();
+        Task<string> UpsertRole(string roleName);
+        Task<string> DeleteRole(string roleName);
+        Task<IdentityRole> GetRole(string roleId);
+        Task<IEnumerable<IdentityRole>> GetRoles();
 
         // Default : everyone has "User" role
         // Default : cannot give "User" and "Admin" or "SuperAdmin" role to another user (SuperAdmin can give "admin")
         // Default : cannot take "User" and "Admin" or "SuperAdmin" role from another user
         // Give role to the user, gives back some identity roles for later : fetch the name of the roles (string) then return
-        Task<IEnumerable<ir>> GiveRole(string userId, string roleId);
-        Task<IEnumerable<ir>> GetRole(string userId, string roleId);
+        Task<IEnumerable<IdentityRole>> GiveRoles(string userId, IEnumerable<string> roleIds);
+        Task<IEnumerable<IdentityRole>> GetRoles(string userId, IEnumerable<string> roleIds);
     }
 }
