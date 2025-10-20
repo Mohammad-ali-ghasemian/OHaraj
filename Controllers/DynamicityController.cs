@@ -145,6 +145,7 @@ namespace OHaraj.Controllers
 
         /// <summary>
         /// What menus can the role access (beside anonymous menus)
+        /// SuperAdmin/Admin and the user who has this role can use this
         /// </summary>
         /// <returns></returns>
         [Authorize]
@@ -166,6 +167,6 @@ namespace OHaraj.Controllers
 
 
         []
-
+        config
     }
 }
