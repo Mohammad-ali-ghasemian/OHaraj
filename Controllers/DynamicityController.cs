@@ -242,5 +242,41 @@ namespace OHaraj.Controllers
 
 
 
+        [HttpPost("Add-Audio-Config")]
+        [Produces(typeof(Response<int>))]
+        public async Task<IActionResult> AddAudioConfig(UpsertAudioConfig input)
+        {
+            return new Response<int>(await _dynamicityService.UpsertAudioConfig(input)).ToJsonResult();
+        }
+
+        [HttpPost("Update-Audio-Config")]
+        [Produces(typeof(Response<int>))]
+        public async Task<IActionResult> UpdateAudioConfig(UpsertAudioConfig input)
+        {
+            return new Response<int>(await _dynamicityService.UpsertAudioConfig(input)).ToJsonResult();
+        }
+
+        [HttpPost("Delete-Audio-Config")]
+        [Produces(typeof(Response<int>))]
+        public async Task<IActionResult> DeleteAudioConfig(int audioConfigId)
+        {
+            return new Response<int>(await _dynamicityService.DeleteAudioConfig(audioConfigId)).ToJsonResult();
+        }
+
+        [HttpGet("Get-Audio-Config")]
+        [Produces(typeof(Response<AudioConfigs>))]
+        public async Task<IActionResult> GetAudioConfig(int audioConfigId)
+        {
+            return new Response<AudioConfigs>(await _dynamicityService.GetAudioConfig(audioConfigId)).ToJsonResult();
+        }
+
+        [HttpGet("Get-Audio-Configs")]
+        [Produces(typeof(Response<IEnumerable<AudioConfigs>>))]
+        public async Task<IActionResult> GetAudioConfigs()
+        {
+            return new Response<IEnumerable<AudioConfigs>>(await _dynamicityService.GetAudioConfigs()).ToJsonResult();
+        }
+
+
     }
 }
