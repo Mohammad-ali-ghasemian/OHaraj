@@ -136,5 +136,12 @@ namespace OHaraj.Controllers
             return new Response<int>(await _dynamicityService.DeleteAccess(accessId)).ToJsonResult();
         }
 
+        [HttpPost("Get-Access-By-Id")]
+        [Produces(typeof(Response<RoleAccess>))]
+        public async Task<IActionResult> GetAccessById(int id)
+        {
+            return new Response<RoleAccess>(await _dynamicityService.GetAccess(id)).ToJsonResult();
+        }
+
     }
 }
