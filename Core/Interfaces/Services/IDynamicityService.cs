@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using OHaraj.Core.Domain.DTOs;
 using OHaraj.Core.Domain.Entities.Configs;
 using OHaraj.Core.Domain.Entities.Management;
 using OHaraj.Core.Domain.Entities.Settings;
@@ -92,8 +93,8 @@ namespace OHaraj.Core.Interfaces.Services
         //Roles
         Task<string> UpsertRole(UpsertRole input);
         Task<string> DeleteRole(string roleId);
-        Task<IdentityRole> GetRole(string roleId);
-        Task<IEnumerable<IdentityRole>> GetRoles();
+        Task<RoleDTO> GetRole(string roleId);
+        Task<IEnumerable<RoleDTO>> GetRoles();
 
         // Default : everyone has "User" role
         // Default : cannot give "User" and "Admin" or "SuperAdmin" role to another user (SuperAdmin can give "admin")
