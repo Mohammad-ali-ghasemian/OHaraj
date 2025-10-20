@@ -218,6 +218,15 @@ namespace OHaraj.Services
         //Role Access 
         public async Task<int> UpsertAccess(UpsertRoleAccess input)
         {
+            if (await _dynamicityRepository.GetMenuAsync(input.MenuId) == null)
+            {
+                throw new NotFoundException("منو یافت نشد");
+            }
+            if (await _dynamicityRepository.GetRoleByIdAsync(input.RoleId) == null)
+            {
+                throw new NotFoundException("رول یافت نشد");
+            }
+
             if (input.Id == null)
             {
                 return await _dynamicityRepository.AddAccessAsync(new RoleAccess
