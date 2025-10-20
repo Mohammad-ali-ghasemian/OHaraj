@@ -14,15 +14,18 @@ namespace OHaraj.Repositories
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly ApplicationDbContext _dbContext;
+        private readonly RoleManager<IdentityRole> _roleManager;
         public AuthenticationRepository(
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager,
-            ApplicationDbContext dbContext
+            ApplicationDbContext dbContext,
+            RoleManager<IdentityRole> roleManager
             )
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _dbContext = dbContext;
+            _roleManager = roleManager;
         }
 
         // User - Register
@@ -85,6 +88,11 @@ namespace OHaraj.Repositories
         public async Task<IdentityResult> DeleteUserAsync(IdentityUser user)
         {
             return await _userManager.DeleteAsync(user);
+        }
+
+        public async Task<IEnumerable<IdentityRole>> GetRolesAsync()
+        {
+            return await _roleManager.Roles.ToListAsync();
         }
 
 

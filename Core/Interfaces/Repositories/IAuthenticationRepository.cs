@@ -23,6 +23,8 @@ namespace OHaraj.Core.Interfaces.Repositories
         Task<IdentityResult> UpdateUserAsync(IdentityUser user);
         
         Task<IdentityResult> DeleteUserAsync(IdentityUser user);
+
+        Task<IEnumerable<IdentityRole>> GetRolesAsync();
         
         // Token
         Task AddUserTokensAsync(Token token);
