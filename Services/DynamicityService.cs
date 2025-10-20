@@ -815,9 +815,35 @@ namespace OHaraj.Services
 
         }
 
-        public Task<IEnumerable<RoleDTO>> TakeRoles(string userId, IEnumerable<string> roleNames)
+        public async Task<IEnumerable<RoleDTO>> TakeRoles(string userId, IEnumerable<string> roleNames)
         {
-            throw new NotImplementedException();
+            var user = await _authenticationRepository.GetUserByIdAsync(userId);
+            if (user == null)
+            {
+                throw new NotFoundException("کاربر یافت نشد");
+            }
+
+            foreach (var roleName in roleNames)
+            {
+                if (await _dynamicityRepository.GetRoleByNameAsync(roleName) == null)
+                {
+                    throw new NotFoundException($"رول  '{roleName}' یافت نشد");
+                }
+            }
+
+            var roles = await _dynamicityRepository.TakeRolesAsync(user, roleNames);
+
+            return await Task.WhenAll(
+                roles.Select(async roleName =>
+                {
+                    var role = await _dynamicityRepository.GetRoleByNameAsync(roleName);
+                    return new RoleDTO
+                    {
+                        Id = role.Id,
+                        Name = roleName
+                    };
+                })
+            );
         }
     }
 }
