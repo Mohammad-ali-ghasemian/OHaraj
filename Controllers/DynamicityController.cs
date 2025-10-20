@@ -369,8 +369,13 @@ namespace OHaraj.Controllers
             return new Response<IEnumerable<ImageSettings>>(await _dynamicityService.GetImageSettings()).ToJsonResult();
         }
 
-
-
+        [HttpGet("Get-Image-Settings-By-MenuId")]
+        [Produces(typeof(Response<IEnumerable<ImageSettings>>))]
+        public async Task<IActionResult> GetImageSettingsByMenuId(int menuId)
+        {
+            return new Response<IEnumerable<ImageSettings>>(await _dynamicityService.GetImageSettingsByMenuId(menuId)).ToJsonResult();
+        }
+        
 
     }
 }
