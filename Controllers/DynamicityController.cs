@@ -506,5 +506,63 @@ namespace OHaraj.Controllers
         {
             return new Response<IEnumerable<AudioSettings>>(await _dynamicityService.GetAudioSettingsByConfigId(audioConfigId)).ToJsonResult();
         }
+
+
+
+        [HttpPost("Add-Document-Setting")]
+        [Produces(typeof(Response<int>))]
+        public async Task<IActionResult> AddDocumentSetting(UpsertSetting input)
+        {
+            return new Response<int>(await _dynamicityService.UpsertDocumentSetting(input)).ToJsonResult();
+        }
+
+        [HttpPost("Update-Document-Setting")]
+        [Produces(typeof(Response<int>))]
+        public async Task<IActionResult> UpdateDocumentSetting(UpsertSetting input)
+        {
+            return new Response<int>(await _dynamicityService.UpsertDocumentSetting(input)).ToJsonResult();
+        }
+
+        [HttpPost("Delete-Document-Setting")]
+        [Produces(typeof(Response<int>))]
+        public async Task<IActionResult> DeleteDocumentSetting(int documentSettingId)
+        {
+            return new Response<int>(await _dynamicityService.DeleteDocumentSetting(documentSettingId)).ToJsonResult();
+        }
+
+        [HttpGet("Get-Document-Setting")]
+        [Produces(typeof(Response<DocumentSettings>))]
+        public async Task<IActionResult> GetDocumentSetting(int documentSettingId)
+        {
+            return new Response<DocumentSettings>(await _dynamicityService.GetDocumentSetting(documentSettingId)).ToJsonResult();
+        }
+
+        [HttpGet("Get-Document-Settings")]
+        [Produces(typeof(Response<IEnumerable<DocumentSettings>>))]
+        public async Task<IActionResult> GetDocumentSettings()
+        {
+            return new Response<IEnumerable<DocumentSettings>>(await _dynamicityService.GetDocumentSettings()).ToJsonResult();
+        }
+
+        [HttpGet("Get-Document-Settings-By-MenuId")]
+        [Produces(typeof(Response<IEnumerable<DocumentSettings>>))]
+        public async Task<IActionResult> GetDocumentSettingsByMenuId(int menuId)
+        {
+            return new Response<IEnumerable<DocumentSettings>>(await _dynamicityService.GetDocumentSettingsByMenuId(menuId)).ToJsonResult();
+        }
+
+        [HttpGet("Get-Document-Settings-By-Area")]
+        [Produces(typeof(Response<IEnumerable<DocumentSettings>>))]
+        public async Task<IActionResult> GetDocumentSettingsByArea(Area area)
+        {
+            return new Response<IEnumerable<DocumentSettings>>(await _dynamicityService.GetDocumentSettingsByArea(area)).ToJsonResult();
+        }
+
+        [HttpGet("Get-Document-Settings-By-ConfigId")]
+        [Produces(typeof(Response<IEnumerable<DocumentSettings>>))]
+        public async Task<IActionResult> GetDocumentSettingsByConfigId(int documentConfigId)
+        {
+            return new Response<IEnumerable<DocumentSettings>>(await _dynamicityService.GetDocumentSettingsByConfigId(documentConfigId)).ToJsonResult();
+        }
     }
 }
