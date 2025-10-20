@@ -278,5 +278,42 @@ namespace OHaraj.Controllers
         }
 
 
+
+        [HttpPost("Add-Document-Config")]
+        [Produces(typeof(Response<int>))]
+        public async Task<IActionResult> AddDocumentConfig(UpsertDocumentConfig input)
+        {
+            return new Response<int>(await _dynamicityService.UpsertDocumentConfig(input)).ToJsonResult();
+        }
+
+        [HttpPost("Update-Document-Config")]
+        [Produces(typeof(Response<int>))]
+        public async Task<IActionResult> UpdateDocumentConfig(UpsertDocumentConfig input)
+        {
+            return new Response<int>(await _dynamicityService.UpsertDocumentConfig(input)).ToJsonResult();
+        }
+
+        [HttpPost("Delete-Document-Config")]
+        [Produces(typeof(Response<int>))]
+        public async Task<IActionResult> DeleteDocumentConfig(int documentConfigId)
+        {
+            return new Response<int>(await _dynamicityService.DeleteDocumentConfig(documentConfigId)).ToJsonResult();
+        }
+
+        [HttpGet("Get-Document-Config")]
+        [Produces(typeof(Response<DocumentConfigs>))]
+        public async Task<IActionResult> GetDocumentConfig(int documentConfigId)
+        {
+            return new Response<DocumentConfigs>(await _dynamicityService.GetDocumentConfig(documentConfigId)).ToJsonResult();
+        }
+
+        [HttpGet("Get-Document-Configs")]
+        [Produces(typeof(Response<IEnumerable<DocumentConfigs>>))]
+        public async Task<IActionResult> GetDocumentConfigs()
+        {
+            return new Response<IEnumerable<DocumentConfigs>>(await _dynamicityService.GetDocumentConfigs()).ToJsonResult();
+        }
+
+
     }
 }
