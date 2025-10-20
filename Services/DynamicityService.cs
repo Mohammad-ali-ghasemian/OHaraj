@@ -111,11 +111,58 @@ namespace OHaraj.Services
                 throw new NotFoundException("کاربر یافت نشد.");
             }
 
-            var access = await _dynamicityRepository.GetAccessMenusAsync(await _authenticationRepository.GetUserRolesAsync(user));
+            var roleNames = await _authenticationRepository.GetUserRolesAsync(user);
+            List<string> roleIds = new List<string>();
+
+            IdentityRole role;
+            foreach (string roleName in roleNames)
+            {
+                role = await _dynamicityRepository.GetRoleByNameAsync(roleName);
+                roleIds.Add(role.Id);
+            }
+
+            var access = await _dynamicityRepository.GetAccessMenusAsync(roleIds);
             //var menus = await _dynamicityRepository.GetMenusAsync();
 
             //return menus.Except(accessBanned);
             return access;
+        }
+
+        public async Task<bool> HasCurrentUserAccess(int menuId)
+        {
+            var user = await Current();
+            if (user == null)
+            {
+                throw new BadRequestException("کاربر لاگین نشده است");
+            }
+
+            var menu = await (_dynamicityRepository.GetMenuAsync(menuId));
+            if (menu == null)
+            {
+                throw new NotFoundException("منو یافت نشد");
+            }
+
+            var roleNames = await _authenticationRepository.GetUserRolesAsync(user);
+            List<string> roleIds = new List<string>();
+
+            IdentityRole role;
+            foreach (string roleName in roleNames)
+            {
+                role = await _dynamicityRepository.GetRoleByNameAsync(roleName);
+                roleIds.Add(role.Id);
+            }
+
+            // found current user's role ids. now let us see with these roles can access the menu or not.
+            var accessMenus = await _dynamicityRepository.GetAccessMenusAsync(roleIds);
+            if (accessMenus.Any(m => m.Id == menuId))
+            {
+                return true;
+            }
+            else
+            {
+                throw new UnauthorizedAccessException("دسترسی غیرمجاز");
+            }
+
         }
 
         public async Task<IEnumerable<Menu>> GetOtherUserAccessMenus(string userId)
@@ -126,7 +173,17 @@ namespace OHaraj.Services
                 throw new NotFoundException("کاربر یافت نشد.");
             }
 
-            var access = await _dynamicityRepository.GetAccessMenusAsync(await _authenticationRepository.GetUserRolesAsync(user));
+            var roleNames = await _authenticationRepository.GetUserRolesAsync(user);
+            List<string> roleIds = new List<string>();
+
+            IdentityRole role;
+            foreach (string roleName in roleNames)
+            {
+                role = await _dynamicityRepository.GetRoleByNameAsync(roleName);
+                roleIds.Add(role.Id);
+            }
+
+            var access = await _dynamicityRepository.GetAccessMenusAsync(roleIds);
             //var menus = await _dynamicityRepository.GetMenusAsync();
 
             //return menus.Except(accessBanned);
