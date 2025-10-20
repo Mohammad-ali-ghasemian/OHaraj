@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OHaraj.Core.Domain.Entities.Management;
+using OHaraj.Core.Domain.Models.Dynamicity;
 using OHaraj.Core.Interfaces.Services;
 using Project.Application.Responses;
 using System.Net;
@@ -22,10 +23,13 @@ namespace OHaraj.Controllers
         }
 
         [HttpPost("Add-Menu")]
-        [Produces(typeof(Response<Menu>))]
-        public async Task<IActionResult> AddMenu(Menu input) 
+        [Produces(typeof(Response<int>))]
+        public async Task<IActionResult> AddMenu(UpsertMenu input) 
         {
-
+            return new Response<int>(await _dynamicityService.UpsertMenu(input)).ToJsonResult();
         }
+
+
+
     }
 }
