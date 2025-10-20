@@ -362,6 +362,15 @@ namespace OHaraj.Controllers
             return new Response<ImageSettings>(await _dynamicityService.GetImageSetting(imageSettingId)).ToJsonResult();
         }
 
+        [HttpGet("Get-Image-Settings")]
+        [Produces(typeof(Response<IEnumerable<ImageSettings>>))]
+        public async Task<IActionResult> GetImageSettings()
+        {
+            return new Response<IEnumerable<ImageSettings>>(await _dynamicityService.GetImageSettings()).ToJsonResult();
+        }
+
+
+
 
     }
 }
