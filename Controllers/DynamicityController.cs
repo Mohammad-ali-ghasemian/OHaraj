@@ -205,6 +205,42 @@ namespace OHaraj.Controllers
 
 
 
+        [HttpPost("Add-Video-Config")]
+        [Produces(typeof(Response<int>))]
+        public async Task<IActionResult> AddVideoConfig(UpsertVideoConfig input)
+        {
+            return new Response<int>(await _dynamicityService.UpsertVideoConfig(input)).ToJsonResult();
+        }
+
+        [HttpPost("Update-Video-Config")]
+        [Produces(typeof(Response<int>))]
+        public async Task<IActionResult> UpdateVideoConfig(UpsertVideoConfig input)
+        {
+            return new Response<int>(await _dynamicityService.UpsertVideoConfig(input)).ToJsonResult();
+        }
+
+        [HttpPost("Delete-Video-Config")]
+        [Produces(typeof(Response<int>))]
+        public async Task<IActionResult> DeleteVideoConfig(int videoConfigId)
+        {
+            return new Response<int>(await _dynamicityService.DeleteVideoConfig(videoConfigId)).ToJsonResult();
+        }
+
+        [HttpGet("Get-Video-Config")]
+        [Produces(typeof(Response<VideoConfigs>))]
+        public async Task<IActionResult> GetVideoConfig(int videoConfigId)
+        {
+            return new Response<VideoConfigs>(await _dynamicityService.GetVideoConfig(videoConfigId)).ToJsonResult();
+        }
+
+        [HttpGet("Get-Video-Configs")]
+        [Produces(typeof(Response<IEnumerable<VideoConfigs>>))]
+        public async Task<IActionResult> GetVideoConfigs()
+        {
+            return new Response<IEnumerable<VideoConfigs>>(await _dynamicityService.GetVideoConfigs()).ToJsonResult();
+        }
+
+
 
     }
 }
