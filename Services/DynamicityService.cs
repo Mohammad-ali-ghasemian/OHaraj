@@ -240,7 +240,7 @@ namespace OHaraj.Services
                 var access = await _dynamicityRepository.GetAccessAsync((int) input.Id);
                 if (access == null)
                 {
-                    throw new NotFoundException("مورد یافت نشد");
+                    throw new NotFoundException("شناسه یافت نشد");
                 }
                 access.RoleId = input.RoleId;
                 access.MenuId = input.MenuId;
