@@ -142,7 +142,18 @@ namespace OHaraj.Services
 
         public async Task<IEnumerable<Menu>> GetAnonymousUserAccessMenus()
         {
+            var allMenus = await _dynamicityRepository.GetMenusAsync();
+            //var allRoles = await _authenticationRepository.GetRolesAsync();
 
+            //List<IdentityRole> roleMenus = new List<IdentityRole>();
+            //foreach (var role in allRoles)
+            //{
+            //    roleMenus.Add(await _dynamicityRepository.)
+            //}
+
+            var accessMenus = await _dynamicityRepository.GetAccessesAsync();
+
+            return allMenus.Where(menu => !accessMenus.Any(x => x.MenuId == menu.Id));
         }
 
         public async Task<IEnumerable<Menu>> GetLoginedUserAccessMenus()
