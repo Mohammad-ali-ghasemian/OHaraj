@@ -6,6 +6,7 @@ using OHaraj.Core.Domain.Entities.Management;
 using OHaraj.Core.Domain.Entities.Settings;
 using OHaraj.Core.Domain.Models.Dynamicity;
 using OHaraj.Core.Domain.Models.Dynamicity.Configs;
+using OHaraj.Core.Enums;
 using OHaraj.Core.Interfaces.Services;
 using Project.Application.Responses;
 using System.Net;
@@ -375,7 +376,21 @@ namespace OHaraj.Controllers
         {
             return new Response<IEnumerable<ImageSettings>>(await _dynamicityService.GetImageSettingsByMenuId(menuId)).ToJsonResult();
         }
-        
+
+        [HttpGet("Get-Image-Settings-By-Area")]
+        [Produces(typeof(Response<IEnumerable<ImageSettings>>))]
+        public async Task<IActionResult> GetImageSettingsByArea(Area area)
+        {
+            return new Response<IEnumerable<ImageSettings>>(await _dynamicityService.GetImageSettingsByArea(area)).ToJsonResult();
+        }
+
+        [HttpGet("Get-Image-Settings-By-ConfigId")]
+        [Produces(typeof(Response<IEnumerable<ImageSettings>>))]
+        public async Task<IActionResult> GetImageSettingsByConfigId(int imageConfigId)
+        {
+            return new Response<IEnumerable<ImageSettings>>(await _dynamicityService.GetImageSettingsByConfigId(imageConfigId)).ToJsonResult();
+        }
+
 
     }
 }
