@@ -272,7 +272,21 @@ namespace OHaraj.Services
 
         public async Task<IEnumerable<RoleAccess>> GetAccess(string roleId)
         {
-            return await _dynamicityRepository.GetAccessByRoleAsync(roleId);
+            var role = await _dynamicityRepository.GetRoleByIdAsync(roleId);
+            if (role == null)
+            {
+                throw new NotFoundException("رول یافت نشد");
+            }
+
+            var user = await Current();
+            var userRoles = await _authenticationRepository.GetUserRolesAsync(user);
+
+            if (userRoles.Contains("SuperAdmin") || userRoles.Contains("Admin") || userRoles.Contains(role.Name))
+            {
+                return await _dynamicityRepository.GetAccessByRoleAsync(roleId);
+            }
+
+            throw new UnauthorizedAccessException("دسترسی غیرمجاز");
         }
 
         public async Task<IEnumerable<RoleAccess>> GetAllAccesss()

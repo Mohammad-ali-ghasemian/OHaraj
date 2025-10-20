@@ -147,6 +147,7 @@ namespace OHaraj.Controllers
         /// What menus can the role access (beside anonymous menus)
         /// </summary>
         /// <returns></returns>
+        [Authorize]
         [HttpGet("Get-Role-Accesses")]
         [Produces(typeof(Response<IEnumerable<RoleAccess>>))]
         public async Task<IActionResult> GetRoleAccesses(string roleId)
@@ -154,13 +155,17 @@ namespace OHaraj.Controllers
             return new Response<IEnumerable<RoleAccess>>(await _dynamicityService.GetAccess(roleId)).ToJsonResult();
         }
 
-
         [HttpGet("Get-All-Accesses")]
         [Produces(typeof(Response<IEnumerable<RoleAccess>>))]
         public async Task<IActionResult> GetAllAccesses()
         {
             return new Response<IEnumerable<RoleAccess>>(await _dynamicityService.GetAllAccesss()).ToJsonResult();
         }
+
+
+
+
+        []
 
     }
 }
