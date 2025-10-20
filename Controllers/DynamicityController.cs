@@ -189,11 +189,18 @@ namespace OHaraj.Controllers
             return new Response<int>(await _dynamicityService.DeleteImageConfig(imageConfigId)).ToJsonResult();
         }
 
-        [HttpPost("Get-Image-Config")]
+        [HttpGet("Get-Image-Config")]
         [Produces(typeof(Response<ImageConfigs>))]
         public async Task<IActionResult> GetImageConfig(int imageConfigId)
         {
             return new Response<ImageConfigs>(await _dynamicityService.GetImageConfig(imageConfigId)).ToJsonResult();
+        }
+
+        [HttpGet("Get-Image-Configs")]
+        [Produces(typeof(Response<IEnumerable<ImageConfigs>>))]
+        public async Task<IActionResult> GetImageConfigs()
+        {
+            return new Response<IEnumerable<ImageConfigs>>(await _dynamicityService.GetImageConfigs()).ToJsonResult();
         }
 
 
