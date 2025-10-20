@@ -5,6 +5,7 @@ using OHaraj.Core.Domain.Entities.Configs;
 using OHaraj.Core.Domain.Entities.Management;
 using OHaraj.Core.Domain.Entities.Settings;
 using OHaraj.Core.Domain.Entities.Shop;
+using System.Reflection.Emit;
 
 namespace OHaraj.Infrastructure
 {
@@ -105,6 +106,29 @@ namespace OHaraj.Infrastructure
             //        Description = "Footer"
             //    }
             //);
+            builder.Entity<ImageSettings>()
+            .HasOne(s => s.ImageConfigs)
+            .WithMany(c => c.ImageSettings)
+            .HasForeignKey(s => s.ImageConfigsId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<VideoSettings>()
+            .HasOne(s => s.VideoConfigs)
+            .WithMany(c => c.VideoSettings)
+            .HasForeignKey(s => s.VideoConfigsId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<AudioSettings>()
+            .HasOne(s => s.AudioConfigs)
+            .WithMany(c => c.AudioSettings)
+            .HasForeignKey(s => s.AudioConfigsId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<DocumentSettings>()
+            .HasOne(s => s.DocumentConfigs)
+            .WithMany(c => c.DocumentSettings)
+            .HasForeignKey(s => s.DocumentConfigsId)
+            .OnDelete(DeleteBehavior.Cascade);
         }
 
         public DbSet<Cart> Carts { get; set; }

@@ -182,6 +182,10 @@ namespace OHaraj.Controllers
             return new Response<int>(await _dynamicityService.UpsertImageConfig(input)).ToJsonResult();
         }
 
+        /// <summary>
+        /// Delet a config will delete all settings that was matching to it
+        /// </summary>
+        /// <returns></returns>
         [HttpPost("Delete-Image-Config")]
         [Produces(typeof(Response<int>))]
         public async Task<IActionResult> DeleteImageConfig(int imageConfigId)
@@ -313,6 +317,9 @@ namespace OHaraj.Controllers
         {
             return new Response<IEnumerable<DocumentConfigs>>(await _dynamicityService.GetDocumentConfigs()).ToJsonResult();
         }
+
+
+
 
 
     }
