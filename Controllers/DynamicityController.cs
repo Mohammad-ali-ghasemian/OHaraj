@@ -29,6 +29,12 @@ namespace OHaraj.Controllers
             return new Response<int>(await _dynamicityService.UpsertMenu(input)).ToJsonResult();
         }
 
+        [HttpPost("Update-Menu")]
+        [Produces(typeof(Response<int>))]
+        public async Task<IActionResult> UpdateMenu(UpsertMenu input)
+        {
+            return new Response<int>(await _dynamicityService.UpsertMenu(input)).ToJsonResult();
+        }
 
 
     }
