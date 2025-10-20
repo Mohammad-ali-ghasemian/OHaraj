@@ -129,5 +129,12 @@ namespace OHaraj.Controllers
             return new Response<int>(await _dynamicityService.UpsertAccess(input)).ToJsonResult();
         }
 
+        [HttpPost("Delete-Access")]
+        [Produces(typeof(Response<int>))]
+        public async Task<IActionResult> DeleteAccess(int accessId)
+        {
+            return new Response<int>(await _dynamicityService.DeleteAccess(accessId)).ToJsonResult();
+        }
+
     }
 }
