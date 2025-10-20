@@ -195,6 +195,11 @@ namespace OHaraj.Controllers
             return new Response<int>(await _dynamicityService.DeleteImageConfig(imageConfigId)).ToJsonResult();
         }
 
+        /// <summary>
+        /// Everyone can access
+        /// </summary>
+        /// <returns></returns>
+        [AllowAnonymous]
         [HttpGet("Get-Image-Config")]
         [Produces(typeof(Response<ImageConfigs>))]
         public async Task<IActionResult> GetImageConfig(int imageConfigId)
@@ -236,6 +241,12 @@ namespace OHaraj.Controllers
             return new Response<int>(await _dynamicityService.DeleteVideoConfig(videoConfigId)).ToJsonResult();
         }
 
+
+        /// <summary>
+        /// Everyone can access
+        /// </summary>
+        /// <returns></returns>
+        [AllowAnonymous]
         [HttpGet("Get-Video-Config")]
         [Produces(typeof(Response<VideoConfigs>))]
         public async Task<IActionResult> GetVideoConfig(int videoConfigId)
@@ -277,6 +288,12 @@ namespace OHaraj.Controllers
             return new Response<int>(await _dynamicityService.DeleteAudioConfig(audioConfigId)).ToJsonResult();
         }
 
+
+        /// <summary>
+        /// Everyone can access
+        /// </summary>
+        /// <returns></returns>
+        [AllowAnonymous]
         [HttpGet("Get-Audio-Config")]
         [Produces(typeof(Response<AudioConfigs>))]
         public async Task<IActionResult> GetAudioConfig(int audioConfigId)
@@ -318,6 +335,12 @@ namespace OHaraj.Controllers
             return new Response<int>(await _dynamicityService.DeleteDocumentConfig(documentConfigId)).ToJsonResult();
         }
 
+
+        /// <summary>
+        /// Everyone can access
+        /// </summary>
+        /// <returns></returns>
+        [AllowAnonymous]
         [HttpGet("Get-Document-Config")]
         [Produces(typeof(Response<DocumentConfigs>))]
         public async Task<IActionResult> GetDocumentConfig(int documentConfigId)
@@ -356,6 +379,12 @@ namespace OHaraj.Controllers
             return new Response<int>(await _dynamicityService.DeleteImageSetting(imageSettingId)).ToJsonResult();
         }
 
+
+        /// <summary>
+        /// Everyone can access
+        /// </summary>
+        /// <returns></returns>
+        [AllowAnonymous]
         [HttpGet("Get-Image-Setting")]
         [Produces(typeof(Response<ImageSettings>))]
         public async Task<IActionResult> GetImageSetting(int imageSettingId)
@@ -370,6 +399,11 @@ namespace OHaraj.Controllers
             return new Response<IEnumerable<ImageSettings>>(await _dynamicityService.GetImageSettings()).ToJsonResult();
         }
 
+        /// <summary>
+        /// Everyone can access
+        /// </summary>
+        /// <returns></returns>
+        [AllowAnonymous]
         [HttpGet("Get-Image-Settings-By-MenuId")]
         [Produces(typeof(Response<IEnumerable<ImageSettings>>))]
         public async Task<IActionResult> GetImageSettingsByMenuId(int menuId)
@@ -414,6 +448,12 @@ namespace OHaraj.Controllers
             return new Response<int>(await _dynamicityService.DeleteVideoSetting(videoSettingId)).ToJsonResult();
         }
 
+
+        /// <summary>
+        /// Everyone can access
+        /// </summary>
+        /// <returns></returns>
+        [AllowAnonymous]
         [HttpGet("Get-Video-Setting")]
         [Produces(typeof(Response<VideoSettings>))]
         public async Task<IActionResult> GetVideoSetting(int videoSettingId)
@@ -428,6 +468,11 @@ namespace OHaraj.Controllers
             return new Response<IEnumerable<VideoSettings>>(await _dynamicityService.GetVideoSettings()).ToJsonResult();
         }
 
+        /// <summary>
+        /// Everyone can access
+        /// </summary>
+        /// <returns></returns>
+        [AllowAnonymous]
         [HttpGet("Get-Video-Settings-By-MenuId")]
         [Produces(typeof(Response<IEnumerable<VideoSettings>>))]
         public async Task<IActionResult> GetVideoSettingsByMenuId(int menuId)
@@ -472,6 +517,11 @@ namespace OHaraj.Controllers
             return new Response<int>(await _dynamicityService.DeleteAudioSetting(audioSettingId)).ToJsonResult();
         }
 
+        /// <summary>
+        /// Everyone can access
+        /// </summary>
+        /// <returns></returns>
+        [AllowAnonymous]
         [HttpGet("Get-Audio-Setting")]
         [Produces(typeof(Response<AudioSettings>))]
         public async Task<IActionResult> GetAudioSetting(int audioSettingId)
@@ -486,6 +536,11 @@ namespace OHaraj.Controllers
             return new Response<IEnumerable<AudioSettings>>(await _dynamicityService.GetAudioSettings()).ToJsonResult();
         }
 
+        /// <summary>
+        /// Everyone can access
+        /// </summary>
+        /// <returns></returns>
+        [AllowAnonymous]
         [HttpGet("Get-Audio-Settings-By-MenuId")]
         [Produces(typeof(Response<IEnumerable<AudioSettings>>))]
         public async Task<IActionResult> GetAudioSettingsByMenuId(int menuId)
@@ -530,6 +585,11 @@ namespace OHaraj.Controllers
             return new Response<int>(await _dynamicityService.DeleteDocumentSetting(documentSettingId)).ToJsonResult();
         }
 
+        /// <summary>
+        /// Everyone can access
+        /// </summary>
+        /// <returns></returns>
+        [AllowAnonymous]
         [HttpGet("Get-Document-Setting")]
         [Produces(typeof(Response<DocumentSettings>))]
         public async Task<IActionResult> GetDocumentSetting(int documentSettingId)
@@ -544,6 +604,11 @@ namespace OHaraj.Controllers
             return new Response<IEnumerable<DocumentSettings>>(await _dynamicityService.GetDocumentSettings()).ToJsonResult();
         }
 
+        /// <summary>
+        /// Everyone can access
+        /// </summary>
+        /// <returns></returns>
+        [AllowAnonymous]
         [HttpGet("Get-Document-Settings-By-MenuId")]
         [Produces(typeof(Response<IEnumerable<DocumentSettings>>))]
         public async Task<IActionResult> GetDocumentSettingsByMenuId(int menuId)
