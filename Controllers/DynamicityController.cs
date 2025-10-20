@@ -73,6 +73,19 @@ namespace OHaraj.Controllers
             return new Response<bool>(await _dynamicityService.HasCurrentUserAccess(menuId)).ToJsonResult();
         }
 
+        /// <summary>
+        /// By default, everyone can access all menus, except admins set specific roles for that menu
+        /// </summary>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [HttpGet("Get-Anonymous-User-Access-Menus")]
+        [Produces(typeof(Response<IEnumerable<Menu>>))]
+        public async Task<IActionResult> GetAnonymousUserAccessMenus()
+        {
+            return new Response<IEnumerable<Menu>>(await _dynamicityService.GetAnonymousUserAccessMenus()).ToJsonResult();
+        }
+
+
 
     }
 }
