@@ -533,7 +533,7 @@ namespace OHaraj.Repositories
                 return IdentityResult.Failed(new IdentityError
                 {
                     Code = "DuplicateRole",
-                    Description = "A role with the name 'Admin' already exists."
+                    Description = $"A role with the name '{roleName}' already exists."
                 });
             }
         }
