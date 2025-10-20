@@ -333,6 +333,11 @@ namespace OHaraj.Controllers
 
 
 
-
+        [HttpPost("Add-Image-Setting")]
+        [Produces(typeof(Response<int>))]
+        public async Task<IActionResult> AddImageSetting(UpsertSetting input)
+        {
+            return new Response<int>(await _dynamicityService.UpsertImageSetting(input)).ToJsonResult();
+        }
     }
 }
