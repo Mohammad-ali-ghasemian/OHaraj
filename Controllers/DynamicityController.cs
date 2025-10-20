@@ -55,12 +55,24 @@ namespace OHaraj.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet("Get-Menus")]
-        [Produces(typeof(IEnumerable<Response<Menu>>))]
+        [Produces(typeof(Response<IEnumerable<Menu>>))]
         public async Task<IActionResult> GetMenus()
         {
             return new Response<IEnumerable<Menu>>(await _dynamicityService.GetMenus()).ToJsonResult();
         }
 
-        
+        /// <summary>
+        /// Send a menu id and see if the current user has access? (true/execption)
+        /// </summary>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [HttpGet("Has-Current-User-Access")]
+        [Produces(typeof(Response<bool>))]
+        public async Task<IActionResult> HasCurrentUserAccess(int menuId)
+        {
+            return new Response<bool>(await _dynamicityService.HasCurrentUserAccess(menuId)).ToJsonResult();
+        }
+
+
     }
 }
