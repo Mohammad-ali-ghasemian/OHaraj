@@ -103,31 +103,6 @@ namespace OHaraj.Services
             return await _dynamicityRepository.GetMenusAsync();
         }
 
-        public async Task<IEnumerable<Menu>> GetLoginedUserAccessMenus()
-        {
-            var user = await Current();
-            if (user == null)
-            {
-                throw new NotFoundException("کاربر یافت نشد.");
-            }
-
-            var roleNames = await _authenticationRepository.GetUserRolesAsync(user);
-            List<string> roleIds = new List<string>();
-
-            IdentityRole role;
-            foreach (string roleName in roleNames)
-            {
-                role = await _dynamicityRepository.GetRoleByNameAsync(roleName);
-                roleIds.Add(role.Id);
-            }
-
-            var access = await _dynamicityRepository.GetAccessMenusAsync(roleIds);
-            //var menus = await _dynamicityRepository.GetMenusAsync();
-
-            //return menus.Except(accessBanned);
-            return access;
-        }
-
         public async Task<bool> HasCurrentUserAccess(int menuId)
         {
             var user = await Current();
@@ -163,6 +138,36 @@ namespace OHaraj.Services
                 throw new UnauthorizedAccessException("دسترسی غیرمجاز");
             }
 
+        }
+
+        public async Task<IEnumerable<Menu>> GetAnonymousUserAccessMenus()
+        {
+
+        }
+
+        public async Task<IEnumerable<Menu>> GetLoginedUserAccessMenus()
+        {
+            var user = await Current();
+            if (user == null)
+            {
+                throw new NotFoundException("کاربر یافت نشد.");
+            }
+
+            var roleNames = await _authenticationRepository.GetUserRolesAsync(user);
+            List<string> roleIds = new List<string>();
+
+            IdentityRole role;
+            foreach (string roleName in roleNames)
+            {
+                role = await _dynamicityRepository.GetRoleByNameAsync(roleName);
+                roleIds.Add(role.Id);
+            }
+
+            var access = await _dynamicityRepository.GetAccessMenusAsync(roleIds);
+            //var menus = await _dynamicityRepository.GetMenusAsync();
+
+            //return menus.Except(accessBanned);
+            return access;
         }
 
         public async Task<IEnumerable<Menu>> GetOtherUserAccessMenus(string userId)

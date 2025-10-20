@@ -19,6 +19,7 @@ namespace OHaraj.Core.Interfaces.Services
         Task<Menu> GetMenu(int menuId);
         Task<IEnumerable<Menu>> GetMenus();
         Task<bool> HasCurrentUserAccess(int menuId);
+        Task<IEnumerable<Menu>> GetAnonymousUserAccessMenus();
         Task<IEnumerable<Menu>> GetLoginedUserAccessMenus();
         Task<IEnumerable<Menu>> GetOtherUserAccessMenus(string userId);
 
