@@ -720,5 +720,53 @@ namespace OHaraj.Services
             return await _dynamicityRepository.GetDocumentSettingsByConfigIdAsync(documentConfigId);
         }
 
+        public async Task<string> UpsertRole(UpsertRole input)
+        {
+            var role = await _dynamicityRepository.GetRoleByIdAsync(input.Id);
+            if (role == null)
+            {
+                var result = await _dynamicityRepository.AddRoleAsync(input.Name);
+                if (result.Succeeded)
+                {
+                    return input.Name;
+                }
+                throw new BadRequestException("مشکلی در ایجاد رول به وجود آمده است");
+            }
+            else
+            {
+                role.Name = input.Name;
+                var result = await _dynamicityRepository.UpdateRoleAsync(role);
+                if (result.Succeeded)
+                {
+                    return input.Name;
+                }
+                throw new BadRequestException("مشکلی در به روز رسانی رول به وجود آمده است");
+            }
+        }
+
+        public Task<string> DeleteRole(string roleName)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IdentityRole> GetRole(string roleId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<IdentityRole>> GetRoles()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<IdentityRole>> GiveRoles(string userId, IEnumerable<string> roleIds)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<IdentityRole>> GetRoles(string userId, IEnumerable<string> roleIds)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
