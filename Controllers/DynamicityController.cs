@@ -173,5 +173,17 @@ namespace OHaraj.Controllers
         {
             return new Response<int>(await _dynamicityService.UpsertImageConfig(input)).ToJsonResult();
         }
+
+        [HttpPost("Update-Image-Config")]
+        [Produces(typeof(Response<int>))]
+        public async Task<IActionResult> UpdateImageConfig(UpsertImageConfig input)
+        {
+            return new Response<int>(await _dynamicityService.UpsertImageConfig(input)).ToJsonResult();
+        }
+
+
+
+
+
     }
 }
