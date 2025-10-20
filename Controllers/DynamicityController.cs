@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OHaraj.Core.Domain.Entities.Management;
 using OHaraj.Core.Domain.Models.Dynamicity;
+using OHaraj.Core.Domain.Models.Dynamicity.Configs;
 using OHaraj.Core.Interfaces.Services;
 using Project.Application.Responses;
 using System.Net;
@@ -166,7 +167,11 @@ namespace OHaraj.Controllers
 
 
 
-        []
-        config
+        [HttpPost("Add-Image-Config")]
+        [Produces(typeof(Response<int>))]
+        public async Task<IActionResult> AddImageConfig(UpsertImageConfig input)
+        {
+            return new Response<int>(await _dynamicityService.UpsertImageConfig(input)).ToJsonResult();
+        }
     }
 }
