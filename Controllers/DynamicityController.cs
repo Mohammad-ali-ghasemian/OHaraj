@@ -346,5 +346,14 @@ namespace OHaraj.Controllers
         {
             return new Response<int>(await _dynamicityService.UpsertImageSetting(input)).ToJsonResult();
         }
+
+        [HttpPost("Delete-Image-Setting")]
+        [Produces(typeof(Response<int>))]
+        public async Task<IActionResult> DeleteImageSetting(int imageSettingId)
+        {
+            return new Response<int>(await _dynamicityService.DeleteImageSetting(imageSettingId)).ToJsonResult();
+        }
+
+
     }
 }
