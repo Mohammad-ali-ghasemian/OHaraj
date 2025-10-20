@@ -448,5 +448,63 @@ namespace OHaraj.Controllers
         {
             return new Response<IEnumerable<VideoSettings>>(await _dynamicityService.GetVideoSettingsByConfigId(videoConfigId)).ToJsonResult();
         }
+
+
+
+        [HttpPost("Add-Audio-Setting")]
+        [Produces(typeof(Response<int>))]
+        public async Task<IActionResult> AddAudioSetting(UpsertSetting input)
+        {
+            return new Response<int>(await _dynamicityService.UpsertAudioSetting(input)).ToJsonResult();
+        }
+
+        [HttpPost("Update-Audio-Setting")]
+        [Produces(typeof(Response<int>))]
+        public async Task<IActionResult> UpdateAudioSetting(UpsertSetting input)
+        {
+            return new Response<int>(await _dynamicityService.UpsertAudioSetting(input)).ToJsonResult();
+        }
+
+        [HttpPost("Delete-Audio-Setting")]
+        [Produces(typeof(Response<int>))]
+        public async Task<IActionResult> DeleteAudioSetting(int audioSettingId)
+        {
+            return new Response<int>(await _dynamicityService.DeleteAudioSetting(audioSettingId)).ToJsonResult();
+        }
+
+        [HttpGet("Get-Audio-Setting")]
+        [Produces(typeof(Response<AudioSettings>))]
+        public async Task<IActionResult> GetAudioSetting(int audioSettingId)
+        {
+            return new Response<AudioSettings>(await _dynamicityService.GetAudioSetting(audioSettingId)).ToJsonResult();
+        }
+
+        [HttpGet("Get-Audio-Settings")]
+        [Produces(typeof(Response<IEnumerable<AudioSettings>>))]
+        public async Task<IActionResult> GetAudioSettings()
+        {
+            return new Response<IEnumerable<AudioSettings>>(await _dynamicityService.GetAudioSettings()).ToJsonResult();
+        }
+
+        [HttpGet("Get-Audio-Settings-By-MenuId")]
+        [Produces(typeof(Response<IEnumerable<AudioSettings>>))]
+        public async Task<IActionResult> GetAudioSettingsByMenuId(int menuId)
+        {
+            return new Response<IEnumerable<AudioSettings>>(await _dynamicityService.GetAudioSettingsByMenuId(menuId)).ToJsonResult();
+        }
+
+        [HttpGet("Get-Audio-Settings-By-Area")]
+        [Produces(typeof(Response<IEnumerable<AudioSettings>>))]
+        public async Task<IActionResult> GetAudioSettingsByArea(Area area)
+        {
+            return new Response<IEnumerable<AudioSettings>>(await _dynamicityService.GetAudioSettingsByArea(area)).ToJsonResult();
+        }
+
+        [HttpGet("Get-Audio-Settings-By-ConfigId")]
+        [Produces(typeof(Response<IEnumerable<AudioSettings>>))]
+        public async Task<IActionResult> GetAudioSettingsByConfigId(int audioConfigId)
+        {
+            return new Response<IEnumerable<AudioSettings>>(await _dynamicityService.GetAudioSettingsByConfigId(audioConfigId)).ToJsonResult();
+        }
     }
 }
