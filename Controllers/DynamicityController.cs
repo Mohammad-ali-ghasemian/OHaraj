@@ -117,7 +117,14 @@ namespace OHaraj.Controllers
         /// <returns></returns>
         [HttpPost("Add-Access")]
         [Produces(typeof(Response<int>))]
-        public async Task<IActionResult]> AddAccess(UpsertRoleAccess input)
+        public async Task<IActionResult> AddAccess(UpsertRoleAccess input)
+        {
+            return new Response<int>(await _dynamicityService.UpsertAccess(input)).ToJsonResult();
+        }
+
+        [HttpPost("Update-Access")]
+        [Produces(typeof(Response<int>))]
+        public async Task<IActionResult> UpdateAccess(UpsertRoleAccess input)
         {
             return new Response<int>(await _dynamicityService.UpsertAccess(input)).ToJsonResult();
         }
