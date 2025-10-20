@@ -50,11 +50,17 @@ namespace OHaraj.Controllers
             return new Response<Menu>(await _dynamicityService.GetMenu(menuId)).ToJsonResult();
         }
 
-
-
         /// <summary>
-        /// Did user liked the product? (true/false)
+        /// Get all menus
         /// </summary>
         /// <returns></returns>
+        [HttpGet("Get-Menus")]
+        [Produces(typeof(IEnumerable<Response<Menu>>))]
+        public async Task<IActionResult> GetMenus()
+        {
+            return new Response<IEnumerable<Menu>>(await _dynamicityService.GetMenus()).ToJsonResult();
+        }
+
+        
     }
 }
