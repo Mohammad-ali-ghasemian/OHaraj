@@ -392,5 +392,61 @@ namespace OHaraj.Controllers
         }
 
 
+
+        [HttpPost("Add-Video-Setting")]
+        [Produces(typeof(Response<int>))]
+        public async Task<IActionResult> AddVideoSetting(UpsertSetting input)
+        {
+            return new Response<int>(await _dynamicityService.UpsertVideoSetting(input)).ToJsonResult();
+        }
+
+        [HttpPost("Update-Video-Setting")]
+        [Produces(typeof(Response<int>))]
+        public async Task<IActionResult> UpdateVideoSetting(UpsertSetting input)
+        {
+            return new Response<int>(await _dynamicityService.UpsertVideoSetting(input)).ToJsonResult();
+        }
+
+        [HttpPost("Delete-Video-Setting")]
+        [Produces(typeof(Response<int>))]
+        public async Task<IActionResult> DeleteVideoSetting(int videoSettingId)
+        {
+            return new Response<int>(await _dynamicityService.DeleteVideoSetting(videoSettingId)).ToJsonResult();
+        }
+
+        [HttpGet("Get-Video-Setting")]
+        [Produces(typeof(Response<VideoSettings>))]
+        public async Task<IActionResult> GetVideoSetting(int videoSettingId)
+        {
+            return new Response<VideoSettings>(await _dynamicityService.GetVideoSetting(videoSettingId)).ToJsonResult();
+        }
+
+        [HttpGet("Get-Video-Settings")]
+        [Produces(typeof(Response<IEnumerable<VideoSettings>>))]
+        public async Task<IActionResult> GetVideoSettings()
+        {
+            return new Response<IEnumerable<VideoSettings>>(await _dynamicityService.GetVideoSettings()).ToJsonResult();
+        }
+
+        [HttpGet("Get-Video-Settings-By-MenuId")]
+        [Produces(typeof(Response<IEnumerable<VideoSettings>>))]
+        public async Task<IActionResult> GetVideoSettingsByMenuId(int menuId)
+        {
+            return new Response<IEnumerable<VideoSettings>>(await _dynamicityService.GetVideoSettingsByMenuId(menuId)).ToJsonResult();
+        }
+
+        [HttpGet("Get-Video-Settings-By-Area")]
+        [Produces(typeof(Response<IEnumerable<VideoSettings>>))]
+        public async Task<IActionResult> GetVideoSettingsByArea(Area area)
+        {
+            return new Response<IEnumerable<VideoSettings>>(await _dynamicityService.GetVideoSettingsByArea(area)).ToJsonResult();
+        }
+
+        [HttpGet("Get-Video-Settings-By-ConfigId")]
+        [Produces(typeof(Response<IEnumerable<VideoSettings>>))]
+        public async Task<IActionResult> GetVideoSettingsByConfigId(int videoConfigId)
+        {
+            return new Response<IEnumerable<VideoSettings>>(await _dynamicityService.GetVideoSettingsByConfigId(videoConfigId)).ToJsonResult();
+        }
     }
 }
