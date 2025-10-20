@@ -106,7 +106,7 @@ namespace OHaraj.Services
         public async Task<bool> HasCurrentUserAccess(int menuId)
         {
             var user = await Current();
-            // if the user did not login, check if it can access to it
+            // if the user did not login, check if the menu id is in the anonymous menus
             if (user == null)
             {
                 var anonymousMenus = await GetAnonymousUserAccessMenus();

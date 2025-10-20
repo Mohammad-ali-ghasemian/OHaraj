@@ -13,6 +13,7 @@ namespace OHaraj.Core.Interfaces.Services
 {
     public interface IDynamicityService
     {
+        //By default, everyone can access all menus except the admins set specific roles for that menu
         //Menu
         Task<int> UpsertMenu(UpsertMenu input);
         Task<int> DeleteMenu(int menuId);
