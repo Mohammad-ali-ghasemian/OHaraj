@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Identity;
+using OHaraj.Core.Domain.DTOs;
 using OHaraj.Core.Domain.Entities.Configs;
 using OHaraj.Core.Domain.Entities.Management;
 using OHaraj.Core.Domain.Entities.Settings;
@@ -751,19 +752,28 @@ namespace OHaraj.Services
             {
                 throw new NotFoundException("رول یافت نشد");
             }
+
             var result = await _dynamicityRepository.DeleteRoleAsync(role);
             if (result.Succeeded)
             {
                 return role.Name;
             }
+
+            throw new BadRequestException("مشکلی در حذف رول رخ داده است");
         }
 
-        public Task<IdentityRole> GetRole(string roleId)
+        public async Task<RoleDTO> GetRole(string roleId)
         {
-            throw new NotImplementedException();
+            var role = await _dynamicityRepository.GetRoleByIdAsync(roleId);
+            if (role == null)
+            {
+                throw new NotFoundException("رول یافت نشد");
+            }
+
+            return new RoleDTO { Id = role.Id , Name = role.Name};
         }
 
-        public Task<IEnumerable<IdentityRole>> GetRoles()
+        public Task<IEnumerable<RoleDTO>> GetRoles()
         {
             throw new NotImplementedException();
         }
