@@ -97,5 +97,17 @@ namespace OHaraj.Controllers
             return new Response<IEnumerable<Menu>>(await _dynamicityService.GetLoginedUserAccessMenus()).ToJsonResult();
         }
 
+        /// <summary>
+        /// Just for admins
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("Get-Other-User-Access-Menus")]
+        [Produces(typeof(Response<IEnumerable<Menu>>))]
+        public async Task<IActionResult> GetOtherUserAccessMenus(string userId)
+        {
+            return new Response<IEnumerable<Menu>>(await _dynamicityService.GetOtherUserAccessMenus(userId)).ToJsonResult();
+        }
+        
+
     }
 }
