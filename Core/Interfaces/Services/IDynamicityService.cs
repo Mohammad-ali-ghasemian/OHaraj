@@ -18,7 +18,7 @@ namespace OHaraj.Core.Interfaces.Services
         Task<int> DeleteMenu(int menuId);
         Task<Menu> GetMenu(int menuId);
         Task<IEnumerable<Menu>> GetMenus();
-        Task<bool> HasCurrentUserAccess();
+        Task<bool> HasCurrentUserAccess(int menuId);
         Task<IEnumerable<Menu>> GetLoginedUserAccessMenus();
         Task<IEnumerable<Menu>> GetOtherUserAccessMenus(string userId);
 
