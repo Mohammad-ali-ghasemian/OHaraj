@@ -43,6 +43,18 @@ namespace OHaraj.Controllers
             return new Response<int>(await _dynamicityService.DeleteMenu(menuId)).ToJsonResult();
         }
 
+        [HttpGet("Get-Menu")]
+        [Produces(typeof(Response<Menu>))]
+        public async Task<IActionResult> GetMenu(int menuId)
+        {
+            return new Response<Menu>(await _dynamicityService.GetMenu(menuId)).ToJsonResult();
+        }
 
+
+
+        /// <summary>
+        /// Did user liked the product? (true/false)
+        /// </summary>
+        /// <returns></returns>
     }
 }
