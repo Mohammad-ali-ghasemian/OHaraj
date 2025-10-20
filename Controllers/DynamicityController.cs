@@ -36,6 +36,13 @@ namespace OHaraj.Controllers
             return new Response<int>(await _dynamicityService.UpsertMenu(input)).ToJsonResult();
         }
 
+        [HttpPost("Delete-Menu")]
+        [Produces(typeof(Response<int>))]
+        public async Task<IActionResult> DeleteMenu(int menuId)
+        {
+            return new Response<int>(await _dynamicityService.DeleteMenu(menuId)).ToJsonResult();
+        }
+
 
     }
 }
