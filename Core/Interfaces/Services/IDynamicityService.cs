@@ -100,7 +100,7 @@ namespace OHaraj.Core.Interfaces.Services
         // Default : cannot give "User" and "Admin" or "SuperAdmin" role to another user (SuperAdmin can give "admin")
         // Default : cannot take "User" and "Admin" or "SuperAdmin" role from another user
         // Give role to the user, gives back some identity roles for later : fetch the name of the roles (string) then return
-        Task<IEnumerable<IdentityRole>> GiveRoles(string userId, IEnumerable<string> roleIds);
-        Task<IEnumerable<IdentityRole>> GetRoles(string userId, IEnumerable<string> roleIds);
+        Task<IEnumerable<RoleDTO>> GiveRoles(string userId, IEnumerable<string> roleIds);
+        Task<IEnumerable<RoleDTO>> TakeRoles(string userId, IEnumerable<string> roleIds);
     }
 }
