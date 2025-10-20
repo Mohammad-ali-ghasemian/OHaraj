@@ -106,9 +106,16 @@ namespace OHaraj.Services
         public async Task<bool> HasCurrentUserAccess(int menuId)
         {
             var user = await Current();
+            // if the user did not login, check if it can access to it
             if (user == null)
             {
-                throw new BadRequestException("کاربر لاگین نشده است");
+                var anonymousMenus = await GetAnonymousUserAccessMenus();
+                if (anonymousMenus.Any(x => x.Id == menuId))
+                {
+                    return true;
+                }
+
+                throw new UnauthorizedAccessException("دسترسی غیرمجاز");
             }
 
             var menu = await (_dynamicityRepository.GetMenuAsync(menuId));
