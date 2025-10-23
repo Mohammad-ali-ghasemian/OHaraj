@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using OHaraj.Core.Domain.DTOs;
 using OHaraj.Core.Domain.Entities.Configs;
 using OHaraj.Core.Domain.Entities.Management;
@@ -9,6 +10,7 @@ using OHaraj.Core.Domain.Models.Dynamicity.Configs;
 using OHaraj.Core.Enums;
 using OHaraj.Core.Interfaces.Repositories;
 using OHaraj.Core.Interfaces.Services;
+using OHaraj.Infrastructure.Exceptions;
 using Project.Application.Contracts.Infrastructure;
 using Project.Application.Exceptions;
 using System.Xml.Linq;
@@ -286,7 +288,7 @@ namespace OHaraj.Services
                 return await _dynamicityRepository.GetAccessByRoleAsync(roleId);
             }
 
-            throw new UnauthorizedAccessException("دسترسی غیرمجاز");
+            throw new ForbiddenAccessException("دسترسی غیرمجاز");
         }
 
         public async Task<IEnumerable<RoleAccess>> GetAllAccesss()
