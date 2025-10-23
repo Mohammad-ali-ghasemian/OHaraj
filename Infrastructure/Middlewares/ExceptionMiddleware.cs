@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using OHaraj.Infrastructure.Exceptions;
 using Project.Application.Exceptions;
 using Project.Application.Responses;
 using System.ComponentModel.DataAnnotations;
@@ -61,6 +62,12 @@ namespace Project.Application.Middlewares
                     statusCode = HttpStatusCode.Unauthorized;
                     res = new Response<string>(ResponseStatus.Unauthorized);
                     res.Errors.Add(unauthorizedAccessException.Message);
+                    break;
+
+                case ForbiddenAccessException forbiddenAccessException:
+                    statusCode = HttpStatusCode.Forbidden;
+                    res = new Response<string>(ResponseStatus.Forbidden);
+                    res.Errors.Add(forbiddenAccessException.Message);
                     break;
 
                 default:
