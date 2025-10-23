@@ -93,6 +93,13 @@ builder.Services.AddSwaggerGen(c =>
     c.IncludeXmlComments(xmlPath);
 });
 
+// 
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("AuthenticatedOnly", policy =>
+        policy.RequireAuthenticatedUser());
+});
+
 
 // AutoMapper
 builder.Services.AddAutoMapper(typeof(MappingProfile).Assembly);

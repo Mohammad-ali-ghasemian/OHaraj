@@ -93,7 +93,7 @@ namespace OHaraj.Controllers
         /// Must login first to use this
         /// </summary>
         /// <returns></returns>
-        [Authorize]
+        [Authorize(Policy = "AuthenticatedOnly")]
         [HttpGet("Get-Logined-User-Access-Menus")]
         [Produces(typeof(Response<IEnumerable<Menu>>))]
         public async Task<IActionResult> GetLoginedUserAccessMenus()
@@ -152,7 +152,7 @@ namespace OHaraj.Controllers
         /// SuperAdmin/Admin and the user who has this role can use this
         /// </summary>
         /// <returns></returns>
-        [Authorize]
+        [Authorize(Policy = "AuthenticatedOnly")]
         [HttpGet("Get-Role-Accesses")]
         [Produces(typeof(Response<IEnumerable<RoleAccess>>))]
         public async Task<IActionResult> GetRoleAccesses(string roleId)
