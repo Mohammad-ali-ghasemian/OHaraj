@@ -47,13 +47,12 @@ namespace OHaraj.Repositories
         public async Task<Menu> GetMenuAsync(int id)
         {
             return await _dbcontext.Menus.AsNoTracking()
-                .Include(nameof(Menu))
                 .FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task<IEnumerable<Menu>> GetMenusAsync()
         {
-            return await _dbcontext.Menus.AsNoTracking().Include(nameof(Menu)).ToListAsync();
+            return await _dbcontext.Menus.AsNoTracking().ToListAsync();
         }
 
         public async Task<IEnumerable<Menu>> GetAccessMenusAsync(IEnumerable<string> roleIds)
@@ -63,8 +62,10 @@ namespace OHaraj.Repositories
                 .Select(x => x.MenuId)
                 .ToListAsync();
 
+            if (!access.Any())
+                return Enumerable.Empty<Menu>();
+
             return await _dbcontext.Menus.AsNoTracking()
-                .Include(nameof(Menu))
                 .Where(x => access.Contains(x.Id))
                 .ToListAsync();
         }
