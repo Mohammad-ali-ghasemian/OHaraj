@@ -129,6 +129,12 @@ namespace OHaraj.Infrastructure
             .WithMany(c => c.DocumentSettings)
             .HasForeignKey(s => s.DocumentConfigsId)
             .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<TextSettings>()
+            .HasOne(s => s.TextConfigs)
+            .WithMany(c => c.TextSettings)
+            .HasForeignKey(s => s.TextConfigsId)
+            .OnDelete(DeleteBehavior.Cascade);
         }
 
         public DbSet<Cart> Carts { get; set; }
@@ -149,11 +155,13 @@ namespace OHaraj.Infrastructure
         public DbSet<DocumentConfigs> DocumentConfigs { get; set; }
         public DbSet<ImageConfigs> ImageConfigs { get; set; }
         public DbSet<VideoConfigs> VideoConfigs { get; set; }
+        public DbSet<TextConfigs> TextConfigs { get; set; }
 
         public DbSet<AudioSettings> AudioSettings { get; set; }
         public DbSet<DocumentSettings> DocumentSettings { get; set; }
         public DbSet<ImageSettings> ImageSettings { get; set; }
         public DbSet<VideoSettings> VideoSettings { get; set; }
+        public DbSet<TextSettings> TextSettings { get; set; }
 
     }
 }
