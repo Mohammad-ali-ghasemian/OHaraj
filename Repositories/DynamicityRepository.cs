@@ -559,6 +559,68 @@ namespace OHaraj.Repositories
 
 
 
+        public async Task<int> AddTextSettingAsync(TextSettings input)
+        {
+            await _dbcontext.AddAsync(input);
+            await _dbcontext.SaveChangesAsync();
+            return input.Id;
+        }
+
+        public async Task<int> UpdateTextSettingAsync(TextSettings input)
+        {
+            _dbcontext.Update(input);
+            await _dbcontext.SaveChangesAsync();
+            return input.Id;
+        }
+
+        public async Task<int> DeleteTextSettingAsync(TextSettings input)
+        {
+            _dbcontext.Remove(input);
+            await _dbcontext.SaveChangesAsync();
+            return input.Id;
+        }
+
+
+        public async Task<TextSettings> GetTextSettingAsync(int id)
+        {
+            return await _dbcontext.TextSettings
+                .AsNoTracking()
+                .FirstOrDefaultAsync(x => x.Id == id);
+        }
+
+        public async Task<IEnumerable<TextSettings>> GetTextSettingsAsync()
+        {
+            return await _dbcontext.TextSettings
+                .AsNoTracking()
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<TextSettings>> GetTextSettingsByMenuIdAsync(int menuId)
+        {
+            return await _dbcontext.TextSettings
+                .AsNoTracking()
+                .Where(x => x.MenuId == menuId)
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<TextSettings>> GetTextSettingsByAreaAsync(Area area)
+        {
+            return await _dbcontext.TextSettings
+                .AsNoTracking()
+                .Where(x => x.Area == area)
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<TextSettings>> GetTextSettingsByConfigIdAsync(int configId)
+        {
+            return await _dbcontext.TextSettings
+                .AsNoTracking()
+                .Where(x => x.TextConfigsId == configId)
+                .ToListAsync();
+        }
+
+
+
         //Roles
         public async Task<IdentityResult> AddRoleAsync(string roleName)
         {
