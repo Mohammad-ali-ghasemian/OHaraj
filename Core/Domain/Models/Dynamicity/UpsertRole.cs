@@ -5,7 +5,7 @@ namespace OHaraj.Core.Domain.Models.Dynamicity
 {
     public class UpsertRole
     {
-        public string Id { get; set; }
+        public string? Id { get; set; }
         [Required(ErrorMessage = PublicHelper.RequiredValidationErrorMessage)]
         public string Name { get; set; }
     }
