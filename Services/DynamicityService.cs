@@ -11,6 +11,7 @@ using OHaraj.Core.Enums;
 using OHaraj.Core.Interfaces.Repositories;
 using OHaraj.Core.Interfaces.Services;
 using OHaraj.Infrastructure.Exceptions;
+using OHaraj.Migrations;
 using Project.Application.Contracts.Infrastructure;
 using Project.Application.Exceptions;
 using System.Xml.Linq;
@@ -979,12 +980,22 @@ namespace OHaraj.Services
 
 
         //Role
+        private void RoleException(string roleName)
+        {
+            switch (roleName) {
+                case "SuperAdmin":
+                    throw new ForbiddenAccessException("Cannot manipulate SuperAdmin role!");
+                case "Admin":
+                    throw new ForbiddenAccessException("Cannot manipulate Admin role!");
+                case "User":
+                    throw new ForbiddenAccessException("Cannot manipulate User role!");
+
+            }
+        }
+
         public async Task<string> UpsertRole(UpsertRole input)
         {
-            if (input.Name == "SuperAdmin" || input.Name == "Admin" || input.Name == "User")
-            {
-                throw new ForbiddenAccessException("Cannot manipulate this role!");
-            }
+            RoleException(input.Name);
 
             var role = await _dynamicityRepository.GetRoleByIdAsync(input.Id);
             if (role == null)
@@ -1015,6 +1026,8 @@ namespace OHaraj.Services
             {
                 throw new NotFoundException("رول یافت نشد");
             }
+
+            RoleException(role.Name);
 
             var result = await _dynamicityRepository.DeleteRoleAsync(role);
             if (result.Succeeded)
@@ -1048,6 +1061,11 @@ namespace OHaraj.Services
 
         public async Task<IEnumerable<RoleDTO>> GiveRoles(string userId, IEnumerable<string> roleNames)
         {
+            foreach (string roleName in roleNames)
+            {
+                RoleException(roleName);
+            }
+
             var user = await _authenticationRepository.GetUserByIdAsync(userId);
             if (user == null)
             {
@@ -1080,6 +1098,11 @@ namespace OHaraj.Services
 
         public async Task<IEnumerable<RoleDTO>> TakeRoles(string userId, IEnumerable<string> roleNames)
         {
+            foreach (string roleName in roleNames)
+            {
+                RoleException(roleName);
+            }
+
             var user = await _authenticationRepository.GetUserByIdAsync(userId);
             if (user == null)
             {
