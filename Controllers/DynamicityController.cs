@@ -365,6 +365,53 @@ namespace OHaraj.Controllers
 
 
 
+        [HttpPost("Add-Text-Config")]
+        [Produces(typeof(Response<int>))]
+        public async Task<IActionResult> AddTextConfig(UpsertTextConfig input)
+        {
+            input.Id = null;
+            return new Response<int>(await _dynamicityService.UpsertTextConfig(input)).ToJsonResult();
+        }
+
+        [HttpPost("Update-Text-Config")]
+        [Produces(typeof(Response<int>))]
+        public async Task<IActionResult> UpdateTextConfig(UpsertTextConfig input)
+        {
+            return new Response<int>(await _dynamicityService.UpsertTextConfig(input)).ToJsonResult();
+        }
+
+        /// <summary>
+        /// Delet a config will delete all settings that were matching to it
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost("Delete-Text-Config")]
+        [Produces(typeof(Response<int>))]
+        public async Task<IActionResult> DeleteTextConfig(int textConfigId)
+        {
+            return new Response<int>(await _dynamicityService.DeleteTextConfig(textConfigId)).ToJsonResult();
+        }
+
+
+        /// <summary>
+        /// Everyone can access
+        /// </summary>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [HttpGet("Get-Text-Config")]
+        [Produces(typeof(Response<TextConfigs>))]
+        public async Task<IActionResult> GetTextConfig(int textConfigId)
+        {
+            return new Response<TextConfigs>(await _dynamicityService.GetTextConfig(textConfigId)).ToJsonResult();
+        }
+
+        [HttpGet("Get-Text-Configs")]
+        [Produces(typeof(Response<IEnumerable<TextConfigs>>))]
+        public async Task<IActionResult> GetTextConfigs()
+        {
+            return new Response<IEnumerable<TextConfigs>>(await _dynamicityService.GetTextConfigs()).ToJsonResult();
+        }
+
+
 
         [HttpPost("Add-Image-Setting")]
         [Produces(typeof(Response<int>))]
