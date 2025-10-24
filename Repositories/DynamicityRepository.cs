@@ -273,6 +273,44 @@ namespace OHaraj.Repositories
 
 
 
+        public async Task<int> AddTextConfigAsync(TextConfigs input)
+        {
+            await _dbcontext.AddAsync(input);
+            await _dbcontext.SaveChangesAsync();
+            return input.Id;
+        }
+
+        public async Task<int> UpdateTextConfigAsync(TextConfigs input)
+        {
+            _dbcontext.Update(input);
+            await _dbcontext.SaveChangesAsync();
+            return input.Id;
+        }
+
+        public async Task<int> DeleteTextConfigAsync(TextConfigs input)
+        {
+            _dbcontext.Remove(input);
+            await _dbcontext.SaveChangesAsync();
+            return input.Id;
+        }
+
+
+        public async Task<TextConfigs> GetTextConfigAsync(int id)
+        {
+            return await _dbcontext.TextConfigs
+                .AsNoTracking()
+                .FirstOrDefaultAsync(x => x.Id == id);
+        }
+
+        public async Task<IEnumerable<TextConfigs>> GetTextConfigsAsync()
+        {
+            return await _dbcontext.TextConfigs
+                .AsNoTracking()
+                .ToListAsync();
+        }
+
+
+
 
         //Settings
         public async Task<int> AddImageSettingAsync(ImageSettings input)
