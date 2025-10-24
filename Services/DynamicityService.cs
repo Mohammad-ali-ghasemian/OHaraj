@@ -56,9 +56,10 @@ namespace OHaraj.Services
         //Menu
         public async Task<int> UpsertMenu(UpsertMenu input)
         {
-            if (input.ParentId != null && await _dynamicityRepository.GetMenuAsync((int) input.ParentId) == null)
+            int? parentId = input.ParentId;
+            if (input.ParentId != null && await _dynamicityRepository.GetMenuAsync((int)input.ParentId) == null)
             {
-                throw new NotFoundException("منو والد یافت نشد");
+                parentId = 0;
             }
 
             var menu = await _dynamicityRepository.GetMenuAsync(input.Id);
@@ -67,13 +68,13 @@ namespace OHaraj.Services
                 return await _dynamicityRepository.AddMenuAsync(new Menu
                 {
                     Title = input.Title,
-                    ParentId = input.ParentId,
+                    ParentId = parentId,
                 });
             }
             else
             {
                 menu.Title = input.Title;
-                menu.ParentId = input.ParentId;
+                menu.ParentId = parentId;
                 return await _dynamicityRepository.UpdateMenuAsync(menu);
             }
         }
@@ -109,9 +110,9 @@ namespace OHaraj.Services
         {
             var user = await Current();
             // if the user did not login, check if the menu id is in the anonymous menus
+            var anonymousMenus = await GetAnonymousUserAccessMenus();
             if (user == null)
             {
-                var anonymousMenus = await GetAnonymousUserAccessMenus();
                 if (anonymousMenus.Any(x => x.Id == menuId))
                 {
                     return true;
@@ -138,7 +139,9 @@ namespace OHaraj.Services
 
             // found current user's role ids. now let us see with these roles can access the menu or not.
             var accessMenus = await _dynamicityRepository.GetAccessMenusAsync(roleIds);
-            if (accessMenus.Any(m => m.Id == menuId))
+            var finalMenus = accessMenus.ToList();
+            finalMenus.AddRange(anonymousMenus);
+            if (finalMenus.Any(m => m.Id == menuId))
             {
                 return true;
             }
@@ -167,10 +170,11 @@ namespace OHaraj.Services
 
         public async Task<IEnumerable<Menu>> GetLoginedUserAccessMenus()
         {
+            // the user must be logged in to use it
             var user = await Current();
             if (user == null)
             {
-                throw new NotFoundException("کاربر یافت نشد.");
+                throw new UnauthorizedAccessException("ابتدا وارد شوید");
             }
 
             var roleNames = await _authenticationRepository.GetUserRolesAsync(user);
@@ -274,13 +278,19 @@ namespace OHaraj.Services
 
         public async Task<IEnumerable<RoleAccess>> GetAccess(string roleId)
         {
+            // the user must be logged in to use it
+            var user = await Current();
+            if (user == null)
+            {
+                throw new UnauthorizedAccessException("ابتدا وارد شوید.");
+            }
+
             var role = await _dynamicityRepository.GetRoleByIdAsync(roleId);
             if (role == null)
             {
                 throw new NotFoundException("رول یافت نشد");
             }
 
-            var user = await Current();
             var userRoles = await _authenticationRepository.GetUserRolesAsync(user);
 
             if (userRoles.Contains("SuperAdmin") || userRoles.Contains("Admin") || userRoles.Contains(role.Name))
