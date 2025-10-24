@@ -688,5 +688,75 @@ namespace OHaraj.Controllers
         {
             return new Response<IEnumerable<DocumentSettings>>(await _dynamicityService.GetDocumentSettingsByConfigId(documentConfigId)).ToJsonResult();
         }
+
+
+
+        [HttpPost("Add-Text-Setting")]
+        [Produces(typeof(Response<int>))]
+        public async Task<IActionResult> AddTextSetting(UpsertSetting input)
+        {
+            input.Id = null;
+            return new Response<int>(await _dynamicityService.UpsertTextSetting(input)).ToJsonResult();
+        }
+
+        [HttpPost("Update-Text-Setting")]
+        [Produces(typeof(Response<int>))]
+        public async Task<IActionResult> UpdateTextSetting(UpsertSetting input)
+        {
+            return new Response<int>(await _dynamicityService.UpsertTextSetting(input)).ToJsonResult();
+        }
+
+        [HttpPost("Delete-Text-Setting")]
+        [Produces(typeof(Response<int>))]
+        public async Task<IActionResult> DeleteTextSetting(int textSettingId)
+        {
+            return new Response<int>(await _dynamicityService.DeleteTextSetting(textSettingId)).ToJsonResult();
+        }
+
+        /// <summary>
+        /// Everyone can access
+        /// </summary>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [HttpGet("Get-Text-Setting")]
+        [Produces(typeof(Response<TextSettings>))]
+        public async Task<IActionResult> GetTextSetting(int textSettingId)
+        {
+            return new Response<TextSettings>(await _dynamicityService.GetTextSetting(textSettingId)).ToJsonResult();
+        }
+
+        [HttpGet("Get-Text-Settings")]
+        [Produces(typeof(Response<IEnumerable<TextSettings>>))]
+        public async Task<IActionResult> GetTextSettings()
+        {
+            return new Response<IEnumerable<TextSettings>>(await _dynamicityService.GetTextSettings()).ToJsonResult();
+        }
+
+        /// <summary>
+        /// Everyone can access
+        /// </summary>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [HttpGet("Get-Text-Settings-By-MenuId")]
+        [Produces(typeof(Response<IEnumerable<TextSettings>>))]
+        public async Task<IActionResult> GetTextSettingsByMenuId(int menuId)
+        {
+            return new Response<IEnumerable<TextSettings>>(await _dynamicityService.GetTextSettingsByMenuId(menuId)).ToJsonResult();
+        }
+
+        [HttpGet("Get-Text-Settings-By-Area")]
+        [Produces(typeof(Response<IEnumerable<TextSettings>>))]
+        public async Task<IActionResult> GetTextSettingsByArea(Area area)
+        {
+            return new Response<IEnumerable<TextSettings>>(await _dynamicityService.GetTextSettingsByArea(area)).ToJsonResult();
+        }
+
+        [HttpGet("Get-Text-Settings-By-ConfigId")]
+        [Produces(typeof(Response<IEnumerable<TextSettings>>))]
+        public async Task<IActionResult> GetTextSettingsByConfigId(int textConfigId)
+        {
+            return new Response<IEnumerable<TextSettings>>(await _dynamicityService.GetTextSettingsByConfigId(textConfigId)).ToJsonResult();
+        }
+
     }
 }
