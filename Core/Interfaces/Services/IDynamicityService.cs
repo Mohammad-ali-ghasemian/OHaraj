@@ -56,6 +56,11 @@ namespace OHaraj.Core.Interfaces.Services
         Task<DocumentConfigs> GetDocumentConfig(int documentConfigId);
         Task<IEnumerable<DocumentConfigs>> GetDocumentConfigs();
 
+        Task<int> UpsertTextConfig(UpsertTextConfig input);
+        Task<int> DeleteTextConfig(int textConfigId);
+        Task<TextConfigs> GetTextConfig(int textConfigId);
+        Task<IEnumerable<TextConfigs>> GetTextConfigs();
+
 
 
         //Settings
