@@ -521,6 +521,67 @@ namespace OHaraj.Services
 
 
 
+        public async Task<int> UpsertTextConfig(UpsertTextConfig input)
+        {
+            if (input.Id == null)
+            {
+                return await _dynamicityRepository.AddTextConfigAsync(new TextConfigs
+                {
+                    Name = input.Name,
+                    Font = input.Font,
+                    Size = input.Size,
+                    Weight = input.Weight,
+                    Opacity = input.Opacity,
+                    Color = input.Color,
+                    BackgroundColor = input.BackgroundColor,
+                });
+            }
+            else
+            {
+                var textConfig = await _dynamicityRepository.GetTextConfigAsync((int)input.Id);
+                if (textConfig == null)
+                {
+                    throw new NotFoundException("کانفیگ یافت نشد");
+                }
+                textConfig.Name = input.Name;
+                textConfig.Font = input.Font;
+                textConfig.Size = input.Size;
+                textConfig.Weight = input.Weight;
+                textConfig.Opacity = input.Opacity;
+                textConfig.Color = input.Color;
+                textConfig.BackgroundColor = input.BackgroundColor;
+
+                return await _dynamicityRepository.UpdateTextConfigAsync(textConfig);
+            }
+        }
+
+        public async Task<int> DeleteTextConfig(int textConfigId)
+        {
+            var textConfig = await _dynamicityRepository.GetTextConfigAsync(textConfigId);
+            if (textConfig == null)
+            {
+                throw new NotFoundException("کانفیگ یافت نشد");
+            }
+            return await _dynamicityRepository.DeleteTextConfigAsync(textConfig);
+        }
+
+        public async Task<TextConfigs> GetTextConfig(int textConfigId)
+        {
+            var textConfig = await _dynamicityRepository.GetTextConfigAsync(textConfigId);
+            if (textConfig == null)
+            {
+                throw new NotFoundException("کانفیگ یافت نشد");
+            }
+            return textConfig;
+        }
+
+        public async Task<IEnumerable<TextConfigs>> GetTextConfigs()
+        {
+            return await _dynamicityRepository.GetTextConfigsAsync();
+        }
+
+
+
         //Settings
         public async Task<int> UpsertImageSetting(UpsertSetting input)
         {
