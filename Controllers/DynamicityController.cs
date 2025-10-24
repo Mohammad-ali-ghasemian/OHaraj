@@ -26,19 +26,23 @@ namespace OHaraj.Controllers
             _dynamicityService = dynamicityService;
         }
 
-        [HttpPost("Add-Menu")]
+        /// <summary>
+        /// Invalid menuId ~ new menu - Valid menuId ~ update menu - Invalid parentId ~ becomes main menu
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost("Upsert-Menu")]
         [Produces(typeof(Response<int>))]
-        public async Task<IActionResult> AddMenu(UpsertMenu input) 
+        public async Task<IActionResult> UpsertMenu(UpsertMenu input) 
         {
             return new Response<int>(await _dynamicityService.UpsertMenu(input)).ToJsonResult();
         }
 
-        [HttpPost("Update-Menu")]
-        [Produces(typeof(Response<int>))]
-        public async Task<IActionResult> UpdateMenu(UpsertMenu input)
-        {
-            return new Response<int>(await _dynamicityService.UpsertMenu(input)).ToJsonResult();
-        }
+        //[HttpPost("Update-Menu")]
+        //[Produces(typeof(Response<int>))]
+        //public async Task<IActionResult> UpdateMenu(UpsertMenu input)
+        //{
+        //    return new Response<int>(await _dynamicityService.UpsertMenu(input)).ToJsonResult();
+        //}
 
         [HttpPost("Delete-Menu")]
         [Produces(typeof(Response<int>))]
@@ -93,7 +97,7 @@ namespace OHaraj.Controllers
         /// Must login first to use this
         /// </summary>
         /// <returns></returns>
-        [Authorize(Policy = "AuthenticatedOnly")]
+        [AllowAnonymous]
         [HttpGet("Get-Logined-User-Access-Menus")]
         [Produces(typeof(Response<IEnumerable<Menu>>))]
         public async Task<IActionResult> GetLoginedUserAccessMenus()
@@ -152,7 +156,7 @@ namespace OHaraj.Controllers
         /// SuperAdmin/Admin and the user who has this role can use this
         /// </summary>
         /// <returns></returns>
-        [Authorize(Policy = "AuthenticatedOnly")]
+        [AllowAnonymous]
         [HttpGet("Get-Role-Accesses")]
         [Produces(typeof(Response<IEnumerable<RoleAccess>>))]
         public async Task<IActionResult> GetRoleAccesses(string roleId)
