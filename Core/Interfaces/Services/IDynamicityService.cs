@@ -96,6 +96,14 @@ namespace OHaraj.Core.Interfaces.Services
         Task<IEnumerable<DocumentSettings>> GetDocumentSettingsByArea(Area area);
         Task<IEnumerable<DocumentSettings>> GetDocumentSettingsByConfigId(int documentConfigId);
 
+        Task<int> UpsertTextSetting(UpsertSetting input);
+        Task<int> DeleteTextSetting(int textSettingId);
+        Task<TextSettings> GetTextSetting(int textSettingId);
+        Task<IEnumerable<TextSettings>> GetTextSettings();
+        Task<IEnumerable<TextSettings>> GetTextSettingsByMenuId(int menuId);
+        Task<IEnumerable<TextSettings>> GetTextSettingsByArea(Area area);
+        Task<IEnumerable<TextSettings>> GetTextSettingsByConfigId(int textConfigId);
+
 
 
         //Roles
