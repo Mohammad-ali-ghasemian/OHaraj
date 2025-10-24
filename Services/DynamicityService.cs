@@ -897,6 +897,88 @@ namespace OHaraj.Services
             return await _dynamicityRepository.GetDocumentSettingsByConfigIdAsync(documentConfigId);
         }
 
+
+
+        public async Task<int> UpsertTextSetting(UpsertSetting input)
+        {
+            if (input.Id == null)
+            {
+                return await _dynamicityRepository.AddTextSettingAsync(new TextSettings
+                {
+                    Area = input.Area,
+                    TextConfigsId = input.ConfigId,
+                    MenuId = input.MenuId,
+                });
+            }
+            else
+            {
+                var textSetting = await _dynamicityRepository.GetTextSettingAsync((int)input.Id);
+                if (textSetting == null)
+                {
+                    throw new NotFoundException("تنظیمات یافت نشد");
+                }
+                textSetting.Area = input.Area;
+                textSetting.TextConfigsId = input.ConfigId;
+                textSetting.MenuId = input.MenuId;
+
+                return await _dynamicityRepository.UpdateTextSettingAsync(textSetting);
+            }
+        }
+
+        public async Task<int> DeleteTextSetting(int textSettingId)
+        {
+            var textSetting = await _dynamicityRepository.GetTextSettingAsync(textSettingId);
+            if (textSetting == null)
+            {
+                throw new NotFoundException("تنظیمات یافت نشد");
+            }
+
+            return await _dynamicityRepository.DeleteTextSettingAsync(textSetting);
+        }
+
+        public async Task<TextSettings> GetTextSetting(int textSettingId)
+        {
+            var textSetting = await _dynamicityRepository.GetTextSettingAsync(textSettingId);
+            if (textSetting == null)
+            {
+                throw new NotFoundException("تنظیمات یافت نشد");
+            }
+
+            return textSetting;
+        }
+
+        public async Task<IEnumerable<TextSettings>> GetTextSettings()
+        {
+            return await _dynamicityRepository.GetTextSettingsAsync();
+        }
+
+        public async Task<IEnumerable<TextSettings>> GetTextSettingsByMenuId(int menuId)
+        {
+            if (await _dynamicityRepository.GetMenuAsync(menuId) == null)
+            {
+                throw new NotFoundException("منو یافت نشد");
+            }
+            return await _dynamicityRepository.GetTextSettingsByMenuIdAsync(menuId);
+        }
+
+        public async Task<IEnumerable<TextSettings>> GetTextSettingsByArea(Area area)
+        {
+            return await _dynamicityRepository.GetTextSettingsByAreaAsync(area);
+        }
+
+        public async Task<IEnumerable<TextSettings>> GetTextSettingsByConfigId(int textConfigId)
+        {
+            if (await _dynamicityRepository.GetTextConfigAsync(textConfigId) == null)
+            {
+                throw new NotFoundException("کانفیگ یافت نشد");
+            }
+
+            return await _dynamicityRepository.GetTextSettingsByConfigIdAsync(textConfigId);
+        }
+
+
+
+        //Role
         public async Task<string> UpsertRole(UpsertRole input)
         {
             var role = await _dynamicityRepository.GetRoleByIdAsync(input.Id);
@@ -1021,5 +1103,6 @@ namespace OHaraj.Services
                 })
             );
         }
+        
     }
 }
