@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using OHaraj.Core.Domain.DTOs;
 using OHaraj.Core.Domain.Entities.Configs;
 using OHaraj.Core.Domain.Entities.Management;
 using OHaraj.Core.Domain.Entities.Settings;
@@ -757,6 +758,60 @@ namespace OHaraj.Controllers
         {
             return new Response<IEnumerable<TextSettings>>(await _dynamicityService.GetTextSettingsByConfigId(textConfigId)).ToJsonResult();
         }
+
+
+
+        [HttpPost("Upsert-Role")]
+        [Produces(typeof(Response<string>))]
+        public async Task<IActionResult> UpsertRole(UpsertRole input)
+        {
+            return new Response<string>(await _dynamicityService.UpsertRole(input)).ToJsonResult();
+        }
+
+        [HttpPost("Delete-Role")]
+        [Produces(typeof(Response<string>))]
+        public async Task<IActionResult> DeleteRole(string roleId)
+        {
+            return new Response<string>(await _dynamicityService.DeleteRole(roleId)).ToJsonResult();
+        }
+
+        [HttpGet("Get-Role")]
+        [Produces(typeof(Response<RoleDTO>))]
+        public async Task<IActionResult> GetRole(string roleId)
+        {
+            return new Response<RoleDTO>(await _dynamicityService.GetRole(roleId)).ToJsonResult();
+        }
+
+        [HttpGet("Get-Roles")]
+        [Produces(typeof(Response<IEnumerable<RoleDTO>>))]
+        public async Task<IActionResult> GetRoles()
+        {
+            return new Response<IEnumerable<RoleDTO>>(await _dynamicityService.GetRoles()).ToJsonResult();
+        }
+
+        /// <summary>
+        /// Give defiened roles to members (of course except SuperAdmin/Admin/User)
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost("Give-Roles")]
+        [Produces(typeof(Response<IEnumerable<RoleDTO>>))]
+        public async Task<IActionResult> GiveRoles(string userId, IEnumerable<string> roleIds)
+        {
+            return new Response<IEnumerable<RoleDTO>>(await _dynamicityService.GiveRoles(userId, roleIds)).ToJsonResult();
+        }
+
+        /// <summary>
+        /// Take roles from members (of course except SuperAdmin/Admin/User)
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost("Take-Roles")]
+        [Produces(typeof(Response<IEnumerable<RoleDTO>>))]
+        public async Task<IActionResult> TakeRoles(string userId, IEnumerable<string> roleIds)
+        {
+            return new Response<IEnumerable<RoleDTO>>(await _dynamicityService.TakeRoles(userId, roleIds)).ToJsonResult();
+        }
+
+
 
     }
 }
