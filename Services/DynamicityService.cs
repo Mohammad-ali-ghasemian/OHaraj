@@ -981,6 +981,11 @@ namespace OHaraj.Services
         //Role
         public async Task<string> UpsertRole(UpsertRole input)
         {
+            if (input.Name == "SuperAdmin" || input.Name == "Admin" || input.Name == "User")
+            {
+                throw new ForbiddenAccessException("Cannot manipulate this role!");
+            }
+
             var role = await _dynamicityRepository.GetRoleByIdAsync(input.Id);
             if (role == null)
             {
