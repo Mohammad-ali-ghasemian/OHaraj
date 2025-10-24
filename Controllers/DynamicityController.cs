@@ -178,6 +178,7 @@ namespace OHaraj.Controllers
         [Produces(typeof(Response<int>))]
         public async Task<IActionResult> AddImageConfig(UpsertImageConfig input)
         {
+            input.Id = null;
             return new Response<int>(await _dynamicityService.UpsertImageConfig(input)).ToJsonResult();
         }
 
@@ -224,6 +225,7 @@ namespace OHaraj.Controllers
         [Produces(typeof(Response<int>))]
         public async Task<IActionResult> AddVideoConfig(UpsertVideoConfig input)
         {
+            input.Id = null;
             return new Response<int>(await _dynamicityService.UpsertVideoConfig(input)).ToJsonResult();
         }
 
@@ -271,6 +273,7 @@ namespace OHaraj.Controllers
         [Produces(typeof(Response<int>))]
         public async Task<IActionResult> AddAudioConfig(UpsertAudioConfig input)
         {
+            input.Id = null;
             return new Response<int>(await _dynamicityService.UpsertAudioConfig(input)).ToJsonResult();
         }
 
@@ -318,6 +321,7 @@ namespace OHaraj.Controllers
         [Produces(typeof(Response<int>))]
         public async Task<IActionResult> AddDocumentConfig(UpsertDocumentConfig input)
         {
+            input.Id = null;
             return new Response<int>(await _dynamicityService.UpsertDocumentConfig(input)).ToJsonResult();
         }
 
