@@ -14,6 +14,7 @@ using OHaraj.Infrastructure.Exceptions;
 using OHaraj.Migrations;
 using Project.Application.Contracts.Infrastructure;
 using Project.Application.Exceptions;
+using System;
 using System.Xml.Linq;
 
 namespace OHaraj.Services
@@ -142,7 +143,9 @@ namespace OHaraj.Services
             // found current user's role ids. now let us see with these roles can access the menu or not.
             var accessMenus = await _dynamicityRepository.GetAccessMenusAsync(roleIds);
             var finalMenus = accessMenus.ToList();
-            finalMenus.AddRange(anonymousMenus);
+
+            var finalMenusDto = finalMenus.Select(menu => _mapper.Map<MenuDTO>(menu)).ToList();
+            finalMenusDto.AddRange(anonymousMenus);
             if (finalMenus.Any(m => m.Id == menuId))
             {
                 return true;
@@ -167,7 +170,8 @@ namespace OHaraj.Services
 
             var accessMenus = await _dynamicityRepository.GetAccessesAsync();
 
-            return allMenus.Where(menu => !accessMenus.Any(x => x.MenuId == menu.Id));
+            var menus = allMenus.Where(menu => !accessMenus.Any(x => x.MenuId == menu.Id));
+            return menus.Select(menu => _mapper.Map<MenuDTO>(menu));
         }
 
         public async Task<IEnumerable<MenuDTO>> GetLoginedUserAccessMenus()
@@ -193,7 +197,7 @@ namespace OHaraj.Services
             //var menus = await _dynamicityRepository.GetMenusAsync();
 
             //return menus.Except(accessBanned);
-            return access;
+            return access.Select(menu => _mapper.Map<MenuDTO>(menu));
         }
 
         public async Task<IEnumerable<MenuDTO>> GetOtherUserAccessMenus(string userId)
@@ -218,7 +222,7 @@ namespace OHaraj.Services
             //var menus = await _dynamicityRepository.GetMenusAsync();
 
             //return menus.Except(accessBanned);
-            return access;
+            return access.Select(menu => _mapper.Map<MenuDTO>(menu));
         }
 
 
