@@ -146,7 +146,7 @@ namespace OHaraj.Services
 
             var finalMenusDto = finalMenus.Select(menu => _mapper.Map<MenuDTO>(menu)).ToList();
             finalMenusDto.AddRange(anonymousMenus);
-            if (finalMenus.Any(m => m.Id == menuId))
+            if (finalMenusDto.Any(m => m.Id == menuId))
             {
                 return true;
             }
@@ -239,7 +239,8 @@ namespace OHaraj.Services
                 throw new NotFoundException("رول یافت نشد");
             }
 
-            if (input.Id == null)
+            var access = await _dynamicityRepository.GetAccessAsync((int)input.Id);
+            if (access == null)
             {
                 return await _dynamicityRepository.AddAccessAsync(new Core.Domain.Entities.Management.RoleAccess
                 {
@@ -249,11 +250,6 @@ namespace OHaraj.Services
             }
             else
             {
-                var access = await _dynamicityRepository.GetAccessAsync((int) input.Id);
-                if (access == null)
-                {
-                    throw new NotFoundException("شناسه یافت نشد");
-                }
                 access.RoleId = input.RoleId;
                 access.MenuId = input.MenuId;
                 return await _dynamicityRepository.UpdateAccessAsync(access);
