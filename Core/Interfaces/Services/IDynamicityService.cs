@@ -17,12 +17,12 @@ namespace OHaraj.Core.Interfaces.Services
         //Menu
         Task<int> UpsertMenu(UpsertMenu input);
         Task<int> DeleteMenu(int menuId);
-        Task<Menu> GetMenu(int menuId);
-        Task<IEnumerable<Menu>> GetMenus();
+        Task<MenuDTO> GetMenu(int menuId);
+        Task<IEnumerable<MenuDTO>> GetMenus();
         Task<bool> HasCurrentUserAccess(int menuId);
-        Task<IEnumerable<Menu>> GetAnonymousUserAccessMenus();
-        Task<IEnumerable<Menu>> GetLoginedUserAccessMenus();
-        Task<IEnumerable<Menu>> GetOtherUserAccessMenus(string userId);
+        Task<IEnumerable<MenuDTO>> GetAnonymousUserAccessMenus();
+        Task<IEnumerable<MenuDTO>> GetLoginedUserAccessMenus();
+        Task<IEnumerable<MenuDTO>> GetOtherUserAccessMenus(string userId);
 
 
 
