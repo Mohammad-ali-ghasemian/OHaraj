@@ -598,6 +598,15 @@ namespace OHaraj.Services
         //Settings
         public async Task<int> UpsertImageSetting(UpsertSetting input)
         {
+            if (await _dynamicityRepository.GetImageConfigAsync(input.ConfigId) == null)
+            {
+                throw new NotFoundException("کانفیگ یافت نشد");
+            }
+            if (await _dynamicityRepository.GetMenuAsync(input.MenuId) == null)
+            {
+                throw new NotFoundException("منو یافت نشد");
+            }
+
             var imageSetting = await _dynamicityRepository.GetImageSettingAsync(input.Id);
             if (imageSetting == null)
             {
@@ -673,6 +682,15 @@ namespace OHaraj.Services
 
         public async Task<int> UpsertVideoSetting(UpsertSetting input)
         {
+            if (await _dynamicityRepository.GetVideoConfigAsync(input.ConfigId) == null)
+            {
+                throw new NotFoundException("کانفیگ یافت نشد");
+            }
+            if (await _dynamicityRepository.GetMenuAsync(input.MenuId) == null)
+            {
+                throw new NotFoundException("منو یافت نشد");
+            }
+
             var videoSetting = await _dynamicityRepository.GetVideoSettingAsync(input.Id);
             if (videoSetting == null)
             {
@@ -748,6 +766,15 @@ namespace OHaraj.Services
 
         public async Task<int> UpsertAudioSetting(UpsertSetting input)
         {
+            if (await _dynamicityRepository.GetImageConfigAsync(input.ConfigId) == null)
+            {
+                throw new NotFoundException("کانفیگ یافت نشد");
+            }
+            if (await _dynamicityRepository.GetMenuAsync(input.MenuId) == null)
+            {
+                throw new NotFoundException("منو یافت نشد");
+            }
+
             var audioSetting = await _dynamicityRepository.GetAudioSettingAsync(input.Id);
             if (audioSetting == null)
             {
@@ -823,6 +850,15 @@ namespace OHaraj.Services
 
         public async Task<int> UpsertDocumentSetting(UpsertSetting input)
         {
+            if (await _dynamicityRepository.GetImageConfigAsync(input.ConfigId) == null)
+            {
+                throw new NotFoundException("کانفیگ یافت نشد");
+            }
+            if (await _dynamicityRepository.GetMenuAsync(input.MenuId) == null)
+            {
+                throw new NotFoundException("منو یافت نشد");
+            }
+
             var documentSetting = await _dynamicityRepository.GetDocumentSettingAsync(input.Id);
             if (documentSetting == null)
             {
@@ -898,6 +934,15 @@ namespace OHaraj.Services
 
         public async Task<int> UpsertTextSetting(UpsertSetting input)
         {
+            if (await _dynamicityRepository.GetImageConfigAsync(input.ConfigId) == null)
+            {
+                throw new NotFoundException("کانفیگ یافت نشد");
+            }
+            if (await _dynamicityRepository.GetMenuAsync(input.MenuId) == null)
+            {
+                throw new NotFoundException("منو یافت نشد");
+            }
+
             var textSetting = await _dynamicityRepository.GetTextSettingAsync(input.Id);
             if (input.Id == null)
             {
