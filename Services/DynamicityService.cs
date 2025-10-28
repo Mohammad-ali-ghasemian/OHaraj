@@ -91,7 +91,7 @@ namespace OHaraj.Services
             return await _dynamicityRepository.DeleteMenuAsync(menu);
         }
 
-        public async Task<Menu> GetMenu(int menuId)
+        public async Task<MenuDTO> GetMenu(int menuId)
         {
             var menu = await _dynamicityRepository.GetMenuAsync(menuId);
             if (menu == null)
@@ -99,12 +99,13 @@ namespace OHaraj.Services
                 throw new NotFoundException("منو یافت نشد!");
             }
 
-            return menu;
+            return _mapper.Map<MenuDTO>(menu);
         }
 
-        public async Task<IEnumerable<Menu>> GetMenus()
+        public async Task<IEnumerable<MenuDTO>> GetMenus()
         {
-            return await _dynamicityRepository.GetMenusAsync();
+            var menus = await _dynamicityRepository.GetMenusAsync();
+            return menus.Select(menu => _mapper.Map<MenuDTO>(menu));
         }
 
         public async Task<bool> HasCurrentUserAccess(int menuId)
@@ -153,7 +154,7 @@ namespace OHaraj.Services
 
         }
 
-        public async Task<IEnumerable<Menu>> GetAnonymousUserAccessMenus()
+        public async Task<IEnumerable<MenuDTO>> GetAnonymousUserAccessMenus()
         {
             var allMenus = await _dynamicityRepository.GetMenusAsync();
             //var allRoles = await _authenticationRepository.GetRolesAsync();
@@ -169,7 +170,7 @@ namespace OHaraj.Services
             return allMenus.Where(menu => !accessMenus.Any(x => x.MenuId == menu.Id));
         }
 
-        public async Task<IEnumerable<Menu>> GetLoginedUserAccessMenus()
+        public async Task<IEnumerable<MenuDTO>> GetLoginedUserAccessMenus()
         {
             // the user must be logged in to use it
             var user = await Current();
@@ -195,7 +196,7 @@ namespace OHaraj.Services
             return access;
         }
 
-        public async Task<IEnumerable<Menu>> GetOtherUserAccessMenus(string userId)
+        public async Task<IEnumerable<MenuDTO>> GetOtherUserAccessMenus(string userId)
         {
             var user = await _authenticationRepository.GetUserByIdAsync(userId);
             if (user == null)
@@ -236,7 +237,7 @@ namespace OHaraj.Services
 
             if (input.Id == null)
             {
-                return await _dynamicityRepository.AddAccessAsync(new RoleAccess
+                return await _dynamicityRepository.AddAccessAsync(new Core.Domain.Entities.Management.RoleAccess
                 {
                     RoleId = input.RoleId,
                     MenuId = input.MenuId,
@@ -266,7 +267,7 @@ namespace OHaraj.Services
             return await _dynamicityRepository.DeleteAccessAsync(access);
         }
 
-        public async Task<RoleAccess> GetAccess(int accessId)
+        public async Task<Core.Domain.Entities.Management.RoleAccess> GetAccess(int accessId)
         {
             var access = await _dynamicityRepository.GetAccessAsync(accessId);
             if (access == null)
@@ -277,7 +278,7 @@ namespace OHaraj.Services
             return access;
         }
 
-        public async Task<IEnumerable<RoleAccess>> GetAccess(string roleId)
+        public async Task<IEnumerable<Core.Domain.Entities.Management.RoleAccess>> GetAccess(string roleId)
         {
             // the user must be logged in to use it
             var user = await Current();
@@ -302,7 +303,7 @@ namespace OHaraj.Services
             throw new ForbiddenAccessException("دسترسی غیرمجاز");
         }
 
-        public async Task<IEnumerable<RoleAccess>> GetAllAccesss()
+        public async Task<IEnumerable<Core.Domain.Entities.Management.RoleAccess>> GetAllAccesss()
         {
             return await _dynamicityRepository.GetAccessesAsync();
         }
