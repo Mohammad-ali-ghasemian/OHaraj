@@ -151,10 +151,10 @@ namespace OHaraj.Controllers
         }
 
         [HttpGet("Get-Access-By-Id")]
-        [Produces(typeof(Response<RoleAccess>))]
+        [Produces(typeof(Response<RoleAccessDTO>))]
         public async Task<IActionResult> GetAccessById(int id)
         {
-            return new Response<RoleAccess>(await _dynamicityService.GetAccess(id)).ToJsonResult();
+            return new Response<RoleAccessDTO>(await _dynamicityService.GetAccess(id)).ToJsonResult();
         }
 
         /// <summary>
@@ -164,17 +164,17 @@ namespace OHaraj.Controllers
         /// <returns></returns>
         [AllowAnonymous]
         [HttpGet("Get-Role-Accesses")]
-        [Produces(typeof(Response<IEnumerable<RoleAccess>>))]
+        [Produces(typeof(Response<IEnumerable<RoleAccessDTO>>))]
         public async Task<IActionResult> GetRoleAccesses(string roleId)
         {
-            return new Response<IEnumerable<RoleAccess>>(await _dynamicityService.GetAccess(roleId)).ToJsonResult();
+            return new Response<IEnumerable<RoleAccessDTO>>(await _dynamicityService.GetAccess(roleId)).ToJsonResult();
         }
 
         [HttpGet("Get-All-Accesses")]
-        [Produces(typeof(Response<IEnumerable<RoleAccess>>))]
+        [Produces(typeof(Response<IEnumerable<RoleAccessDTO>>))]
         public async Task<IActionResult> GetAllAccesses()
         {
-            return new Response<IEnumerable<RoleAccess>>(await _dynamicityService.GetAllAccesss()).ToJsonResult();
+            return new Response<IEnumerable<RoleAccessDTO>>(await _dynamicityService.GetAllAccesss()).ToJsonResult();
         }
 
 
