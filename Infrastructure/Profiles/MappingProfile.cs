@@ -50,6 +50,9 @@ namespace Project.Application.Profiles
 
             CreateMap<Menu, MenuDTO>()
                 .ReverseMap();
+
+            CreateMap<RoleAccess, RoleAccessDTO>()
+                .ReverseMap();
         }
     }
 }
