@@ -107,7 +107,7 @@ namespace OHaraj.Controllers
         }
 
         /// <summary>
-        /// Just for admins
+        /// Just for admins 
         /// </summary>
         /// <returns></returns>
         [HttpGet("Get-Other-User-Access-Menus")]
@@ -121,19 +121,12 @@ namespace OHaraj.Controllers
 
 
         /// <summary>
-        /// Which role can access which menu
+        /// Which role can access which menu - Invalid id ~ new access - Valid id ~ update access
         /// </summary>
         /// <returns></returns>
-        [HttpPost("Add-Access")]
+        [HttpPost("Upsert-Access")]
         [Produces(typeof(Response<int>))]
-        public async Task<IActionResult> AddAccess(UpsertRoleAccess input)
-        {
-            return new Response<int>(await _dynamicityService.UpsertAccess(input)).ToJsonResult();
-        }
-
-        [HttpPost("Update-Access")]
-        [Produces(typeof(Response<int>))]
-        public async Task<IActionResult> UpdateAccess(UpsertRoleAccess input)
+        public async Task<IActionResult> UpsertAccess(UpsertRoleAccess input)
         {
             return new Response<int>(await _dynamicityService.UpsertAccess(input)).ToJsonResult();
         }
