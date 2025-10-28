@@ -107,6 +107,18 @@ namespace OHaraj.Controllers
         }
 
         /// <summary>
+        /// Must login first to use this
+        /// </summary>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [HttpGet("Get-Logined-User-Menus")]
+        [Produces(typeof(Response<IEnumerable<MenuDTO>>))]
+        public async Task<IActionResult> GetLoginedUserMenus()
+        {
+            return new Response<IEnumerable<MenuDTO>>(await _dynamicityService.GetLoginedUserMenus()).ToJsonResult();
+        }
+
+        /// <summary>
         /// Just for admins 
         /// </summary>
         /// <returns></returns>

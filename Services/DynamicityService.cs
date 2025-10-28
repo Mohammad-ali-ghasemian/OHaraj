@@ -200,6 +200,35 @@ namespace OHaraj.Services
             return access.Select(menu => _mapper.Map<MenuDTO>(menu));
         }
 
+        public async Task<IEnumerable<MenuDTO>> GetLoginedUserMenus()
+        {
+            // the user must be logged in to use it
+            var user = await Current();
+            if (user == null)
+            {
+                throw new UnauthorizedAccessException("ابتدا وارد شوید");
+            }
+
+            var roleNames = await _authenticationRepository.GetUserRolesAsync(user);
+            List<string> roleIds = new List<string>();
+
+            IdentityRole role;
+            foreach (string roleName in roleNames)
+            {
+                role = await _dynamicityRepository.GetRoleByNameAsync(roleName);
+                roleIds.Add(role.Id);
+            }
+
+            var access = await _dynamicityRepository.GetAccessMenusAsync(roleIds);
+            //var menus = await _dynamicityRepository.GetMenusAsync();
+
+            //return menus.Except(accessBanned);
+            var accessList = access.Select(menu => _mapper.Map<MenuDTO>(menu)).ToList();
+            var anonymousMenus = await GetAnonymousUserAccessMenus();
+            accessList.AddRange(anonymousMenus);
+            return accessList.Select(menu => _mapper.Map<MenuDTO>(menu));
+        }
+
         public async Task<IEnumerable<MenuDTO>> GetOtherUserAccessMenus(string userId)
         {
             var user = await _authenticationRepository.GetUserByIdAsync(userId);
