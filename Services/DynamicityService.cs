@@ -606,6 +606,10 @@ namespace OHaraj.Services
             {
                 throw new NotFoundException("منو یافت نشد");
             }
+            if (!Enum.IsDefined(typeof(Area), input.Area))
+            {
+                throw new BadRequestException("Area not defiend!");
+            }
 
             var imageSetting = await _dynamicityRepository.GetImageSettingAsync(input.Id);
             if (imageSetting == null)
@@ -689,6 +693,10 @@ namespace OHaraj.Services
             if (await _dynamicityRepository.GetMenuAsync(input.MenuId) == null)
             {
                 throw new NotFoundException("منو یافت نشد");
+            }
+            if (!Enum.IsDefined(typeof(Area), input.Area))
+            {
+                throw new BadRequestException("Area not defiend!");
             }
 
             var videoSetting = await _dynamicityRepository.GetVideoSettingAsync(input.Id);
@@ -774,6 +782,10 @@ namespace OHaraj.Services
             {
                 throw new NotFoundException("منو یافت نشد");
             }
+            if (!Enum.IsDefined(typeof(Area), input.Area))
+            {
+                throw new BadRequestException("Area not defiend!");
+            }
 
             var audioSetting = await _dynamicityRepository.GetAudioSettingAsync(input.Id);
             if (audioSetting == null)
@@ -858,6 +870,10 @@ namespace OHaraj.Services
             {
                 throw new NotFoundException("منو یافت نشد");
             }
+            if (!Enum.IsDefined(typeof(Area), input.Area))
+            {
+                throw new BadRequestException("Area not defiend!");
+            }
 
             var documentSetting = await _dynamicityRepository.GetDocumentSettingAsync(input.Id);
             if (documentSetting == null)
@@ -941,6 +957,10 @@ namespace OHaraj.Services
             if (await _dynamicityRepository.GetMenuAsync(input.MenuId) == null)
             {
                 throw new NotFoundException("منو یافت نشد");
+            }
+            if (!Enum.IsDefined(typeof(Area), input.Area))
+            {
+                throw new BadRequestException("Area not defiend!");
             }
 
             var textSetting = await _dynamicityRepository.GetTextSettingAsync(input.Id);
