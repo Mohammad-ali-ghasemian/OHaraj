@@ -1116,6 +1116,24 @@ namespace OHaraj.Services
             });
         }
 
+        public async Task<IEnumerable<string>> GetRoles(string userId)
+        {
+            var user = await _authenticationRepository.GetUserByIdAsync(userId);
+            if (user == null)
+            {
+                throw new NotFoundException("کاربر یافت نشد");
+            }
+
+            var roles = await _dynamicityRepository.GetRolesAsync(user);
+            //return roles.Select(r =>
+            //new RoleDTO
+            //{
+            //    Id = r.Id,
+            //    Name = r.Name
+            //});
+            return roles;
+        }
+
         public async Task<IEnumerable<RoleDTO>> GiveRoles(string userId, IEnumerable<string> roleNames)
         {
             foreach (string roleName in roleNames)
@@ -1139,17 +1157,31 @@ namespace OHaraj.Services
 
             var roles = await _dynamicityRepository.GiveRolesAsync(user, roleNames);
 
-            return await Task.WhenAll(
-                roles.Select(async roleName =>
+            //return await Task.WhenAll(
+            //    roles.Select(async roleName =>
+            //    {
+            //        var role = await _dynamicityRepository.GetRoleByNameAsync(roleName);
+            //        return new RoleDTO
+            //        {
+            //            Id = role.Id,
+            //            Name = roleName
+            //        };
+            //    })
+            //);
+
+            var result = new List<RoleDTO>();
+
+            foreach (var roleName in roles)
+            {
+                var role = await _dynamicityRepository.GetRoleByNameAsync(roleName);
+                result.Add(new RoleDTO
                 {
-                    var role = await _dynamicityRepository.GetRoleByNameAsync(roleName);
-                    return new RoleDTO
-                    {
-                        Id = role.Id,
-                        Name = roleName
-                    };
-                })
-            );
+                    Id = role.Id,
+                    Name = roleName
+                });
+            }
+
+            return result;
 
         }
 
@@ -1176,17 +1208,31 @@ namespace OHaraj.Services
 
             var roles = await _dynamicityRepository.TakeRolesAsync(user, roleNames);
 
-            return await Task.WhenAll(
-                roles.Select(async roleName =>
+            //return await Task.WhenAll(
+            //    roles.Select(async roleName =>
+            //    {
+            //        var role = await _dynamicityRepository.GetRoleByNameAsync(roleName);
+            //        return new RoleDTO
+            //        {
+            //            Id = role.Id,
+            //            Name = roleName
+            //        };
+            //    })
+            //);
+
+            var result = new List<RoleDTO>();
+
+            foreach (var roleName in roles)
+            {
+                var role = await _dynamicityRepository.GetRoleByNameAsync(roleName);
+                result.Add(new RoleDTO
                 {
-                    var role = await _dynamicityRepository.GetRoleByNameAsync(roleName);
-                    return new RoleDTO
-                    {
-                        Id = role.Id,
-                        Name = roleName
-                    };
-                })
-            );
+                    Id = role.Id,
+                    Name = roleName
+                });
+            }
+
+            return result;
         }
         
     }
