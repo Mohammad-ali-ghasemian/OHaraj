@@ -188,7 +188,7 @@ namespace OHaraj.Controllers
         [Produces(typeof(Response<int>))]
         public async Task<IActionResult> UpsertImageConfig([FromForm] UpsertImageConfig input)
         {
-            input.Id = null;
+            
             return new Response<int>(await _dynamicityService.UpsertImageConfig(input)).ToJsonResult();
         }
 
@@ -232,7 +232,7 @@ namespace OHaraj.Controllers
         [Produces(typeof(Response<int>))]
         public async Task<IActionResult> UpsertVideoConfig([FromForm] UpsertVideoConfig input)
         {
-            input.Id = null;
+            
             return new Response<int>(await _dynamicityService.UpsertVideoConfig(input)).ToJsonResult();
         }
 
@@ -277,7 +277,7 @@ namespace OHaraj.Controllers
         [Produces(typeof(Response<int>))]
         public async Task<IActionResult> UpsertAudioConfig([FromForm] UpsertAudioConfig input)
         {
-            input.Id = null;
+            
             return new Response<int>(await _dynamicityService.UpsertAudioConfig(input)).ToJsonResult();
         }
 
@@ -322,7 +322,7 @@ namespace OHaraj.Controllers
         [Produces(typeof(Response<int>))]
         public async Task<IActionResult> UpsertDocumentConfig([FromForm] UpsertDocumentConfig input)
         {
-            input.Id = null;
+            
             return new Response<int>(await _dynamicityService.UpsertDocumentConfig(input)).ToJsonResult();
         }
 
@@ -367,7 +367,7 @@ namespace OHaraj.Controllers
         [Produces(typeof(Response<int>))]
         public async Task<IActionResult> UpsertTextConfig([FromForm] UpsertTextConfig input)
         {
-            input.Id = null;
+            
             return new Response<int>(await _dynamicityService.UpsertTextConfig(input)).ToJsonResult();
         }
 
@@ -419,7 +419,7 @@ namespace OHaraj.Controllers
         [Produces(typeof(Response<int>))]
         public async Task<IActionResult> UpsertImageSetting(UpsertSetting input)
         {
-            input.Id = null;
+            
             return new Response<int>(await _dynamicityService.UpsertImageSetting(input)).ToJsonResult();
         }
 
@@ -486,7 +486,7 @@ namespace OHaraj.Controllers
         [Produces(typeof(Response<int>))]
         public async Task<IActionResult> UpsertVideoSetting(UpsertSetting input)
         {
-            input.Id = null;
+            
             return new Response<int>(await _dynamicityService.UpsertVideoSetting(input)).ToJsonResult();
         }
 
@@ -553,7 +553,7 @@ namespace OHaraj.Controllers
         [Produces(typeof(Response<int>))]
         public async Task<IActionResult> UpsertAudioSetting(UpsertSetting input)
         {
-            input.Id = null;
+            
             return new Response<int>(await _dynamicityService.UpsertAudioSetting(input)).ToJsonResult();
         }
 
@@ -619,7 +619,7 @@ namespace OHaraj.Controllers
         [Produces(typeof(Response<int>))]
         public async Task<IActionResult> UpsertDocumentSetting(UpsertSetting input)
         {
-            input.Id = null;
+            
             return new Response<int>(await _dynamicityService.UpsertDocumentSetting(input)).ToJsonResult();
         }
 
@@ -685,7 +685,7 @@ namespace OHaraj.Controllers
         [Produces(typeof(Response<int>))]
         public async Task<IActionResult> UpsertTextSetting(UpsertSetting input)
         {
-            input.Id = null;
+            
             return new Response<int>(await _dynamicityService.UpsertTextSetting(input)).ToJsonResult();
         }
 
