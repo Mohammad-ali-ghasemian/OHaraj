@@ -371,13 +371,6 @@ namespace OHaraj.Controllers
             return new Response<int>(await _dynamicityService.UpsertTextConfig(input)).ToJsonResult();
         }
 
-        [HttpPost("Update-Text-Config")]
-        [Produces(typeof(Response<int>))]
-        public async Task<IActionResult> UpdateTextConfig(UpsertTextConfig input)
-        {
-            return new Response<int>(await _dynamicityService.UpsertTextConfig(input)).ToJsonResult();
-        }
-
         /// <summary>
         /// Delet a config will delete all settings that were matching to it
         /// </summary>
