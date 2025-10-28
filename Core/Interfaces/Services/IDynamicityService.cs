@@ -112,6 +112,7 @@ namespace OHaraj.Core.Interfaces.Services
         Task<string> DeleteRole(string roleId);
         Task<RoleDTO> GetRole(string roleId);
         Task<IEnumerable<RoleDTO>> GetRoles();
+        Task<IEnumerable<string>> GetRoles(string userId);
 
         // Default : everyone has "User" role
         // Default : cannot give "User" and "Admin" or "SuperAdmin" role to another user (SuperAdmin can give "admin")
