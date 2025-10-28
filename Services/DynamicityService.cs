@@ -296,7 +296,7 @@ namespace OHaraj.Services
             return await _dynamicityRepository.DeleteAccessAsync(access);
         }
 
-        public async Task<Core.Domain.Entities.Management.RoleAccess> GetAccess(int accessId)
+        public async Task<RoleAccessDTO> GetAccess(int accessId)
         {
             var access = await _dynamicityRepository.GetAccessAsync(accessId);
             if (access == null)
@@ -304,10 +304,10 @@ namespace OHaraj.Services
                 throw new NotFoundException("مورد یافت نشد");
             }
 
-            return access;
+            return _mapper.Map<RoleAccessDTO>(access);
         }
 
-        public async Task<IEnumerable<Core.Domain.Entities.Management.RoleAccess>> GetAccess(string roleId)
+        public async Task<IEnumerable<RoleAccessDTO>> GetAccess(string roleId)
         {
             // the user must be logged in to use it
             var user = await Current();
@@ -326,15 +326,17 @@ namespace OHaraj.Services
 
             if (userRoles.Contains("SuperAdmin") || userRoles.Contains("Admin") || userRoles.Contains(role.Name))
             {
-                return await _dynamicityRepository.GetAccessByRoleAsync(roleId);
+                var accesses = await _dynamicityRepository.GetAccessByRoleAsync(roleId);
+                return accesses.Select(access => _mapper.Map<RoleAccessDTO>(access));
             }
 
             throw new ForbiddenAccessException("دسترسی غیرمجاز");
         }
 
-        public async Task<IEnumerable<Core.Domain.Entities.Management.RoleAccess>> GetAllAccesss()
+        public async Task<IEnumerable<RoleAccessDTO>> GetAllAccesss()
         {
-            return await _dynamicityRepository.GetAccessesAsync();
+            var accesses = await _dynamicityRepository.GetAccessesAsync();
+            return accesses.Select(access => _mapper.Map<RoleAccessDTO>(access));
         }
 
 
@@ -342,7 +344,8 @@ namespace OHaraj.Services
         //Configs
         public async Task<int> UpsertImageConfig(UpsertImageConfig input)
         {
-            if (input.Id == null)
+            var imageConfig = await _dynamicityRepository.GetImageConfigAsync((int)input.Id);
+            if (imageConfig == null)
             {
                 return await _dynamicityRepository.AddImageConfigAsync(new ImageConfigs
                 {
@@ -354,11 +357,6 @@ namespace OHaraj.Services
             }
             else
             {
-                var imageConfig = await _dynamicityRepository.GetImageConfigAsync((int)input.Id);
-                if (imageConfig == null)
-                {
-                    throw new NotFoundException("کانفیگ یافت نشد");
-                }
                 imageConfig.Name = input.Name;
                 imageConfig.MaxSize = input.MaxSize;
                 imageConfig.MaxWidth = input.MaxWidth;
@@ -397,7 +395,8 @@ namespace OHaraj.Services
 
         public async Task<int> UpsertVideoConfig(UpsertVideoConfig input)
         {
-            if (input.Id == null)
+            var videoConfig = await _dynamicityRepository.GetVideoConfigAsync((int)input.Id);
+            if (videoConfig == null)
             {
                 return await _dynamicityRepository.AddVideoConfigAsync(new VideoConfigs
                 {
@@ -410,11 +409,6 @@ namespace OHaraj.Services
             }
             else
             {
-                var videoConfig = await _dynamicityRepository.GetVideoConfigAsync((int)input.Id);
-                if (videoConfig == null)
-                {
-                    throw new NotFoundException("کانفیگ یافت نشد");
-                }
                 videoConfig.Name = input.Name;
                 videoConfig.MaxSize = input.MaxSize;
                 videoConfig.MaxWidth = input.MaxWidth;
@@ -454,7 +448,8 @@ namespace OHaraj.Services
 
         public async Task<int> UpsertAudioConfig(UpsertAudioConfig input)
         {
-            if (input.Id == null)
+            var audioConfig = await _dynamicityRepository.GetAudioConfigAsync((int)input.Id);
+            if (audioConfig == null)
             {
                 return await _dynamicityRepository.AddAudioConfigAsync(new AudioConfigs
                 {
@@ -464,11 +459,6 @@ namespace OHaraj.Services
             }
             else
             {
-                var audioConfig = await _dynamicityRepository.GetAudioConfigAsync((int)input.Id);
-                if (audioConfig == null)
-                {
-                    throw new NotFoundException("کانفیگ یافت نشد");
-                }
                 audioConfig.MaxSize= input.MaxSize;
                 audioConfig.MaxLength = input.MaxLength;
 
@@ -505,7 +495,8 @@ namespace OHaraj.Services
 
         public async Task<int> UpsertDocumentConfig(UpsertDocumentConfig input)
         {
-            if (input.Id == null)
+            var documentConfig = await _dynamicityRepository.GetDocumentConfigAsync((int)input.Id);
+            if (documentConfig == null)
             {
                 return await _dynamicityRepository.AddDocumentConfigAsync(new DocumentConfigs
                 {
@@ -514,11 +505,6 @@ namespace OHaraj.Services
             }
             else
             {
-                var documentConfig = await _dynamicityRepository.GetDocumentConfigAsync((int)input.Id);
-                if (documentConfig == null)
-                {
-                    throw new NotFoundException("کانفیگ یافت نشد");
-                }
                 documentConfig.MaxSize = input.MaxSize;
 
                 return await _dynamicityRepository.UpdateDocumentConfigAsync(documentConfig);
@@ -554,7 +540,8 @@ namespace OHaraj.Services
 
         public async Task<int> UpsertTextConfig(UpsertTextConfig input)
         {
-            if (input.Id == null)
+            var textConfig = await _dynamicityRepository.GetTextConfigAsync((int)input.Id);
+            if (textConfig == null)
             {
                 return await _dynamicityRepository.AddTextConfigAsync(new TextConfigs
                 {
@@ -569,11 +556,6 @@ namespace OHaraj.Services
             }
             else
             {
-                var textConfig = await _dynamicityRepository.GetTextConfigAsync((int)input.Id);
-                if (textConfig == null)
-                {
-                    throw new NotFoundException("کانفیگ یافت نشد");
-                }
                 textConfig.Name = input.Name;
                 textConfig.Font = input.Font;
                 textConfig.Size = input.Size;
