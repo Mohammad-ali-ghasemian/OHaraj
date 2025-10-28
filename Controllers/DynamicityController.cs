@@ -180,18 +180,15 @@ namespace OHaraj.Controllers
 
 
 
-        [HttpPost("Add-Image-Config")]
+        /// <summary>
+        /// Invalid id ~ Add config
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost("Upsert-Image-Config")]
         [Produces(typeof(Response<int>))]
-        public async Task<IActionResult> AddImageConfig(UpsertImageConfig input)
+        public async Task<IActionResult> UpsertImageConfig(UpsertImageConfig input)
         {
             input.Id = null;
-            return new Response<int>(await _dynamicityService.UpsertImageConfig(input)).ToJsonResult();
-        }
-
-        [HttpPost("Update-Image-Config")]
-        [Produces(typeof(Response<int>))]
-        public async Task<IActionResult> UpdateImageConfig(UpsertImageConfig input)
-        {
             return new Response<int>(await _dynamicityService.UpsertImageConfig(input)).ToJsonResult();
         }
 
@@ -227,18 +224,15 @@ namespace OHaraj.Controllers
 
 
 
-        [HttpPost("Add-Video-Config")]
+        /// <summary>
+        /// Invalid id ~ Add config
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost("Upsert-Video-Config")]
         [Produces(typeof(Response<int>))]
-        public async Task<IActionResult> AddVideoConfig(UpsertVideoConfig input)
+        public async Task<IActionResult> UpsertVideoConfig(UpsertVideoConfig input)
         {
             input.Id = null;
-            return new Response<int>(await _dynamicityService.UpsertVideoConfig(input)).ToJsonResult();
-        }
-
-        [HttpPost("Update-Video-Config")]
-        [Produces(typeof(Response<int>))]
-        public async Task<IActionResult> UpdateVideoConfig(UpsertVideoConfig input)
-        {
             return new Response<int>(await _dynamicityService.UpsertVideoConfig(input)).ToJsonResult();
         }
 
@@ -275,18 +269,15 @@ namespace OHaraj.Controllers
 
 
 
-        [HttpPost("Add-Audio-Config")]
+        /// <summary>
+        /// Invalid id ~ Add config
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost("Upsert-Audio-Config")]
         [Produces(typeof(Response<int>))]
-        public async Task<IActionResult> AddAudioConfig(UpsertAudioConfig input)
+        public async Task<IActionResult> UpsertAudioConfig(UpsertAudioConfig input)
         {
             input.Id = null;
-            return new Response<int>(await _dynamicityService.UpsertAudioConfig(input)).ToJsonResult();
-        }
-
-        [HttpPost("Update-Audio-Config")]
-        [Produces(typeof(Response<int>))]
-        public async Task<IActionResult> UpdateAudioConfig(UpsertAudioConfig input)
-        {
             return new Response<int>(await _dynamicityService.UpsertAudioConfig(input)).ToJsonResult();
         }
 
@@ -323,18 +314,15 @@ namespace OHaraj.Controllers
 
 
 
-        [HttpPost("Add-Document-Config")]
+        /// <summary>
+        /// Invalid id ~ Add config
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost("Upsert-Document-Config")]
         [Produces(typeof(Response<int>))]
-        public async Task<IActionResult> AddDocumentConfig(UpsertDocumentConfig input)
+        public async Task<IActionResult> UpsertDocumentConfig(UpsertDocumentConfig input)
         {
             input.Id = null;
-            return new Response<int>(await _dynamicityService.UpsertDocumentConfig(input)).ToJsonResult();
-        }
-
-        [HttpPost("Update-Document-Config")]
-        [Produces(typeof(Response<int>))]
-        public async Task<IActionResult> UpdateDocumentConfig(UpsertDocumentConfig input)
-        {
             return new Response<int>(await _dynamicityService.UpsertDocumentConfig(input)).ToJsonResult();
         }
 
@@ -371,9 +359,13 @@ namespace OHaraj.Controllers
 
 
 
-        [HttpPost("Add-Text-Config")]
+        /// <summary>
+        /// Invalid id ~ Add config
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost("Upsert-Text-Config")]
         [Produces(typeof(Response<int>))]
-        public async Task<IActionResult> AddTextConfig(UpsertTextConfig input)
+        public async Task<IActionResult> UpsertTextConfig(UpsertTextConfig input)
         {
             input.Id = null;
             return new Response<int>(await _dynamicityService.UpsertTextConfig(input)).ToJsonResult();
@@ -419,6 +411,10 @@ namespace OHaraj.Controllers
 
 
 
+        /// <summary>
+        /// Invalid id ~ Add setting
+        /// </summary>
+        /// <returns></returns>
         [HttpPost("Add-Image-Setting")]
         [Produces(typeof(Response<int>))]
         public async Task<IActionResult> AddImageSetting(UpsertSetting input)
