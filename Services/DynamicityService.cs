@@ -598,7 +598,8 @@ namespace OHaraj.Services
         //Settings
         public async Task<int> UpsertImageSetting(UpsertSetting input)
         {
-            if (input.Id == null)
+            var imageSetting = await _dynamicityRepository.GetImageSettingAsync((int)input.Id);
+            if (imageSetting == null)
             {
                 return await _dynamicityRepository.AddImageSettingAsync(new ImageSettings
                 {
@@ -609,11 +610,6 @@ namespace OHaraj.Services
             }
             else
             {
-                var imageSetting = await _dynamicityRepository.GetImageSettingAsync((int) input.Id);
-                if (imageSetting == null)
-                {
-                    throw new NotFoundException("تنظیمات یافت نشد");
-                }
                 imageSetting.Area = input.Area;
                 imageSetting.ImageConfigsId = input.ConfigId;
                 imageSetting.MenuId = input.MenuId;
@@ -677,7 +673,8 @@ namespace OHaraj.Services
 
         public async Task<int> UpsertVideoSetting(UpsertSetting input)
         {
-            if (input.Id == null)
+            var videoSetting = await _dynamicityRepository.GetVideoSettingAsync((int)input.Id);
+            if (videoSetting == null)
             {
                 return await _dynamicityRepository.AddVideoSettingAsync(new VideoSettings
                 {
@@ -688,11 +685,6 @@ namespace OHaraj.Services
             }
             else
             {
-                var videoSetting = await _dynamicityRepository.GetVideoSettingAsync((int)input.Id);
-                if (videoSetting == null)
-                {
-                    throw new NotFoundException("تنظیمات یافت نشد");
-                }
                 videoSetting.Area = input.Area;
                 videoSetting.VideoConfigsId = input.ConfigId;
                 videoSetting.MenuId = input.MenuId;
@@ -756,7 +748,8 @@ namespace OHaraj.Services
 
         public async Task<int> UpsertAudioSetting(UpsertSetting input)
         {
-            if (input.Id == null)
+            var audioSetting = await _dynamicityRepository.GetAudioSettingAsync((int)input.Id);
+            if (audioSetting == null)
             {
                 return await _dynamicityRepository.AddAudioSettingAsync(new AudioSettings
                 {
@@ -767,11 +760,6 @@ namespace OHaraj.Services
             }
             else
             {
-                var audioSetting = await _dynamicityRepository.GetAudioSettingAsync((int)input.Id);
-                if (audioSetting == null)
-                {
-                    throw new NotFoundException("تنظیمات یافت نشد");
-                }
                 audioSetting.Area = input.Area;
                 audioSetting.AudioConfigsId = input.ConfigId;
                 audioSetting.MenuId = input.MenuId;
@@ -835,7 +823,8 @@ namespace OHaraj.Services
 
         public async Task<int> UpsertDocumentSetting(UpsertSetting input)
         {
-            if (input.Id == null)
+            var documentSetting = await _dynamicityRepository.GetDocumentSettingAsync((int)input.Id);
+            if (documentSetting == null)
             {
                 return await _dynamicityRepository.AddDocumentSettingAsync(new DocumentSettings
                 {
@@ -846,11 +835,6 @@ namespace OHaraj.Services
             }
             else
             {
-                var documentSetting = await _dynamicityRepository.GetDocumentSettingAsync((int)input.Id);
-                if (documentSetting == null)
-                {
-                    throw new NotFoundException("تنظیمات یافت نشد");
-                }
                 documentSetting.Area = input.Area;
                 documentSetting.DocumentConfigsId = input.ConfigId;
                 documentSetting.MenuId = input.MenuId;
@@ -914,6 +898,7 @@ namespace OHaraj.Services
 
         public async Task<int> UpsertTextSetting(UpsertSetting input)
         {
+            var textSetting = await _dynamicityRepository.GetTextSettingAsync((int)input.Id);
             if (input.Id == null)
             {
                 return await _dynamicityRepository.AddTextSettingAsync(new TextSettings
@@ -925,11 +910,6 @@ namespace OHaraj.Services
             }
             else
             {
-                var textSetting = await _dynamicityRepository.GetTextSettingAsync((int)input.Id);
-                if (textSetting == null)
-                {
-                    throw new NotFoundException("تنظیمات یافت نشد");
-                }
                 textSetting.Area = input.Area;
                 textSetting.TextConfigsId = input.ConfigId;
                 textSetting.MenuId = input.MenuId;
