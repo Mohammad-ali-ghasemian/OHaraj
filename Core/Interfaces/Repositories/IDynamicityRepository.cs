@@ -36,7 +36,7 @@ namespace OHaraj.Core.Interfaces.Repositories
         Task<int> UpdateImageConfigAsync(ImageConfigs input);
         Task<int> DeleteImageConfigAsync(ImageConfigs input);
 
-        Task<ImageConfigs> GetImageConfigAsync(int id);
+        Task<ImageConfigs> GetImageConfigAsync(int? id);
         Task<IEnumerable<ImageConfigs>> GetImageConfigsAsync();
 
 
@@ -44,7 +44,7 @@ namespace OHaraj.Core.Interfaces.Repositories
         Task<int> UpdateVideoConfigAsync(VideoConfigs input);
         Task<int> DeleteVideoConfigAsync(VideoConfigs input);
 
-        Task<VideoConfigs> GetVideoConfigAsync(int id);
+        Task<VideoConfigs> GetVideoConfigAsync(int? id);
         Task<IEnumerable<VideoConfigs>> GetVideoConfigsAsync();
 
 
@@ -52,7 +52,7 @@ namespace OHaraj.Core.Interfaces.Repositories
         Task<int> UpdateAudioConfigAsync(AudioConfigs input);
         Task<int> DeleteAudioConfigAsync(AudioConfigs input);
 
-        Task<AudioConfigs> GetAudioConfigAsync(int id);
+        Task<AudioConfigs> GetAudioConfigAsync(int? id);
         Task<IEnumerable<AudioConfigs>> GetAudioConfigsAsync();
 
 
@@ -60,7 +60,7 @@ namespace OHaraj.Core.Interfaces.Repositories
         Task<int> UpdateDocumentConfigAsync(DocumentConfigs input);
         Task<int> DeleteDocumentConfigAsync(DocumentConfigs input);
 
-        Task<DocumentConfigs> GetDocumentConfigAsync(int id);
+        Task<DocumentConfigs> GetDocumentConfigAsync(int? id);
         Task<IEnumerable<DocumentConfigs>> GetDocumentConfigsAsync();
 
 
@@ -68,7 +68,7 @@ namespace OHaraj.Core.Interfaces.Repositories
         Task<int> UpdateTextConfigAsync(TextConfigs input);
         Task<int> DeleteTextConfigAsync(TextConfigs input);
 
-        Task<TextConfigs> GetTextConfigAsync(int id);
+        Task<TextConfigs> GetTextConfigAsync(int? id);
         Task<IEnumerable<TextConfigs>> GetTextConfigsAsync();
 
 
@@ -78,7 +78,7 @@ namespace OHaraj.Core.Interfaces.Repositories
         Task<int> UpdateImageSettingAsync(ImageSettings input);
         Task<int> DeleteImageSettingAsync(ImageSettings input);
 
-        Task<ImageSettings> GetImageSettingAsync(int id);
+        Task<ImageSettings> GetImageSettingAsync(int? id);
         Task<IEnumerable<ImageSettings>> GetImageSettingsAsync();
         Task<IEnumerable<ImageSettings>> GetImageSettingsByMenuIdAsync(int menuId);
         Task<IEnumerable<ImageSettings>> GetImageSettingsByAreaAsync(Area area);
@@ -89,7 +89,7 @@ namespace OHaraj.Core.Interfaces.Repositories
         Task<int> UpdateVideoSettingAsync(VideoSettings input);
         Task<int> DeleteVideoSettingAsync(VideoSettings input);
 
-        Task<VideoSettings> GetVideoSettingAsync(int id);
+        Task<VideoSettings> GetVideoSettingAsync(int? id);
         Task<IEnumerable<VideoSettings>> GetVideoSettingsAsync();
         Task<IEnumerable<VideoSettings>> GetVideoSettingsByMenuIdAsync(int menuId);
         Task<IEnumerable<VideoSettings>> GetVideoSettingsByAreaAsync(Area area);
@@ -100,7 +100,7 @@ namespace OHaraj.Core.Interfaces.Repositories
         Task<int> UpdateAudioSettingAsync(AudioSettings input);
         Task<int> DeleteAudioSettingAsync(AudioSettings input);
 
-        Task<AudioSettings> GetAudioSettingAsync(int id);
+        Task<AudioSettings> GetAudioSettingAsync(int? id);
         Task<IEnumerable<AudioSettings>> GetAudioSettingsAsync();
         Task<IEnumerable<AudioSettings>> GetAudioSettingsByMenuIdAsync(int menuId);
         Task<IEnumerable<AudioSettings>> GetAudioSettingsByAreaAsync(Area area);
@@ -111,7 +111,7 @@ namespace OHaraj.Core.Interfaces.Repositories
         Task<int> UpdateDocumentSettingAsync(DocumentSettings input);
         Task<int> DeleteDocumentSettingAsync(DocumentSettings input);
 
-        Task<DocumentSettings> GetDocumentSettingAsync(int id);
+        Task<DocumentSettings> GetDocumentSettingAsync(int? id);
         Task<IEnumerable<DocumentSettings>> GetDocumentSettingsAsync();
         Task<IEnumerable<DocumentSettings>> GetDocumentSettingsByMenuIdAsync(int menuId);
         Task<IEnumerable<DocumentSettings>> GetDocumentSettingsByAreaAsync(Area area);
@@ -122,7 +122,7 @@ namespace OHaraj.Core.Interfaces.Repositories
         Task<int> UpdateTextSettingAsync(TextSettings input);
         Task<int> DeleteTextSettingAsync(TextSettings input);
 
-        Task<TextSettings> GetTextSettingAsync(int id);
+        Task<TextSettings> GetTextSettingAsync(int? id);
         Task<IEnumerable<TextSettings>> GetTextSettingsAsync();
         Task<IEnumerable<TextSettings>> GetTextSettingsByMenuIdAsync(int menuId);
         Task<IEnumerable<TextSettings>> GetTextSettingsByAreaAsync(Area area);

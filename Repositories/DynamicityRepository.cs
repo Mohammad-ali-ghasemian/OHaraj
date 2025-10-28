@@ -143,7 +143,7 @@ namespace OHaraj.Repositories
         }
 
 
-        public async Task<ImageConfigs> GetImageConfigAsync(int id)
+        public async Task<ImageConfigs> GetImageConfigAsync(int? id)
         {
             return await _dbcontext.ImageConfigs
                 .AsNoTracking()
@@ -181,7 +181,7 @@ namespace OHaraj.Repositories
         }
 
 
-        public async Task<VideoConfigs> GetVideoConfigAsync(int id)
+        public async Task<VideoConfigs> GetVideoConfigAsync(int? id)
         {
             return await _dbcontext.VideoConfigs
                 .AsNoTracking()
@@ -219,7 +219,7 @@ namespace OHaraj.Repositories
         }
 
 
-        public async Task<AudioConfigs> GetAudioConfigAsync(int id)
+        public async Task<AudioConfigs> GetAudioConfigAsync(int? id)
         {
             return await _dbcontext.AudioConfigs
                 .AsNoTracking()
@@ -257,7 +257,7 @@ namespace OHaraj.Repositories
         }
 
 
-        public async Task<DocumentConfigs> GetDocumentConfigAsync(int id)
+        public async Task<DocumentConfigs> GetDocumentConfigAsync(int? id)
         {
             return await _dbcontext.DocumentConfigs
                 .AsNoTracking()
@@ -295,7 +295,7 @@ namespace OHaraj.Repositories
         }
 
 
-        public async Task<TextConfigs> GetTextConfigAsync(int id)
+        public async Task<TextConfigs> GetTextConfigAsync(int? id)
         {
             return await _dbcontext.TextConfigs
                 .AsNoTracking()

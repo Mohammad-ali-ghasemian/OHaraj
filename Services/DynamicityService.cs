@@ -344,7 +344,7 @@ namespace OHaraj.Services
         //Configs
         public async Task<int> UpsertImageConfig(UpsertImageConfig input)
         {
-            var imageConfig = await _dynamicityRepository.GetImageConfigAsync((int)input.Id);
+            var imageConfig = await _dynamicityRepository.GetImageConfigAsync(input.Id);
             if (imageConfig == null)
             {
                 return await _dynamicityRepository.AddImageConfigAsync(new ImageConfigs
@@ -395,7 +395,7 @@ namespace OHaraj.Services
 
         public async Task<int> UpsertVideoConfig(UpsertVideoConfig input)
         {
-            var videoConfig = await _dynamicityRepository.GetVideoConfigAsync((int)input.Id);
+            var videoConfig = await _dynamicityRepository.GetVideoConfigAsync(input.Id);
             if (videoConfig == null)
             {
                 return await _dynamicityRepository.AddVideoConfigAsync(new VideoConfigs
@@ -448,7 +448,7 @@ namespace OHaraj.Services
 
         public async Task<int> UpsertAudioConfig(UpsertAudioConfig input)
         {
-            var audioConfig = await _dynamicityRepository.GetAudioConfigAsync((int)input.Id);
+            var audioConfig = await _dynamicityRepository.GetAudioConfigAsync(input.Id);
             if (audioConfig == null)
             {
                 return await _dynamicityRepository.AddAudioConfigAsync(new AudioConfigs
@@ -495,7 +495,7 @@ namespace OHaraj.Services
 
         public async Task<int> UpsertDocumentConfig(UpsertDocumentConfig input)
         {
-            var documentConfig = await _dynamicityRepository.GetDocumentConfigAsync((int)input.Id);
+            var documentConfig = await _dynamicityRepository.GetDocumentConfigAsync(input.Id);
             if (documentConfig == null)
             {
                 return await _dynamicityRepository.AddDocumentConfigAsync(new DocumentConfigs
@@ -540,7 +540,7 @@ namespace OHaraj.Services
 
         public async Task<int> UpsertTextConfig(UpsertTextConfig input)
         {
-            var textConfig = await _dynamicityRepository.GetTextConfigAsync((int)input.Id);
+            var textConfig = await _dynamicityRepository.GetTextConfigAsync(input.Id);
             if (textConfig == null)
             {
                 return await _dynamicityRepository.AddTextConfigAsync(new TextConfigs
@@ -598,7 +598,7 @@ namespace OHaraj.Services
         //Settings
         public async Task<int> UpsertImageSetting(UpsertSetting input)
         {
-            var imageSetting = await _dynamicityRepository.GetImageSettingAsync((int)input.Id);
+            var imageSetting = await _dynamicityRepository.GetImageSettingAsync(input.Id);
             if (imageSetting == null)
             {
                 return await _dynamicityRepository.AddImageSettingAsync(new ImageSettings
@@ -673,7 +673,7 @@ namespace OHaraj.Services
 
         public async Task<int> UpsertVideoSetting(UpsertSetting input)
         {
-            var videoSetting = await _dynamicityRepository.GetVideoSettingAsync((int)input.Id);
+            var videoSetting = await _dynamicityRepository.GetVideoSettingAsync(input.Id);
             if (videoSetting == null)
             {
                 return await _dynamicityRepository.AddVideoSettingAsync(new VideoSettings
@@ -748,7 +748,7 @@ namespace OHaraj.Services
 
         public async Task<int> UpsertAudioSetting(UpsertSetting input)
         {
-            var audioSetting = await _dynamicityRepository.GetAudioSettingAsync((int)input.Id);
+            var audioSetting = await _dynamicityRepository.GetAudioSettingAsync(input.Id);
             if (audioSetting == null)
             {
                 return await _dynamicityRepository.AddAudioSettingAsync(new AudioSettings
@@ -823,7 +823,7 @@ namespace OHaraj.Services
 
         public async Task<int> UpsertDocumentSetting(UpsertSetting input)
         {
-            var documentSetting = await _dynamicityRepository.GetDocumentSettingAsync((int)input.Id);
+            var documentSetting = await _dynamicityRepository.GetDocumentSettingAsync(input.Id);
             if (documentSetting == null)
             {
                 return await _dynamicityRepository.AddDocumentSettingAsync(new DocumentSettings
@@ -898,7 +898,7 @@ namespace OHaraj.Services
 
         public async Task<int> UpsertTextSetting(UpsertSetting input)
         {
-            var textSetting = await _dynamicityRepository.GetTextSettingAsync((int)input.Id);
+            var textSetting = await _dynamicityRepository.GetTextSettingAsync(input.Id);
             if (input.Id == null)
             {
                 return await _dynamicityRepository.AddTextSettingAsync(new TextSettings
