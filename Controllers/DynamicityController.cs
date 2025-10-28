@@ -53,10 +53,10 @@ namespace OHaraj.Controllers
         }
 
         [HttpGet("Get-Menu")]
-        [Produces(typeof(Response<Menu>))]
+        [Produces(typeof(Response<MenuDTO>))]
         public async Task<IActionResult> GetMenu(int menuId)
         {
-            return new Response<Menu>(await _dynamicityService.GetMenu(menuId)).ToJsonResult();
+            return new Response<MenuDTO>(await _dynamicityService.GetMenu(menuId)).ToJsonResult();
         }
 
         /// <summary>
@@ -64,10 +64,10 @@ namespace OHaraj.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet("Get-Menus")]
-        [Produces(typeof(Response<IEnumerable<Menu>>))]
+        [Produces(typeof(Response<IEnumerable<MenuDTO>>))]
         public async Task<IActionResult> GetMenus()
         {
-            return new Response<IEnumerable<Menu>>(await _dynamicityService.GetMenus()).ToJsonResult();
+            return new Response<IEnumerable<MenuDTO>>(await _dynamicityService.GetMenus()).ToJsonResult();
         }
 
         /// <summary>
@@ -88,10 +88,10 @@ namespace OHaraj.Controllers
         /// <returns></returns>
         [AllowAnonymous]
         [HttpGet("Get-Anonymous-User-Access-Menus")]
-        [Produces(typeof(Response<IEnumerable<Menu>>))]
+        [Produces(typeof(Response<IEnumerable<MenuDTO>>))]
         public async Task<IActionResult> GetAnonymousUserAccessMenus()
         {
-            return new Response<IEnumerable<Menu>>(await _dynamicityService.GetAnonymousUserAccessMenus()).ToJsonResult();
+            return new Response<IEnumerable<MenuDTO>>(await _dynamicityService.GetAnonymousUserAccessMenus()).ToJsonResult();
         }
 
         /// <summary>
@@ -100,10 +100,10 @@ namespace OHaraj.Controllers
         /// <returns></returns>
         [AllowAnonymous]
         [HttpGet("Get-Logined-User-Access-Menus")]
-        [Produces(typeof(Response<IEnumerable<Menu>>))]
+        [Produces(typeof(Response<IEnumerable<MenuDTO>>))]
         public async Task<IActionResult> GetLoginedUserAccessMenus()
         {
-            return new Response<IEnumerable<Menu>>(await _dynamicityService.GetLoginedUserAccessMenus()).ToJsonResult();
+            return new Response<IEnumerable<MenuDTO>>(await _dynamicityService.GetLoginedUserAccessMenus()).ToJsonResult();
         }
 
         /// <summary>
@@ -111,10 +111,10 @@ namespace OHaraj.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet("Get-Other-User-Access-Menus")]
-        [Produces(typeof(Response<IEnumerable<Menu>>))]
+        [Produces(typeof(Response<IEnumerable<MenuDTO>>))]
         public async Task<IActionResult> GetOtherUserAccessMenus(string userId)
         {
-            return new Response<IEnumerable<Menu>>(await _dynamicityService.GetOtherUserAccessMenus(userId)).ToJsonResult();
+            return new Response<IEnumerable<MenuDTO>>(await _dynamicityService.GetOtherUserAccessMenus(userId)).ToJsonResult();
         }
 
 
@@ -795,9 +795,9 @@ namespace OHaraj.Controllers
         /// <returns></returns>
         [HttpPost("Give-Roles")]
         [Produces(typeof(Response<IEnumerable<RoleDTO>>))]
-        public async Task<IActionResult> GiveRoles(string userId, IEnumerable<string> roleIds)
+        public async Task<IActionResult> GiveRoles([FromForm] string userId, [FromForm] IEnumerable<string> roleNames)
         {
-            return new Response<IEnumerable<RoleDTO>>(await _dynamicityService.GiveRoles(userId, roleIds)).ToJsonResult();
+            return new Response<IEnumerable<RoleDTO>>(await _dynamicityService.GiveRoles(userId, roleNames)).ToJsonResult();
         }
 
         /// <summary>
@@ -806,12 +806,16 @@ namespace OHaraj.Controllers
         /// <returns></returns>
         [HttpPost("Take-Roles")]
         [Produces(typeof(Response<IEnumerable<RoleDTO>>))]
-        public async Task<IActionResult> TakeRoles(string userId, IEnumerable<string> roleIds)
+        public async Task<IActionResult> TakeRoles([FromForm] string userId, [FromForm] IEnumerable<string> roleNames)
         {
-            return new Response<IEnumerable<RoleDTO>>(await _dynamicityService.TakeRoles(userId, roleIds)).ToJsonResult();
+            return new Response<IEnumerable<RoleDTO>>(await _dynamicityService.TakeRoles(userId, roleNames)).ToJsonResult();
         }
 
-
-
+        //[HttpPost("test")]
+        //[Produces(typeof(Response<int>))]
+        //public async Task<IActionResult> test()
+        //{
+        //    return new Response<int>(2).ToJsonResult();
+        //}
     }
 }
