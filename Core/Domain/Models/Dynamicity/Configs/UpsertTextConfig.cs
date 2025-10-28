@@ -6,8 +6,8 @@ namespace OHaraj.Core.Domain.Models.Dynamicity.Configs
     public class UpsertTextConfig
     {
         public int? Id { get; set; }
-        public string? Name { get; set; }
         [Required(ErrorMessage = PublicHelper.RequiredValidationErrorMessage)]
+        public string? Name { get; set; }
         public string? Font { get; set; }
         [Required(ErrorMessage = PublicHelper.RequiredValidationErrorMessage)]
         public int? Size { get; set; }

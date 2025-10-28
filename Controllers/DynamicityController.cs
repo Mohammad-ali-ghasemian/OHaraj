@@ -186,7 +186,7 @@ namespace OHaraj.Controllers
         /// <returns></returns>
         [HttpPost("Upsert-Image-Config")]
         [Produces(typeof(Response<int>))]
-        public async Task<IActionResult> UpsertImageConfig(UpsertImageConfig input)
+        public async Task<IActionResult> UpsertImageConfig([FromForm] UpsertImageConfig input)
         {
             input.Id = null;
             return new Response<int>(await _dynamicityService.UpsertImageConfig(input)).ToJsonResult();
@@ -230,7 +230,7 @@ namespace OHaraj.Controllers
         /// <returns></returns>
         [HttpPost("Upsert-Video-Config")]
         [Produces(typeof(Response<int>))]
-        public async Task<IActionResult> UpsertVideoConfig(UpsertVideoConfig input)
+        public async Task<IActionResult> UpsertVideoConfig([FromForm] UpsertVideoConfig input)
         {
             input.Id = null;
             return new Response<int>(await _dynamicityService.UpsertVideoConfig(input)).ToJsonResult();
@@ -275,7 +275,7 @@ namespace OHaraj.Controllers
         /// <returns></returns>
         [HttpPost("Upsert-Audio-Config")]
         [Produces(typeof(Response<int>))]
-        public async Task<IActionResult> UpsertAudioConfig(UpsertAudioConfig input)
+        public async Task<IActionResult> UpsertAudioConfig([FromForm] UpsertAudioConfig input)
         {
             input.Id = null;
             return new Response<int>(await _dynamicityService.UpsertAudioConfig(input)).ToJsonResult();
@@ -320,7 +320,7 @@ namespace OHaraj.Controllers
         /// <returns></returns>
         [HttpPost("Upsert-Document-Config")]
         [Produces(typeof(Response<int>))]
-        public async Task<IActionResult> UpsertDocumentConfig(UpsertDocumentConfig input)
+        public async Task<IActionResult> UpsertDocumentConfig([FromForm] UpsertDocumentConfig input)
         {
             input.Id = null;
             return new Response<int>(await _dynamicityService.UpsertDocumentConfig(input)).ToJsonResult();
@@ -365,7 +365,7 @@ namespace OHaraj.Controllers
         /// <returns></returns>
         [HttpPost("Upsert-Text-Config")]
         [Produces(typeof(Response<int>))]
-        public async Task<IActionResult> UpsertTextConfig(UpsertTextConfig input)
+        public async Task<IActionResult> UpsertTextConfig([FromForm] UpsertTextConfig input)
         {
             input.Id = null;
             return new Response<int>(await _dynamicityService.UpsertTextConfig(input)).ToJsonResult();
