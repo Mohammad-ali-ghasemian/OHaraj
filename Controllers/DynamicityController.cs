@@ -768,6 +768,13 @@ namespace OHaraj.Controllers
             return new Response<IEnumerable<RoleDTO>>(await _dynamicityService.GetRoles()).ToJsonResult();
         }
 
+        [HttpGet("Get-User-Roles")]
+        [Produces(typeof(Response<IEnumerable<string>>))]
+        public async Task<IActionResult> GetUserRoles(string userId)
+        {
+            return new Response<IEnumerable<string>>(await _dynamicityService.GetRoles(userId)).ToJsonResult();
+        }
+
         /// <summary>
         /// Give defiened roles to members (of course except SuperAdmin/Admin/User)
         /// </summary>
