@@ -335,7 +335,7 @@ namespace OHaraj.Repositories
         }
 
 
-        public async Task<ImageSettings> GetImageSettingAsync(int id)
+        public async Task<ImageSettings> GetImageSettingAsync(int? id)
         {
             return await _dbcontext.ImageSettings
                 .AsNoTracking()
@@ -395,7 +395,7 @@ namespace OHaraj.Repositories
         }
 
 
-        public async Task<VideoSettings> GetVideoSettingAsync(int id)
+        public async Task<VideoSettings> GetVideoSettingAsync(int? id)
         {
             return await _dbcontext.VideoSettings
                 .AsNoTracking()
@@ -457,7 +457,7 @@ namespace OHaraj.Repositories
         }
 
 
-        public async Task<AudioSettings> GetAudioSettingAsync(int id)
+        public async Task<AudioSettings> GetAudioSettingAsync(int? id)
         {
             return await _dbcontext.AudioSettings
                 .AsNoTracking()
@@ -519,7 +519,7 @@ namespace OHaraj.Repositories
         }
 
 
-        public async Task<DocumentSettings> GetDocumentSettingAsync(int id)
+        public async Task<DocumentSettings> GetDocumentSettingAsync(int? id)
         {
             return await _dbcontext.DocumentSettings
                 .AsNoTracking()
@@ -581,7 +581,7 @@ namespace OHaraj.Repositories
         }
 
 
-        public async Task<TextSettings> GetTextSettingAsync(int id)
+        public async Task<TextSettings> GetTextSettingAsync(int? id)
         {
             return await _dbcontext.TextSettings
                 .AsNoTracking()
