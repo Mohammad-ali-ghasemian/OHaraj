@@ -30,9 +30,9 @@ namespace OHaraj.Core.Interfaces.Services
         //Role Access 
         Task<int> UpsertAccess(UpsertRoleAccess input);
         Task<int> DeleteAccess(int accessId);
-        Task<RoleAccess> GetAccess(int accessId);
-        Task<IEnumerable<RoleAccess>> GetAccess(string roleId);
-        Task<IEnumerable<RoleAccess>> GetAllAccesss();
+        Task<RoleAccessDTO> GetAccess(int accessId);
+        Task<IEnumerable<RoleAccessDTO>> GetAccess(string roleId);
+        Task<IEnumerable<RoleAccessDTO>> GetAllAccesss();
 
 
 
