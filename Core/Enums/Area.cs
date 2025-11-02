@@ -6,6 +6,6 @@ namespace OHaraj.Core.Enums
     {
         Header,
         Body,
-        final testing
+        Footer
     }
 }
